@@ -1,7 +1,7 @@
 # =======================
 # Local
 # =======================
-source/yaz0enc
+source/yaz0enc/
 
 # =======================
 # Visual Studio
