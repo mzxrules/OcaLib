@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EC69E9E2-4CFB-43F9-8E37-CB6A52935E4C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OcarinaPlayer</RootNamespace>
+    <AssemblyName>OcarinaPlayer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Address\Addresses.cs" />
+    <Compile Include="Address\Addresser.cs" />
+    <Compile Include="Rom\RomFileToken.cs" />
+    <Compile Include="Rom\MRom.cs" />
+    <Compile Include="Rom\RomVersion.cs" />
+    <Compile Include="Rom\VFileTable_Abstract.cs" />
+    <Compile Include="Rom\VFileTable.cs" />
+    <Compile Include="Rom\FileList.cs" />
+    <Compile Include="Cutscenes\Command0009.cs" />
+    <Compile Include="Cutscenes\Cutscene.cs" />
+    <Compile Include="Cutscenes\EndCommand.cs" />
+    <Compile Include="Cutscenes\ExitCommand.cs" />
+    <Compile Include="Cutscenes\IFrameData.cs" />
+    <Compile Include="Cutscenes\ScreenTransitionCommand.cs" />
+    <Compile Include="Cutscenes\TextCommand.cs" />
+    <Compile Include="Rom\DmaData.cs" />
+    <Compile Include="Rom\Game.cs" />
+    <Compile Include="GameText_Rewrite.cs" />
+    <Compile Include="ImageHelper.cs" />
+    <Compile Include="MBlock.cs" />
+    <Compile Include="Rom\MVersioning.cs" />
+    <Compile Include="Rom\MFileTable.cs" />
+    <Compile Include="Rom\ORom.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Rom\Rom.cs" />
+    <Compile Include="Rom\RomFile.cs" />
+    <Compile Include="SceneRoom\HeaderCommands.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\ActorListCommand.cs" />
+    <Compile Include="SceneRoom\CollisionMesh.cs" />
+    <Compile Include="SceneRoom\CollisionPolygon.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\AlternateHeadersCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\CMD05Command.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\CollisionCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\ConcreteSceneCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\CutsceneCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\EndCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\EntranceDefinitionsCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\EnvironmentSettingsCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\ExitListCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\IActorList.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\ISMAsset.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\JpegBackgroundCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\MapBehaviorCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\MapListCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\MapMeshCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\ObjectListCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\PathListCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\PositionListCommand.cs" />
+    <Compile Include="Cutscenes\AbstractCutsceneCommand.cs" />
+    <Compile Include="Cutscenes\ActorCommand.cs" />
+    <Compile Include="Cutscenes\CameraCommand.cs" />
+    <Compile Include="Cutscenes\ConcreteCutsceneCommand.cs" />
+    <Compile Include="Cutscenes\HeaderCommand.cs" />
+    <Compile Include="SceneRoom\SceneHeader.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\SkyboxModifierCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\SkyboxSettingsCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\SoundSettingsCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\SoundSettingsEchoCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\SpecialObjectCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\TimeSettingsCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\TransitionActorListCommand.cs" />
+    <Compile Include="SpiritHack.cs" />
+    <Compile Include="GameText.cs" />
+    <Compile Include="Rom\OFileTable.cs" />
+    <Compile Include="SceneRoom\ISceneRoomHeader.cs" />
+    <Compile Include="SceneRoom\Room.cs" />
+    <Compile Include="SceneRoom\Scene.cs" />
+    <Compile Include="SceneRoom\EntranceDef.cs" />
+    <Compile Include="SceneRoom\SceneWord.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\AbstractSceneCommand.cs" />
+    <Compile Include="SceneRoom\SceneRoomReader.cs" />
+    <Compile Include="Rom\OVersioning.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VirtualTable\OvlActor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Addresses.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RHelper\Helper.csproj">
+      <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
+      <Name>Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZActor\ZActor.csproj">
+      <Project>{85fd7069-d868-431d-87f9-eb76bdf73fc5}</Project>
+      <Name>ZActor</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

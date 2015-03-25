@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Addresses>
+  <Game name="OcarinaOfTime">
+    <File n="(none)">
+      <Item var="Template">
+        <Version v="N0"></Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP"></Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ"></Version>
+      </Item>
+    </File>
+    <File n="dmadata">
+      <Item var="__Start">
+        <!--First record in the file table-->
+        <Version v="N0">7430</Version>
+        <Version v="N1">7430</Version>
+        <Version v="N2">7960</Version>
+        <Version v="P0">7950</Version>
+        <Version v="P1">7950</Version>
+        <Version v="GCNJ">7170</Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">7170</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">12F70</Version>
+      </Item>
+      <Item var="__End">
+        <!--Final record in the file table (NO LONGER USED)-->
+        <Version v="N0">D280</Version>
+        <Version v="N1">D280</Version>
+        <Version v="N2">D7B0</Version>
+        <Version v="MQP">CFC0</Version>
+        <Version v="DBGMQ">18F20</Version>
+      </Item>
+      <Item var="Scenes_Start">
+        <!--Start of the portion of the file table that contains scene / map files-->
+        <!--//const int SCENE_MAP_FILE_COUNT = 489 *2;-->
+        <Version v="N0">B320</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP"></Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">16EC0</Version>
+      </Item>
+      <Item var="Scenes_End">
+        <Version v="N0">D1A0</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP"></Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">17240</Version>
+      </Item>
+    </File>
+    <File n="code">
+      <Item var="__Start">
+        <Version v="N0">A87000</Version>
+        <Version v="N1">A87000</Version>
+        <Version v="N2">A87000</Version>
+        <Version v="P0">A89000</Version>
+        <Version v="P1">A89000</Version>
+        <Version v="GCNJ">A86000</Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">A88000</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">A94000</Version>
+      </Item>
+      <Item var="TextbankTable">
+        <Version v="N0">B808AC</Version>
+        <Version v="N1">B80A6C</Version>
+        <Version v="N2">B8091C</Version>
+        <Version v="P0">B801DC</Version>
+        <Version v="P1">B8021C</Version>
+        <Version v="GCNJ">B7EFAC</Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">B7E8F0</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">BC24C0</Version>
+      </Item>
+      <Item var="ovl_EffectTable_Start">
+        <!--ovl_effect table 7 words:
+        VA start, end, vram start, end-->
+        <!--25 files-->
+        <Version v="N0">B5DBA0</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">B5BB90</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">B8CB50</Version>
+      </Item>
+      <Item var="ActorTable_Start">
+        <!-- Actor count = 0x1D7;-->
+        <Version v="N0">B5E490</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">B5C480</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">B8D440</Version>
+      </Item>
+      <Item var="UnknownTable_Start">
+        <!-- 0x30 in size
+    ???,      fileVromStart,  fileVromEnd,  ov? vramStart,
+    vramEnd,  ???,            vramEnd,      vramStart
+    ???,???,???,  constant across all vers
+    -->
+        <Version v="N0">B672A0</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">B65290</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">B969D0</Version>
+      </Item>
+      <Item var="HyruleSkyboxTable_Start">
+        <!--Hyrule Field Skybox. 9 Variations-->
+        <Version v="N0">B677AC</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">B6579C</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">B96EDC</Version>
+      </Item>
+      <Item var="ObjectTable_Start">
+        <!-- Object count = 0x192;-->
+        <Version v="N0">B6EF58</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">B6CF58</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">B9E6C8</Version>
+      </Item>
+      <Item var="EntranceIndexTable_Start">
+        <!--Entrance Record Count = 0x614-->
+        <Version v="N0">B6FBF0</Version>
+        <Version v="N1">B6FDB0</Version>
+        <Version v="N2">B6FC00</Version>
+        <Version v="P0">B6F510</Version>
+        <Version v="P1">B6F550</Version>
+        <Version v="GCNJ">B6E2B0</Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">B6DBF0</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">B9F360</Version>
+      </Item>
+      <Item var="SceneTable_Start">
+        <!-- scene count = 101 or 109 in debug-->
+        <Version v="N0">B71440</Version>
+        <Version v="N1">B71600</Version>
+        <Version v="N2">B71450</Version>
+        <Version v="P0">B70D60</Version>
+        <Version v="P1">B70DA0</Version>
+        <Version v="GCNJ">B6FB00</Version>
+        <!--USA GCN-->
+        <Version v="GCNP"></Version>
+        <Version v="MQP">B6F440</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">BA0BB0</Version>
+      </Item>
+    </File>
+    <File n="jpn_message_data_static">
+      <Item var="__Start">
+        <Version v="N0">8EB000</Version>
+        <Version v="N1">8EB000</Version>
+        <Version v="N2">8F2000</Version>
+        <Version v="GCNJ">8F1000</Version>
+        <Version v="MQJ"></Version>
+      </Item>
+    </File>
+    <File n="nes_message_data_static">
+      <Item var="__Start">
+        <Version v="N0">92D000</Version>
+        <Version v="N1">92D000</Version>
+        <Version v="N2">92D000</Version>
+        <Version v="P0">8BB000</Version>
+        <Version v="P1">8BB000</Version>
+        <Version v="GCNJ">92C000</Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">8BA000</Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">8C6000</Version>
+      </Item>
+    </File>
+    <File n="ger_message_data_static">
+      <Item var="__Start">
+        <Version v="P0">8F4000</Version>
+        <Version v="P1">8F4000</Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">8F3000</Version>
+        <Version v="DBGMQ">8FF000</Version>
+      </Item>
+    </File>
+    <File n="fra_message_data_static">
+      <Item var="__Start">
+        <Version v="P0">930000</Version>
+        <Version v="P1">930000</Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP">92F000</Version>
+        <Version v="DBGMQ">93B000</Version>
+      </Item>
+    </File>
+    <!--*************RAM*************-->
+    <File n="ram">
+      <Item var="CONV_code">
+        <Version v="N0">110A0</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP"></Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">1CE60</Version>
+      </Item>
+      <!--Address to a Linked list that maps out certain memory blocks-->
+      <Item var="RAM_LL_First">
+        <Version v="N0">1C6E60</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0">1C4EA0</Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP"></Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">212090</Version>
+      </Item>
+      <!--Start pointer to actor linked list-->
+      <Item var="OVL_LL_First">
+        <Version v="N0">1DAA00</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0">1D8A40</Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP"></Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">224580</Version>
+      </Item>
+      <!-- Address of the actor category linked list table -->
+      <Item var="ACTOR_CAT_LL_Start">
+        <Version v="N0">1CA0D0</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP"></Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">213C50</Version>
+      </Item>
+
+      <!--Address containing the number of loaded object files-->
+      <Item var="OBJ_COUNT_ADDR">
+        <Version v="N0">1D9C4C</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP"></Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">2237CC</Version>
+      </Item>
+      <!--Address to a list of the currently loaded object file set-->
+      <Item var="OBJ_LIST_START_ADDR">
+        <Version v="N0">1D9C50</Version>
+        <Version v="N1"></Version>
+        <Version v="N2"></Version>
+        <Version v="P0"></Version>
+        <Version v="P1"></Version>
+        <Version v="GCNJ"></Version>
+        <Version v="GCNP"></Version>
+        <Version v="MQP"></Version>
+        <Version v="MQJ"></Version>
+        <Version v="DBGMQ">2237D0</Version>
+      </Item>
+    </File>
+  </Game>
+  <Game name="MajorasMask">
+    <!--*************MM**************-->
+    <File n="dmadata">
+      <Item var="__Start">
+        <!--First record in the file table-->
+        <Version v="U0">1A500</Version>
+      </Item>
+    </File>
+    <File n="code">
+      <Item var="__Start">
+        <Version v="U0">B3C000</Version>
+      </Item>
+      <Item var="SceneTable_Start">
+        <!-- scene count =?-->
+        <Version v="U0">C5A1E0</Version>
+      </Item>
+      <Item var="EntranceIndexTable_Start">
+        <!--Record Count = 110?-->
+        <Version v="U0">C5BC60</Version>
+      </Item>
+      <Item var ="ActorTable_Start">
+        <!--Count = 0x2B2-->
+        <Version v="U0">C45510</Version>
+      </Item>
+    </File>
+    <File n="ram">
+      <Item var="CONV_code">
+        <Version v="U0">A5AC0</Version>
+      </Item>
+      <Item var="OVL_LL_First">
+        <Version v="U0">3FFDA0</Version>
+      </Item>
+      
+    </File>
+  </Game>
+</Addresses>
