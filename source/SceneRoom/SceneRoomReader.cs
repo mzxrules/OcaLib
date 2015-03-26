@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using ZActor.OActors;
-using RHelper;
+using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.SceneRoom
 {
+    /// <summary>
+    /// A gross class that was written to initially manage VerboseOcarina's core functionality
+    /// </summary>
     public static class SceneRoomReader
     {
         public static Scene InitializeScene(int number, RomFile file)
@@ -82,19 +85,18 @@ namespace mzxrules.OcaLib.SceneRoom
 
         #endregion
 
-        public static string ReadCutscene(Rom rom, long address)
+        public static bool TryGetCutscene(Rom rom, long address, out Cutscenes.Cutscene cutscene)
         {
             FileRecord addr;
-            Cutscenes.Cutscene cs;
+            cutscene = null;
 
             addr = rom.Files.GetFileStart(address);
             if (addr == null)
-                return "Input address does not point within a file.";
+                return false;
             var s = (Stream)rom.Files.GetFile(addr.VirtualAddress);
             s.Position = addr.GetRelativeAddress(address);
-            cs = new Cutscenes.Cutscene(s);
-
-            return cs.PrintCutsceneByCommandOrder();
+            cutscene = new Cutscenes.Cutscene(s);
+            return true;
         }
 
         public static string ReadScene(Scene scene)
