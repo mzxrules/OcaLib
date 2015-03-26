@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     class ExitCommand : CutsceneCommand
     {
@@ -16,14 +16,15 @@ namespace OcarinaPlayer.Cutscenes
         public ExitCommand(uint command, BinaryReader br)
             : base(command, br)
         {
-
+            Load(br);
         }
 
         protected override int GetLength()
         {
             return ExitCommandEntry.LENGTH * entries.Count + LENGTH;
         }
-        protected override void Load(BinaryReader br)
+        
+        private void Load(BinaryReader br)
         {
             Endian.Convert(out entryCount, br.ReadBytes(sizeof(int)));
 
@@ -49,7 +50,7 @@ namespace OcarinaPlayer.Cutscenes
         public override string ToString()
         {
             return String.Format("{0:X8}: Exit Command, {1} entries",
-                command,
+                Command,
                 entryCount);
         }
 
@@ -65,10 +66,10 @@ namespace OcarinaPlayer.Cutscenes
             ushort asm;
             public short StartFrame { get; set; }
             public short EndFrame { get; set; }
-            public AbstractCutsceneCommand RootCommand { get; set; }
+            public CutsceneCommand RootCommand { get; set; }
             short endFrame2;
 
-            internal void Load(AbstractCutsceneCommand cmd, BinaryReader br)
+            internal void Load(CutsceneCommand cmd, BinaryReader br)
             {
                 RootCommand = cmd;
                 Endian.Convert(out asm, br.ReadBytes(2));

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     class EndCommand : CutsceneCommand
     {
@@ -12,14 +12,15 @@ namespace OcarinaPlayer.Cutscenes
         public EndCommand(uint command, BinaryReader br)
             :base(command, br)
         {
+            Load(br);
         }
-        protected override void Load(BinaryReader br)
+        private void Load(BinaryReader br)
         {
             br.ReadInt32();
         }
         public override string ToString()
         {
-            return String.Format("{0:X8}: End Cutscene {1:X4}", command, index + Length);
+            return String.Format("{0:X8}: End Cutscene {1:X4}", Command, Index + Length);
         }
         public override string ReadCommand()
         {

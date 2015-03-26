@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using ZActor.OActors;
 
-namespace OcarinaPlayer.SceneRoom
+namespace mzxrules.OcaLib.SceneRoom
 {
     public struct EntranceDef
     {

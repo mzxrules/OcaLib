@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ZActor.OActors;
-using OcarinaPlayer.SceneRoom.Commands;
+using mzxrules.OcaLib.SceneRoom.Commands;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer.SceneRoom
+namespace mzxrules.OcaLib.SceneRoom
 {        
     #region Command Data
     

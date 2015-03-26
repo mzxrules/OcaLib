@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using RHelper;
 
-namespace OcarinaPlayer.SceneRoom.Commands
+namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     class TransitionActorListCommand : SceneCommand, IActorList, IBankRefAsset
     {

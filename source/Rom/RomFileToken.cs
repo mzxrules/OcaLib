@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
     public class RomFileToken
     {
@@ -51,7 +51,7 @@ namespace OcarinaPlayer
             {
                 case Game.OcarinaOfTime: return this.oFile.ToString();
                 case Game.MajorasMask: return this.mFile.ToString();
-                default: throw new NotImplementedException();
+                default: return base.ToString();
             }
         }
     }

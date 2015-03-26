@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OcarinaPlayer.SceneRoom
+namespace mzxrules.OcaLib.SceneRoom
 {
     public class SceneCommand : AbstractSceneCommand
     {

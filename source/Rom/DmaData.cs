@@ -5,14 +5,23 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
     public class FileRecord
     {
         //public const int LENGTH = 0x10;
-        public FileAddress VirtualAddress;   //file location on an uncompressed rom 
-        public FileAddress PhysicalAddress;  //file location on a compressed rom
-        public FileAddress DataAddress;      //file location independent of compression state
+        /// <summary>
+        /// The file's mapped location in virtual space
+        /// </summary>
+        public FileAddress VirtualAddress { get; set; } 
+        /// <summary>
+        /// The file's mapped location on file. A zeroed end address means that the file is not compressed
+        /// </summary>
+        public FileAddress PhysicalAddress { get; set; } 
+        /// <summary>
+        /// The file's location independent of compression state
+        /// </summary>
+        public FileAddress DataAddress { get; private set; }
         public bool IsCompressed { get { return PhysicalAddress.End != 0; } }
         public int Index = -1;
 
@@ -47,8 +56,7 @@ namespace OcarinaPlayer
     public class DmaData
     {
         public Dictionary<long, FileRecord> Table;
-        public FileRecord Address { get { return addr; } }
-        FileRecord addr;
+        public FileRecord Address { get; private set; }
 
         public DmaData (Stream s, ORom.Build version)
         {
@@ -103,7 +111,9 @@ namespace OcarinaPlayer
                 fileRecord = new FileRecord(fileVirtualAddress, filePhysicalAddress, i);
                 Table.Add(fileRecord.VirtualAddress.Start, fileRecord);
             }
+            FileRecord addr;
             Table.TryGetValue(address, out addr);
+            Address = addr;
         }
 
         private int GetEndAddress(BinaryReader br)

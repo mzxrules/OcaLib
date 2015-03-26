@@ -5,13 +5,10 @@ using System.Linq;
 using System.Text;
 using RHelper;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
-    public class MFileTable : VFileTable //: IDisposable, IEnumerable<FileRecord>
+    public class MFileTable : VFileTable
     {
-        //public MRom.Build Version { get { return version; } }
-        //public MRom.Localization Localization { get { return MRom.GetLocalization(Version); } }
-
         public MFileTable(string romLoc, MRom.Build version)
         {
             using (FileStream fs = new FileStream(romLoc, FileMode.Open, FileAccess.Read))

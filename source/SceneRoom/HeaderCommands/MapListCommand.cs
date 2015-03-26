@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using RHelper;
 
-namespace OcarinaPlayer.SceneRoom.Commands
+namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     public class MapListCommand : SceneCommand, IBankRefAsset
     {

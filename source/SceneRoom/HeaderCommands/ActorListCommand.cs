@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer.SceneRoom.Commands
+namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     class ActorListCommand: SceneCommand, IActorList, IBankRefAsset
     {
@@ -23,7 +23,7 @@ namespace OcarinaPlayer.SceneRoom.Commands
 
             if (Game == Game.OcarinaOfTime)
                 NewActor = ActorFactory.NewActor;//ActorList.Add(ActorFactory.NewActor(actorArray));
-            if (Game == OcarinaPlayer.Game.MajorasMask)
+            if (Game == mzxrules.OcaLib.Game.MajorasMask)
                 NewActor = MActorFactory.NewActor;//ActorList.Add(MActorFactory.NewActor(actorArray));
         }
 

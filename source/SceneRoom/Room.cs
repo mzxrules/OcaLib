@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using OcarinaPlayer;
+using mzxrules.OcaLib;
 using RHelper;
 
-namespace OcarinaPlayer.SceneRoom
+namespace mzxrules.OcaLib.SceneRoom
 {
     public class Room : ISceneRoomHeader
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using RHelper;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
     /// <summary>
     /// Encapsulates an n64 Ocarina of Time binary file

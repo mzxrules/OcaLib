@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     class CutsceneCommand : AbstractCutsceneCommand
     {
@@ -18,15 +18,11 @@ namespace OcarinaPlayer.Cutscenes
 
         protected CutsceneCommand(uint command, BinaryReader br)
         {
-            this.command = command;
-            index = br.BaseStream.Position;
-            Load(br);
+            this.Command = command;
+            Index = br.BaseStream.Position;
+            //Load(br);
         }
 
-        protected override void Load(BinaryReader br)
-        {
-            throw new InvalidOperationException();
-        }
         public override string ReadCommand()
         {
             throw new InvalidOperationException();

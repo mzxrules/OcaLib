@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     class ScreenTransitionCommand : CutsceneCommand, IFrameData
     {
@@ -14,7 +14,7 @@ namespace OcarinaPlayer.Cutscenes
         ushort transition;
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
-        public AbstractCutsceneCommand RootCommand
+        public CutsceneCommand RootCommand
         {
             get { return this;}
             set { throw new InvalidOperationException(); }
@@ -24,12 +24,14 @@ namespace OcarinaPlayer.Cutscenes
         public ScreenTransitionCommand(uint command, BinaryReader br)
             : base(command, br)
         {
+            Load(br);
         }
         protected override int GetLength()
         {
             return LENGTH;
         }
-        protected override void Load(BinaryReader br)
+       
+        private void Load(BinaryReader br)
         {
             byte[] arr;
             short startFrame;
@@ -55,7 +57,7 @@ namespace OcarinaPlayer.Cutscenes
             StringBuilder sb;
 
             sb = new StringBuilder();
-            sb.AppendLine(String.Format("{0:X8}: Screen Transition fx", command));
+            sb.AppendLine(String.Format("{0:X8}: Screen Transition fx", Command));
             sb.Append(string.Format(
                 "{0:X8}, Transition: {1:X4}, Start: {2:X4} End: {3:X4} End: {4:X4}",
                 a,

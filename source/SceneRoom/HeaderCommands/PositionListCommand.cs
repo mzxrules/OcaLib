@@ -7,7 +7,7 @@ using ZActor.OActors;
 using System.IO;
 
 
-namespace OcarinaPlayer.SceneRoom.Commands
+namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     class PositionListCommand : SceneCommand, IActorList, IBankRefAsset
     {

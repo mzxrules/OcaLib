@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using RHelper;
 
-namespace OcarinaPlayer.SceneRoom
+namespace mzxrules.OcaLib.SceneRoom
 {
     public class ISceneRoomHeader
     {

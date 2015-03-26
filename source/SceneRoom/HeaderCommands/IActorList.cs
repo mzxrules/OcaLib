@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using ZActor.OActors;
 
-namespace OcarinaPlayer.SceneRoom.Commands
+namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     interface IActorList
     {

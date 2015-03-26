@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     public class Cutscene
     {
@@ -19,10 +19,10 @@ namespace OcarinaPlayer.Cutscenes
         public Cutscene(Stream s)
         {
             BinaryReader br;
-            br = new BinaryReader(s);
-
             CutsceneCommand cmd;
             UInt32 commandId;
+
+            br = new BinaryReader(s);
 
             //Read the header
             header = new HeaderCommand(br);
@@ -37,12 +37,11 @@ namespace OcarinaPlayer.Cutscenes
                 Endian.Convert(out commandId, br.ReadBytes(4));
                 switch (commandId)
                 {
-                    case 0x00000001: goto case 2;
-                    case 0x00000002: cmd = new CameraCommand(commandId, br); break;
-                    case 0x00000005: goto case 2; // Scene 67
-                    case 0x00000006: goto case 2; // Scene 67
+                    case 0x00000001: cmd = new CameraCommand(commandId, br); break;
+                    case 0x00000002: goto case 1;
+                    case 0x00000005: goto case 1; // Scene 67
+                    case 0x00000006: goto case 1; // Scene 67
                     case 0x00000009: cmd = new Command0009(commandId, br); break;
-                    //case 0x0000000B: cmd = new Command000B(commandId, br); break;// throw new NotImplementedException(); //CutsceneDuration(br, output); break;
                     case 0x00000013: cmd = new TextCommand(commandId, br); break;
                     case 0x0000002D: cmd = new ScreenTransitionCommand(commandId, br); break;
                     case 0x000003E8: cmd = new ExitCommand(commandId, br); break;

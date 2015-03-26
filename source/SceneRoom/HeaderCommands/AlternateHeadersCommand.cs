@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer.SceneRoom.Commands
+namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     public class AlternateHeadersCommand : SceneCommand, IBankRefAsset
     {

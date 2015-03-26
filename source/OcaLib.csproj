@@ -7,8 +7,8 @@
     <ProjectGuid>{EC69E9E2-4CFB-43F9-8E37-CB6A52935E4C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OcarinaPlayer</RootNamespace>
-    <AssemblyName>OcarinaPlayer</AssemblyName>
+    <RootNamespace>mzxrules.OcaLib</RootNamespace>
+    <AssemblyName>OcaLib</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

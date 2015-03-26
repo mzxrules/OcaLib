@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RHelper;
 
-namespace OcarinaPlayer.SceneRoom
+namespace mzxrules.OcaLib.SceneRoom
 {
     public class CollisionMesh
     {

@@ -6,7 +6,7 @@ using System.IO;
 using ZActor.OActors;
 using RHelper;
 
-namespace OcarinaPlayer.SceneRoom
+namespace mzxrules.OcaLib.SceneRoom
 {
     public class Scene : ISceneRoomHeader
     {

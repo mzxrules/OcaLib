@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     interface IFrameData
     {
-        AbstractCutsceneCommand RootCommand { get; set; }
+        CutsceneCommand RootCommand { get; set; }
         short StartFrame { get; set; }
         short EndFrame { get; set; }
     }

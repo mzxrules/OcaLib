@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
     public class OvlActor
     {

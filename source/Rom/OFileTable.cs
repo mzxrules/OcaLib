@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
     /// <summary>
     /// Provides a means of accessing files in a Zelda 64 Rom

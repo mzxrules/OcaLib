@@ -1,4 +1,4 @@
-﻿using OcarinaPlayer.SceneRoom;
+﻿using mzxrules.OcaLib.SceneRoom;
 using RHelper;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
     public static class SpiritHack
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using RHelper;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
     public abstract class AbstractVFileTable 
     {

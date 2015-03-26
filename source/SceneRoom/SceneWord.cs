@@ -1,7 +1,7 @@
 ﻿using RHelper;
 using System;
 
-namespace OcarinaPlayer.SceneRoom
+namespace mzxrules.OcaLib.SceneRoom
 {
     public class SceneWord
     {

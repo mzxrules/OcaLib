@@ -8,7 +8,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
     public static class Addresser
     {
@@ -17,7 +17,7 @@ namespace OcarinaPlayer
         static Addresser()
         {
             var stream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("OcarinaPlayer.Addresses.xml");
+                .GetManifestResourceStream("mzxrules.OcaLib.Addresses.xml");
 
 
             XmlSerializer serializer;
@@ -138,36 +138,5 @@ namespace OcarinaPlayer
         }
         #endregion
 
-
-        //public static bool TryConvertToRam(MRom.FileList file, MRom.Build version, string addrVar, out int v)
-        //{
-        //    return TryConvertToRam(Game.OcarinaOfTime, file.ToString(), version.ToString(), addrVar, out v);
-        //}
-
-        //private static int GetAddress_old(Game game, string file, string version, string addrVar)
-        //{
-        //    XElement address;
-        //    XElement fileX;
-
-        //    var x = from a in addrDoc.Elements("Addresses").Elements("File")
-        //            where a.Attribute("n").Value == file
-        //            select a;
-
-        //    fileX = x.Single();
-
-        //    if (fileX == null)
-        //        throw new ArgumentException(String.Format("File {0} was not found in Addresses.xml", file));
-
-        //    var y = from a in fileX.Elements("Item")
-        //            where a.Attribute("var").Value == addrVar
-        //            select a;
-
-        //    address = GetElementOfVersion(version, y.SingleOrDefault());
-        //    if (address == null)
-        //        throw new ArgumentException(String.Format("{1} does not exist under {0} in Addresses.xml",
-        //            file, addrVar));
-
-        //    return int.Parse(address.Value, System.Globalization.NumberStyles.HexNumber);
-        //}
     }
 }

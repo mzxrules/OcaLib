@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     class ActorCommand : CutsceneCommand
     {
@@ -16,8 +16,10 @@ namespace OcarinaPlayer.Cutscenes
         public ActorCommand(uint command, BinaryReader br)
             : base(command, br)
         {
+            Load(br);
         }
-        protected override void Load(BinaryReader br)
+        
+        private void Load(BinaryReader br)
         {
             Endian.Convert(out EntryCount, br.ReadBytes(4));
 
@@ -29,7 +31,7 @@ namespace OcarinaPlayer.Cutscenes
 
         public override string ToString()
         {
-            return String.Format("{0:X8}: Actor, Entries: {1:X8}", command, EntryCount);
+            return String.Format("{0:X8}: Actor, Entries: {1:X8}", Command, EntryCount);
         }
 
         public override string ReadCommand()
@@ -56,7 +58,7 @@ namespace OcarinaPlayer.Cutscenes
 
         class ActorCommandEntry : IFrameData
         {
-            public AbstractCutsceneCommand RootCommand { get; set; }
+            public CutsceneCommand RootCommand { get; set; }
             public short StartFrame { get; set; }
             public short EndFrame { get; set; }
             public const int LENGTH = 0x30;
@@ -68,12 +70,12 @@ namespace OcarinaPlayer.Cutscenes
             public Vector3<int> EndVertex = new Vector3<int>();
             public Vector3<float> VertexNormal = new Vector3<float>();
 
-            public ActorCommandEntry(AbstractCutsceneCommand cmd,  BinaryReader br)
+            public ActorCommandEntry(CutsceneCommand cmd,  BinaryReader br)
             {
                 Load(cmd, br);
             }
 
-            private void Load(AbstractCutsceneCommand cmd, BinaryReader br)
+            private void Load(CutsceneCommand cmd, BinaryReader br)
             {
                 byte[] arr;
                 short startFrame;
@@ -111,14 +113,14 @@ namespace OcarinaPlayer.Cutscenes
                     e));
 
                 sb.Append(String.Format(" Vertex Start: ({0}, {1}, {2}) ",
-                    StartVertex.x.ToString(),
-                    StartVertex.y.ToString(),
-                    StartVertex.z.ToString()));
+                    StartVertex.x,
+                    StartVertex.y,
+                    StartVertex.z));
 
                 sb.Append(String.Format("End: ({0}, {1}, {2}) ",
-                    EndVertex.x.ToString(),
-                    EndVertex.y.ToString(),
-                    EndVertex.z.ToString()));
+                    EndVertex.x,
+                    EndVertex.y,
+                    EndVertex.z));
 
                 sb.Append(String.Format("Normal: ({0:F4}, {1:F4}, {2:F4})",
                     VertexNormal.x,

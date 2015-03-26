@@ -5,16 +5,16 @@ using System.Text;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     class HeaderCommand : CutsceneCommand, IFrameData
     {
         const int LENGTH = 8;
-        public int Commands { get { return (int)command; } }
+        public int Commands { get { return (int)Command; } }
         public int EndFrame { get { return endFrame; } }
         int endFrame;
 
-        public AbstractCutsceneCommand RootCommand
+        public CutsceneCommand RootCommand
         {
             get { return this; }
             set { throw new InvalidOperationException(); }
@@ -35,7 +35,7 @@ namespace OcarinaPlayer.Cutscenes
         public HeaderCommand(BinaryReader br)
             : base(br.ReadBigUInt32(), br)
         {
-            
+            Load(br);
         }
         protected override int GetLength()
         {
@@ -44,10 +44,11 @@ namespace OcarinaPlayer.Cutscenes
         public override string ToString()
         {
             return String.Format("Header: Commands {0:X8}, End Frame {1:X8}",
-                command,
+                Command,
                 endFrame);
         }
-        protected override void Load(BinaryReader br)
+        
+        private void Load(BinaryReader br)
         {
             endFrame = br.ReadBigInt32();
         }
@@ -60,6 +61,5 @@ namespace OcarinaPlayer.Cutscenes
         {
             yield return this;
         }
-
     }
 }

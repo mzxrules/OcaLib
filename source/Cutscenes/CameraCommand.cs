@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     class CameraCommand : CutsceneCommand
     {
@@ -15,6 +15,7 @@ namespace OcarinaPlayer.Cutscenes
         public CameraCommand(uint command, BinaryReader br)
             : base(command, br)
         {
+            Load(br);
         }
 
         protected override int GetLength()
@@ -22,7 +23,7 @@ namespace OcarinaPlayer.Cutscenes
             return (4 + CameraCommandParams.LENGTH + (CameraCommandEntry.LENGTH * entries.Count));
         }
 
-        protected override void Load(BinaryReader br)
+        private void Load(BinaryReader br)
         {
             CameraCommandEntry entry;
             short startFrame;
@@ -44,15 +45,18 @@ namespace OcarinaPlayer.Cutscenes
         public override string ToString()
         {
             string commandType;
+            string relativity = string.Empty;
             switch (Command)
             {
-                case 01: commandType = "Positions"; break;
-                case 02: commandType = "Focus Points"; break;
+                case 01: relativity = "Static"; commandType = "Positions"; break;
+                case 02: relativity = "Static"; commandType = "Focus Points"; break;
+                case 05: relativity = "Player Relative"; commandType = "Positions"; break;
+                case 06: relativity = "Player Relative"; commandType = "Focus Point"; break;
                 default: commandType = "Unknown Command"; break;
             }
 
-            return String.Format("{0:X8}: Camera {2} , {1}", command, p,
-                commandType);
+            return String.Format("{0:X8}: {3} Camera {2} , {1}", Command, p,
+                commandType, relativity);
         }
 
         public override string ReadCommand()
@@ -68,7 +72,6 @@ namespace OcarinaPlayer.Cutscenes
 
         protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
         {
-            //yield return p;
             foreach (IFrameData e in entries)
                 yield return e;
         }
@@ -76,14 +79,14 @@ namespace OcarinaPlayer.Cutscenes
         class CameraCommandParams : IFrameData
         {
             public const int LENGTH = 8;
-            public AbstractCutsceneCommand RootCommand { get; set; }
+            public CutsceneCommand RootCommand { get; set; }
             public short StartFrame { get; set; }
             public short EndFrame { get; set; }
 
             public ushort w;
             public ushort z;
 
-            public CameraCommandParams(AbstractCutsceneCommand cmd, BinaryReader br)
+            public CameraCommandParams(CutsceneCommand cmd, BinaryReader br)
             {
                 RootCommand = cmd;
                 w = br.ReadBigUInt16();
@@ -100,11 +103,9 @@ namespace OcarinaPlayer.Cutscenes
                     EndFrame,
                     z);
             }
-
-
         }
 
-        class CameraCommandEntry:IFrameData
+        class CameraCommandEntry : IFrameData
         {
             public const int LENGTH = 0x10;
 
@@ -122,7 +123,7 @@ namespace OcarinaPlayer.Cutscenes
 
             public bool IsLastEntry { get { return (Terminator == 0xFF); } }
 
-            public void Load(AbstractCutsceneCommand cmd, short startFrame, BinaryReader br)
+            public void Load(CutsceneCommand cmd, short startFrame, BinaryReader br)
             {
                 byte[] arr;
                 byte[] arr2 = new byte[4];
@@ -160,7 +161,7 @@ namespace OcarinaPlayer.Cutscenes
                     (float)Rotation * 180 / 128);
             }
 
-            public AbstractCutsceneCommand RootCommand
+            public CutsceneCommand RootCommand
             {
                 get;
                 set;

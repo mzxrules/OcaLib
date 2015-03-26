@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using RHelper;
 
-namespace OcarinaPlayer.Cutscenes
+namespace mzxrules.OcaLib.Cutscenes
 {
     class TextCommand : CutsceneCommand
     {
@@ -16,12 +16,14 @@ namespace OcarinaPlayer.Cutscenes
         public TextCommand(uint command, BinaryReader br)
             : base(command, br)
         {
+            Load(br);
         }
         protected override int GetLength()
         {
             return TextCommandEntry.LENGTH * entries.Count + LENGTH;
         }
-        protected override void Load(BinaryReader br)
+        
+        private void Load(BinaryReader br)
         {
             byte[] arr;
             arr = br.ReadBytes(sizeof (int));
@@ -36,7 +38,7 @@ namespace OcarinaPlayer.Cutscenes
         public override string ToString()
         {
             return String.Format("{0:X8}: Text Command, {1} entries",
-                command,
+                Command,
                 entryCount);
         }
         public override string ReadCommand()
@@ -60,11 +62,11 @@ namespace OcarinaPlayer.Cutscenes
         {
             public const int LENGTH = 12;
             ushort text;
-            public AbstractCutsceneCommand RootCommand { get; set; }
+            public CutsceneCommand RootCommand { get; set; }
             public short StartFrame { get; set; }
             public short EndFrame { get; set; }
             ushort a, b, c;
-            internal void Load(AbstractCutsceneCommand cmd, BinaryReader br)
+            internal void Load(CutsceneCommand cmd, BinaryReader br)
             {
                 short startFrame;
                 short endFrame;

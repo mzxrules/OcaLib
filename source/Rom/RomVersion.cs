@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace OcarinaPlayer
+namespace mzxrules.OcaLib
 {
     public class RomVersion
     {
@@ -13,14 +13,14 @@ namespace OcarinaPlayer
 
         private RomVersion(ORom.Build build)
         {
-            Game = OcarinaPlayer.Game.OcarinaOfTime;
+            Game = mzxrules.OcaLib.Game.OcarinaOfTime;
             OVer = build;
             MVer = MRom.Build.UNKNOWN;
         }
 
         private RomVersion(MRom.Build build)
         {
-            Game = OcarinaPlayer.Game.MajorasMask;
+            Game = mzxrules.OcaLib.Game.MajorasMask;
             OVer = ORom.Build.UNKNOWN;
             MVer = build;
         }
@@ -55,7 +55,7 @@ namespace OcarinaPlayer
             {
                 case Game.OcarinaOfTime: return this.OVer.ToString(); 
                 case Game.MajorasMask: return this.MVer.ToString();
-                default: throw new NotImplementedException();
+                default: return base.ToString();
             }
 
         }

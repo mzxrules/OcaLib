@@ -1,4 +1,4 @@
-﻿namespace OcarinaPlayer.SceneRoom.Commands
+﻿namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     public enum HeaderCommands
     {
