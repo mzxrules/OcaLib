@@ -20,7 +20,6 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             this.Command = command;
             Index = br.BaseStream.Position;
-            //Load(br);
         }
 
         public override string ReadCommand()

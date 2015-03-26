@@ -3,7 +3,7 @@ using ZActor.MActors;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using RHelper;
+using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {

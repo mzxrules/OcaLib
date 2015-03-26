@@ -1,4 +1,4 @@
-﻿using RHelper;
+﻿using mzxrules.OcaLib.Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,19 +9,20 @@ namespace mzxrules.OcaLib.Cutscenes
 {
     public class Cutscene
     {
-        const int COMMAND_CAP = 250;
+        int CommandCap;
         HeaderCommand header; 
         List<CutsceneCommand> Commands = new List<CutsceneCommand>();
         public bool CommandCapReached = false;
         public int Frames { get { return header.EndFrame; } }
         public int CommandCount { get { return header.Commands; } }
 
-        public Cutscene(Stream s)
+        public Cutscene(Stream s, int commandCap = 250)
         {
             BinaryReader br;
             CutsceneCommand cmd;
             UInt32 commandId;
 
+            CommandCap = commandCap;
             br = new BinaryReader(s);
 
             //Read the header
@@ -34,13 +35,13 @@ namespace mzxrules.OcaLib.Cutscenes
 
             for (int i = 0; i < header.Commands + 1; i++)
             {
-                Endian.Convert(out commandId, br.ReadBytes(4));
+                commandId = (uint)br.ReadBigInt32();
                 switch (commandId)
                 {
                     case 0x00000001: cmd = new CameraCommand(commandId, br); break;
                     case 0x00000002: goto case 1;
-                    case 0x00000005: goto case 1; // Scene 67
-                    case 0x00000006: goto case 1; // Scene 67
+                    case 0x00000005: goto case 1; 
+                    case 0x00000006: goto case 1; 
                     case 0x00000009: cmd = new Command0009(commandId, br); break;
                     case 0x00000013: cmd = new TextCommand(commandId, br); break;
                     case 0x0000002D: cmd = new ScreenTransitionCommand(commandId, br); break;
@@ -53,7 +54,7 @@ namespace mzxrules.OcaLib.Cutscenes
                 if (cmd is EndCommand)
                     break;
 
-                if (i > COMMAND_CAP)
+                if (i > CommandCap)
                 {
                     CommandCapReached = true;
                     return;
@@ -61,8 +62,11 @@ namespace mzxrules.OcaLib.Cutscenes
             }
         }
 
-
-        public string PrintCutsceneByCommandOrder()
+        /// <summary>
+        /// Generates a verbose dump of a cutscene, ordering instructions by occurance within the file
+        /// </summary>
+        /// <returns>The output text</returns>
+        public string PrintByOccurance()
         {
             StringBuilder output = new StringBuilder();
             long streamStart;
@@ -70,8 +74,8 @@ namespace mzxrules.OcaLib.Cutscenes
             if (Commands.Count == 0 || header == null)
                 return "No Cutscene Found";
 
-            if (CommandCapReached)//header.Commands > COMMAND_CAP)
-                return String.Format("Exceeded {0} command limit: {1}", COMMAND_CAP, header.Commands);
+            if (CommandCapReached)
+                return String.Format("Exceeded {0} command limit: {1}", CommandCap, header.Commands);
 
             streamStart = header.Index;
 
@@ -88,12 +92,15 @@ namespace mzxrules.OcaLib.Cutscenes
 
             return output.ToString();
         }
-
-        public string PrintCutsceneByTimelineOrder()
+        /// <summary>
+        /// Generates a verbose dump of a cutscene, ordering intructions by start frame
+        /// </summary>
+        /// <returns>The output text</returns>
+        public string PrintByTimeline()
         {
             short time = -1;
             StringBuilder sb = new StringBuilder();
-            AbstractCutsceneCommand lastRoot = null;
+            CutsceneCommand lastRoot = null;
 
             foreach (IFrameData f in Commands
                 .SelectMany(x => x.IFrameDataEnum)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using RHelper;
+using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
@@ -16,7 +16,7 @@ namespace mzxrules.OcaLib.Cutscenes
         public short EndFrame { get; set; }
         public CutsceneCommand RootCommand
         {
-            get { return this;}
+            get { return this; }
             set { throw new InvalidOperationException(); }
         }
         short endFrameD;

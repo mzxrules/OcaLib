@@ -5,7 +5,7 @@ using System.Text;
 using ZActor.OActors;
 using mzxrules.OcaLib.SceneRoom.Commands;
 using System.IO;
-using RHelper;
+using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.SceneRoom
 {        

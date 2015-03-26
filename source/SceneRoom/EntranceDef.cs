@@ -8,11 +8,11 @@ namespace mzxrules.OcaLib.SceneRoom
 {
     public struct EntranceDef
     {
-        public byte Map;
+        public byte Room;
         public byte Position;
         public EntranceDef(byte pIndex, byte m)
         {
-            Map = m;
+            Room = m;
             Position = pIndex;
         }
     }

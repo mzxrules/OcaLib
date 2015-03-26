@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using RHelper;
+using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
+    /// <summary>
+    /// The header for a cutscene. Not a proper command, but contains frame information
+    /// </summary>
     class HeaderCommand : CutsceneCommand, IFrameData
     {
         const int LENGTH = 8;
-        public int Commands { get { return (int)Command; } }
-        public int EndFrame { get { return endFrame; } }
-        int endFrame;
+        public int Commands { get; private set; }
+        public int EndFrame { get; private set; }
 
         public CutsceneCommand RootCommand
         {
@@ -28,14 +30,15 @@ namespace mzxrules.OcaLib.Cutscenes
 
         short IFrameData.EndFrame
         {
-            get { return (short)endFrame; }
-            set { endFrame = value; }
+            get { return (short)EndFrame; }
+            set { EndFrame = value; }
         }
 
         public HeaderCommand(BinaryReader br)
             : base(br.ReadBigUInt32(), br)
         {
             Load(br);
+            Commands = (int)this.Command;
         }
         protected override int GetLength()
         {
@@ -45,12 +48,12 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             return String.Format("Header: Commands {0:X8}, End Frame {1:X8}",
                 Command,
-                endFrame);
+                EndFrame);
         }
         
         private void Load(BinaryReader br)
         {
-            endFrame = br.ReadBigInt32();
+            EndFrame = br.ReadBigInt32();
         }
         public override string ReadCommand()
         {

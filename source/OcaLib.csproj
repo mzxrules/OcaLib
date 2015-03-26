@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="Address\Addresses.cs" />
     <Compile Include="Address\Addresser.cs" />
+    <Compile Include="Cutscenes\ActorCommandEntry.cs" />
+    <Compile Include="Cutscenes\CameraCommandEntry.cs" />
+    <Compile Include="Cutscenes\TextCommandEntry.cs" />
     <Compile Include="Rom\RomFileToken.cs" />
     <Compile Include="Rom\MRom.cs" />
     <Compile Include="Rom\RomVersion.cs" />
@@ -92,10 +95,10 @@
     <Compile Include="SceneRoom\HeaderCommands\ObjectListCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\PathListCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\PositionListCommand.cs" />
-    <Compile Include="Cutscenes\AbstractCutsceneCommand.cs" />
+    <Compile Include="Cutscenes\CutsceneCommand_Abstract.cs" />
     <Compile Include="Cutscenes\ActorCommand.cs" />
     <Compile Include="Cutscenes\CameraCommand.cs" />
-    <Compile Include="Cutscenes\ConcreteCutsceneCommand.cs" />
+    <Compile Include="Cutscenes\CutsceneCommand_Concrete.cs" />
     <Compile Include="Cutscenes\HeaderCommand.cs" />
     <Compile Include="SceneRoom\SceneHeader.cs" />
     <Compile Include="SceneRoom\HeaderCommands\SkyboxModifierCommand.cs" />
@@ -132,13 +135,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RHelper\Helper.csproj">
-      <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
-      <Name>Helper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ZActor\ZActor.csproj">
+    <ProjectReference Include="..\..\ZActor\ZActor.csproj">
       <Project>{85fd7069-d868-431d-87f9-eb76bdf73fc5}</Project>
       <Name>ZActor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helper\Helper.csproj">
+      <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
+      <Name>Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

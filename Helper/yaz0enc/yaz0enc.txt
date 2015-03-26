@@ -1,0 +1,71 @@
+Yaz0 encoder for nintendo
+ver 1.0 (2005-07-07)
+by shevious
+
+1. Introduction
+
+This is a Yaz0 encoder for ngc and n64. I only tested for zww(Zelda Windwaker) yaz0 files.
+The Yaz0 format is widely used in n64 and ngc nintendo games.
+This compression is slow but ultra fast for decoding.
+So it is good for game data compression since compression rate is fairly high.
+The decoding method is simple and fast, but encoding method is not unique.
+I've tried to figure out nintendo's encoding algorithm. 
+If you encode the exact same uncompressed file, you'll get exactly same yaz0 compressed file.
+For decoding and RLE format, see yaz0.txt by thakis.
+Please let me know if you have any problems or comments.
+(shevious@yahoo.com)
+
+2. Compression
+
+A. simple encoding
+
+Just search longest matched pattern with the current position in the previous data.
+Make it RLE style data if you found pattern longer than 3 bytes.
+Just copy 1 byte if you didn't.
+
+ex1)
+Original data: "0 1 2 A 0 1 2 3 B 0 1 2 3 4 5 6 7" where current encoding position is 0x8 
+Let "0 1 2 A 0 1 2 3" be already encoded, "B 0 1 2 3 4 5 6 7" be to be encoded.
+
+There is no "B", so just copy 1 byte "B" to output.
+Next encoding position will be 0x9.
+
+ex2) next step of ex1
+Original data: "0 1 2 A 0 1 2 3 B 0 1 2 3 4 5 6 7" where current encoding position is 0x9 
+Let "0 1 2 A 0 1 2 3 B" be already encoded, "0 1 2 3 4 5 6 7" be to be encoded.
+
+The longest matching is "0 1 2 3". <-4 postion, length 4>
+Make RLE for 4 bytes, next encoding position will be 0xD.
+
+
+B. nintendo's encoding
+
+If you succeed in simple encoding at current position, then just look ahead after 1 byte copying.
+If the next encoded length is longer than +2, then choose this look-ahead one.
+If not, discard the look-ahead one and just take simple encoding.
+
+ex3)
+Original data: "0 0 0 A 0 0 0 0 0 0 0 0 0 0 A" where current encoding position is 0x4.
+"0 0 0 A" is encoded alread, and "0 0 0 0 ..." should be encoded.
+
+Simple encoding tells that <-4 position, length 3> is encoded result.
+For look-ahead, just copy one byte "0" then 
+"0 0 0 A 0" is encoded for look-ahead and " 0 0 0 0 0 0 0 0 0 A" to be encoded.
+
+Then the longest matching is "0 0 0 0 0 0 0 0 0". (-1 position and length 9)
+The matching position can be overlapped. (See yaz0.txt.)
+
+Choose <1 byte copy> + <-1 position, 9 byte> scheme
+instead of simple <-4 position, 3 byte> + <-1 position, 6 byte>.
+The encoded length for <1 byte copy> is 1 byte + 1 bit.
+<-1 position, 9 bytes>: 2 byte + 1 bit
+<-4 position, 3 bytes>: 2 byte + 1 bit
+<-4 position, 6 bytes>: 2 byte + 1 bit
+So the look-ahead scheme saves 1 byte compared to simple encoding method.
+
+The scheme for previous example saved 1 byte, but it doesn't always guarantee that.
+For rare cases, the nintendo's scheme can be longer.
+Anyway, the encoding method is fairly fast and statistically good.
+
+<End of document>
+
