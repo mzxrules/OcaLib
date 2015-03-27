@@ -6,7 +6,7 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class MapBehaviorCommand : SceneCommand
+    class WindCommand : SceneCommand
     {
         public override string Read()
         {
@@ -14,10 +14,11 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ReadSimple()
         {
-            SceneWord cmd = command;
-            return string.Format("Map Behavior: {0:X2} : {1:X8}",
-                command.Data1,
-                command.Data2);
+            return string.Format("Wind Settings: Forces Westward {0:X2}, Vertical {1:X2}, Southward {2:X2}, Strength {3:X2}",
+                command[4],
+                command[5],
+                command[6],
+                command[7]);
         }
     }
 }

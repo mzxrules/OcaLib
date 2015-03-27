@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RHelper")]
+[assembly: AssemblyTitle("Helper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("mzxrules")]
-[assembly: AssemblyProduct("RHelper")]
-[assembly: AssemblyCopyright("mzxrules")]
+[assembly: AssemblyProduct("Helper")]
+[assembly: AssemblyCopyright("Copyright © mzxrules 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

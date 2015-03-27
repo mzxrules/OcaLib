@@ -121,10 +121,10 @@ namespace mzxrules.OcaLib.SceneRoom
                     command = new CollisionCommand();
                     break;
                 case HeaderCommands.MapList:            //0x04
-                    command = new MapListCommand();
+                    command = new RoomListCommand();
                     break;
                 case HeaderCommands.CMD05:              //0x05
-                    command = new CMD05Command();
+                    command = new WindCommand();
                     break;
                 case HeaderCommands.EntranceDefs:       //0x06
                     command = new EntranceDefinitionsCommand();
@@ -133,10 +133,10 @@ namespace mzxrules.OcaLib.SceneRoom
                     command = new SpecialObjectCommand();
                     break;
                 case HeaderCommands.MapBehavior:        //0x08
-                    command = new MapBehaviorCommand();
+                    command = new RoomBehaviorCommand();
                     break;
                 case HeaderCommands.MapMesh:            //0x0A
-                    command = new MapMeshCommand();
+                    command = new RoomMeshCommand();
                     break;
                 case HeaderCommands.ObjectList:         //0x0B
                     command = new ObjectListCommand();
@@ -270,13 +270,13 @@ namespace mzxrules.OcaLib.SceneRoom
         public List<FileAddress> GetRoomAddresses()
         {
             List<FileAddress> resultAddresses = new List<FileAddress>();
-            MapListCommand cmd;
+            RoomListCommand cmd;
 
-            cmd = (MapListCommand)this[HeaderCommands.MapList];
+            cmd = (RoomListCommand)this[HeaderCommands.MapList];
             if (cmd == null)
                 return null;
 
-            foreach (FileAddress addr in cmd.MapAddresses)
+            foreach (FileAddress addr in cmd.RoomAddresses)
                 resultAddresses.Add(addr);
 
             if (HasAlternateHeaders())
@@ -285,13 +285,13 @@ namespace mzxrules.OcaLib.SceneRoom
                 foreach (SceneHeader altHeader in Alternate.HeaderList.Where(x => x != null))
                 {
                     //for every map in that scene setup
-                    cmd = (MapListCommand)altHeader[HeaderCommands.MapList];
+                    cmd = (RoomListCommand)altHeader[HeaderCommands.MapList];
 
-                    for (int i = 0; i < cmd.Maps; i++)
+                    for (int i = 0; i < cmd.Rooms; i++)
                     {
-                        if (!resultAddresses.Contains(cmd.MapAddresses[i]))
+                        if (!resultAddresses.Contains(cmd.RoomAddresses[i]))
                         {
-                            resultAddresses.Add(cmd.MapAddresses[i]);
+                            resultAddresses.Add(cmd.RoomAddresses[i]);
                             break;
                         }
                     }

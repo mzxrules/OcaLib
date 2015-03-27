@@ -78,7 +78,7 @@
     <Compile Include="SceneRoom\CollisionMesh.cs" />
     <Compile Include="SceneRoom\CollisionPolygon.cs" />
     <Compile Include="SceneRoom\HeaderCommands\AlternateHeadersCommand.cs" />
-    <Compile Include="SceneRoom\HeaderCommands\CMD05Command.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\WindCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\CollisionCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\ConcreteSceneCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\CutsceneCommand.cs" />
@@ -89,9 +89,9 @@
     <Compile Include="SceneRoom\HeaderCommands\IActorList.cs" />
     <Compile Include="SceneRoom\HeaderCommands\ISMAsset.cs" />
     <Compile Include="SceneRoom\HeaderCommands\JpegBackgroundCommand.cs" />
-    <Compile Include="SceneRoom\HeaderCommands\MapBehaviorCommand.cs" />
-    <Compile Include="SceneRoom\HeaderCommands\MapListCommand.cs" />
-    <Compile Include="SceneRoom\HeaderCommands\MapMeshCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\RoomBehaviorCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\RoomListCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\RoomMeshCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\ObjectListCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\PathListCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\PositionListCommand.cs" />
