@@ -26,8 +26,8 @@ namespace mzxrules.OcaLib.SceneRoom
     //0x17
     //0x19
 
-    //Map Setup
-    //0x08 map behavior
+    //Room Setup
+    //0x08 Room behavior
     //0x0A mesh
     //0x0B
     //0x10 time setting
@@ -120,11 +120,11 @@ namespace mzxrules.OcaLib.SceneRoom
                 case HeaderCommands.Collision:          //0x03
                     command = new CollisionCommand();
                     break;
-                case HeaderCommands.MapList:            //0x04
+                case HeaderCommands.RoomList:            //0x04
                     command = new RoomListCommand();
                     break;
-                case HeaderCommands.CMD05:              //0x05
-                    command = new WindCommand();
+                case HeaderCommands.WindSettings:              //0x05
+                    command = new WindSettingsCommand();
                     break;
                 case HeaderCommands.EntranceDefs:       //0x06
                     command = new EntranceDefinitionsCommand();
@@ -132,10 +132,10 @@ namespace mzxrules.OcaLib.SceneRoom
                 case HeaderCommands.SpecialObject:      //0x07
                     command = new SpecialObjectCommand();
                     break;
-                case HeaderCommands.MapBehavior:        //0x08
+                case HeaderCommands.RoomBehavior:        //0x08
                     command = new RoomBehaviorCommand();
                     break;
-                case HeaderCommands.MapMesh:            //0x0A
+                case HeaderCommands.RoomMesh:            //0x0A
                     command = new RoomMeshCommand();
                     break;
                 case HeaderCommands.ObjectList:         //0x0B
@@ -242,7 +242,7 @@ namespace mzxrules.OcaLib.SceneRoom
             else if ((IBankRefAsset)this[HeaderCommands.ObjectList] != null)
                 return ((IBankRefAsset)this[HeaderCommands.ObjectList]).Offset;
             else 
-                return ((IBankRefAsset)this[HeaderCommands.MapMesh]).Offset;
+                return ((IBankRefAsset)this[HeaderCommands.RoomMesh]).Offset;
         }
         #endregion
 
@@ -264,15 +264,15 @@ namespace mzxrules.OcaLib.SceneRoom
         }
 
         /// <summary>
-        /// Gets all map addresses from the header and child headers
+        /// Gets all room addresses from the header and child headers
         /// </summary>
-        /// <returns>Returns a list of maps if the MapListCommand is found, else returns null</returns>
+        /// <returns>Returns a list of rooms if the RoomListCommand is found, else returns null</returns>
         public List<FileAddress> GetRoomAddresses()
         {
             List<FileAddress> resultAddresses = new List<FileAddress>();
             RoomListCommand cmd;
 
-            cmd = (RoomListCommand)this[HeaderCommands.MapList];
+            cmd = (RoomListCommand)this[HeaderCommands.RoomList];
             if (cmd == null)
                 return null;
 
@@ -284,8 +284,8 @@ namespace mzxrules.OcaLib.SceneRoom
                 //for every scene setup
                 foreach (SceneHeader altHeader in Alternate.HeaderList.Where(x => x != null))
                 {
-                    //for every map in that scene setup
-                    cmd = (RoomListCommand)altHeader[HeaderCommands.MapList];
+                    //for every room in that scene setup
+                    cmd = (RoomListCommand)altHeader[HeaderCommands.RoomList];
 
                     for (int i = 0; i < cmd.Rooms; i++)
                     {
@@ -431,106 +431,5 @@ namespace mzxrules.OcaLib.SceneRoom
         {
             return cmds;
         }
-
-        //FIXME
-        //public void SetExits(FileStream sr)
-        //{
-        //    byte[] bShort = new byte[2];
-        //    int exitCount = 0;
-        //    MaxExits = 0;
-
-        //    if (header.HasAlternateSetups())
-        //    {
-        //        foreach (SceneSetup setup in header.Alt.AlternateSetups)
-        //        {
-        //            if (setup != null && setup.ExitListAddress != -1)
-        //            {
-        //                if (setup.EnvironmentSettingsAddress == -1)
-        //                {
-        //                    throw new Exception("EnvSetting always set" + ID);
-        //                }
-        //                else
-        //                {
-        //                    exitCount = (int)((setup.EnvironmentSettingsAddress - setup.ExitListAddress) / 2);
-        //                    if (MaxExits < exitCount)
-        //                        MaxExits = exitCount;
-        //                }
-        //            }
-        //        }
-        //        foreach (SceneSetup setup in header.Alt.AlternateSetups)
-        //        {
-        //            if (setup != null)
-        //            {
-        //                if (setup.ExitListAddress != -1)
-        //                {
-        //                    sr.Position = setup.ExitListAddress;
-        //                    for (int i = 0; i < MaxExits; i++)
-        //                    {
-        //                        sr.Read(bShort, 0, 2);
-        //                        setup.exitList.Add((ushort)((bShort[0] << 8) + bShort[1]));
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
-        //FIXME
-        //public string ReturnCSVEntranceDefinitions()
-        //{
-        //    EntranceDef def;
-        //    Vector3<short> v;
-        //    StringBuilder result = new StringBuilder();
-        //    SceneSetup setup;
-
-        //    for (int i = 0; i < AlternateSetups.Count; i++)
-        //    {
-        //        if (AlternateSetups[i] != null)
-        //        {
-        //            for (int j = 0; j < MaxEntrances; j++)
-        //            {
-        //                setup = (SceneSetup)AlternateSetups[i];
-        //                def = setup.EntranceDefinitions[j];
-        //                result.AppendFormat("{0}, {1}, {2}, {3}, {4}",
-        //                    ID, i, j, def.Map, def.Position);
-        //                if (def.Position < setup.Positions)
-        //                {
-        //                    v = setup.PositionList[def.Position].GetCoords();
-        //                    result.AppendFormat(", {0}, {1}, {2}",
-        //                        v.x, v.y, v.z);
-        //                }
-        //                result.AppendLine();
-        //            }
-        //        }
-        //    }
-        //    return result.ToString();
-        //}
-
-        //FIXME
-        //public string ReturnCSVExitDefinitions()
-        //{
-        //    ushort exit;
-        //    StringBuilder result = new StringBuilder();
-        //    SceneSetup setup;
-        //    for (int i = 0; i < header.Alt.AlternateSetups.Count; i++)
-        //    {
-        //        if (header.Alt.AlternateSetups[i] != null)
-        //        {
-        //            setup = (SceneSetup)header.Alt.AlternateSetups[i];
-        //            if (setup.ExitListAddress != -1)
-        //            {
-        //                for (int j = 0; j < MaxExits; j++)
-        //                {
-        //                    exit = setup.exitList[j];
-        //                    result.AppendFormat("{0}, {1}, {2}, {3}",
-        //                        ID, i, j,
-        //                        exit.ToString("X4"));
-        //                    result.AppendLine();
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return result.ToString();
-        //}
     }
 }

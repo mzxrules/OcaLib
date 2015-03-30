@@ -78,7 +78,7 @@
     <Compile Include="SceneRoom\CollisionMesh.cs" />
     <Compile Include="SceneRoom\CollisionPolygon.cs" />
     <Compile Include="SceneRoom\HeaderCommands\AlternateHeadersCommand.cs" />
-    <Compile Include="SceneRoom\HeaderCommands\WindCommand.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\WindSettingsCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\CollisionCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\ConcreteSceneCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\CutsceneCommand.cs" />

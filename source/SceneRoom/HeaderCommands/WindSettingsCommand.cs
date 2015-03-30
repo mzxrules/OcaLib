@@ -6,7 +6,7 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class WindCommand : SceneCommand
+    class WindSettingsCommand : SceneCommand
     {
         public override string Read()
         {
