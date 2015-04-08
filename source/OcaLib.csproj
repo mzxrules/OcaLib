@@ -135,7 +135,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ZActor\ZActor.csproj">
+    <ProjectReference Include="..\ZActor\ZActor.csproj">
       <Project>{85fd7069-d868-431d-87f9-eb76bdf73fc5}</Project>
       <Name>ZActor</Name>
     </ProjectReference>

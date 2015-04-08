@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{85FD7069-D868-431D-87F9-EB76BDF73FC5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZActor</RootNamespace>
+    <AssemblyName>ZActor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MActors\MActorFactory.cs" />
+    <Compile Include="MActors\MActorRecord.cs" />
+    <Compile Include="MActors\MSimpleActor.cs" />
+    <Compile Include="OActors\ActorDialog.cs" />
+    <Compile Include="OActors\ActorFactory.cs" />
+    <Compile Include="OActors\GreeneryActor.cs" />
+    <Compile Include="OActors\GrottoActor.cs" />
+    <Compile Include="Shared\ActorRecord.cs" />
+    <Compile Include="OActors\AmbientFxActor.cs" />
+    <Compile Include="OActors\ArmosStatueActor.cs" />
+    <Compile Include="OActors\BabyDodongoActor.cs" />
+    <Compile Include="OActors\BasicSwitchActor.cs" />
+    <Compile Include="OActors\BeamosActor.cs" />
+    <Compile Include="OActors\BlockSpotSwitchActor.cs" />
+    <Compile Include="OActors\BombableWallActor.cs" />
+    <Compile Include="OActors\BombflowerActor.cs" />
+    <Compile Include="OActors\BreakablePotActor.cs" />
+    <Compile Include="OActors\BrownBoulderActor.cs" />
+    <Compile Include="OActors\BubbleActor.cs" />
+    <Compile Include="OActors\CheckSpotActor.cs" />
+    <Compile Include="OActors\ChestActor.cs" />
+    <Compile Include="OActors\ChestFlag.cs" />
+    <Compile Include="OActors\ClearBlockActor.cs" />
+    <Compile Include="OActors\CollectibleActor.cs" />
+    <Compile Include="OActors\CollectibleFlags.cs" />
+    <Compile Include="OActors\CutsceneActor.cs" />
+    <Compile Include="OActors\DecorativeFlameActor.cs" />
+    <Compile Include="OActors\DekuScrubActor.cs" />
+    <Compile Include="OActors\DodongoActor.cs" />
+    <Compile Include="OActors\FlameCircleActor.cs" />
+    <Compile Include="OActors\FlareDancerActor.cs" />
+    <Compile Include="OActors\FlyingPotActor.cs" />
+    <Compile Include="OActors\GhomaLarvaActor.cs" />
+    <Compile Include="OActors\GossipStoneActor.cs" />
+    <Compile Include="OActors\GraveFlowerActor.cs" />
+    <Compile Include="OActors\GravestoneActor.cs" />
+    <Compile Include="OActors\GraveyardActor.cs" />
+    <Compile Include="OActors\GraveyardBoyActor.cs" />
+    <Compile Include="OActors\GreenNaviSpotActor.cs" />
+    <Compile Include="OActors\GroundedSalesScrubActor.cs" />
+    <Compile Include="OActors\HookshotBlockActor.cs" />
+    <Compile Include="OActors\HugeStoneElevatorActor.cs" />
+    <Compile Include="OActors\InvisibleCollectableActor.cs" />
+    <Compile Include="OActors\IronKnuckleRoomActor.cs" />
+    <Compile Include="OActors\KaeporaGaeboraActor.cs" />
+    <Compile Include="OActors\KeeseActor.cs" />
+    <Compile Include="OActors\LargeCrateActor.cs" />
+    <Compile Include="OActors\LiftingDoorActor.cs" />
+    <Compile Include="OActors\LizafosActor.cs" />
+    <Compile Include="OActors\MegaDodongoActor.cs" />
+    <Compile Include="OActors\MegatonStatueActor.cs" />
+    <Compile Include="OActors\MoveableBlockActor.cs" />
+    <Compile Include="OActors\NaviInfospotActor.cs" />
+    <Compile Include="OActors\OcarinaPlaySpotActor.cs" />
+    <Compile Include="OActors\PoeSistersPuzzle.cs" />
+    <Compile Include="OActors\PoeSistersTorch.cs" />
+    <Compile Include="OActors\RedeadActor.cs" />
+    <Compile Include="OActors\RegenGrassActor.cs" />
+    <Compile Include="OActors\RisingStonePlatformActor.cs" />
+    <Compile Include="OActors\ShadowTempleGraphicalActor.cs" />
+    <Compile Include="OActors\SilverRupeeActor.cs" />
+    <Compile Include="OActors\SimpleActor.cs" />
+    <Compile Include="OActors\SkulltulaActor.cs" />
+    <Compile Include="OActors\SkullwalltulaActor.cs" />
+    <Compile Include="OActors\SlidingSpikeTrapActor.cs" />
+    <Compile Include="OActors\SpiritStoneFace.cs" />
+    <Compile Include="OActors\SpiritTempleChainPlatform.cs" />
+    <Compile Include="OActors\StalfosActor.cs" />
+    <Compile Include="OActors\StandardDoorActor.cs" />
+    <Compile Include="OActors\StoneStairsActor.cs" />
+    <Compile Include="OActors\SwitchFlag.cs" />
+    <Compile Include="OActors\TektiteActor.cs" />
+    <Compile Include="OActors\TempleOfTimeActors.cs" />
+    <Compile Include="OActors\TimeBlockActor.cs" />
+    <Compile Include="OActors\TimerActor.cs" />
+    <Compile Include="OActors\TorchActor.cs" />
+    <Compile Include="OActors\TransitionActor.cs" />
+    <Compile Include="OActors\TransitionPlaneActor.cs" />
+    <Compile Include="OActors\WaterSpoutActor.cs" />
+    <Compile Include="OActors\WebActor.cs" />
+    <Compile Include="OActors\WellWaterActor.cs" />
+    <Compile Include="OActors\WolfosActor.cs" />
+    <Compile Include="Pack.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlActor.cs" />
+    <Compile Include="XmlActorDictionary.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Helper\Helper.csproj">
+      <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
+      <Name>Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
