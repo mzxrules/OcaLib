@@ -47,6 +47,7 @@
       </xs:element>
       <xs:element name="Description" type="xs:string" />
       <xs:element name="Comment" type="xs:string" minOccurs ="0"/>
+      <xs:element name="Default" type="xs:string"/>
       <xs:element minOccurs ="0" maxOccurs="unbounded" name="Value">
         <xs:complexType>
           <xs:sequence>
