@@ -5,8 +5,7 @@
 
   <xs:complexType name ="XActors">
     <xs:sequence>
-      <xs:element maxOccurs="unbounded" name="Actor" type ="XActor">
-      </xs:element>
+      <xs:element maxOccurs="unbounded" name="Actor" type ="XActor"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -46,9 +45,10 @@
         </xs:complexType>
       </xs:element>
       <xs:element name="Description" type="xs:string" />
+      <xs:element name="UI" type="UI" minOccurs="1" maxOccurs="1"></xs:element>
       <xs:element name="Comment" type="xs:string" minOccurs ="0"/>
-      <xs:element name="Default" type="xs:string"/>
-      <xs:element minOccurs ="0" maxOccurs="unbounded" name="Value">
+      <xs:element name="Default" minOccurs="0" type="xs:string"/>
+      <xs:element name="Value" minOccurs ="0" maxOccurs="unbounded" >
         <xs:complexType>
           <xs:sequence>
             <xs:element name="Data" type ="XValueData"/>
@@ -60,6 +60,32 @@
     </xs:sequence>
     <xs:attribute name="altvar" type="xs:string" use="optional" />
   </xs:complexType>
+
+  <xs:complexType name="UI">
+    <xs:sequence>
+      <xs:element minOccurs ="0" maxOccurs="unbounded" name ="Param">
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="id" type="xs:string" use="required"/>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element> 
+    </xs:sequence>
+    <xs:attribute name="name" type ="UITypes" default="default"/>
+  </xs:complexType>
+  
+  <xs:simpleType name="UITypes">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="default" />
+    <xs:enumeration value="bitflag" />
+    <xs:enumeration value="switchflag" />
+    <xs:enumeration value="select" />
+    <xs:enumeration value="numupdown" />
+  </xs:restriction>
+</xs:simpleType>
+
 
   <xs:complexType name="XValueData">
     <xs:simpleContent>

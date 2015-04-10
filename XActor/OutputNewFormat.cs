@@ -117,6 +117,9 @@ namespace XActor
         private static void PrintComments(StringBuilder sb, string p, bool inline = false)
         {
             string[] commentLines;
+            bool emptyLine = false;
+            bool firstLine = true;
+
             if (p == null)
                 return;
 
@@ -129,7 +132,7 @@ namespace XActor
             {
                 if (commentLines.Length == 1)
                 {
-                    sb.Append(@" //" + commentLines[0]);
+                    sb.Append(@" //" + commentLines[0].Trim());
                     return;
                 }
                 else
@@ -138,8 +141,21 @@ namespace XActor
                 }
             }
 
-            foreach (string s in commentLines)
+            for (int i = 0; i < commentLines.Length; i++)
             {
+                string s = commentLines[i].Trim();
+
+                if (s.Length == 0)
+                {
+                    emptyLine = true;
+                    continue;
+                }
+                if (emptyLine && !firstLine)
+                {
+                    sb.AppendLine();
+                }
+                emptyLine = false;
+                firstLine = false;
                 sb.AppendLine(String.Format(@"//{0}",
                     s
                     ));

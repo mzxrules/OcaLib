@@ -85,7 +85,7 @@ namespace XActor
             StringBuilder sb = new StringBuilder();
             List<Tuple<string, string>> ActorToObjects = new List<Tuple<string,string>>();
 
-            actorList = XActors.DeserializeXmlFile(XmlFileLocation);
+            actorList = XActors.LoadFromFile(XmlFileLocation);
 
             sb.AppendLine("{|class=\"wikitable sortable\"");
             sb.AppendLine("! data-sort-type=\"text\" | Actor");
@@ -125,7 +125,7 @@ namespace XActor
 
         private void PrintListFromXml()
         {
-            outRichTextBox.Text = OutputNewFormat.Output(XActors.DeserializeXmlFile(XmlFileLocation)).ToString();
+            outRichTextBox.Text = OutputNewFormat.Output(XActors.LoadFromFile(XmlFileLocation)).ToString();
         }
     }
 }
