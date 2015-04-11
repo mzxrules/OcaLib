@@ -39,8 +39,9 @@
         <xs:complexType>
           <xs:simpleContent>
             <xs:extension base="xs:string">
-              <xs:attribute name="type" type="xs:string" use="required" />
+              <xs:attribute name="type" type="Mask" use="required" />
             </xs:extension>
+            
           </xs:simpleContent>
         </xs:complexType>
       </xs:element>
@@ -61,6 +62,13 @@
     <xs:attribute name="altvar" type="xs:string" use="optional" />
   </xs:complexType>
 
+  <xs:simpleType name="Mask">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="&amp;"/>
+      <xs:enumeration value="|"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:complexType name="UI">
     <xs:sequence>
       <xs:element minOccurs ="0" maxOccurs="unbounded" name ="Param">
@@ -71,20 +79,23 @@
             </xs:extension>
           </xs:simpleContent>
         </xs:complexType>
-      </xs:element> 
+      </xs:element>
     </xs:sequence>
     <xs:attribute name="name" type ="UITypes" default="default"/>
   </xs:complexType>
-  
+
   <xs:simpleType name="UITypes">
-  <xs:restriction base="xs:string">
-    <xs:enumeration value="default" />
-    <xs:enumeration value="bitflag" />
-    <xs:enumeration value="switchflag" />
-    <xs:enumeration value="select" />
-    <xs:enumeration value="numupdown" />
-  </xs:restriction>
-</xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="bitflag" />
+      <xs:enumeration value="default" />
+      <xs:enumeration value="path" />
+      <xs:enumeration value="randomdrop" />
+      <xs:enumeration value="switchflag" />
+      <xs:enumeration value="select" />
+      <xs:enumeration value="textid" />
+      <xs:enumeration value="numupdown" />
+    </xs:restriction>
+  </xs:simpleType>
 
 
   <xs:complexType name="XValueData">

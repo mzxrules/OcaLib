@@ -1,4 +1,4 @@
-﻿namespace XActor
+﻿namespace mzxrules.XActor
 {
     partial class TestForm
     {

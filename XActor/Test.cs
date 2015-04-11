@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using XActors1 = XActor.XActors;
-namespace XActor
+using XActors1 = mzxrules.XActor.XActors;
+namespace mzxrules.XActor
 {
     class Test
     {

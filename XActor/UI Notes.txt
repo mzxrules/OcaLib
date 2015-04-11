@@ -1,9 +1,16 @@
 ﻿default = input box, hex
+
 bitflag = sets binary state (no params)
 switchflag = sets collectible switch flag (no params)
 select = dropdown selector
 numupdown = numericUpDown
+randomdrop = Random drop table
 params:
 	unit (display unit)
 	increment
 	min (integer)		
+
+path = pathway selector
+textid = game text id
+- params:
+	base (base id number, hex)

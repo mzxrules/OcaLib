@@ -11,17 +11,45 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace XActor
+namespace mzxrules.XActor
 {
     public partial class TestForm : Form
     {
         static string XmlFileLocation = "ActorVars.xml";
+
         public TestForm()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            XActors actors;
+            Int16[] bitDictionary = new Int16[16];
+            actors = XActors.LoadFromFile(XmlFileLocation);
+
+
+            for (int i = 0; i < 16; i++)
+            {
+                bitDictionary[i] = (Int16)(1 << i);
+            }
+
+            foreach (XActor actor in actors.Actor)
+            {
+                var value = from v in actor.Variables
+                            where bitDictionary.Contains(Convert.ToInt16(v.Mask.Value, 16))
+                            select v;
+
+                foreach (var v in value)
+                {
+                    if (v.UI.name == "default")
+                        v.UI.name = "bitfield";
+                }
+            }
+            outRichTextBox.Text = actors.Serialize();
+        }
+
+        private void ParseOld()
         {
             string[] Lines;
             XActors resultXActors;

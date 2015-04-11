@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using XActors1 = XActor.XActor;
+using XActors1 = mzxrules.XActor.XActor;
 
-namespace XActor
+namespace mzxrules.XActor
 {
     class ParseOldFormat
     {
