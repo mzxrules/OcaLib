@@ -965,7 +965,7 @@
       <Variable altvar="ZRot">
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag to spawn chest.</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -1032,12 +1032,12 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag set when destroyed</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">0FC0</Mask>
         <Description>Switch Flag that when set causes web to burn self</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">F000</Mask>
@@ -1106,7 +1106,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
         <Comment>Switch Flag to spawn on, type 02 only</Comment>
       </Variable>
     </Variables>
@@ -1587,15 +1587,10 @@
         </Value>
       </Variable>
       <Variable>
-        <Mask type="&amp;">3F00</Mask>
-        <Description>Switch Flag</Description>
-        <UI />
+        <Mask type="&amp;">FF00</Mask>
+        <Description>Nullable Switch Flag</Description>
+        <UI name="switchflag"/>
         <Comment>Lizalfos Miniboss spawns when entering room from door bound to this switch flag</Comment>
-      </Variable>
-      <Variable>
-        <Mask type="|">FF00</Mask>
-        <Description>No Flag</Description>
-        <UI />
       </Variable>
     </Variables>
   </Actor>
@@ -1774,7 +1769,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flags</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -2245,7 +2240,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flags</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">FF00</Mask>
@@ -2513,7 +2508,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flags</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -2554,7 +2549,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -2655,7 +2650,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -2689,7 +2684,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -2934,7 +2929,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>
@@ -2984,7 +2979,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>
@@ -3701,7 +3696,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">FF00</Mask>
@@ -4541,7 +4536,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag for Zelda's Lullaby spot</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -4819,7 +4814,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">FF00</Mask>
@@ -4837,7 +4832,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>
@@ -4985,14 +4980,9 @@
     <Description>Lord Jabu-Jabu objects</Description>
     <Variables>
       <Variable>
-        <Mask type="&amp;">3F00</Mask>
-        <Description>Switch Flag</Description>
-        <UI />
-      </Variable>
-      <Variable>
-        <Mask type="|">FF00</Mask>
-        <Description>No Flag</Description>
-        <UI />
+        <Mask type="&amp;">FF00</Mask>
+        <Description>Nullable Switch Flag</Description>
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>
@@ -5100,7 +5090,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag?</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="|">FF00</Mask>
@@ -5123,7 +5113,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>
@@ -5153,7 +5143,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">FF00</Mask>
@@ -5206,14 +5196,9 @@
     <Description>Lake Hylia Objects</Description>
     <Variables>
       <Variable>
-        <Mask type="&amp;">003F</Mask>
-        <Description>Switch Flag</Description>
-        <UI />
-      </Variable>
-      <Variable>
-        <Mask type="|">00FF</Mask>
-        <Description>No Flag</Description>
-        <UI />
+        <Mask type="&amp;">00FF</Mask>
+        <Description>Nullable Switch Flag</Description>
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">FF00</Mask>
@@ -5258,7 +5243,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
         <Comment>If set, water level is lowered</Comment>
       </Variable>
     </Variables>
@@ -5999,7 +5984,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">00F0</Mask>
@@ -6131,7 +6116,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">FF00</Mask>
@@ -6408,7 +6393,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable altvar="ZRot">
         <Mask type="&amp;">FFFF</Mask>
@@ -6457,7 +6442,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>
@@ -6620,7 +6605,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>
@@ -7782,7 +7767,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -8641,7 +8626,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">03C0</Mask>
@@ -9902,7 +9887,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -9944,7 +9929,7 @@
       <Variable>
         <Mask type="&amp;">FC00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
         <Comment>Set on room clear</Comment>
       </Variable>
       <Variable>
@@ -10097,7 +10082,7 @@
       <Variable>
         <Mask type="&amp;">3F00</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>
@@ -10128,7 +10113,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -10710,7 +10695,7 @@
       <Variable>
         <Mask type="&amp;">003F</Mask>
         <Description>Switch Flag</Description>
-        <UI />
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -10884,9 +10869,10 @@
     <Description>Wolfos</Description>
     <Variables>
       <Variable>
-        <Mask type="&amp;">3F00</Mask>
-        <Description>Switch Flag (FF = no flag)</Description>
-        <UI />
+        <Mask type="&amp;">FF00</Mask>
+        <Description>Nullable Switch Flag</Description>
+        <UI name="switchflag"/>
+        <Default>FF</Default>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>
@@ -11068,14 +11054,10 @@
     </Comment>
     <Variables>
       <Variable>
-        <Mask type="&amp;">3F00</Mask>
-        <Description>Switch Flag</Description>
-        <UI />
-      </Variable>
-      <Variable>
-        <Mask type="|">FF00</Mask>
-        <Description>Enabled and ignoring switch flag input</Description>
-        <UI />
+        <Mask type="&amp;">FF00</Mask>
+        <Description>Nullable Switch Flag</Description>
+        <UI name="switchflag"/>
+        <Comment>If null, Enabled and ignoring switch flag input</Comment>
       </Variable>
       <Variable>
         <Mask type="&amp;">00FF</Mask>

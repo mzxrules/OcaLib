@@ -39,7 +39,7 @@
         <xs:complexType>
           <xs:simpleContent>
             <xs:extension base="xs:string">
-              <xs:attribute name="type" type="Mask" use="required" />
+              <xs:attribute name="type" type="MaskType" use="required" />
             </xs:extension>
             
           </xs:simpleContent>
@@ -59,10 +59,18 @@
         </xs:complexType>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="altvar" type="xs:string" use="optional" />
+    <xs:attribute name="altvar" type="AltVarTypes" use="optional" />
   </xs:complexType>
+  
+  <xs:simpleType name="AltVarTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="XRot"/>
+      <xs:enumeration value="YRot"/>
+      <xs:enumeration value="ZRot"/>
+      </xs:restriction>
+  </xs:simpleType>
 
-  <xs:simpleType name="Mask">
+  <xs:simpleType name="MaskType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="&amp;"/>
       <xs:enumeration value="|"/>
@@ -71,7 +79,7 @@
 
   <xs:complexType name="UI">
     <xs:sequence>
-      <xs:element minOccurs ="0" maxOccurs="unbounded" name ="Param">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name ="Param">
         <xs:complexType>
           <xs:simpleContent>
             <xs:extension base="xs:string">
@@ -96,7 +104,6 @@
       <xs:enumeration value="numupdown" />
     </xs:restriction>
   </xs:simpleType>
-
 
   <xs:complexType name="XValueData">
     <xs:simpleContent>

@@ -85,6 +85,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Test.xslt" />
     <Content Include="UI Notes.txt" />
     <Content Include="xml-test\TestActorVariables.xml">
       <SubType>Designer</SubType>
