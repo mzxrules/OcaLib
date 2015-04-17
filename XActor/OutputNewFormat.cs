@@ -33,18 +33,18 @@ namespace mzxrules.XActor
 
             foreach (XVariable var in actor.Variables)
             {
-                if (var.altvar != null)
+                if (var.altvar !=  AltVarTypes.Var)
                 {
                     sb.AppendLine();
-                    if (var.altvar == "XRot")
+                    if (var.altvar == AltVarTypes.XRot)
                     {
                         sb.AppendLine("X Rotation:");
                     }
-                    else if (var.altvar == "YRot")
+                    else if (var.altvar == AltVarTypes.YRot)
                     {
                         sb.AppendLine("Y Rotation:");
                     }
-                    else if (var.altvar == "ZRot")
+                    else if (var.altvar == AltVarTypes.ZRot)
                     {
                         sb.AppendLine("Z Rotation:");
                     }
@@ -67,15 +67,15 @@ namespace mzxrules.XActor
         private static void PrintVariable(StringBuilder sb,  XVariable var)
         {
             sb.AppendFormat(" {0} {1} - {2} ",
-                var.Mask.type,
-                var.Mask.Value,
+                (var.maskType == MaskType.And)? "&":"|",
+                var.mask,
                 var.Description);
             PrintComments(sb, var.Comment, true);
             sb.AppendLine();
 
             foreach (XVariableValue value in var.Value)
             {
-                PrintVariableValue(sb, value, int.Parse(var.Mask.Value, System.Globalization.NumberStyles.HexNumber));
+                PrintVariableValue(sb, value, int.Parse(var.mask, System.Globalization.NumberStyles.HexNumber));
             }
         }
 

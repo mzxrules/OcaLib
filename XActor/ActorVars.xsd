@@ -35,39 +35,34 @@
 
   <xs:complexType name="XVariable">
     <xs:sequence>
-      <xs:element name="Mask">
-        <xs:complexType>
-          <xs:simpleContent>
-            <xs:extension base="xs:string">
-              <xs:attribute name="type" type="MaskType" use="required" />
-            </xs:extension>
-            
-          </xs:simpleContent>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="Description" type="xs:string" />
-      <xs:element name="UI" type="UI" minOccurs="1" maxOccurs="1"></xs:element>
       <xs:element name="Comment" type="xs:string" minOccurs ="0"/>
-      <xs:element name="Default" minOccurs="0" type="xs:string"/>
+      <xs:element name="UI" type="UI" minOccurs="1" maxOccurs="1"/>
       <xs:element name="Value" minOccurs ="0" maxOccurs="unbounded" >
         <xs:complexType>
           <xs:sequence>
             <xs:element name="Data" type ="XValueData"/>
             <xs:element name="Description" type="xs:string"/>
-            <xs:element name ="Comment" type ="xs:string" minOccurs ="0" />
+            <xs:element name="Comment" type ="xs:string" minOccurs ="0" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="altvar" type="AltVarTypes" use="optional" />
+    <xs:attribute name="id" default="-1"/>
+    <xs:attribute name="altvar" type="AltVarTypes" use="optional" default="Var" />
+    <xs:attribute name="maskType" type="MaskType" use="required"/>
+    <xs:attribute name="mask" type="xs:string" use="required"/>
+    <xs:attribute name="default" type="xs:string" use="optional" />
+    <xs:attribute name="nullable" type="xs:boolean" default="0"/>
   </xs:complexType>
-  
+
   <xs:simpleType name="AltVarTypes">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="Var"/>
       <xs:enumeration value="XRot"/>
       <xs:enumeration value="YRot"/>
       <xs:enumeration value="ZRot"/>
-      </xs:restriction>
+    </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="MaskType">
@@ -95,12 +90,16 @@
   <xs:simpleType name="UITypes">
     <xs:restriction base="xs:string">
       <xs:enumeration value="bitflag" />
+      <xs:enumeration value="collectflag" />
       <xs:enumeration value="default" />
       <xs:enumeration value="path" />
       <xs:enumeration value="randomdrop" />
+      <xs:enumeration value="reflink"/>
       <xs:enumeration value="switchflag" />
       <xs:enumeration value="select" />
       <xs:enumeration value="textid" />
+      <xs:enumeration value="none"/>
+      <xs:enumeration value="num"/>
       <xs:enumeration value="numupdown" />
     </xs:restriction>
   </xs:simpleType>

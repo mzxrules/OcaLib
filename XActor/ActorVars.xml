@@ -11,11 +11,9 @@
       May sometimes cause Z-buffer glitches
     </Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">0F00</Mask>
+      <Variable maskType="&amp;" mask="0F00" default="F">
         <Description>Spawn Behavior</Description>
         <UI name="select" />
-        <Default>F</Default>
         <Value>
           <Data>0</Data>
           <Description>Invisible, can't be controlled</Description>
@@ -64,11 +62,9 @@
           <Description>Spawned, retain previous velocity</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" default="FF">
         <Description>Spawn Camera Behavior. Camera is positioned based on the scene Link spawns in</Description>
         <UI />
-        <Default>FF</Default>
         <Value>
           <Data>FF</Data>
           <Description>No special positioning</Description>
@@ -82,8 +78,7 @@
     </Objects>
     <Description>Stalfos</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -124,8 +119,7 @@
     </Objects>
     <Description>Dissipating Flames</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -169,8 +163,7 @@
     </Objects>
     <Description>Decorative Flames</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -255,8 +248,7 @@
     <Description>Standard Door</Description>
     <Comment>if the fourth digit is not 0, then the doors will spawn artifacts of themselves</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -317,8 +309,7 @@
     </Objects>
     <Description>Treasure chest</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">F000</Mask>
+      <Variable maskType="&amp;" mask="F000" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -374,8 +365,7 @@
           <Description>Large</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0FE0</Mask>
+      <Variable maskType="&amp;" mask="0FE0" >
         <Description>Chest Contents</Description>
         <UI />
         <Value>
@@ -956,16 +946,14 @@
           <Description>Invalid, crashes when opened</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">001F</Mask>
+      <Variable maskType="&amp;" mask="001F" >
         <Description>Chest Flag</Description>
-        <UI />
         <Comment>If multiple chests share the same chest flag in a room, opening one will open the others with the same flag.</Comment>
+        <UI />
       </Variable>
-      <Variable altvar="ZRot">
-        <Mask type="&amp;">003F</Mask>
+      <Variable altvar="ZRot" maskType="&amp;" mask="003F" >
         <Description>Switch Flag to spawn chest.</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -982,11 +970,9 @@
     </Objects>
     <Description>Proximity activated flame wall</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="00FF">
         <Description>Type</Description>
         <UI />
-        <Default>00FF</Default>
       </Variable>
     </Variables>
   </Actor>
@@ -996,11 +982,9 @@
     </Objects>
     <Description>Poe</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="0000">
         <Description>Type</Description>
         <UI />
-        <Default>0000</Default>
         <Value>
           <Data>0000</Data>
           <Description>Normal Poe</Description>
@@ -1029,18 +1013,15 @@
     </Objects>
     <Description>Webs</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag set when destroyed</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0FC0</Mask>
+      <Variable maskType="&amp;" mask="0FC0" >
         <Description>Switch Flag that when set causes web to burn self</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">F000</Mask>
+      <Variable maskType="&amp;" mask="F000" >
         <Description>Web Type</Description>
         <UI />
         <Value>
@@ -1064,8 +1045,7 @@
     </Objects>
     <Description>Bomb</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -1085,8 +1065,7 @@
     </Objects>
     <Description>Wallmaster (Ceiling monster)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -1103,11 +1082,10 @@
           <Description>Spawn on Switch Flag</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
         <Comment>Switch Flag to spawn on, type 02 only</Comment>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -1117,8 +1095,7 @@
     </Objects>
     <Description>Dodongo</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -1143,8 +1120,7 @@
     </Objects>
     <Description>Keese</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -1180,8 +1156,7 @@
     </Objects>
     <Description>Epona</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -1213,17 +1188,14 @@
       else it becomes nothing
     </Comment-Other>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" default="FFFF">
         <Description>Collectible Flag</Description>
         <UI />
-        <Default>FFFF</Default>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
-        <UI />
         <Comment>Some types won't work under certain conditions</Comment>
+        <UI />
         <Value>
           <Data>00</Data>
           <Description>Green Rupee</Description>
@@ -1344,8 +1316,7 @@
     </Objects>
     <Description>Arrows</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -1365,8 +1336,7 @@
     </Objects>
     <Description>Fairies</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -1417,8 +1387,7 @@
     </Objects>
     <Description>Tektite</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -1453,8 +1422,7 @@
     </Objects>
     <Description>Peahat</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -1485,8 +1453,7 @@
     </Objects>
     <Description>Bugs</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -1514,8 +1481,7 @@
     </Objects>
     <Description>Fish</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -1559,8 +1525,7 @@
       To differentiate the two encounters (as both are in room 3), the switch flag is used. This flag matches the switch flag of the door used to enter the room
     </Comment-Other>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -1586,11 +1551,10 @@
           <Description>Dinolfos, no mini-boss music, drops down from ceiling</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Nullable Switch Flag</Description>
-        <UI name="switchflag"/>
         <Comment>Lizalfos Miniboss spawns when entering room from door bound to this switch flag</Comment>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -1629,8 +1593,7 @@
     <Description>Cutscene Actors</Description>
     <Comment>FIXME: Need their own objects</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -1682,8 +1645,7 @@
     </Objects>
     <Description>Ghoma Larva</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -1733,8 +1695,7 @@
     </Objects>
     <Description>Lifting Dungeon Door</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">0FC0</Mask>
+      <Variable maskType="&amp;" mask="0FC0" >
         <Description>Door type</Description>
         <UI />
         <Value>
@@ -1766,10 +1727,9 @@
           <Description>Key Locked door</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flags</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -1814,8 +1774,7 @@
     </Objects>
     <Description>Skulltula</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -1850,8 +1809,7 @@
     </Objects>
     <Description>Gameplay_keep items</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -1911,8 +1869,7 @@
     </Objects>
     <Description>Stinger</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -1940,8 +1897,7 @@
     </Objects>
     <Description>Ambient sound effects</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Sound</Description>
         <UI />
         <Value>
@@ -2051,8 +2007,7 @@
     <Description>Shopkeeper</Description>
     <Comment>FIXME: Probably needs objects</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -2117,8 +2072,7 @@
     </Objects>
     <Description>Megaton Statue</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -2152,8 +2106,7 @@
     </Objects>
     <Description>Stone blocks (Fire Temple)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2180,8 +2133,7 @@
     </Objects>
     <Description>Stationary flame thrower statue (Fire Temple)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2201,8 +2153,7 @@
     </Objects>
     <Description>Stone platform (Fire Temple)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2237,13 +2188,11 @@
     <Description>Flame circle</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flags</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -2287,8 +2236,7 @@
     </Objects>
     <Description>Drawbridge Objects</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2308,18 +2256,23 @@
     </Objects>
     <Description>Moblins</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="00FF" >
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
-          <Data>0000</Data>
-          <Description>Ground-Pounder</Description>
+          <Data>00</Data>
+          <Description>Club Moblin</Description>
+          <Comment>Pounds the ground</Comment>
         </Value>
         <Value>
-          <Data repeat="+">0001</Data>
+          <Data repeat="+">FF</Data>
           <Description>Spear Moblin</Description>
         </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask="FF00" default="00">
+        <Description>Path</Description>
+        <Comment>Spear Moblins only</Comment>
+        <UI name="path"></UI>
       </Variable>
     </Variables>
   </Actor>
@@ -2329,8 +2282,7 @@
     </Objects>
     <Description>Bombflower Bomb</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2372,13 +2324,11 @@
     <Description>Deku Tree Puzzle elements</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Input</Description>
         <UI />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -2420,8 +2370,7 @@
     </Objects>
     <Description>Armos statue</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2445,8 +2394,7 @@
     </Objects>
     <Description>Deku Baba (Snapping)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2492,8 +2440,7 @@
     <Description>Bombable Wall</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>??</Description>
         <UI />
         <Value>
@@ -2505,10 +2452,9 @@
           <Description>Dodongo's Cavern cutscene</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flags</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -2518,8 +2464,7 @@
     </Objects>
     <Description>Lord Jabu-Jabu</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2546,10 +2491,9 @@
     </Objects>
     <Description>Stone stairs</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -2559,8 +2503,7 @@
     </Objects>
     <Description>Warp portals</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2621,8 +2564,7 @@
     <Description>Torch</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FC00</Mask>
+      <Variable maskType="&amp;" mask="FC00" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -2642,15 +2584,13 @@
           <Description>Lit Wooden Torch</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">03C0</Mask>
+      <Variable maskType="&amp;" mask="03C0" >
         <Description>Torches to light to solve puzzle (Timed Torch)</Description>
         <UI />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -2665,15 +2605,33 @@
     <Objects>
       <Object>004A</Object>
     </Objects>
-    <Description>Mad Scrub (Deku Scrub variant)</Description>
-    <Variables />
+    <Description>Mad Scrub</Description>
+    <Comment>Deku Scrub variant</Comment>
+    <Variables>
+      <Variable maskType="&amp;" mask="00FF" default="FF" nullable="true">
+        <Description>Nuts shot per volley</Description>
+        <UI name="num">
+          <Param id="display">hex</Param>
+        </UI>
+        <Value>
+          <Data>FF</Data>
+          <Description>Fire 1 shot</Description>
+        </Value>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0061">
     <Objects>
       <Object>004D</Object>
     </Objects>
-    <Description>Large rotating stone ring (Forest Temple &amp; Gerudo Training Center)</Description>
-    <Variables />
+    <Description>Large rotating stone ring</Description>
+    <Comment>Gerudo Training Grounds and Forest Temple</Comment>
+    <Variables>
+      <Variable maskType="&amp;" mask="003F" nullable ="true" default="003F">
+        <Description>Switch Flag</Description>
+        <UI name="switchflag"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0062">
     <Objects>
@@ -2681,10 +2639,9 @@
     </Objects>
     <Description>Eye platform eye switches</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -2701,8 +2658,7 @@
     </Objects>
     <Description>Water Temple Platforms / Dragon Head Statues</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2739,8 +2695,7 @@
     <Description>Large square of water (Water Temple)</Description>
     <Comment>used for the main pool of water</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2797,14 +2752,11 @@
     </Objects>
     <Description>Bubble (flying skull) enemy</Description>
     <Variables>
-      <Variable>
-        <Mask type="|">00F0</Mask>
+      <Variable maskType="|" mask="00F0" default="F">
         <Description>Bits always set</Description>
         <UI />
-        <Default>F</Default>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">000F</Mask>
+      <Variable maskType="&amp;" mask="000F" >
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -2831,10 +2783,9 @@
           <Comment>requires movement path</Comment>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Movement path number (believe pathway is set within the scene file)</Description>
-        <UI name="path"/>
+        <UI name="path" />
       </Variable>
     </Variables>
   </Actor>
@@ -2844,8 +2795,7 @@
     </Objects>
     <Description>Temple of Time windows</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -2885,8 +2835,7 @@
     </Objects>
     <Description>Warp Pad</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -2926,13 +2875,11 @@
     </Objects>
     <Description>Metal gate</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -2976,13 +2923,11 @@
     </Objects>
     <Description>Stone Steps and Platforms (Fire Temple)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3010,8 +2955,7 @@
     </Objects>
     <Description>Greenery</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3112,8 +3056,7 @@
           <Comment>Disappears after several repetitions</Comment>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Controls item(s) dropped (trees only)</Description>
         <UI />
         <Value>
@@ -3161,8 +3104,7 @@
     </Objects>
     <Description>Large noisy stone (Alpha!)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -3194,8 +3136,7 @@
     </Objects>
     <Description>Stone cube (Alpha)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -3215,8 +3156,7 @@
     </Objects>
     <Description>Sliding metal spike trap</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">F000</Mask>
+      <Variable maskType="&amp;" mask="F000" >
         <Description>controls speed.</Description>
         <UI />
         <Value>
@@ -3236,8 +3176,7 @@
           <Description>too fast for collision to function correctly</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0F00</Mask>
+      <Variable maskType="&amp;" mask="0F00" >
         <Description>determines the distance the trap slides, or the radius when circling a point</Description>
         <UI />
         <Value>
@@ -3249,11 +3188,10 @@
           <Description>as wide as Ganondorf's chamber</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>movement pattern</Description>
-        <UI />
         <Comment>FIXME</Comment>
+        <UI />
         <Value>
           <Data>00</Data>
           <Description>normal</Description>
@@ -3356,10 +3294,9 @@
     <Description>Beamos</Description>
     <Comment>FIXME: does not attack/missing variables</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">0F00</Mask>
+      <Variable maskType="&amp;" mask="0F00" >
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>4</Data>
           <Description>?</Description>
@@ -3390,10 +3327,9 @@
           <Description>?</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0001</Mask>
+      <Variable maskType="&amp;" mask="0001" >
         <Description>Unknown</Description>
-        <UI/>
+        <UI />
       </Variable>
     </Variables>
   </Actor>
@@ -3403,14 +3339,12 @@
     </Objects>
     <Description>Spiritual stones</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">F000</Mask>
+      <Variable maskType="&amp;" mask="F000" >
         <Description>Unknown</Description>
-        <UI />
         <Comment>FIXME: Figure this out</Comment>
+        <UI />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3514,8 +3448,7 @@
     </Objects>
     <Description>Temple of Time Objects</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3625,7 +3558,39 @@
       <Object>0097</Object>
     </Objects>
     <Description>Castle Courtyard Guards</Description>
-    <Variables />
+    <Variables>
+      <Variable maskType="&amp;" mask="FF00">
+        <Description>Type</Description>
+        <Comment>FIXME: Figure out finer details to this variable</Comment>
+        <UI name="select"/>
+        <Value>
+          <Data>00</Data>
+          <Description>? patrolling guard?</Description>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>? patrolling guard?</Description>
+        </Value>
+        <Value>
+          <Data>02</Data>
+          <Description>? patrolling guard?</Description>
+        </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>? patrolling guard?</Description>
+        </Value>
+        <Value>
+          <Data>05</Data>
+          <Description>Standing guard</Description>
+          <Comment>Immediately unloads self if the current world time is &lt;= B888, or if it's currently day</Comment>
+        </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask="00FF" default="FF" nullable="true">
+        <Description>Path</Description>
+        <Comment>FIXME: A special case check is done when path == 03, possibly others. Find out why</Comment>
+        <UI name="path"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0090">
     <Objects>
@@ -3633,9 +3598,8 @@
     </Objects>
     <Description>Redead</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
+      <Variable maskType="&amp;" mask="FFFF" >
+        <Description>Type</Description>
         <UI />
         <Value>
           <Data>0000</Data>
@@ -3693,13 +3657,11 @@
     <Description>Poe Sisters Puzzle Actor</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Puzzle Type</Description>
         <UI />
         <Value>
@@ -3732,8 +3694,7 @@
     <Description>Fish, Bugs, Butterflies</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -3753,8 +3714,7 @@
     </Objects>
     <Description>Skullwalltula and Gold Skulltulas</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">E000</Mask>
+      <Variable maskType="&amp;" mask="E000" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3770,8 +3730,7 @@
           <Description>Gold Skulltula, Spawns at night</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">1F00</Mask>
+      <Variable maskType="&amp;" mask="1F00" >
         <Description>Gold Skulltula region, for saving gold skulltulas</Description>
         <UI />
         <Value>
@@ -3869,8 +3828,7 @@
           <Description>Desert Colossus, Haunted Wasteland</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Skulltula Flag</Description>
         <UI />
         <Value>
@@ -3906,8 +3864,7 @@
           <Description>Skulltulla 8</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>FIXME</Description>
         <UI />
         <Value>
@@ -3996,8 +3953,7 @@
     <Description>Environmental Effects</Description>
     <Comment>All/Some? variables require their own object</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4052,8 +4008,7 @@
     <Description>Grotto</Description>
     <Comment>FIXME: Special Case</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">F000</Mask>
+      <Variable maskType="&amp;" mask="F000" >
         <Description>Destination Scene</Description>
         <UI />
         <Value>
@@ -4065,8 +4020,7 @@
           <Description>Fairy Fountain Grotto (Scene 60)</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0300</Mask>
+      <Variable maskType="&amp;" mask="0300" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4082,14 +4036,13 @@
           <Description>Appear when Bombed or hit with Megaton Hammer</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00E0</Mask>
+      <Variable maskType="&amp;" mask="00E0" >
         <Description>Chest Contents</Description>
-        <UI />
         <Comment>
           Used by Chest 0181 when loading the destination.
           Get Items 4D, 4E, 56, 67, 65+
         </Comment>
+        <UI />
         <Value>
           <Data>00</Data>
           <Description>Blue Rupee (5)</Description>
@@ -4124,14 +4077,12 @@
           <Comment>Used for no item when chest does not exist</Comment>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">001F</Mask>
+      <Variable maskType="&amp;" mask="001F" >
         <Description>Chest Flag</Description>
-        <UI />
         <Comment>Used by Chest 0181</Comment>
+        <UI />
       </Variable>
-      <Variable altvar="ZRot">
-        <Mask type="&amp;">000F</Mask>
+      <Variable altvar="ZRot" maskType="&amp;" mask="000F" >
         <Description>Destination</Description>
         <UI />
         <Value>
@@ -4152,8 +4103,7 @@
     </Objects>
     <Description>Graveyard Actors</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4189,8 +4139,7 @@
     </Objects>
     <Description>Gravestone</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4214,8 +4163,7 @@
     </Objects>
     <Description>Farore's Wind</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4246,8 +4194,7 @@
     </Objects>
     <Description>Child Princess Ruto</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4286,8 +4233,7 @@
     </Objects>
     <Description>Fireball</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4331,8 +4277,7 @@
     <Description>Enemy spawner</Description>
     <Comment>The object file for the enemy being spawned must also be loaded</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Type of Enemy</Description>
         <UI />
         <Value>
@@ -4350,8 +4295,7 @@
           <Comment>Must stand on dirt to appear?</Comment>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Number of enemies to spawn</Description>
         <UI />
         <Value>
@@ -4397,8 +4341,7 @@
     <Description>Core Flare Dancer creature</Description>
     <Comment>Has trouble running? Tends to stay in one place or run in one direction; if it jumps up, it'll disappear</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4438,8 +4381,7 @@
       FIXME: Likely either missing objects or display lists stored in scene/room files
     </Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4495,8 +4437,7 @@
     </Objects>
     <Description>Platforms (Shadow Temple)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4533,10 +4474,9 @@
       0001+ = Ship is gone, wheels still there?
     </Comment-Other>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" >
         <Description>Switch Flag for Zelda's Lullaby spot</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -4547,8 +4487,7 @@
     </Objects>
     <Description>Spinning Scythe Trap</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4572,8 +4511,7 @@
     </Objects>
     <Description>Hyrulian guards</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4621,8 +4559,7 @@
     </Objects>
     <Description>Flying rubble</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4654,8 +4591,7 @@
     </Objects>
     <Description>Flobbery muscle block (Jabu-Jabu's Belly)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>height of the muscle block</Description>
         <UI />
         <Value>
@@ -4667,11 +4603,10 @@
           <Description>Default height</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="|">1000</Mask>
+      <Variable maskType="|" mask="1000" >
         <Description>Smaller size, height not affected by last two digits</Description>
-        <UI name="bitflag" />
         <Comment>+1000 repeat //FIXME</Comment>
+        <UI name="bitflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -4695,8 +4630,7 @@
     </Objects>
     <Description>Statue from Darunia's room</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4720,8 +4654,7 @@
     </Objects>
     <Description>Barinade</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4768,8 +4701,7 @@
     </Objects>
     <Description>Shadow Temple objects</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4811,13 +4743,11 @@
     </Objects>
     <Description>Coffin lid</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>??? (always 01?)</Description>
         <UI />
       </Variable>
@@ -4829,13 +4759,11 @@
     </Objects>
     <Description>Statue and Wall (Shadow Temple)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4890,8 +4818,7 @@
     </Objects>
     <Description>Shop shelves</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4926,8 +4853,7 @@
     </Objects>
     <Description>Morpha</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4951,8 +4877,7 @@
     <Description>Big Octo</Description>
     <Comment>Slicing it in the back will make it jump to the y location of its room, which is typically below most floors</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4979,13 +4904,11 @@
     </Objects>
     <Description>Lord Jabu-Jabu objects</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Nullable Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -5017,8 +4940,7 @@
     </Objects>
     <Description>Sage Saria (Cutscene)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5060,8 +4982,7 @@
     </Objects>
     <Description>Koume and Kotake</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5087,18 +5008,15 @@
       - FFFF = Giant Rock
     </Comment-Other>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" >
         <Description>Switch Flag?</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="|">FF00</Mask>
+      <Variable maskType="|" mask="FF00" >
         <Description>? (No switch / is invisible?)</Description>
         <UI />
       </Variable>
-      <Variable>
-        <Mask type="|">00FF</Mask>
+      <Variable maskType="|" mask="00FF" >
         <Description>? (Always FF)</Description>
         <UI />
       </Variable>
@@ -5110,13 +5028,11 @@
     </Objects>
     <Description>Bombable walls (Fire Temple)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -5140,13 +5056,11 @@
     </Objects>
     <Description>2D Bombable Wall</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Unknown</Description>
         <UI />
         <Value>
@@ -5195,13 +5109,11 @@
     </Objects>
     <Description>Lake Hylia Objects</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Nullable Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -5240,11 +5152,10 @@
     </Objects>
     <Description>Bottom of the Well water level changer</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
         <Comment>If set, water level is lowered</Comment>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -5268,8 +5179,7 @@
     </Objects>
     <Description>Horseback Games</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5327,8 +5237,7 @@
     </Objects>
     <Description>Tentacle from inside Lord Jabu-Jabu</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5356,8 +5265,7 @@
     </Objects>
     <Description>Jabu-Jabu Electrified Tentacle</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5408,8 +5316,7 @@
     </Objects>
     <Description>Forest Temple ladder</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5426,8 +5333,7 @@
     </Objects>
     <Description>Forest Temple objects</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5454,8 +5360,7 @@
     </Objects>
     <Description>Death Mountain cloud ring</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -5481,8 +5386,7 @@
     </Objects>
     <Description>Switch from inside Lord Jabu-Jabu</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -5527,8 +5431,7 @@
     </Objects>
     <Description>Ganondorf Boss</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5548,8 +5451,7 @@
     </Objects>
     <Description>Bongo Bongo's hand</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5653,8 +5555,7 @@
     </Objects>
     <Description>Spike enemy (Water Temple)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5681,8 +5582,7 @@
     </Objects>
     <Description>Deku Shield</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5706,8 +5606,7 @@
     </Objects>
     <Description>Red Ice</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5747,8 +5646,7 @@
     </Objects>
     <Description>Blue Flame</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5772,10 +5670,9 @@
     </Objects>
     <Description>Ocarina of Time</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" default="0003">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Ocarina of Time being tossed higher in air</Description>
@@ -5801,9 +5698,8 @@
     </Objects>
     <Description>Nayru's Love</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
+      <Variable maskType="&amp;" mask="FFFF">
+        <Description>Type</Description>
         <UI />
         <Value>
           <Data>0000</Data>
@@ -5822,21 +5718,46 @@
     </Objects>
     <Description>Sages, Balls of Light (Cutscene)</Description>
     <Comment>
+      FIXME:
       Shooting Gallery, Chamber of Sages, Death Mountain Trail,
       Lon Lon Ranch, Ganon's Castle?
     </Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
+      <Variable maskType="&amp;" mask="FFFF">
+        <Description>Type</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Nothing</Description>
         </Value>
         <Value>
-          <Data repeat="+">0001</Data>
-          <Description>Crashes</Description>
+          <Data>0001</Data>
+          <Description>?</Description>
+          <Comment>FIXME: Crashes?</Comment>
+        </Value>
+        <Value>
+          <Data>000E</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>000F</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0010</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0011</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0012</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0013</Data>
+          <Description>?</Description>
         </Value>
       </Variable>
     </Variables>
@@ -5854,10 +5775,9 @@
     </Objects>
     <Description>Shadow Temple truth spinner</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Bird statue with push block attached, rotates</Description>
@@ -5887,7 +5807,12 @@
     </Objects>
     <Description>Hyrule Castle Gate</Description>
     <Comment>not market town gate</Comment>
-    <Variables />
+    <Variables>
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF">
+        <Description>Default</Description>
+        <UI name="none"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="00F9">
     <Objects>
@@ -5910,8 +5835,7 @@
     </Objects>
     <Description>Rotating Cobra mirror</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5948,8 +5872,7 @@
     </Objects>
     <Description>Fishing pond man and Fish</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5981,13 +5904,11 @@
     </Objects>
     <Description>Movable Block</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" default="">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00F0</Mask>
+      <Variable maskType="&amp;" mask="00F0" default="">
         <Description>Color</Description>
         <UI />
         <Value>
@@ -5999,8 +5920,7 @@
           <Description>Green</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0004</Mask>
+      <Variable maskType="&amp;" mask="0004" default="">
         <Description>Loads block based on Switch Flag state</Description>
         <UI name="select" />
         <Value>
@@ -6012,8 +5932,7 @@
           <Description>Load on 1</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0003</Mask>
+      <Variable maskType="&amp;" mask="0003" default="">
         <Description>Size</Description>
         <UI />
         <Value>
@@ -6048,8 +5967,7 @@
     </Objects>
     <Description>Sparklies gathering together</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -6091,8 +6009,7 @@
     </Objects>
     <Description>Kakariko Village well water</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -6113,13 +6030,11 @@
       If switch flags 1C-1E are 1 and a Meg Torch is attached to a flag that is 0, Meg spawns. Killing Meg sets the Meg Torch flag, and 1B is set to 0
     </Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" default="">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" default="">
         <Description>Color (Sister)</Description>
         <UI />
         <Value>
@@ -6161,8 +6076,7 @@
     </Objects>
     <Description>Lon Lon Ranch Obstacle Fence</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -6208,8 +6122,7 @@
     </Objects>
     <Description>Collectible items</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -6254,14 +6167,12 @@
     <Description>Small, Liftable Crate</Description>
     <Comment>Can also appear as a giant, liftable fish</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>Item Spawn Parameters</Description>
-        <UI />
         <Comment>Spawns instance of Actor 0015 with identical parameters //FIXME: Spawner</Comment>
+        <UI />
       </Variable>
-      <Variable>
-        <Mask type="|">FFFF</Mask>
+      <Variable maskType="|" mask="FFFF" default="">
         <Description>No Item Spawn</Description>
         <UI />
       </Variable>
@@ -6273,13 +6184,11 @@
     </Objects>
     <Description>Breakable pot</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">7E00</Mask>
+      <Variable maskType="&amp;" mask="7E00" default="">
         <Description>Collectible Flag</Description>
         <UI />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" default="">
         <Description>Collectible (see 0015)</Description>
         <UI />
       </Variable>
@@ -6292,8 +6201,7 @@
     <Description>Invisible Collectible</Description>
     <Comment>Used in Master Quest to create "Cow" Switches //FIXME: IMPLEMENT TYPE</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">F800</Mask>
+      <Variable maskType="&amp;" mask="F800" default="">
         <Description>Collectible Type</Description>
         <UI />
         <Value>
@@ -6329,11 +6237,10 @@
           <Description>Slingshot hittable collision box, spawns Hylian Soldier (actor 00B3) who throws a bomb</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">07C0</Mask>
+      <Variable maskType="&amp;" mask="07C0" default="">
         <Description>Collectible Spawned</Description>
-        <UI />
         <Comment>FIXME: See actor 0015 for spawn values</Comment>
+        <UI />
         <Value>
           <Data>00</Data>
           <Description>0C</Description>
@@ -6390,22 +6297,19 @@
           <Comment>12</Comment>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" default="">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable altvar="ZRot">
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable altvar="ZRot" maskType="&amp;" mask="FFFF" default="">
         <Description>Number of collectibles spawned</Description>
-        <UI />
         <Comment>Type 02 only</Comment>
-      </Variable>
-      <Variable altvar="ZRot">
-        <Mask type="&amp;">00FF</Mask>
-        <Description>Trigger used to spawn item</Description>
         <UI />
+      </Variable>
+      <Variable altvar="ZRot" maskType="&amp;" mask="00FF" default="">
+        <Description>Trigger used to spawn item</Description>
         <Comment>Type 03 only</Comment>
+        <UI />
         <Value>
           <Data>00</Data>
           <Description>Sword Swing</Description>
@@ -6439,13 +6343,11 @@
     </Objects>
     <Description>Iron Knuckle</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" default="">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" default="">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -6520,8 +6422,7 @@
     </Objects>
     <Description>Deku salesman</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -6589,8 +6490,7 @@
     </Objects>
     <Description>Navi information spot</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">8000</Mask>
+      <Variable maskType="&amp;" mask="8000" default="">
         <Description>Sets how Navi will interact</Description>
         <UI name="select" />
         <Value>
@@ -6602,18 +6502,16 @@
           <Description>Navi wants to speak through C-Up</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" default="">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" default="">
         <Description>Text Id</Description>
+        <Comment>0x0100 + value</Comment>
         <UI name="textid">
           <Param id="base">0100</Param>
         </UI>
-        <Comment>0x0100 + value</Comment>
         <Value>
           <Data>00</Data>
           <Description>What’s that?</Description>
@@ -7275,8 +7173,7 @@
     </Objects>
     <Description>Stone Eye Flamethrower</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -7304,8 +7201,7 @@
     </Objects>
     <Description>Flying Pot</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -7363,8 +7259,7 @@
     </Objects>
     <Description>Zora's Domain waterfall</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -7384,8 +7279,7 @@
     </Objects>
     <Description>Frezzard</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -7413,8 +7307,7 @@
     </Objects>
     <Description>Rotating windmill mechanism</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -7443,8 +7336,7 @@
     <Description>Single Bush/Grass</Description>
     <Comment> Liftable &amp; cut-able</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">0003</Mask>
+      <Variable maskType="&amp;" mask="0003" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -7466,13 +7358,11 @@
           <Description>Nothing</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0010</Mask>
+      <Variable maskType="&amp;" mask="0010" >
         <Description>Spawns set of 3 bugs</Description>
         <UI name="bitflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Random Drop Table</Description>
         <UI name="randomdrop" />
         <Value>
@@ -7497,8 +7387,7 @@
     <Description>Brown boulder</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>?</Description>
         <UI />
         <Value>
@@ -7510,8 +7399,7 @@
           <Description>Makes puzzle solved sound when destroyed</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -7524,8 +7412,7 @@
     <Description>Switches</Description>
     <Comment> make puzzle solved sound when triggered, one-time only</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">000F</Mask>
+      <Variable maskType="&amp;" mask="000F" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -7553,29 +7440,24 @@
           <Description>Crashes</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0010</Mask>
+      <Variable maskType="&amp;" mask="0010" >
         <Description>Can be toggled</Description>
         <UI name="bitflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0020</Mask>
+      <Variable maskType="&amp;" mask="0020" >
         <Description>Floor/Rusted Floor switches reset (zero switch flag) when not held down</Description>
         <UI name="bitflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0040</Mask>
+      <Variable maskType="&amp;" mask="0040" >
         <Description>Triggers all switches with same switch flag</Description>
-        <UI name="bitflag" />
         <Comment>crystal switches only?</Comment>
+        <UI name="bitflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0080</Mask>
+      <Variable maskType="&amp;" mask="0080" >
         <Description>Switch is frozen in ice</Description>
         <UI name="bitflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" >
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -7587,8 +7469,7 @@
     </Objects>
     <Description>Huge stone elevator</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">0001</Mask>
+      <Variable maskType="&amp;" mask="0001" >
         <Description>Platform Size</Description>
         <UI name="select" />
         <Value>
@@ -7600,8 +7481,7 @@
           <Description>Small</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">F000</Mask>
+      <Variable maskType="&amp;" mask="F000" >
         <Description>Platform's rise height (80 unit increments)</Description>
         <UI name="numupdown">
           <Param id="unit">Unit</Param>
@@ -7609,16 +7489,15 @@
           <Param id="min">0</Param>
         </UI>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0F00</Mask>
+      <Variable maskType="&amp;" mask="0F00" >
         <Description>Platform Travel Speed</Description>
-        <UI />
         <Comment>
           - 0 = No vertical movement, moving sfx repeats endlessly if x isn't 0
           - 1 = Very slow
           ...
           - F = Very, very fast
         </Comment>
+        <UI />
       </Variable>
     </Variables>
   </Actor>
@@ -7646,8 +7525,7 @@
     <Description>Stone Hookshot target</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -7681,8 +7559,7 @@
     <Description>Music Staff (Ocarina) spot</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">1C00</Mask>
+      <Variable maskType="&amp;" mask="1C00" >
         <Description>Spot Type</Description>
         <UI />
         <Value>
@@ -7714,11 +7591,10 @@
           <Description>Puzzle Spot</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">03C0</Mask>
+      <Variable maskType="&amp;" mask="03C0" >
         <Description>Song to play</Description>
-        <UI />
         <Comment>Puzzle Spot only?</Comment>
+        <UI />
         <Value>
           <Data>01</Data>
           <Description>Epona's Song</Description>
@@ -7764,10 +7640,9 @@
           <Description>All 6 non-warp songs / Preset song</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -7777,8 +7652,7 @@
     </Objects>
     <Description>Horseback Archery target (arrow hitbox)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -7803,8 +7677,7 @@
     <Description>Rolling Boulder</Description>
     <Comment>FIXME: Variable, Z-Rotation</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">0300</Mask>
+      <Variable maskType="&amp;" mask="0300" >
         <Description>Pattern</Description>
         <UI name="select" />
         <Value>
@@ -7827,8 +7700,7 @@
           <Comment>As in Fire Temple boulder maze</Comment>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Path number to follow</Description>
         <UI name="path" />
       </Variable>
@@ -7840,8 +7712,7 @@
     </Objects>
     <Description>Sparkling Rupee</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -7885,8 +7756,7 @@
     <Description>Carpenters</Description>
     <Comment>Dialog softlock if talked to outside of set scenes</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -7929,11 +7799,10 @@
     <Description>Zelda's Magic to Open Gates</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Value</Description>
-        <UI />
         <Comment>pattern repeats after 003F (Probably 3B-&gt;3F cycle)</Comment>
+        <UI />
         <Value>
           <Data>0000</Data>
           <Description>Cannot see anything while object is visible.  Navi is capable of targeting it, but gives no information.</Description>
@@ -8079,8 +7948,7 @@
     </Objects>
     <Description>White clothed Gerudo</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -8104,11 +7972,10 @@
     </Objects>
     <Description>Block placement actor</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag" />
         <Comment>Set flag when block is placed on top of actor</Comment>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -8126,8 +7993,7 @@
     </Objects>
     <Description>Enemy Arwing (Alpha)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -8154,8 +8020,7 @@
     </Objects>
     <Description>Medigoron</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -8197,13 +8062,12 @@
     </Objects>
     <Description>Square signpost</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Text Id</Description>
+        <Comment>Value + 0x0300</Comment>
         <UI name="textid">
           <Param id="base">0300</Param>
         </UI>
-        <Comment>Value + 0x0300</Comment>
         <Value>
           <Data>00</Data>
           <Description>X</Description>
@@ -8497,8 +8361,7 @@
     </Objects>
     <Description>Hyrule Castle guard</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -8522,8 +8385,7 @@
     </Objects>
     <Description>Hopping Cucco, not solid</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -8623,13 +8485,11 @@
       scene will crash the game.
     </Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">03C0</Mask>
+      <Variable maskType="&amp;" mask="03C0" >
         <Description>Owl</Description>
         <UI />
         <Value>
@@ -8698,8 +8558,7 @@
     <Description>Small rock</Description>
     <Comment>FIXME: may cause glitched graphics in certain places</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -8753,8 +8612,7 @@
     </Objects>
     <Description>Grave flower</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">0003</Mask>
+      <Variable maskType="&amp;" mask="0003" >
         <Description>Types</Description>
         <UI />
         <Value>
@@ -8783,8 +8641,7 @@
     <Description>Sun Emblem Trigger (Spirit Temple)</Description>
     <Comment>FIXME: Switch Flag variable</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">0001</Mask>
+      <Variable maskType="&amp;" mask="0001" >
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -8805,8 +8662,7 @@
     <Description>Rock/Bush groups</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">000F</Mask>
+      <Variable maskType="&amp;" mask="000F" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -8826,16 +8682,14 @@
           <Description>Crashes</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0010</Mask>
+      <Variable maskType="&amp;" mask="0010" >
         <Description>Spawns set of 3 bugs</Description>
-        <UI name="bitflag"/>
         <Comment>FIXME: Untested</Comment>
+        <UI name="bitflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Random Drop Table</Description>
-        <UI name="randomdrop"/>
+        <UI name="randomdrop" />
       </Variable>
     </Variables>
   </Actor>
@@ -8925,8 +8779,7 @@
     <Description>Water spout</Description>
     <Comment>FIXME: Document Petrie's findings</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -8946,8 +8799,7 @@
     </Objects>
     <Description>Whirlpool effect</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -8978,8 +8830,7 @@
     </Objects>
     <Description>Kokiri Children</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9069,8 +8920,7 @@
     </Objects>
     <Description>Iron Knuckles Room Stuff (Spirit Temple)</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">0001</Mask>
+      <Variable maskType="&amp;" mask="0001" >
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -9105,8 +8955,7 @@
     <Description>Graveyard boy</Description>
     <Comment>FIXME: Path</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>path number to follow</Description>
         <UI name="path" />
       </Variable>
@@ -9118,8 +8967,7 @@
     </Objects>
     <Description>Mido</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9137,8 +8985,7 @@
     </Objects>
     <Description>Market NPCs</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Npc</Description>
         <UI />
         <Value>
@@ -9222,11 +9069,10 @@
           <Description>Man in two shades of green</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0780</Mask>
+      <Variable maskType="&amp;" mask="0780" >
         <Description>Path to follow</Description>
-        <UI name="path"/>
         <Comment>NPCs 03 and 07 only</Comment>
+        <UI name="path" />
       </Variable>
     </Variables>
   </Actor>
@@ -9280,8 +9126,7 @@
     </Objects>
     <Description>Big Poe</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9315,8 +9160,7 @@
     </Objects>
     <Description>Hyrule guard</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9395,8 +9239,7 @@
     <Description>Credits Revelers from Lon Lon</Description>
     <Comment>Each variable requires it's own object</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9557,8 +9400,7 @@
     <Description>Spiral Beams (Great Fairy Fountains)</Description>
     <Comment>Lots of combinations...</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9607,8 +9449,7 @@
     <Description>Dialog Spot</Description>
     <Comment>Attracts Navi, makes her green</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">C000</Mask>
+      <Variable maskType="&amp;" mask="C000" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -9628,13 +9469,12 @@
           <Description>Z-Target, No Text</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">3FC0</Mask>
+      <Variable maskType="&amp;" mask="3FC0" >
         <Description>Text Id</Description>
+        <Comment>0x0200 + Value</Comment>
         <UI name="textid">
           <Param id="base">0200</Param>
         </UI>
-        <Comment>0x0200 + Value</Comment>
         <Value>
           <Data>00</Data>
           <Description>Hi!  I’m a talking door! (BETA)</Description>
@@ -9884,10 +9724,9 @@
           <Description>You borrowed a Pocket Egg! ...</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -9897,8 +9736,7 @@
     </Objects>
     <Description>Patrolling Gerudo</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9926,19 +9764,16 @@
     </Objects>
     <Description>Timer</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FC00</Mask>
+      <Variable maskType="&amp;" mask="FC00" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
         <Comment>Set on room clear</Comment>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">03FF</Mask>
+      <Variable maskType="&amp;" mask="03FF" >
         <Description>Timer in seconds (capped to 10 minutes)</Description>
         <UI />
       </Variable>
-      <Variable>
-        <Mask type="|">03FF</Mask>
+      <Variable maskType="|" mask="03FF" >
         <Description>No timer</Description>
         <UI />
       </Variable>
@@ -9950,8 +9785,7 @@
     </Objects>
     <Description>Cursed Skulltula people</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -10026,8 +9860,7 @@
     </Objects>
     <Description>Zelda's Lullaby effect</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -10047,8 +9880,7 @@
     </Objects>
     <Description>Song of Storm's effect</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -10079,13 +9911,11 @@
     </Objects>
     <Description>Sacred Forest Meadow objects</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">3F00</Mask>
+      <Variable maskType="&amp;" mask="3F00" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -10110,10 +9940,9 @@
     <Description>Stone Elevator (Spirit Temple)</Description>
     <Comment>Sets switch flag/activates when stepped on iirc</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -10124,8 +9953,7 @@
     <Description>Chair and Pillar pieces when destroyed by an Iron Knuckle</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -10168,8 +9996,7 @@
     <Description>Hint Deku Scrubs (Deku Tree)</Description>
     <Comment>FIXME: text seems to vary depending on the room number you're in</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>?, probably text to display</Description>
         <UI name="select" />
         <Value>
@@ -10185,8 +10012,7 @@
           <Description>Final Deku Scrub</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>?, seems to be used to set up 231/312 puzzle</Description>
         <UI />
         <Value>
@@ -10223,8 +10049,7 @@
     </Objects>
     <Description>Broken Drawbridge, Fencing</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -10244,8 +10069,7 @@
     </Objects>
     <Description>Grounded Sales Scrub</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Item Sold</Description>
         <UI />
         <Value>
@@ -10321,11 +10145,10 @@
     <Description>Gerudo Fighter</Description>
     <Comment>needs a carpenter to load?</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" >
         <Description>Unknown</Description>
-        <UI />
         <Comment>FIXME: Switch Flag?</Comment>
+        <UI />
       </Variable>
     </Variables>
   </Actor>
@@ -10357,16 +10180,14 @@
     <Description>Dog</Description>
     <Comment>it is possible to make this spawn an infinite number of dogs</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">F000</Mask>
+      <Variable maskType="&amp;" mask="F000" >
         <Description>Unknown purpose (never set?)</Description>
         <UI />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0FF0</Mask>
+      <Variable maskType="&amp;" mask="0FF0" >
         <Description>Direction it runs</Description>
-        <UI />
         <Comment>Orientation relative to the object. Also, if you befriend a dog and return to the place with the dog and change this value, another dog will spawn</Comment>
+        <UI />
         <Value>
           <Data>00</Data>
           <Description>SEE</Description>
@@ -10436,8 +10257,7 @@
           <Description>No dog</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">000F</Mask>
+      <Variable maskType="&amp;" mask="000F" >
         <Description>Color</Description>
         <UI />
         <Value>
@@ -10521,8 +10341,7 @@
     <Description>Shooting Gallery Building (Kakariko Village)</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -10573,25 +10392,21 @@
     </Objects>
     <Description>Large Crate</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF" nullable="true">
         <Description>Spawned Skulltula Variable (see actor 0095)</Description>
-        <UI />
+        <UI name="reflink" />
+        <Value>
+          <Data>FFFF</Data>
+          <Description>No Skulltula</Description>
+        </Value>
       </Variable>
-      <Variable>
-        <Mask type="|">FFFF</Mask>
-        <Description>No Skulltula</Description>
-        <UI />
-      </Variable>
-      <Variable altvar="XRot">
-        <Mask type="&amp;">00FF</Mask>
+      <Variable altvar="XRot" maskType="&amp;" mask="00FF" >
         <Description>Collectible Item Dropped (see actor 0015)</Description>
-        <UI />
+        <UI name="reflink" />
       </Variable>
-      <Variable altvar="ZRot">
-        <Mask type="&amp;">003F</Mask>
+      <Variable altvar="ZRot" maskType="&amp;" mask="003F" >
         <Description>Collectible Flag</Description>
-        <UI />
+        <UI name="collectflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -10600,14 +10415,20 @@
       <Object>0001</Object>
     </Objects>
     <Description>Deku Mask Panel Trigger</Description>
-    <Comment> wear a mask to start the cutscene</Comment>
-    <Variables />
+    <Comment>Wear a mask to start the cutscene</Comment>
+    <Variables>
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF">
+        <Description>Default</Description>
+        <UI name="none"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="01A2">
     <Objects>
       <Object>0171</Object>
     </Objects>
     <Description>Deku Mask Panel Head Judge</Description>
+    <Comment>Spawned by Deku Panel (probably)</Comment>
     <Variables />
   </Actor>
   <Actor id="01A3">
@@ -10616,7 +10437,12 @@
     </Objects>
     <Description>Deku Game?</Description>
     <Comment> Yields deku seed upgrade</Comment>
-    <Variables />
+    <Variables>
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF">
+        <Description>Default</Description>
+        <UI name="none"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="01A4">
     <Objects>
@@ -10646,37 +10472,42 @@
     </Objects>
     <Description>Ganon's Tower magic barrier</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" >
+        <Description>Type</Description>
+        <UI  name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Magic barrier</Description>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Purple core, interesting shadow effect, does nothing when destroyed</Description>
+          <Description>Blue core, interesting shadow effect, does nothing when destroyed</Description>
+          <Comment>Use with actor 00D2 (Adult Ruto), var 0002</Comment>
         </Value>
         <Value>
           <Data>0002</Data>
           <Description>Yellow core, shadow effect, crashes when shot at</Description>
+          <Comment>Use with actor 00A6 (Rauru), var 0002</Comment>
         </Value>
         <Value>
           <Data>0003</Data>
           <Description>Red core, shadow effect, crashes when shot at</Description>
+          <Comment>Use with actor 00A8 (Cutscene Darunia), var 0002</Comment>
         </Value>
         <Value>
           <Data>0004</Data>
           <Description>Purple core, shadow effect, does nothing when destroyed</Description>
+          <Comment>Use with actor 00A9 (Impa), var 0002</Comment>
         </Value>
         <Value>
           <Data>0005</Data>
           <Description>Orange core, shadow effect, does nothing when destroyed</Description>
+          <Comment>Use with actor 00C3 (Nabooru), var 0002</Comment>
         </Value>
         <Value>
           <Data>0006</Data>
           <Description>Green core, shadow effect, crashes when shot at</Description>
+          <Comment>Use with actor 00C9 (Cutscene Saria), var 0002</Comment>
         </Value>
         <Value>
           <Data repeat="+">0007</Data>
@@ -10692,10 +10523,9 @@
     <Description>Destructible Wall (Zora's Fountain)</Description>
     <Comment> graphics may glitch when it's destroyed, but will fix after it disappears</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">003F</Mask>
+      <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -10712,25 +10542,30 @@
       <Object>0001</Object>
     </Objects>
     <Description>Tower of Rupees</Description>
+    <Comment>FIXME: Test things</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="F000" >
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
-          <Data repeat="+">0000</Data>
+          <Data repeat="+">0</Data>
           <Description>Five blue rupees stacked vertically</Description>
         </Value>
         <Value>
-          <Data repeat="+">3000</Data>
+          <Data repeat="+">3</Data>
           <Description>Five green rupees in a row</Description>
         </Value>
         <Value>
-          <Data repeat="+">5000</Data>
+          <Data>4</Data>
+          <Description>Five green rupees in a row?</Description>
+          <Comment>FIXME: Test</Comment>
+        </Value>
+        <Value>
+          <Data repeat="+">5</Data>
           <Description>Six green rupees in diamond formation with a red rupee in the center (think medallion screen)</Description>
         </Value>
         <Value>
-          <Data repeat="+">6000</Data>
+          <Data repeat="+">6</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -10749,10 +10584,10 @@
     </Objects>
     <Description>Haggling townspeople</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" >
+        <Description>Color</Description>
+        <Comment>More combinations exist as well.</Comment>
+        <UI name="select"/>
         <Value>
           <Data>0000</Data>
           <Description>Blue/green textures</Description>
@@ -10788,7 +10623,6 @@
         <Value>
           <Data>0008</Data>
           <Description>Purple/red textures</Description>
-          <Comment>More combinations exist as well.</Comment>
         </Value>
       </Variable>
     </Variables>
@@ -10798,10 +10632,10 @@
       <Object>00C9</Object>
     </Objects>
     <Description>Gorons</Description>
+    <Comment>FIXME: Variables</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
+      <Variable maskType="&amp;" mask="FFFF" >
+        <Description>Type</Description>
         <UI />
         <Value>
           <Data>0000</Data>
@@ -10868,14 +10702,11 @@
     </Objects>
     <Description>Wolfos</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" default="FF">
         <Description>Nullable Switch Flag</Description>
-        <UI name="switchflag"/>
-        <Default>FF</Default>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
         <UI />
         <Value>
@@ -10907,10 +10738,9 @@
     </Objects>
     <Description>Ganon Battle rubble</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
-        <UI />
+        <UI  name="select"/>
         <Value>
           <Data>08</Data>
           <Description>Large block with “sun o’er horizon” emblem on it</Description>
@@ -10983,16 +10813,14 @@
       <Object>0186</Object>
     </Objects>
     <Description>Chunk of stone</Description>
-    <Comment> non-solid, possibly Ganon's Tower rubble</Comment>
+    <Comment>non-solid, possibly Ganon's Tower rubble</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>Type</Description>
-        <UI />
         <Comment>
-          FIXME
-          Alternates between the three.
+          FIXME: Alternates between the three.
         </Comment>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Large chunk</Description>
@@ -11017,14 +10845,14 @@
       <Object>0179</Object>
     </Objects>
     <Description>Sinking lava platform (Ganon's Castle)</Description>
+    <Comment>Narrow, maze-like platform (sinks)</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" default="0000">
+        <Description>Default</Description>
+        <UI name="none" />
         <Value>
           <Data>0000</Data>
-          <Description>Narrow, maze-like platform (sinks)</Description>
+          <Description>Default</Description>
         </Value>
         <Value>
           <Data repeat="+">0001</Data>
@@ -11053,27 +10881,27 @@
       FlagA being zeroed before the timer runs out
     </Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FF00</Mask>
+      <Variable maskType="&amp;" mask="FF00" nullable="true">
         <Description>Nullable Switch Flag</Description>
-        <UI name="switchflag"/>
         <Comment>If null, Enabled and ignoring switch flag input</Comment>
+        <UI name="switchflag" />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">00FF</Mask>
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
-        <UI />
+        <UI name="select"/>
         <Value>
           <Data>00</Data>
           <Description>Nothing</Description>
         </Value>
         <Value>
           <Data>01</Data>
-          <Description>Glass Block (appears when Switch Flag set)</Description>
+          <Description>Glass Block</Description>
+          <Comment>appears when Switch Flag is set</Comment>
         </Value>
         <Value>
           <Data>02</Data>
-          <Description>Invisible Timer (See comments)</Description>
+          <Description>Invisible Timer</Description>
+          <Comment>See comments</Comment>
         </Value>
       </Variable>
     </Variables>
@@ -11084,9 +10912,9 @@
     </Objects>
     <Description>Web blocked light window</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
+        <Comment>FIXME: Variable, probably switch flag too</Comment>
         <UI />
         <Value>
           <Data>0000</Data>
@@ -11105,10 +10933,9 @@
     </Objects>
     <Description>2D stone wall</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" >
+        <Description>Type</Description>
+        <UI name="select"/>
         <Value>
           <Data>0000</Data>
           <Description>Square stone</Description>
@@ -11149,10 +10976,11 @@
     </Objects>
     <Description>Gossip stone</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF">
+        <Description>Text Id</Description>
+        <UI name="textid">
+          <Param id="base">0400</Param>
+        </UI>
         <Value>
           <Data>0000</Data>
           <Description>This is a Gossip Stone!</Description>
@@ -11310,8 +11138,7 @@
     <Description>Metal gate</Description>
     <Comment>FIXME: Capture Switch Flag</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">F000</Mask>
+      <Variable maskType="&amp;" mask="F000" >
         <Description>gate size</Description>
         <UI />
         <Value>
@@ -11327,14 +11154,12 @@
           <Description>crash</Description>
         </Value>
       </Variable>
-      <Variable>
-        <Mask type="&amp;">0F00</Mask>
+      <Variable maskType="&amp;" mask="0F00" >
         <Description>Timer</Description>
-        <UI />
         <Comment>1 unit 4 Seconds</Comment>
+        <UI />
       </Variable>
-      <Variable>
-        <Mask type="&amp;">001F</Mask>
+      <Variable maskType="&amp;" mask="001F" >
         <Description>identifier (for use with switches)</Description>
         <UI />
       </Variable>
@@ -11347,8 +11172,7 @@
     <Description>Carpenters</Description>
     <Comment>FIXME: paths</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11364,8 +11188,7 @@
     </Objects>
     <Description>Bombchu Bowling alley wall</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11410,8 +11233,7 @@
     </Objects>
     <Description>Fake door</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11475,8 +11297,7 @@
     </Objects>
     <Description>Cow</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11500,8 +11321,7 @@
     </Objects>
     <Description>Icicles</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11558,8 +11378,7 @@
     <Description>Song of Time effect</Description>
     <Comment>FIXME: Scarecrow's song?</Comment>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11591,8 +11410,7 @@
     </Objects>
     <Description>Circular piece of stone wall</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11633,8 +11451,7 @@
     </Objects>
     <Description>Time block</Description>
     <Variables>
-      <Variable>
-        <Mask type="&amp;">FFFF</Mask>
+      <Variable maskType="&amp;" mask="FFFF" >
         <Description>#N/A</Description>
         <UI />
         <Value>

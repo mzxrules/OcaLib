@@ -37,13 +37,13 @@ namespace mzxrules.XActor
             foreach (XActor actor in actors.Actor)
             {
                 var value = from v in actor.Variables
-                            where bitDictionary.Contains(Convert.ToInt16(v.Mask.Value, 16))
+                            where bitDictionary.Contains(Convert.ToInt16(v.mask, 16))
                             select v;
 
                 foreach (var v in value)
                 {
-                    if (v.UI.name == "default")
-                        v.UI.name = "bitfield";
+                    if (v.UI.name == UITypes.@default)
+                        v.UI.name =  UITypes.bitflag;
                 }
             }
             outRichTextBox.Text = actors.Serialize();

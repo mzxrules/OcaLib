@@ -72,8 +72,8 @@ namespace mzxrules.XActor
                     currentActor.Variables.Add(currentVariable);
 
                     commentParent = currentVariable;
-
-                    NewVariableDefinition(MaskLine.Matches(line_nocomment)[0].Groups, currentVariable);
+                    throw new NotImplementedException();
+                    //NewVariableDefinition(MaskLine.Matches(line_nocomment)[0].Groups, currentVariable);
                 }
                 else if (ValueLine.IsMatch(line_nocomment))
                 {
@@ -123,20 +123,20 @@ namespace mzxrules.XActor
             XVariable r = new XVariable();
             currentActor.Variables.Add(r);
 
-            r.Mask.type = "&";
-            r.Mask.Value = "FFFF";
+            r.maskType =  MaskType.And;
+            r.mask = "FFFF";
             r.Description = "#N/A";
             return r;
         }
 
-        private void NewVariableDefinition(GroupCollection groupCollection, XVariable currentVariable)
-        {
-            //Groups:
-            //Mask type, Mask, Description
-            currentVariable.Mask.type = groupCollection[1].Value;
-            currentVariable.Mask.Value = groupCollection[2].Value;
-            currentVariable.Description = groupCollection[3].Value.Trim();
-        }
+        //private void NewVariableDefinition(GroupCollection groupCollection, XVariable currentVariable)
+        //{
+        //    //Groups:
+        //    //Mask type, Mask, Description
+        //    currentVariable.maskType = groupCollection[1].Value;
+        //    currentVariable.mask = groupCollection[2].Value;
+        //    currentVariable.Description = groupCollection[3].Value.Trim();
+        //}
 
         private void NewActorDefinition(GroupCollection groupCollection, XActor currentActor)
         {
