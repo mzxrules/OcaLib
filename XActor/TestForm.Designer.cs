@@ -28,39 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.inRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.firstConvertRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.dataInRichTextBox = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.outRichTextBox = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.uiTestButton = new System.Windows.Forms.Button();
+            this.actorTextBox = new System.Windows.Forms.TextBox();
+            this.actorControl1 = new mzxrules.XActor.Gui.ActorControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
-            // inRichTextBox
+            // dataInRichTextBox
             // 
-            this.inRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.inRichTextBox.Location = new System.Drawing.Point(12, 12);
-            this.inRichTextBox.Name = "inRichTextBox";
-            this.inRichTextBox.Size = new System.Drawing.Size(436, 362);
-            this.inRichTextBox.TabIndex = 0;
-            this.inRichTextBox.Text = "";
-            // 
-            // firstConvertRichTextBox
-            // 
-            this.firstConvertRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.firstConvertRichTextBox.Location = new System.Drawing.Point(3, 3);
-            this.firstConvertRichTextBox.Name = "firstConvertRichTextBox";
-            this.firstConvertRichTextBox.Size = new System.Drawing.Size(404, 330);
-            this.firstConvertRichTextBox.TabIndex = 1;
-            this.firstConvertRichTextBox.Text = "";
+            this.dataInRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataInRichTextBox.Location = new System.Drawing.Point(3, 3);
+            this.dataInRichTextBox.Name = "dataInRichTextBox";
+            this.dataInRichTextBox.Size = new System.Drawing.Size(404, 330);
+            this.dataInRichTextBox.TabIndex = 1;
+            this.dataInRichTextBox.Text = "";
             // 
             // button1
             // 
@@ -88,7 +78,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.firstConvertRichTextBox);
+            this.tabPage1.Controls.Add(this.dataInRichTextBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -128,54 +118,70 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // numericUpDown1
+            // uiTestButton
             // 
-            this.numericUpDown1.Increment = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Location = new System.Drawing.Point(24, 395);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 5;
+            this.uiTestButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.uiTestButton.Location = new System.Drawing.Point(118, 389);
+            this.uiTestButton.Name = "uiTestButton";
+            this.uiTestButton.Size = new System.Drawing.Size(75, 23);
+            this.uiTestButton.TabIndex = 7;
+            this.uiTestButton.Text = "Test UI";
+            this.uiTestButton.UseVisualStyleBackColor = true;
+            this.uiTestButton.Click += new System.EventHandler(this.uiTestButton_Click);
+            // 
+            // actorTextBox
+            // 
+            this.actorTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.actorTextBox.Location = new System.Drawing.Point(12, 389);
+            this.actorTextBox.Name = "actorTextBox";
+            this.actorTextBox.Size = new System.Drawing.Size(100, 20);
+            this.actorTextBox.TabIndex = 9;
+            // 
+            // actorControl1
+            // 
+            this.actorControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.actorControl1.Document = null;
+            this.actorControl1.Location = new System.Drawing.Point(12, 12);
+            this.actorControl1.MinimumSize = new System.Drawing.Size(350, 0);
+            this.actorControl1.Name = "actorControl1";
+            this.actorControl1.Size = new System.Drawing.Size(436, 362);
+            this.actorControl1.TabIndex = 8;
             // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 421);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.actorTextBox);
+            this.Controls.Add(this.actorControl1);
+            this.Controls.Add(this.uiTestButton);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.inRichTextBox);
             this.Name = "TestForm";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.TestForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox inRichTextBox;
-        private System.Windows.Forms.RichTextBox firstConvertRichTextBox;
+        private System.Windows.Forms.RichTextBox dataInRichTextBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.RichTextBox outRichTextBox;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button uiTestButton;
+        private Gui.ActorControl actorControl1;
+        private System.Windows.Forms.TextBox actorTextBox;
     }
 }
 

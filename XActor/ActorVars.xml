@@ -62,9 +62,12 @@
           <Description>Spawned, retain previous velocity</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" default="FF">
-        <Description>Spawn Camera Behavior. Camera is positioned based on the scene Link spawns in</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="00FF" default="FF" nullable="true">
+        <Description>Spawn Camera Behavior</Description>
+        <Comment>Camera is positioned based on the scene Link spawns in</Comment>
+        <UI name="num">
+          <Param id="display">int</Param>
+        </UI>
         <Value>
           <Data>FF</Data>
           <Description>No special positioning</Description>
@@ -1728,7 +1731,7 @@
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="003F" >
-        <Description>Switch Flags</Description>
+        <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
     </Variables>
@@ -2189,7 +2192,7 @@
     <Comment>FIXME</Comment>
     <Variables>
       <Variable maskType="&amp;" mask="003F" >
-        <Description>Switch Flags</Description>
+        <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
       <Variable maskType="&amp;" mask="FF00" >
@@ -2270,9 +2273,9 @@
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="FF00" default="00">
-        <Description>Path</Description>
+        <Description>Path Id</Description>
         <Comment>Spear Moblins only</Comment>
-        <UI name="path"></UI>
+        <UI name="path"/>
       </Variable>
     </Variables>
   </Actor>
@@ -2370,16 +2373,17 @@
     </Objects>
     <Description>Armos statue</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF" >
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Pushable</Description>
         </Value>
         <Value>
           <Data repeat="+">0001</Data>
-          <Description>Monster, cannot be killed with sword</Description>
+          <Description>Monster</Description>
+          <Comment>FIXME: cannot be killed with sword?</Comment>
         </Value>
         <Value>
           <Data>FFFF</Data>
@@ -2395,8 +2399,8 @@
     <Description>Deku Baba (Snapping)</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Small</Description>
@@ -2453,7 +2457,7 @@
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="003F" >
-        <Description>Switch Flags</Description>
+        <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
     </Variables>
@@ -2504,8 +2508,8 @@
     <Description>Warp portals</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Normal</Description>
@@ -2566,7 +2570,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="FC00" >
         <Description>Type</Description>
-        <UI />
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>Golden Torch</Description>
@@ -2586,7 +2590,9 @@
       </Variable>
       <Variable maskType="&amp;" mask="03C0" >
         <Description>Torches to light to solve puzzle (Timed Torch)</Description>
-        <UI />
+        <UI name="num">
+          <Param id="display">int</Param>
+        </UI>
       </Variable>
       <Variable maskType="&amp;" mask="003F" >
         <Description>Switch Flag</Description>
@@ -2783,8 +2789,9 @@
           <Comment>requires movement path</Comment>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" >
-        <Description>Movement path number (believe pathway is set within the scene file)</Description>
+      <Variable maskType="&amp;" mask="FF00" nullable="true" default="FF" >
+        <Description>Path Id</Description>
+        <Comment>FIXME: is pathway set within the scene file?</Comment>
         <UI name="path" />
       </Variable>
     </Variables>
@@ -3156,9 +3163,50 @@
     </Objects>
     <Description>Sliding metal spike trap</Description>
     <Variables>
+      <Variable maskType="&amp;" mask="00FF" >
+        <Description>Movement Pattern</Description>
+        <Comment>FIXME</Comment>
+        <UI name="select"/>
+        <Value>
+          <Data>00</Data>
+          <Description>Normal</Description>
+          <Comment>FIXME: What is normal?</Comment>
+        </Value>
+        <Value>
+          <Data>20</Data>
+          <Description>Spins in a circle</Description>
+        </Value>
+        <Value>
+          <Data>30</Data>
+          <Description>Vertical</Description>
+        </Value>
+        <Value>
+          <Data>40</Data>
+          <Description>Stays still, no sound</Description>
+          <Comment>FIXME: maybe moves when Link is near?</Comment>
+        </Value>
+        <Value>
+          <Data>50</Data>
+          <Description>Vertical</Description>
+        </Value>
+        <Value>
+          <Data repeat="+">60</Data>
+          <Description>doesn't move, but still makes noise</Description>
+        </Value>
+        <Value>
+          <Data>A0</Data>
+          <Description>Spins in a circle</Description>
+        </Value>
+        <Value>
+          <Data>FF</Data>
+          <Description>Doesn't move or make noise</Description>
+        </Value>
+      </Variable>
       <Variable maskType="&amp;" mask="F000" >
-        <Description>controls speed.</Description>
-        <UI />
+        <Description>Movement Speed</Description>
+        <UI name="num" >
+          <Param id="display">inherited</Param>
+        </UI>
         <Value>
           <Data>00</Data>
           <Description>Doesn't move/moves incredibly slow</Description>
@@ -3177,8 +3225,10 @@
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="0F00" >
-        <Description>determines the distance the trap slides, or the radius when circling a point</Description>
-        <UI />
+        <Description>Distance the trap slides, or the radius when circling a point</Description>
+        <UI name="num">
+          <Param id="display">inherited</Param>
+        </UI>
         <Value>
           <Data>06</Data>
           <Description>normal</Description>
@@ -3186,43 +3236,6 @@
         <Value>
           <Data>0A</Data>
           <Description>as wide as Ganondorf's chamber</Description>
-        </Value>
-      </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
-        <Description>movement pattern</Description>
-        <Comment>FIXME</Comment>
-        <UI />
-        <Value>
-          <Data>00</Data>
-          <Description>normal</Description>
-        </Value>
-        <Value>
-          <Data>20</Data>
-          <Description>spins in a circle</Description>
-        </Value>
-        <Value>
-          <Data>30</Data>
-          <Description>vertical</Description>
-        </Value>
-        <Value>
-          <Data>40</Data>
-          <Description>stays still, no sound (maybe moves when Link is near?)</Description>
-        </Value>
-        <Value>
-          <Data>50</Data>
-          <Description>vertical</Description>
-        </Value>
-        <Value>
-          <Data repeat="+">60</Data>
-          <Description>doesn't move, but still makes noise</Description>
-        </Value>
-        <Value>
-          <Data>A0</Data>
-          <Description>spins in a circle</Description>
-        </Value>
-        <Value>
-          <Data>FF</Data>
-          <Description>Doesn't move or make noise</Description>
         </Value>
       </Variable>
     </Variables>
@@ -3586,7 +3599,7 @@
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="00FF" default="FF" nullable="true">
-        <Description>Path</Description>
+        <Description>Path Id</Description>
         <Comment>FIXME: A special case check is done when path == 03, possibly others. Find out why</Comment>
         <UI name="path"/>
       </Variable>
@@ -3615,7 +3628,8 @@
         </Value>
         <Value>
           <Data>0003</Data>
-          <Description>Invisible (can’t tell position)</Description>
+          <Description>Invisible</Description>
+          <Comment>can’t tell position</Comment>
         </Value>
         <Value>
           <Data repeat="+">0004</Data>
@@ -4904,13 +4918,9 @@
     </Objects>
     <Description>Lord Jabu-Jabu objects</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FF00" >
-        <Description>Nullable Switch Flag</Description>
-        <UI name="switchflag" />
-      </Variable>
       <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
-        <UI />
+        <UI name="select"/>
         <Value>
           <Data>00</Data>
           <Description>Giant Octo's platform</Description>
@@ -4927,10 +4937,14 @@
           <Data>03</Data>
           <Description>Lowering platform, triggered when jumped on and sets Switch Flag</Description>
         </Value>
-        <Value>
+        <Value uihide="true">
           <Data repeat="+">04</Data>
           <Description>Graphical glitch, unknown</Description>
         </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask="FF00" >
+        <Description>Nullable Switch Flag</Description>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -4982,14 +4996,19 @@
     </Objects>
     <Description>Koume and Kotake</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" default="0000">
+        <Description>Type</Description>
+        <Comment>FIXME: Probably picks which one?</Comment>
+        <UI name="select" />
         <Value>
-          <Data repeat="+">0000</Data>
-          <Description>Nothing</Description>
+          <Data>0000</Data>
+          <Description>?</Description>
         </Value>
         <Value>
+          <Data>0001</Data>
+          <Description>?</Description>
+        </Value>
+        <Value uihide="true">
           <Data repeat="+">0002</Data>
           <Description>Crashes</Description>
         </Value>
@@ -5115,7 +5134,7 @@
       </Variable>
       <Variable maskType="&amp;" mask="FF00" >
         <Description>Type</Description>
-        <UI />
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>Temple Gate</Description>
@@ -5132,7 +5151,7 @@
           <Data>03</Data>
           <Description>Nothing</Description>
         </Value>
-        <Value>
+        <Value uihide="true">
           <Data repeat="+">04</Data>
           <Description>Crashes</Description>
         </Value>
@@ -5177,11 +5196,12 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Horseback Games</Description>
+    <Description>Horseback Minigames</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <Comment>FIXME</Comment>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Nothing</Description>
@@ -5238,8 +5258,8 @@
     <Description>Tentacle from inside Lord Jabu-Jabu</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Reddish brown</Description>
@@ -5266,8 +5286,8 @@
     <Description>Jabu-Jabu Electrified Tentacle</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Reddish brown</Description>
@@ -5316,9 +5336,9 @@
     </Objects>
     <Description>Forest Temple ladder</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" default="0000" >
+        <Description>Default</Description>
+        <UI name="none" />
         <Value>
           <Data>0000</Data>
           <Description>Wooden ladder</Description>
@@ -5333,9 +5353,9 @@
     </Objects>
     <Description>Forest Temple objects</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="00FF" >
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Rotating platforms</Description>
@@ -5345,6 +5365,11 @@
           <Description>Metal gate</Description>
         </Value>
       </Variable>
+      <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true">
+        <Description>Nullable Switch Flag</Description>
+        <Comment>Metal gate only</Comment>
+        <UI name="switchflag"/>
+      </Variable>
     </Variables>
   </Actor>
   <Actor id="00E4">
@@ -5352,7 +5377,12 @@
       <Object>0072</Object>
     </Objects>
     <Description>Forest Temple Well Water</Description>
-    <Variables />
+    <Variables>
+      <Variable maskType="&amp;" mask="003F" nullable="true" default ="3F">
+        <Description>Switch Flag</Description>
+        <UI name="switchflag"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="00E5">
     <Objects>
@@ -5360,9 +5390,9 @@
     </Objects>
     <Description>Death Mountain cloud ring</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF" >
         <Description>Type</Description>
-        <UI />
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Gray</Description>
@@ -5377,6 +5407,10 @@
           <Description>Expanding, gray</Description>
           <Comment>Beta?</Comment>
         </Value>
+        <Value>
+          <Data>FFFF</Data>
+          <Description>Default</Description>
+        </Value>
       </Variable>
     </Variables>
   </Actor>
@@ -5384,35 +5418,43 @@
     <Objects>
       <Object>0096</Object>
     </Objects>
-    <Description>Switch from inside Lord Jabu-Jabu</Description>
+    <Description>Switches (Inside Lord Jabu-Jabu)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="00FF" >
         <Description>Type</Description>
-        <UI />
+        <UI name="select"/>
         <Value>
           <Data>0000</Data>
-          <Description>Press down, makes discovery sound</Description>
+          <Description>Blue Switch, resets if not held down</Description>
+          <Comment>makes discovery sound</Comment>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Yellow button, only goes down halfway with Link</Description>
+          <Description>Yellow Switch, requires extra weight to press</Description>
+          <Comment>FIXME: What counts as extra weight other than Ruto?</Comment>
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Yellow button, makes puzzle solved sound</Description>
+          <Description>Yellow Switch, makes puzzle solved sound</Description>
         </Value>
         <Value>
           <Data>0003</Data>
-          <Description>Really tall yellow button, can’t press it, shoot to make puzzle solved sound</Description>
+          <Description>Really tall yellow button</Description>
+          <Comment>can’t press it, shoot to make puzzle solved sound</Comment>
         </Value>
         <Value>
           <Data>0004</Data>
-          <Description>Really tall yellow button, shoot twice to make discovery sound</Description>
+          <Description>Really tall yellow button</Description>
+          <Comment>Only pressed when hit with slingshot or explosives</Comment>
         </Value>
-        <Value>
+        <Value uihide="true">
           <Data repeat="+">0005</Data>
           <Description>Nothing</Description>
         </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask="3F00" default="3F" nullable="true">
+        <Description>Switch Flag</Description>
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -7410,11 +7452,11 @@
       <Object>0003</Object>
     </Objects>
     <Description>Switches</Description>
-    <Comment> make puzzle solved sound when triggered, one-time only</Comment>
+    <Comment>makes puzzle solved sound when triggered, one-time only</Comment>
     <Variables>
       <Variable maskType="&amp;" mask="000F" >
         <Description>Type</Description>
-        <UI />
+        <UI name="select"/>
         <Value>
           <Data>00</Data>
           <Description>Floor switch</Description>
@@ -7445,7 +7487,8 @@
         <UI name="bitflag" />
       </Variable>
       <Variable maskType="&amp;" mask="0020" >
-        <Description>Floor/Rusted Floor switches reset (zero switch flag) when not held down</Description>
+        <Description>Floor switches reset (zero switch flag) when not held down</Description>
+        <Comment>Rusted included</Comment>
         <UI name="bitflag" />
       </Variable>
       <Variable maskType="&amp;" mask="0040" >
@@ -7469,7 +7512,7 @@
     </Objects>
     <Description>Huge stone elevator</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="0001" >
+      <Variable maskType="&amp;" mask="0001">
         <Description>Platform Size</Description>
         <UI name="select" />
         <Value>
@@ -7701,7 +7744,7 @@
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="00FF" >
-        <Description>Path number to follow</Description>
+        <Description>Path Id</Description>
         <UI name="path" />
       </Variable>
     </Variables>
@@ -8956,7 +8999,7 @@
     <Comment>FIXME: Path</Comment>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" >
-        <Description>path number to follow</Description>
+        <Description>Path Id</Description>
         <UI name="path" />
       </Variable>
     </Variables>
@@ -8984,10 +9027,11 @@
       <Object>????</Object>
     </Objects>
     <Description>Market NPCs</Description>
+    <Comment>FIXME: Recheck everything</Comment>
     <Variables>
       <Variable maskType="&amp;" mask="003F" >
         <Description>Npc</Description>
-        <UI />
+        <UI name="select"/>
         <Value>
           <Data object-id="0105">0000</Data>
           <Description>Fat woman in light blue</Description>
@@ -9070,7 +9114,7 @@
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="0780" >
-        <Description>Path to follow</Description>
+        <Description>Path Id</Description>
         <Comment>NPCs 03 and 07 only</Comment>
         <UI name="path" />
       </Variable>
@@ -10338,35 +10382,50 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Shooting Gallery Building (Kakariko Village)</Description>
-    <Comment>FIXME</Comment>
+    <Description>Kakariko Village set pieces</Description>
+    <Comment>FIXME: Objects</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="0007">
+        <Description>Type</Description>
+        <Comment>Values greater than 4 don't load anything</Comment>
+        <UI name="select"/>
         <Value>
-          <Data>0203</Data>
-          <Description>Child Day</Description>
+          <Data>0</Data>
+          <Description>Potion Shop Poster</Description>
         </Value>
         <Value>
-          <Data>0003</Data>
-          <Description>Child Night</Description>
+          <Data>1</Data>
+          <Description>Shooting Gallery Poster</Description>
         </Value>
         <Value>
-          <Data>0002</Data>
-          <Description>Adult</Description>
+          <Data>2</Data>
+          <Description>Bazaar Poster</Description>
         </Value>
         <Value>
-          <Data>0000</Data>
-          <Description>Adult</Description>
+          <Data>3</Data>
+          <Description>Partially Constructed Shooting Gallery</Description>
         </Value>
         <Value>
-          <Data>0001</Data>
-          <Description>Adult</Description>
+          <Data>4</Data>
+          <Description>Completed Shooting Gallery</Description>
+        </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask="FF00" default="00">
+        <Description>Unknown</Description>
+        <UI/>
+        <Value>
+          <Data>00</Data>
+          <Description>?</Description>
         </Value>
         <Value>
-          <Data>FF04</Data>
-          <Description>Adult</Description>
+          <Data>02</Data>
+          <Description>?</Description>
+          <Comment>Used with under construction gallery, child day</Comment>
+        </Value>
+        <Value>
+          <Data>FF</Data>
+          <Description>?</Description>
+          <Comment>used with complete shooting gallery</Comment>
         </Value>
       </Variable>
     </Variables>
@@ -11157,7 +11216,11 @@
       <Variable maskType="&amp;" mask="0F00" >
         <Description>Timer</Description>
         <Comment>1 unit 4 Seconds</Comment>
-        <UI />
+        <UI name="numupdown">
+          <Param id="unit">Seconds</Param>
+          <Param id="increment">4</Param>
+          <Param id="min">0</Param>
+        </UI>
       </Variable>
       <Variable maskType="&amp;" mask="001F" >
         <Description>identifier (for use with switches)</Description>
@@ -11233,8 +11296,8 @@
     </Objects>
     <Description>Fake door</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
+      <Variable maskType="&amp;" mask="FFFF" default="0000">
+        <Description>Type</Description>
         <UI />
         <Value>
           <Data>0000</Data>
@@ -11268,6 +11331,7 @@
       <Object>016F</Object>
     </Objects>
     <Description>Refilling Oasis (Desert Colossus)</Description>
+    <Comment>FIXME: Switch Flag</Comment>
     <Variables />
   </Actor>
   <Actor id="01C3">
@@ -11297,9 +11361,9 @@
     </Objects>
     <Description>Cow</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF" default="0000">
         <Description>#N/A</Description>
-        <UI />
+        <UI  name="select"/>
         <Value>
           <Data>0000</Data>
           <Description>Cow</Description>
@@ -11322,8 +11386,8 @@
     <Description>Icicles</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <UI name="select"/>
         <Value>
           <Data>0000</Data>
           <Description>Stalagmite (floor)</Description>
@@ -11360,7 +11424,7 @@
     <Description>Bonooru the Scarecrow Spawn</Description>
     <Comment>
       Green Navi spot
-      FIXME: Switch Flags
+      FIXME: Switch Flag
     </Comment>
     <Variables />
   </Actor>
@@ -11452,8 +11516,8 @@
     <Description>Time block</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Large time block, doesn’t react to Song of Time</Description>

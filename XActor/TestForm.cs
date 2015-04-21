@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,10 +25,30 @@ namespace mzxrules.XActor
 
         private void button1_Click(object sender, EventArgs e)
         {
+            List<string> Descriptions = new List<string>();
+            XActors actors = XActors.LoadFromFile(XmlFileLocation);
+
+            foreach (var actor in actors.Actor)
+            {
+                foreach (var variable in actor.Variables)
+                {
+                    Descriptions.Add(string.Format("{0}:{1}", actor.id, variable.Description));
+                }
+            }
+            Descriptions = Descriptions.OrderBy(x => x.Length).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (string s in Descriptions)
+                sb.AppendLine(s);
+
+            outRichTextBox.Text = sb.ToString();
+        }
+
+        private void SetBitflagParam()
+        {
             XActors actors;
             Int16[] bitDictionary = new Int16[16];
             actors = XActors.LoadFromFile(XmlFileLocation);
-
 
             for (int i = 0; i < 16; i++)
             {
@@ -43,7 +64,7 @@ namespace mzxrules.XActor
                 foreach (var v in value)
                 {
                     if (v.UI.name == UITypes.@default)
-                        v.UI.name =  UITypes.bitflag;
+                        v.UI.name = UITypes.bitflag;
                 }
             }
             outRichTextBox.Text = actors.Serialize();
@@ -55,7 +76,7 @@ namespace mzxrules.XActor
             XActors resultXActors;
             ParseOldFormat oldFormat = new ParseOldFormat();
 
-            Lines = inRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            Lines = dataInRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
             resultXActors = oldFormat.ParseLines(Lines);
 
             XmlSerializer serializer = new XmlSerializer(typeof(XActors));
@@ -67,7 +88,7 @@ namespace mzxrules.XActor
             {
                 serializer.Serialize(writer, resultXActors);
             }
-            firstConvertRichTextBox.Text = sb.ToString();
+            dataInRichTextBox.Text = sb.ToString();
 
             outRichTextBox.Text = OutputNewFormat.Output(resultXActors).ToString();
         }
@@ -76,7 +97,7 @@ namespace mzxrules.XActor
         {
             string[] Lines;
 
-            Lines = inRichTextBox.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            Lines = dataInRichTextBox.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
 
             Regex TestRegex = new Regex(""); //new Regex(IdLine + Comment);
@@ -84,7 +105,7 @@ namespace mzxrules.XActor
 
             MatchCollection matches = TestRegex.Matches(Lines[0].Trim());
 
-            firstConvertRichTextBox.Clear();
+            dataInRichTextBox.Clear();
 
             foreach (Match m in matches)
             {
@@ -92,8 +113,8 @@ namespace mzxrules.XActor
                 //firstConvertRichTextBox.AppendText(Environment.NewLine);
                 foreach (Group g in m.Groups)
                 {
-                    firstConvertRichTextBox.AppendText(g.Value);
-                    firstConvertRichTextBox.AppendText(Environment.NewLine);
+                    dataInRichTextBox.AppendText(g.Value);
+                    dataInRichTextBox.AppendText(Environment.NewLine);
                 }
 
             }
@@ -147,13 +168,28 @@ namespace mzxrules.XActor
                 sb.AppendLine();
             }
             sb.AppendLine("|}");
-            firstConvertRichTextBox.Text = sb.ToString();
+            dataInRichTextBox.Text = sb.ToString();
         }
 
 
         private void PrintListFromXml()
         {
-            outRichTextBox.Text = OutputNewFormat.Output(XActors.LoadFromFile(XmlFileLocation)).ToString();
+            outRichTextBox.Text = OutputNewFormat.Output(XActors.LoadFromFile(XmlFileLocation)).ToString().TrimEnd();
+        }
+
+        private void uiTestButton_Click(object sender, EventArgs e)
+        {
+            Int16 actor;
+            if (Int16.TryParse(actorTextBox.Text, System.Globalization.NumberStyles.HexNumber,
+                CultureInfo.InvariantCulture, out actor))
+            {
+                actorControl1.SetActor(actor);
+            }
+        }
+
+        private void TestForm_Load(object sender, EventArgs e)
+        {
+            actorControl1.Document = XActors.LoadFromFile(XmlFileLocation);
         }
     }
 }

@@ -18,7 +18,16 @@
       <xs:element name="Variables" type="XVariables"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:string" use="required" />
+    <xs:attribute name="spawnscope" type="ActorSpawnRestrictions" default="All"/>
   </xs:complexType>
+
+  <xs:simpleType name="ActorSpawnRestrictions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All"/>
+      <xs:enumeration value="SceneOnly"/>
+      <xs:enumeration value="Programmatically"/>
+    </xs:restriction>
+  </xs:simpleType>
 
   <xs:complexType name="XObjects">
     <xs:sequence>
@@ -35,7 +44,7 @@
 
   <xs:complexType name="XVariable">
     <xs:sequence>
-      <xs:element name="Description" type="xs:string" />
+      <xs:element name="Description" type="xs:string" minOccurs="1" />
       <xs:element name="Comment" type="xs:string" minOccurs ="0"/>
       <xs:element name="UI" type="UI" minOccurs="1" maxOccurs="1"/>
       <xs:element name="Value" minOccurs ="0" maxOccurs="unbounded" >
@@ -45,6 +54,7 @@
             <xs:element name="Description" type="xs:string"/>
             <xs:element name="Comment" type ="xs:string" minOccurs ="0" />
           </xs:sequence>
+          <xs:attribute name="uihide" type="xs:boolean" default="false"/>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
@@ -52,8 +62,8 @@
     <xs:attribute name="altvar" type="AltVarTypes" use="optional" default="Var" />
     <xs:attribute name="maskType" type="MaskType" use="required"/>
     <xs:attribute name="mask" type="xs:string" use="required"/>
-    <xs:attribute name="default" type="xs:string" use="optional" />
-    <xs:attribute name="nullable" type="xs:boolean" default="0"/>
+    <xs:attribute name="default" type="xs:string" use="optional" default="0000" />
+    <xs:attribute name="nullable" type="xs:boolean" default="false"/>
   </xs:complexType>
 
   <xs:simpleType name="AltVarTypes">

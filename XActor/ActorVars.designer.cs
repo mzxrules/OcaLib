@@ -1525,6 +1525,7 @@ namespace mzxrules.XActor
             this.uiField = new UI();
             this.idField = "-1";
             this.altvarField = AltVarTypes.Var;
+            this.defaultField = "0000";
             this.nullableField = false;
         }
 
@@ -1632,6 +1633,7 @@ namespace mzxrules.XActor
         }
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute("0000")]
         public string @default
         {
             get

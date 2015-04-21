@@ -45,6 +45,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActorVars.designer.cs" />
+    <Compile Include="Gui\ActorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\ActorControl.Designer.cs">
+      <DependentUpon>ActorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\BaseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\BaseControl.Designer.cs">
+      <DependentUpon>BaseControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Helper.cs" />
+    <Compile Include="Gui\NumControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\NumControl.Designer.cs">
+      <DependentUpon>NumControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\SelectControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\SelectControl.Designer.cs">
+      <DependentUpon>SelectControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\XVariableValueDisplay.cs" />
     <Compile Include="TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +82,18 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test.cs" />
+    <EmbeddedResource Include="Gui\ActorControl.resx">
+      <DependentUpon>ActorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\BaseControl.resx">
+      <DependentUpon>BaseControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\NumControl.resx">
+      <DependentUpon>NumControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\SelectControl.resx">
+      <DependentUpon>SelectControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>

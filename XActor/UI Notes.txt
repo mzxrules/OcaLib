@@ -10,7 +10,7 @@ select = dropdown selector
 
 num = integer input
   params: 
-    display (display type hex or int)
+    display (display type hex, int, inherited)
 
 numupdown = numericUpDown
   params:
