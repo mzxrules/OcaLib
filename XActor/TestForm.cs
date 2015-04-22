@@ -32,7 +32,9 @@ namespace mzxrules.XActor
             {
                 foreach (var variable in actor.Variables)
                 {
-                    Descriptions.Add(string.Format("{0}:{1}", actor.id, variable.Description));
+                    if(variable.UI.name == UITypes.@default)
+                    Descriptions.Add(string.Format("{0}:{1}", actor.id, variable.UI.name));
+                    
                 }
             }
             Descriptions = Descriptions.OrderBy(x => x.Length).ToList();

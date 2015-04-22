@@ -60,7 +60,7 @@
     </xs:sequence>
     <xs:attribute name="id" default="-1"/>
     <xs:attribute name="altvar" type="AltVarTypes" use="optional" default="Var" />
-    <xs:attribute name="maskType" type="MaskType" use="required"/>
+    <xs:attribute name="maskType" type="MaskType" use="optional" default="&amp;"/>
     <xs:attribute name="mask" type="xs:string" use="required"/>
     <xs:attribute name="default" type="xs:string" use="optional" default="0000" />
     <xs:attribute name="nullable" type="xs:boolean" default="false"/>
@@ -100,6 +100,7 @@
   <xs:simpleType name="UITypes">
     <xs:restriction base="xs:string">
       <xs:enumeration value="bitflag" />
+      <xs:enumeration value="chestflag" />
       <xs:enumeration value="collectflag" />
       <xs:enumeration value="default" />
       <xs:enumeration value="path" />

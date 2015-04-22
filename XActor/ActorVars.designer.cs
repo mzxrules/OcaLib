@@ -251,12 +251,15 @@ namespace mzxrules.XActor
 
         private string idField;
 
+        private ActorSpawnRestrictions spawnscopeField;
+
         private static System.Xml.Serialization.XmlSerializer serializer;
 
         public XActor()
         {
             this.variablesField = new List<XVariable>();
             this.objectsField = new XObjects();
+            this.spawnscopeField = ActorSpawnRestrictions.All;
         }
 
         public XObjects Objects
@@ -331,6 +334,20 @@ namespace mzxrules.XActor
             set
             {
                 this.idField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(ActorSpawnRestrictions.All)]
+        public ActorSpawnRestrictions spawnscope
+        {
+            get
+            {
+                return this.spawnscopeField;
+            }
+            set
+            {
+                this.spawnscopeField = value;
             }
         }
 
@@ -1457,6 +1474,9 @@ namespace mzxrules.XActor
         bitflag,
 
         /// <remarks/>
+        chestflag,
+
+        /// <remarks/>
         collectflag,
 
         /// <remarks/>
@@ -1525,6 +1545,7 @@ namespace mzxrules.XActor
             this.uiField = new UI();
             this.idField = "-1";
             this.altvarField = AltVarTypes.Var;
+            this.maskTypeField = MaskType.And;
             this.defaultField = "0000";
             this.nullableField = false;
         }
@@ -1607,6 +1628,7 @@ namespace mzxrules.XActor
         }
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(MaskType.And)]
         public MaskType maskType
         {
             get
@@ -1859,11 +1881,14 @@ namespace mzxrules.XActor
 
         private string commentField;
 
+        private bool uihideField;
+
         private static System.Xml.Serialization.XmlSerializer serializer;
 
         public XVariableValue()
         {
             this.dataField = new XValueData();
+            this.uihideField = false;
         }
 
         public XValueData Data
@@ -1899,6 +1924,20 @@ namespace mzxrules.XActor
             set
             {
                 this.commentField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool uihide
+        {
+            get
+            {
+                return this.uihideField;
+            }
+            set
+            {
+                this.uihideField = value;
             }
         }
 
@@ -2120,6 +2159,22 @@ namespace mzxrules.XActor
         /// <remarks/>
         [System.Xml.Serialization.XmlEnumAttribute("|")]
         Or,
+    }
+
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+    public enum ActorSpawnRestrictions
+    {
+
+        /// <remarks/>
+        All,
+
+        /// <remarks/>
+        SceneOnly,
+
+        /// <remarks/>
+        Programmatically,
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34230")]
