@@ -105,16 +105,17 @@ namespace mzxrules.XActor
 
         private void NewVariableValue(GroupCollection groupCollection, XVariableValue val)
         {
+            throw new NotImplementedException();
             //Regex ValueLine = new Regex(@"^\s*(?:-|=)\s*([0-9a-fA-F]{1,4})(\+)?\s*(?:\(([0-9a-fA-F?]{4})\))?\s*(?:-|=)\s*(.*?)$");
             //Groups:
             //Hex Value, repeater?, Hex Object?, description
 
-            val.Data.Value = groupCollection[1].Value;
-            if (!String.IsNullOrEmpty(groupCollection[2].Value))
-                val.Data.repeat = groupCollection[2].Value;
-            if (!String.IsNullOrEmpty(groupCollection[3].Value))
-                val.Data.objectid = groupCollection[3].Value;
-            val.Description = groupCollection[4].Value.Trim();
+            //val.Data = groupCollection[1].Value;
+            //if (!String.IsNullOrEmpty(groupCollection[2].Value))
+            //    val.repeat = groupCollection[2].Value;
+            //if (!String.IsNullOrEmpty(groupCollection[3].Value))
+            //    val.Data.objectid = groupCollection[3].Value;
+            //val.Description = groupCollection[4].Value.Trim();
 
         }
 

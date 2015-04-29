@@ -17,6 +17,8 @@ namespace mzxrules.XActor
     public partial class TestForm : Form
     {
         static string XmlFileLocation = "ActorVars.xml";
+        XActors Document { get; set; }
+
 
         public TestForm()
         {
@@ -25,16 +27,42 @@ namespace mzxrules.XActor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<string> Descriptions = new List<string>();
-            XActors actors = XActors.LoadFromFile(XmlFileLocation);
+            SCRIPT_Ui_Test();
+            //SCRIPT_Select_Width_Test();   
+        }
 
-            foreach (var actor in actors.Actor)
+        private void SCRIPT_Select_Width_Test()
+        {
+            List<string> Descriptions = new List<string>();
+
+            foreach (var actor in Document.Actor)
             {
                 foreach (var variable in actor.Variables)
                 {
-                    if(variable.UI.name == UITypes.@default)
-                    Descriptions.Add(string.Format("{0}:{1}", actor.id, variable.UI.name));
-                    
+                    foreach (var value in variable.Value)
+                        Descriptions.Add(string.Format("{0}:{1}", actor.id, value.Description));
+                }
+            }
+            Descriptions = Descriptions.OrderBy(x => x.Length).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (string s in Descriptions)
+                sb.AppendLine(s);
+
+            outRichTextBox.Text = sb.ToString();
+        }
+
+        private void SCRIPT_Ui_Test()
+        {
+            List<string> Descriptions = new List<string>();
+
+            foreach (var actor in Document.Actor)
+            {
+                foreach (var variable in actor.Variables)
+                {
+                    if (variable.UI.name == UITypes.@default)
+                        Descriptions.Add(string.Format("{0}:{1}", actor.id, variable.UI.name));
+
                 }
             }
             Descriptions = Descriptions.OrderBy(x => x.Length).ToList();
@@ -132,6 +160,7 @@ namespace mzxrules.XActor
 
         private void ActorObjectRelationshipsFromXml()
         {
+            throw new NotImplementedException();
             XActors actorList;
             StringBuilder sb = new StringBuilder();
             List<Tuple<string, string>> ActorToObjects = new List<Tuple<string,string>>();
@@ -151,15 +180,15 @@ namespace mzxrules.XActor
                     }
                     else 
                     {
-                        var objList = actor.Variables.SelectMany(v => v.Value)
-                             .Select(x => x.Data.objectid)
-                             .Where(y => !String.IsNullOrEmpty(y))
-                             .Distinct();
+                        //var objList = actor.Variables.SelectMany(v => v.Value)
+                        //     .Select(x => x.Data.objectid)
+                        //     .Where(y => !String.IsNullOrEmpty(y))
+                        //     .Distinct();
 
-                        foreach (string obj_sub in objList)
-                        {
-                            ActorToObjects.Add(new Tuple<string, string>(actor.id, obj_sub));
-                        }
+                        //foreach (string obj_sub in objList)
+                        //{
+                        //    ActorToObjects.Add(new Tuple<string, string>(actor.id, obj_sub));
+                        //}
                     }
                 }
             }
@@ -191,7 +220,8 @@ namespace mzxrules.XActor
 
         private void TestForm_Load(object sender, EventArgs e)
         {
-            actorControl1.Document = XActors.LoadFromFile(XmlFileLocation);
+            Document = XActors.LoadFromFile(XmlFileLocation);
+            actorControl1.Document = Document;
         }
     }
 }

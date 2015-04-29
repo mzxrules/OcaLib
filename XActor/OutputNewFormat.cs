@@ -11,11 +11,14 @@ namespace mzxrules.XActor
         public static StringBuilder Output(XActors root)
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine("== Actors ==");
+            sb.AppendLine("<pre>");
             foreach (XActor actor in root.Actor)
             {
                 PrintActor(sb, actor);
                 sb.AppendLine();
             }
+            sb.AppendLine("</pre>");
             return sb;
         }
 
@@ -81,11 +84,14 @@ namespace mzxrules.XActor
 
         private static void PrintVariableValue(StringBuilder sb, XVariableValue value, int mask)
         {
+            string obj = null;
+            if (value.Meta != null)
+                obj = string.Join(", ", value.Meta.Object);
             sb.AppendFormat("  - {0}{1} [{2:X4}]{3} = {4}",
-                value.Data.Value,
-                (!String.IsNullOrEmpty(value.Data.repeat)) ? "+" : " ",
-                Shift(int.Parse(value.Data.Value, System.Globalization.NumberStyles.HexNumber), mask),
-                (!String.IsNullOrEmpty(value.Data.objectid)) ? String.Format(" ({0})", value.Data.objectid) : "",
+                value.Data,
+                (!String.IsNullOrEmpty(value.repeat)) ? "+" : " ",
+                Shift(int.Parse(value.Data, System.Globalization.NumberStyles.HexNumber), mask),
+                (!String.IsNullOrEmpty(obj)) ? String.Format(" ({0})", obj) : "",
                 value.Description);
             PrintComments(sb, value.Comment, true);
             sb.AppendLine();

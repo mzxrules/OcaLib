@@ -101,8 +101,8 @@
           <Data>0003</Data>
           <Description>Drops down from the sky when Link is near, no miniboss music</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0004</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0004</Data>
           <Description>Rises out of the ground, miniboss music</Description>
         </Value>
         <Value>
@@ -126,7 +126,7 @@
     </Objects>
     <Description>Dissipating Flames</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -170,9 +170,9 @@
     </Objects>
     <Description>Decorative Flames</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
-        <UI  name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Orange flame</Description>
@@ -255,9 +255,9 @@
     <Description>Standard Door</Description>
     <Comment>if the fourth digit is not 0, then the doors will spawn artifacts of themselves</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFC0" >
+      <Variable maskType="&amp;" mask="FFC0">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Wooden door. Loads rooms</Description>
@@ -299,8 +299,8 @@
           <Description>Talking door.  Passable, but appears on both sides.</Description>
           <Comment>last two values' text matches that of actor 185, but in increments of 1 instead</Comment>
         </Value>
-        <Value>
-          <Data repeat="+">0010</Data>
+        <Value repeat="+">
+          <Data>0010</Data>
           <Description>Single door, no area triggering, both-way</Description>
         </Value>
         <Value>
@@ -311,7 +311,7 @@
       <Variable mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <Comment>Locked doors only</Comment>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -321,9 +321,9 @@
     </Objects>
     <Description>Treasure chest</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="F000" >
+      <Variable maskType="&amp;" mask="F000">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0</Data>
           <Description>Large</Description>
@@ -372,14 +372,14 @@
           <Data>B</Data>
           <Description>Large, Appears, Switch Flag</Description>
         </Value>
-        <Value>
-          <Data repeat="+">C</Data>
+        <Value repeat="+">
+          <Data>C</Data>
           <Description>Large</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="0FE0" >
+      <Variable maskType="&amp;" mask="0FE0">
         <Description>Chest Contents</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>Invalid</Description>
@@ -958,12 +958,12 @@
           <Description>Invalid, crashes when opened</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="001F" >
+      <Variable maskType="&amp;" mask="001F">
         <Description>Chest Flag</Description>
         <Comment>If multiple chests share the same chest flag in a room, opening one will open the others with the same flag.</Comment>
-        <UI name="chestflag"/>
+        <UI name="chestflag" />
       </Variable>
-      <Variable altvar="ZRot" maskType="&amp;" mask="003F" >
+      <Variable altvar="ZRot" maskType="&amp;" mask="003F">
         <Description>Switch Flag to spawn chest.</Description>
         <UI name="switchflag" />
       </Variable>
@@ -977,7 +977,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" default="0000">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -996,12 +996,13 @@
   <Actor id="000D">
     <Objects>
       <Object>0009</Object>
+      <Object>????</Object>
     </Objects>
     <Description>Poe</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" default="0000">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Normal</Description>
@@ -1010,8 +1011,26 @@
           <Data>0001</Data>
           <Description>Leaves a blue rupee at its spawn point</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0004</Data>
+        <Value>
+          <Data>0002</Data>
+          <Description>Sharp (Composer Brothers)</Description>
+          <Comment>Sets Permanent Switch Flag 0B when talked to</Comment>
+          <Meta>
+            <Object>006E</Object>
+            <Flag type="switch">0B</Flag>
+          </Meta>
+        </Value>
+        <Value>
+          <Data>0003</Data>
+          <Description>Flat (Composer Brothers)</Description>
+          <Comment>Sets Permanent Switch Flag 0A when talked to</Comment>
+          <Meta>
+            <Object>006E</Object>
+            <Flag type="switch">0A</Flag>
+          </Meta>
+        </Value>
+        <Value uihide="true" repeat="+">
+          <Data>0004</Data>
           <Description>Normal</Description>
         </Value>
       </Variable>
@@ -1045,15 +1064,15 @@
     </Objects>
     <Description>Webs</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true" >
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag set when destroyed</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="0FC0" default="3F" nullable="true" >
+      <Variable maskType="&amp;" mask="0FC0" default="3F" nullable="true">
         <Description>Switch Flag that when set causes web to burn self</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="F000" >
+      <Variable maskType="&amp;" mask="F000">
         <Description>Web Type</Description>
         <UI name="select" />
         <Value>
@@ -1064,8 +1083,8 @@
           <Data>1</Data>
           <Description>Vertical web wall (huge)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">2</Data>
+        <Value repeat="+">
+          <Data>2</Data>
           <Description>Web-covered hole</Description>
           <Comment>when burned, web becomes inverse-conical and extends up, looks kinda weird</Comment>
         </Value>
@@ -1078,7 +1097,7 @@
     </Objects>
     <Description>Bomb</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1098,7 +1117,7 @@
     </Objects>
     <Description>Wallmaster (Ceiling monster)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1115,7 +1134,7 @@
           <Description>Spawn on Switch Flag</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="3F00" >
+      <Variable maskType="&amp;" mask="3F00">
         <Description>Switch Flag</Description>
         <Comment>Switch Flag to spawn on, type 02 only</Comment>
         <UI name="switchflag" />
@@ -1128,7 +1147,7 @@
     </Objects>
     <Description>Dodongo</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1140,8 +1159,8 @@
           <Description>Two-Foot Dodongo (fire and smoke from mouth when dead)</Description>
           <Comment>FIXME: Beta?</Comment>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Two-Foot Dodongo (no fire/smoke)</Description>
         </Value>
       </Variable>
@@ -1153,7 +1172,7 @@
     </Objects>
     <Description>Keese</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1176,8 +1195,8 @@
           <Data>0004</Data>
           <Description>Ice Keese</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0005</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0005</Data>
           <Description>Aggressive Keese</Description>
         </Value>
       </Variable>
@@ -1189,15 +1208,15 @@
     </Objects>
     <Description>Epona</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" default="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF">
         <Description>Type</Description>
         <UI name="none" />
-        <Value uihide="true">
-          <Data repeat="+">0000</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0000</Data>
           <Description>Epona</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">8000</Data>
+        <Value uihide="true" repeat="+">
+          <Data>8000</Data>
           <Description>No Epona</Description>
         </Value>
         <Value>
@@ -1229,7 +1248,7 @@
         <Description>Collectible Flag</Description>
         <UI name="collectflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <Comment>Some types won't work under certain conditions</Comment>
         <UI name="select" />
@@ -1340,8 +1359,8 @@
           <Data>19</Data>
           <Description>Bomb (5)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">1A</Data>
+        <Value repeat="+">
+          <Data>1A</Data>
           <Description>Invisible item?</Description>
         </Value>
       </Variable>
@@ -1353,15 +1372,15 @@
     </Objects>
     <Description>Arrows</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Fire arrow</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Regular arrow</Description>
         </Value>
       </Variable>
@@ -1373,7 +1392,7 @@
     </Objects>
     <Description>Fairies</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1419,7 +1438,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF" nullable="true">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0004</Data>
           <Description>Flees when approached</Description>
@@ -1466,12 +1485,12 @@
           <Data>FFFE</Data>
           <Description>Blue Tektite</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0000</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0000</Data>
           <Description>Normal tektite</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0004</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0004</Data>
           <Description>Instant death</Description>
         </Value>
       </Variable>
@@ -1490,7 +1509,7 @@
     </Objects>
     <Description>Peahat and Larva</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" default="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1501,8 +1520,8 @@
           <Data>0001</Data>
           <Description>Peahat Larva</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0002</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0002</Data>
           <Description>Crashes</Description>
         </Value>
         <Value>
@@ -1525,10 +1544,10 @@
     </Objects>
     <Description>Bugs</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <Comment>FIXME: Test</Comment>
-        <UI  name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Large bug</Description>
@@ -1541,8 +1560,8 @@
           <Data>0002</Data>
           <Description>Three small bugs</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>Small bug</Description>
         </Value>
       </Variable>
@@ -1554,7 +1573,7 @@
     </Objects>
     <Description>Fish</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" default="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF">
         <Description>Behavior</Description>
         <UI name="select" />
         <Value>
@@ -1604,7 +1623,7 @@
       To differentiate the two encounters (as both are in room 3), the switch flag is used. This flag matches the switch flag of the door used to enter the room
     </Comment-Other>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1612,13 +1631,13 @@
           <Description>Lizalfos mini-boss, jumps down from ceiling</Description>
           <Comment>Partner to 01, in order to be killed</Comment>
         </Value>
-        <Value>
-          <Data repeat="+">01</Data>
+        <Value repeat="+">
+          <Data>01</Data>
           <Description>Lizalfos mini-boss, no mini-boss music</Description>
           <Comment>Partner to 00, in order to be killed</Comment>
         </Value>
-        <Value>
-          <Data repeat="+">80</Data>
+        <Value repeat="+">
+          <Data>80</Data>
           <Description>Single Lizalfos, no mini-boss music</Description>
         </Value>
         <Value>
@@ -1630,7 +1649,7 @@
           <Description>Dinolfos, no mini-boss music, drops down from ceiling</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true" >
+      <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true">
         <Description>Nullable Switch Flag</Description>
         <Comment>Lizalfos miniboss spawns when entering room from door bound to this switch flag</Comment>
         <UI name="switchflag" />
@@ -1645,7 +1664,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1657,7 +1676,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1669,7 +1688,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1681,7 +1700,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1692,7 +1711,7 @@
     <Description>Cutscene Actors</Description>
     <Comment>FIXME: Need their own objects</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1724,16 +1743,22 @@
           <Description>Ganondorf's Horse (Galloping)</Description>
         </Value>
         <Value>
-          <Data object-id="009B">07FF</Data>
+          <Data>07FF</Data>
           <Description>Ganondorf hands crossed</Description>
+          <Meta>
+            <Object>009B</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>08FF</Data>
           <Description>Gaonndorf Bowing to King</Description>
         </Value>
         <Value>
-          <Data object-id="00E1">09FF</Data>
+          <Data>09FF</Data>
           <Description>Ganondorf floating (Curse You)</Description>
+          <Meta>
+            <Object>00E1</Object>
+          </Meta>
         </Value>
       </Variable>
     </Variables>
@@ -1744,40 +1769,40 @@
     </Objects>
     <Description>Ghoma Larva</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <Comment>FIXME: Variable</Comment>
         <UI name="select" />
-        <Value>
-          <Data repeat="+">0000</Data>
+        <Value repeat="+">
+          <Data>0000</Data>
           <Description>Falls, lands on ground, hatches in moments</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0003</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0003</Data>
           <Description>Crashes</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0006</Data>
+        <Value repeat="+">
+          <Data>0006</Data>
           <Description>Normal egg on ground</Description>
         </Value>
         <Value>
           <Data>0007</Data>
           <Description>?</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0008</Data>
+        <Value repeat="+">
+          <Data>0008</Data>
           <Description>Invisible until it hatches (or with Lens of Truth)</Description>
         </Value>
         <Value>
           <Data>0009</Data>
           <Description>?</Description>
         </Value>
-        <Value>
-          <Data repeat="+">000A</Data>
+        <Value repeat="+">
+          <Data>000A</Data>
           <Description>Destroyed</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0064</Data>
+        <Value repeat="+">
+          <Data>0064</Data>
           <Description>Puffs of Blue Smoke (dies away when Link approaches)</Description>
         </Value>
       </Variable>
@@ -1798,7 +1823,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1809,7 +1834,7 @@
     <Description>Lifting Dungeon Door</Description>
     <Comment>Design/object dependencies changes depending on scene //FIXME: Figure out more</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="0FC0" >
+      <Variable maskType="&amp;" mask="0FC0">
         <Description>Door type</Description>
         <UI name="select" />
         <Value>
@@ -1841,7 +1866,7 @@
           <Description>Key Locked door</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true" >
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -1855,7 +1880,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1874,7 +1899,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1886,7 +1911,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1898,7 +1923,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1908,7 +1933,7 @@
     </Objects>
     <Description>Skulltula</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1923,8 +1948,8 @@
           <Data>0002</Data>
           <Description>Invisible</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0003</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0003</Data>
           <Description>Normal</Description>
         </Value>
       </Variable>
@@ -1938,7 +1963,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -1948,7 +1973,7 @@
     </Objects>
     <Description>Gameplay_keep items</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1995,8 +2020,8 @@
           <Data>0A</Data>
           <Description>Arrow Signpost</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0C</Data>
+        <Value repeat="+">
+          <Data>0C</Data>
           <Description>Black knobby thing</Description>
         </Value>
       </Variable>
@@ -2015,7 +2040,7 @@
     </Objects>
     <Description>Stinger</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" default="000A" >
+      <Variable maskType="&amp;" mask="FFFF" default="000A">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -2030,8 +2055,8 @@
           <Data>0002</Data>
           <Description>Two in formation, sink under floor and do not activate</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>One in formation, sink under floor and do not activate</Description>
         </Value>
         <Value>
@@ -2047,7 +2072,7 @@
     </Objects>
     <Description>Ambient sound effects</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Sound</Description>
         <Comment>FIXME: Unknowns</Comment>
         <UI name="select" />
@@ -2136,8 +2161,8 @@
           <Data>0015</Data>
           <Description>Cows</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0016</Data>
+        <Value repeat="+">
+          <Data>0016</Data>
           <Description>Outside of the ambient noise domain</Description>
         </Value>
         <Value>
@@ -2187,7 +2212,7 @@
     <Variables>
       <Variable mask="FFFF">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0001</Data>
           <Description>Tan, Runs Around</Description>
@@ -2215,43 +2240,67 @@
     <Description>Shopkeeper</Description>
     <Comment>FIXME: Probably needs objects</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
-          <Data object-id="0101">0000</Data>
+          <Data>0000</Data>
           <Description>Kokiri Shopkeeper</Description>
-          <Comment>FIXME: Object 0102 as well</Comment>
+          <Meta>
+            <Object>0101</Object>
+            <Object>0102</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0159">0001</Data>
+          <Data>0001</Data>
           <Description>Kakariko Potion Shopkeeper</Description>
-          <Comment>FIXME: Object 00B2 as well</Comment>
+          <Meta>
+            <Object>00B2</Object>
+            <Object>0159</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="????">0002</Data>
+          <Data>0002</Data>
           <Description>Bombchu Shopkeeper</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0159">0003</Data>
+          <Data>0003</Data>
           <Description>Market Potion Shopkeeper</Description>
-          <Comment>FIXME: Object 00B2 as well</Comment>
+          <Meta>
+            <Object>00B2</Object>
+            <Object>0159</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="????">0004</Data>
+          <Data>0004</Data>
           <Description>Bazaar Shopkeeper</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="????">0007</Data>
+          <Data>0007</Data>
           <Description>Zora Shopkeeper</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="????">0008</Data>
+          <Data>0008</Data>
           <Description>Goron Shopkeeper</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="????">000A</Data>
+          <Data>000A</Data>
           <Description>Happy Mask Shopkeeper</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
       </Variable>
     </Variables>
@@ -2264,7 +2313,7 @@
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -2280,7 +2329,7 @@
     <Variables>
       <Variable mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -2290,21 +2339,21 @@
     </Objects>
     <Description>Megaton Statue</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>Lower Part (Flame decal)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">01</Data>
+        <Value repeat="+">
+          <Data>01</Data>
           <Description>Top Part (Face decal)</Description>
         </Value>
       </Variable>
       <Variable mask="FF00" default="FF" nullable="true">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -2328,15 +2377,15 @@
     </Objects>
     <Description>Stone blocks (Fire Temple)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Large face cube (pushable)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Squat cube, shakes and flies into the air when you land on it</Description>
         </Value>
       </Variable>
@@ -2355,15 +2404,15 @@
     </Objects>
     <Description>Stationary flame thrower statue (Fire Temple)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>2-way diagonal</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>4-way plus</Description>
         </Value>
       </Variable>
@@ -2375,15 +2424,15 @@
     </Objects>
     <Description>Stone platform (Fire Temple)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Sinking</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Sliding</Description>
         </Value>
       </Variable>
@@ -2410,43 +2459,43 @@
     <Description>Flame circle</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="003F" default ="003F" nullable="true" >
+      <Variable maskType="&amp;" mask="003F" default="003F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>Type</Description>
         <UI />
-        <Value>
-          <Data repeat="+">00</Data>
+        <Value repeat="+">
+          <Data>00</Data>
           <Description>Large, doesn't switch off.</Description>
         </Value>
-        <Value>
-          <Data repeat="+">10</Data>
+        <Value repeat="+">
+          <Data>10</Data>
           <Description>Small, switches off for long time with ticking sound.</Description>
         </Value>
-        <Value>
-          <Data repeat="+">20</Data>
+        <Value repeat="+">
+          <Data>20</Data>
           <Description>Small, switches off for long time.</Description>
         </Value>
-        <Value>
-          <Data repeat="+">30</Data>
+        <Value repeat="+">
+          <Data>30</Data>
           <Description>Large, switches off for a short time with ticking sound.</Description>
         </Value>
-        <Value>
-          <Data repeat="+">40</Data>
+        <Value repeat="+">
+          <Data>40</Data>
           <Description>Disabled, small, switches on for short time.</Description>
         </Value>
-        <Value>
-          <Data repeat="+">50</Data>
+        <Value repeat="+">
+          <Data>50</Data>
           <Description>Disabled, large, switches on permanently.</Description>
         </Value>
-        <Value>
-          <Data repeat="+">60</Data>
+        <Value repeat="+">
+          <Data>60</Data>
           <Description>Large, switches off permanently.</Description>
         </Value>
-        <Value>
-          <Data repeat="+">70</Data>
+        <Value repeat="+">
+          <Data>70</Data>
           <Description>Nothing.</Description>
         </Value>
       </Variable>
@@ -2458,7 +2507,7 @@
     </Objects>
     <Description>Drawbridge Objects</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2478,7 +2527,7 @@
     </Objects>
     <Description>Moblins</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -2486,15 +2535,15 @@
           <Description>Club Moblin</Description>
           <Comment>Pounds the ground</Comment>
         </Value>
-        <Value>
-          <Data repeat="+">FF</Data>
+        <Value repeat="+">
+          <Data>FF</Data>
           <Description>Spear Moblin</Description>
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="FF00" default="00">
         <Description>Path Id</Description>
         <Comment>Spear Moblins only</Comment>
-        <UI name="path"/>
+        <UI name="path" />
       </Variable>
     </Variables>
   </Actor>
@@ -2504,15 +2553,15 @@
     </Objects>
     <Description>Bombflower Bomb</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Bomb</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Invisible Bomb</Description>
         </Value>
       </Variable>
@@ -2546,11 +2595,11 @@
     <Description>Deku Tree Puzzle elements</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>Input</Description>
         <UI />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -2565,8 +2614,8 @@
           <Data>02</Data>
           <Description>Three rising platforms</Description>
         </Value>
-        <Value>
-          <Data repeat="+">03</Data>
+        <Value repeat="+">
+          <Data>03</Data>
           <Description>Invisible object</Description>
         </Value>
       </Variable>
@@ -2592,15 +2641,15 @@
     </Objects>
     <Description>Armos statue</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" default="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Pushable</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Monster</Description>
           <Comment>FIXME: cannot be killed with sword?</Comment>
         </Value>
@@ -2617,7 +2666,7 @@
     </Objects>
     <Description>Deku Baba (Snapping)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -2628,8 +2677,8 @@
           <Data>0001</Data>
           <Description>Big</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Small</Description>
         </Value>
       </Variable>
@@ -2663,7 +2712,7 @@
     <Description>Bombable Wall</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>??</Description>
         <UI />
         <Value>
@@ -2675,7 +2724,7 @@
           <Description>Dodongo's Cavern cutscene</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true" >
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -2687,15 +2736,15 @@
     </Objects>
     <Description>Lord Jabu-Jabu</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
-        <Value>
-          <Data repeat="+">0000</Data>
+        <Value repeat="+">
+          <Data>0000</Data>
           <Description>Collision Data</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -2714,7 +2763,7 @@
     </Objects>
     <Description>Stone stairs</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true" >
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -2726,7 +2775,7 @@
     </Objects>
     <Description>Warp portals</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -2773,8 +2822,8 @@
           <Data>000A</Data>
           <Description>Red warp, disappears</Description>
         </Value>
-        <Value>
-          <Data repeat="+">000B</Data>
+        <Value repeat="+">
+          <Data>000B</Data>
           <Description>Area fails to load</Description>
         </Value>
       </Variable>
@@ -2787,7 +2836,7 @@
     <Description>Torch</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FC00" >
+      <Variable maskType="&amp;" mask="FC00">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -2807,7 +2856,7 @@
           <Description>Lit Wooden Torch</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="03C0" >
+      <Variable maskType="&amp;" mask="03C0">
         <Description>Torches to light to solve puzzle (Timed Torch)</Description>
         <UI name="num">
           <Param id="display">int</Param>
@@ -2852,9 +2901,9 @@
     <Description>Large rotating stone ring</Description>
     <Comment>Gerudo Training Grounds and Forest Temple</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="003F" nullable ="true" default="003F">
+      <Variable maskType="&amp;" mask="003F" nullable="true" default="003F">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -2864,7 +2913,7 @@
     </Objects>
     <Description>Eye platform eye switches</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="003F" default="003F" nullable="true" >
+      <Variable maskType="&amp;" mask="003F" default="003F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -2883,7 +2932,7 @@
     </Objects>
     <Description>Water Temple Platforms / Dragon Head Statues</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -2920,15 +2969,15 @@
     <Description>Large square of water (Water Temple)</Description>
     <Comment>used for the main pool of water</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Switches to lowest (Triforce seems to activate itself for some reason in the ToT)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Stays at ground level (Triforce isn't affected in ToT)</Description>
         </Value>
         <Value>
@@ -2981,20 +3030,12 @@
         <Description>FIXME: Bits always set to xxFx</Description>
         <UI />
       </Variable>
-      <Variable maskType="&amp;" mask="000F" >
+      <Variable maskType="&amp;" mask="000F">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
-          <Data>0F</Data>
-          <Description>Blue Bubble</Description>
-        </Value>
-        <Value>
-          <Data>0E</Data>
-          <Description>Fire Bubble, proximity activated, bounces on solid surfaces, hides in lava</Description>
-        </Value>
-        <Value>
-          <Data>0D</Data>
-          <Description>White Bubble</Description>
+          <Data>0B</Data>
+          <Description>Large Green Bubble</Description>
           <Comment>requires movement path</Comment>
         </Value>
         <Value>
@@ -3003,12 +3044,20 @@
           <Comment>requires movement path</Comment>
         </Value>
         <Value>
-          <Data>0B</Data>
-          <Description>Large Green Bubble</Description>
+          <Data>0D</Data>
+          <Description>White Bubble</Description>
           <Comment>requires movement path</Comment>
         </Value>
+        <Value>
+          <Data>0E</Data>
+          <Description>Fire Bubble, proximity activated, bounces on solid surfaces, hides in lava</Description>
+        </Value>
+        <Value>
+          <Data>0F</Data>
+          <Description>Blue Bubble</Description>
+        </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" nullable="true" default="FF" >
+      <Variable maskType="&amp;" mask="FF00" nullable="true" default="FF">
         <Description>Path Id</Description>
         <Comment>FIXME: is pathway set within the scene file?</Comment>
         <UI name="path" />
@@ -3021,7 +3070,7 @@
     </Objects>
     <Description>Temple of Time windows</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3032,8 +3081,8 @@
           <Data>0001</Data>
           <Description>Invisible</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -3061,36 +3110,57 @@
     </Objects>
     <Description>Warp Pad</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
-          <Data object-id="0068">0000</Data>
+          <Data>0000</Data>
           <Description>Ocarina (Alpha!)</Description>
+          <Meta>
+            <Object>0068</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0062">0001</Data>
+          <Data>0001</Data>
           <Description>Light Medallion</Description>
+          <Meta>
+            <Object>0062</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0063">0002</Data>
+          <Data>0002</Data>
           <Description>Shadow Medallion</Description>
+          <Meta>
+            <Object>0063</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0064">0003</Data>
+          <Data>0003</Data>
           <Description>Fire Medallion</Description>
+          <Meta>
+            <Object>0064</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0065">0004</Data>
+          <Data>0004</Data>
           <Description>Water Medallion</Description>
+          <Meta>
+            <Object>0065</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0066">0005</Data>
+          <Data>0005</Data>
           <Description>Spirit Medallion</Description>
+          <Meta>
+            <Object>0066</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0067">0006</Data>
+          <Data>0006</Data>
           <Description>Forest Medallion</Description>
+          <Meta>
+            <Object>0067</Object>
+          </Meta>
         </Value>
       </Variable>
     </Variables>
@@ -3105,7 +3175,7 @@
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3128,8 +3198,8 @@
           <Data>04</Data>
           <Description>Crashes before it can even light the area...</Description>
         </Value>
-        <Value>
-          <Data repeat="+">05</Data>
+        <Value repeat="+">
+          <Data>05</Data>
           <Description>Crashes, no sign of a gate</Description>
         </Value>
       </Variable>
@@ -3149,19 +3219,19 @@
     </Objects>
     <Description>Stone Steps and Platforms (Fire Temple)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="3F00"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="3F00" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI />
         <Value>
           <Data>00</Data>
           <Description>Hammer-triggered Stone Steps</Description>
         </Value>
-        <Value>
-          <Data repeat="+">01</Data>
+        <Value repeat="+">
+          <Data>01</Data>
           <Description>Platform, one sided</Description>
         </Value>
       </Variable>
@@ -3182,9 +3252,9 @@
     <Description>Greenery</Description>
     <Comment>FIXME: Z-Rotation</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>Large tree</Description>
@@ -3277,17 +3347,17 @@
           <Data>16</Data>
           <Description>Large dark bush</Description>
         </Value>
-        <Value>
-          <Data repeat="+">19</Data>
+        <Value repeat="+">
+          <Data>19</Data>
           <Description>Dancing dark bush</Description>
           <Comment>Disappears after several repetitions</Comment>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true" >
+      <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true">
         <Description>Controls item(s) dropped (trees only)</Description>
         <UI name="select" />
-        <Value>
-          <Data repeat="+">00</Data>
+        <Value repeat="+">
+          <Data>00</Data>
           <Description>Random</Description>
         </Value>
         <Value>
@@ -3318,8 +3388,8 @@
           <Data>0E</Data>
           <Description>Random</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0F</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0F</Data>
           <Description>Nothing</Description>
         </Value>
         <Value>
@@ -3335,7 +3405,7 @@
     </Objects>
     <Description>Large noisy stone (Alpha!)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -3354,8 +3424,8 @@
           <Data>0003</Data>
           <Description>Ridiculously huge?</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0004</Data>
+        <Value repeat="+">
+          <Data>0004</Data>
           <Description>Small size, flashes blue when struck</Description>
         </Value>
       </Variable>
@@ -3367,15 +3437,15 @@
     </Objects>
     <Description>Stone cube (Alpha)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Stone cube, side struck with sword flashes blue</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Slightly larger</Description>
         </Value>
       </Variable>
@@ -3387,10 +3457,10 @@
     </Objects>
     <Description>Sliding metal spike trap</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Movement Pattern</Description>
         <Comment>FIXME</Comment>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>Normal</Description>
@@ -3413,8 +3483,8 @@
           <Data>50</Data>
           <Description>Vertical</Description>
         </Value>
-        <Value>
-          <Data repeat="+">60</Data>
+        <Value repeat="+">
+          <Data>60</Data>
           <Description>doesn't move, but still makes noise</Description>
         </Value>
         <Value>
@@ -3426,9 +3496,9 @@
           <Description>Doesn't move or make noise</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="F000" >
+      <Variable maskType="&amp;" mask="F000">
         <Description>Movement Speed</Description>
-        <UI name="num" >
+        <UI name="num">
           <Param id="display">inherited</Param>
         </UI>
         <Value>
@@ -3448,7 +3518,7 @@
           <Description>too fast for collision to function correctly</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="0F00" >
+      <Variable maskType="&amp;" mask="0F00">
         <Description>Distance the trap slides, or the radius when circling a point</Description>
         <UI name="num">
           <Param id="display">inherited</Param>
@@ -3531,7 +3601,7 @@
     <Description>Beamos</Description>
     <Comment>FIXME: does not attack/missing variables</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="0F00" >
+      <Variable maskType="&amp;" mask="0F00">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -3564,7 +3634,7 @@
           <Description>?</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="0001" >
+      <Variable maskType="&amp;" mask="0001">
         <Description>Unknown</Description>
         <UI />
       </Variable>
@@ -3576,12 +3646,12 @@
     </Objects>
     <Description>Spiritual stones</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="F000" >
+      <Variable maskType="&amp;" mask="F000">
         <Description>Unknown</Description>
         <Comment>FIXME: Figure this out</Comment>
         <UI />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3671,8 +3741,8 @@
           <Data>17</Data>
           <Description>Corrupted, actors and interface gone</Description>
         </Value>
-        <Value>
-          <Data repeat="+">18</Data>
+        <Value repeat="+">
+          <Data>18</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -3685,93 +3755,147 @@
     </Objects>
     <Description>Temple of Time Objects</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
-          <Data object-id="0092">0000</Data>
+          <Data>0000</Data>
           <Description>Unknown</Description>
           <Comment>FIXME: Spawned in Cutscene Map 71 (0,4,6,8,11)</Comment>
+          <Meta>
+            <Object>0092</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0092">0001</Data>
+          <Data>0001</Data>
           <Description>Unknown</Description>
           <Comment>FIXME: Spawned in Temple of Time</Comment>
+          <Meta>
+            <Object>0092</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0092">0002</Data>
+          <Data>0002</Data>
           <Description>Unknown</Description>
           <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Meta>
+            <Object>0092</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0092">0003</Data>
+          <Data>0003</Data>
           <Description>Unknown</Description>
           <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Meta>
+            <Object>0092</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0092">0004</Data>
+          <Data>0004</Data>
           <Description>Unknown</Description>
           <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Meta>
+            <Object>0092</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0092">0005</Data>
+          <Data>0005</Data>
           <Description>Unknown</Description>
           <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Meta>
+            <Object>0092</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0092">0006</Data>
+          <Data>0006</Data>
           <Description>Unknown</Description>
           <Comment>Creation Cutscene in Gerudo Valley</Comment>
+          <Meta>
+            <Object>0092</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0001">0007</Data>
+          <Data>0007</Data>
           <Description>Fluffy Clouds</Description>
           <Comment>Used when talking to zelda at the end of the game</Comment>
+          <Meta>
+            <Object>0001</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00B6">0008</Data>
+          <Data>0008</Data>
           <Description>Unknown</Description>
           <Comment>object_gi_melody, musical note item</Comment>
+          <Meta>
+            <Object>00B6</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00B6">0009</Data>
+          <Data>0009</Data>
           <Description>Unknown</Description>
           <Comment>object_gi_melody, musical note item</Comment>
+          <Meta>
+            <Object>00B6</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00B6">000A</Data>
+          <Data>000A</Data>
           <Description>Unknown</Description>
           <Comment>object_gi_melody, musical note item</Comment>
+          <Meta>
+            <Object>00B6</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00B6">000B</Data>
+          <Data>000B</Data>
           <Description>Unknown</Description>
           <Comment>object_gi_melody, musical note item</Comment>
+          <Meta>
+            <Object>00B6</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00B6">000C</Data>
+          <Data>000C</Data>
           <Description>Unknown</Description>
           <Comment>object_gi_melody, musical note item</Comment>
+          <Meta>
+            <Object>00B6</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="005E">000D</Data>
+          <Data>000D</Data>
           <Description>Door of Time</Description>
+          <Meta>
+            <Object>005E</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="005E">000E</Data>
+          <Data>000E</Data>
           <Description>Plane of yellow light</Description>
+          <Meta>
+            <Object>005E</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0001">000F</Data>
+          <Data>000F</Data>
           <Description>Warp Song leaving effect</Description>
+          <Meta>
+            <Object>0001</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0001">0010</Data>
+          <Data>0010</Data>
           <Description>Warp song arriving effect</Description>
+          <Meta>
+            <Object>0001</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0001">0011</Data>
+          <Data>0011</Data>
           <Description>Sparkly effect</Description>
+          <Meta>
+            <Object>0001</Object>
+          </Meta>
         </Value>
       </Variable>
     </Variables>
@@ -3799,7 +3923,7 @@
       <Variable maskType="&amp;" mask="FF00">
         <Description>Type</Description>
         <Comment>FIXME: Figure out finer details to this variable</Comment>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>? patrolling guard?</Description>
@@ -3825,7 +3949,7 @@
       <Variable maskType="&amp;" mask="00FF" default="FF" nullable="true">
         <Description>Path Id</Description>
         <Comment>FIXME: A special case check is done when path == 03, possibly others. Find out why</Comment>
-        <UI name="path"/>
+        <UI name="path" />
       </Variable>
     </Variables>
   </Actor>
@@ -3835,7 +3959,7 @@
     </Objects>
     <Description>Redead</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3855,12 +3979,12 @@
           <Description>Invisible</Description>
           <Comment>can’t tell position</Comment>
         </Value>
-        <Value>
-          <Data repeat="+">0004</Data>
+        <Value repeat="+">
+          <Data>0004</Data>
           <Description>Standing</Description>
         </Value>
-        <Value>
-          <Data repeat="+">FF80</Data>
+        <Value repeat="+">
+          <Data>FF80</Data>
           <Description>Gibdo lying down, floats up into standing position (supposed to be in a coffin)</Description>
         </Value>
         <Value>
@@ -3895,11 +4019,11 @@
     <Description>Poe Sisters Puzzle Actor</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>Puzzle Type</Description>
         <UI />
         <Value>
@@ -3932,7 +4056,7 @@
     <Description>Fish, Bugs, Butterflies</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -3952,7 +4076,7 @@
     </Objects>
     <Description>Skullwalltula and Gold Skulltulas</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="E000" >
+      <Variable maskType="&amp;" mask="E000">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -3968,7 +4092,7 @@
           <Description>Gold Skulltula, Spawns at night</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="1F00" >
+      <Variable maskType="&amp;" mask="1F00">
         <Description>Gold Skulltula region, for saving gold skulltulas</Description>
         <UI />
         <Value>
@@ -4066,7 +4190,7 @@
           <Description>Desert Colossus, Haunted Wasteland</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Skulltula Flag</Description>
         <UI />
         <Value>
@@ -4102,75 +4226,75 @@
           <Description>Skulltulla 8</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>FIXME</Description>
         <UI />
-        <Value>
-          <Data repeat="+">0000</Data>
+        <Value repeat="+">
+          <Data>0000</Data>
           <Description>Skullwalltula</Description>
         </Value>
-        <Value>
-          <Data repeat="+">2000</Data>
+        <Value repeat="+">
+          <Data>2000</Data>
           <Description>Golden Skulltula on ground, damaged, discovery sound, Navi can target it and thinks it’s a Skullwalltula</Description>
         </Value>
-        <Value>
-          <Data repeat="+">2100</Data>
+        <Value repeat="+">
+          <Data>2100</Data>
           <Description>Golden Skulltula</Description>
         </Value>
-        <Value>
-          <Data repeat="+">4000</Data>
+        <Value repeat="+">
+          <Data>4000</Data>
           <Description>Same as 2000</Description>
         </Value>
-        <Value>
-          <Data repeat="+">4100</Data>
+        <Value repeat="+">
+          <Data>4100</Data>
           <Description>Same as 2100</Description>
         </Value>
-        <Value>
-          <Data repeat="+">6000</Data>
+        <Value repeat="+">
+          <Data>6000</Data>
           <Description>Same as 2000</Description>
         </Value>
-        <Value>
-          <Data repeat="+">6100</Data>
+        <Value repeat="+">
+          <Data>6100</Data>
           <Description>Golden Skulltula jumps out and lands on ground, discovery sound</Description>
         </Value>
-        <Value>
-          <Data repeat="+">8000</Data>
+        <Value repeat="+">
+          <Data>8000</Data>
           <Description>Same as 2000</Description>
         </Value>
-        <Value>
-          <Data repeat="+">8100</Data>
+        <Value repeat="+">
+          <Data>8100</Data>
           <Description>Same as 2100</Description>
         </Value>
-        <Value>
-          <Data repeat="+">A000</Data>
+        <Value repeat="+">
+          <Data>A000</Data>
           <Description>Same as 2000</Description>
         </Value>
-        <Value>
-          <Data repeat="+">A100</Data>
+        <Value repeat="+">
+          <Data>A100</Data>
           <Description>Same as 2100</Description>
         </Value>
-        <Value>
-          <Data repeat="+">C000</Data>
+        <Value repeat="+">
+          <Data>C000</Data>
           <Description>Same as 2000</Description>
         </Value>
-        <Value>
-          <Data repeat="+">C100</Data>
+        <Value repeat="+">
+          <Data>C100</Data>
           <Description>Same as 2100</Description>
         </Value>
-        <Value>
-          <Data repeat="+">D000</Data>
+        <Value repeat="+">
+          <Data>D000</Data>
           <Description>Same as 6100</Description>
         </Value>
-        <Value>
-          <Data repeat="+">E000</Data>
+        <Value repeat="+">
+          <Data>E000</Data>
           <Description>Same as 2000</Description>
         </Value>
-        <Value>
-          <Data repeat="+">E100</Data>
+        <Value repeat="+">
+          <Data>E100</Data>
           <Description>Same as 2100</Description>
         </Value>
-        <Value>
-          <Data repeat="+">F000</Data>
+        <Value repeat="+">
+          <Data>F000</Data>
           <Description>Same as 6100</Description>
         </Value>
       </Variable>
@@ -4191,29 +4315,44 @@
     <Description>Environmental Effects</Description>
     <Comment>All/Some? variables require their own object</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
-          <Data object-id="????">0000</Data>
+          <Data>0000</Data>
           <Description>Kokiri Forest flying Fairies/dustmotes</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="????">0002</Data>
+          <Data>0002</Data>
           <Description>?</Description>
           <Comment>FIXME: Used in Kakariko Graveyard, cutscene 1</Comment>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="????">0003</Data>
+          <Data>0003</Data>
           <Description>Snow</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="????">0004</Data>
+          <Data>0004</Data>
           <Description>Kakariko Graveyard proximity rain effect?</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0179">0005</Data>
+          <Data>0005</Data>
           <Description>Colored energy beams from lower part of Ganon's Tower.</Description>
+          <Meta>
+            <Object>0179</Object>
+          </Meta>
         </Value>
       </Variable>
     </Variables>
@@ -4246,7 +4385,7 @@
     <Description>Grotto</Description>
     <Comment>FIXME: Special Case</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="F000" >
+      <Variable maskType="&amp;" mask="F000">
         <Description>Destination Scene</Description>
         <UI />
         <Value>
@@ -4258,7 +4397,7 @@
           <Description>Fairy Fountain Grotto (Scene 60)</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="0300" >
+      <Variable maskType="&amp;" mask="0300">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4274,7 +4413,7 @@
           <Description>Appear when Bombed or hit with Megaton Hammer</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="00E0" >
+      <Variable maskType="&amp;" mask="00E0">
         <Description>Chest Contents</Description>
         <Comment>
           Used by Chest 0181 when loading the destination.
@@ -4315,12 +4454,12 @@
           <Comment>Used for no item when chest does not exist</Comment>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="001F" >
+      <Variable maskType="&amp;" mask="001F">
         <Description>Chest Flag</Description>
         <Comment>Used by Chest 0181</Comment>
         <UI />
       </Variable>
-      <Variable altvar="ZRot" maskType="&amp;" mask="000F" >
+      <Variable altvar="ZRot" maskType="&amp;" mask="000F">
         <Description>Destination</Description>
         <UI />
         <Value>
@@ -4341,7 +4480,7 @@
     </Objects>
     <Description>Graveyard Actors</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4364,8 +4503,8 @@
           <Data>0004</Data>
           <Description>Light Aura (appears when Royal Tomb Grave explodes)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0005</Data>
+        <Value repeat="+">
+          <Data>0005</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -4377,19 +4516,19 @@
     </Objects>
     <Description>Gravestone</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
+      <Variable maskType="&amp;" mask="FFFF" default="0000">
+        <Description>Type</Description>
         <UI />
         <Value>
           <Data>0000</Data>
-          <Description>Typical</Description>
+          <Description>Default</Description>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Typical, when pulled back makes discovery sound</Description>
+          <Description>Plays discovery sfx when pulled back</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0002</Data>
           <Description>Typical</Description>
         </Value>
       </Variable>
@@ -4401,7 +4540,7 @@
     </Objects>
     <Description>Farore's Wind</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4412,8 +4551,8 @@
           <Data>0001</Data>
           <Description>Dissipating (no sphere)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -4432,7 +4571,7 @@
     </Objects>
     <Description>Child Princess Ruto</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4451,8 +4590,8 @@
           <Data>0003</Data>
           <Description>Ruto, after falling down the hole in Jabu-Jabu</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0004</Data>
+        <Value repeat="+">
+          <Data>0004</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -4471,15 +4610,15 @@
     </Objects>
     <Description>Fireball</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
-        <Value>
-          <Data repeat="+">0000</Data>
+        <Value repeat="+">
+          <Data>0000</Data>
           <Description>Flies, lands, dies in a bit (try not to run into it, Link’ll catch on fire)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">8000</Data>
+        <Value repeat="+">
+          <Data>8000</Data>
           <Description>Flies, lands, creeps towards Link (it’s blue, but it’s still fire), dies in a bit</Description>
         </Value>
       </Variable>
@@ -4515,25 +4654,34 @@
     <Description>Enemy spawner</Description>
     <Comment>The object file for the enemy being spawned must also be loaded</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>Type of Enemy</Description>
         <UI />
         <Value>
-          <Data object-id="0017">00</Data>
+          <Data>00</Data>
           <Description>Leever</Description>
           <Comment>Must on sand for them to appear? Not sure about object number</Comment>
+          <Meta>
+            <Object>0017</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0016">0A</Data>
+          <Data>0A</Data>
           <Description>Red Tektite</Description>
+          <Meta>
+            <Object>0016</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0184">10</Data>
+          <Data>10</Data>
           <Description>Stalchildren</Description>
           <Comment>Must stand on dirt to appear?</Comment>
+          <Meta>
+            <Object>0184</Object>
+          </Meta>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Number of enemies to spawn</Description>
         <UI />
         <Value>
@@ -4579,15 +4727,15 @@
     <Description>Core Flare Dancer creature</Description>
     <Comment>Has trouble running? Tends to stay in one place or run in one direction; if it jumps up, it'll disappear</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>No damage</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>One-Hit Kill</Description>
         </Value>
       </Variable>
@@ -4619,7 +4767,7 @@
       FIXME: Likely either missing objects or display lists stored in scene/room files
     </Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4662,8 +4810,8 @@
           <Data>000C</Data>
           <Description>Room 11's invisible spikes, invisible hookshot point.</Description>
         </Value>
-        <Value>
-          <Data repeat="+">000D</Data>
+        <Value repeat="+">
+          <Data>000D</Data>
           <Description>No Good</Description>
         </Value>
       </Variable>
@@ -4675,7 +4823,7 @@
     </Objects>
     <Description>Platforms (Shadow Temple)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4694,8 +4842,8 @@
           <Data>0003</Data>
           <Description>Metal grate</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0004</Data>
+        <Value repeat="+">
+          <Data>0004</Data>
           <Description>Same as 0001, but graphics are glitched</Description>
         </Value>
       </Variable>
@@ -4725,20 +4873,29 @@
     </Objects>
     <Description>Spinning Scythe Trap</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
-          <Data object-id="0069">0000</Data>
+          <Data>0000</Data>
           <Description>Shadow Temple Scythes (Visible)</Description>
+          <Meta>
+            <Object>0069</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0069">0001</Data>
+          <Data>0001</Data>
           <Description>Shadow Temple Scythes (Invisible)</Description>
+          <Meta>
+            <Object>0069</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="006B">0100</Data>
+          <Data>0100</Data>
           <Description>Ice Cavern Spinning Blade</Description>
+          <Meta>
+            <Object>006B</Object>
+          </Meta>
         </Value>
       </Variable>
     </Variables>
@@ -4749,7 +4906,7 @@
     </Objects>
     <Description>Hyrulian guards</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4797,7 +4954,7 @@
     </Objects>
     <Description>Flying rubble</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -4816,8 +4973,8 @@
           <Data>0003</Data>
           <Description>Large</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0004</Data>
+        <Value repeat="+">
+          <Data>0004</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -4829,7 +4986,7 @@
     </Objects>
     <Description>Flobbery muscle block (Jabu-Jabu's Belly)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>height of the muscle block</Description>
         <UI />
         <Value>
@@ -4841,7 +4998,7 @@
           <Description>Default height</Description>
         </Value>
       </Variable>
-      <Variable maskType="|" mask="1000" >
+      <Variable maskType="|" mask="1000">
         <Description>Smaller size, height not affected by last two digits</Description>
         <Comment>+1000 repeat //FIXME</Comment>
         <UI name="bitflag" />
@@ -4854,10 +5011,10 @@
     </Objects>
     <Description>Sun Block Switch</Description>
     <Variables>
-      <Variable  mask="FFFF">
+      <Variable mask="FFFF">
         <Description>Type</Description>
         <Comment>FIXME</Comment>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>?</Description>
@@ -4890,7 +5047,7 @@
     </Objects>
     <Description>Statue (Darunia's Room)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -4902,16 +5059,16 @@
           <Description>Spear only, climbable</Description>
           <Comment>FIXME: is this true? "Adult Link won’t see anything"</Comment>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0002</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0002</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
-    <Variable mask="FF00" default="FF" nullable="true">
-      <Description>Switch Flag?</Description>
-      <Comment>FIXME</Comment>
-      <UI name="switchflag"/>
-    </Variable>
+      <Variable mask="FF00" default="FF" nullable="true">
+        <Description>Switch Flag?</Description>
+        <Comment>FIXME</Comment>
+        <UI name="switchflag" />
+      </Variable>
     </Variables>
   </Actor>
   <Actor id="00BA">
@@ -4920,27 +5077,27 @@
     </Objects>
     <Description>Barinade</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
-        <Value>
-          <Data repeat="+">0000</Data>
+        <Value repeat="+">
+          <Data>0000</Data>
           <Description>Nothing</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>Crashes</Description>
         </Value>
         <Value>
           <Data>000A</Data>
           <Description>might spawn jellyfish</Description>
         </Value>
-        <Value>
-          <Data repeat="+">000B</Data>
+        <Value repeat="+">
+          <Data>000B</Data>
           <Description>Crashes</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0063</Data>
+        <Value repeat="+">
+          <Data>0063</Data>
           <Description>Electric jellyfish from Barinade, no collision data</Description>
         </Value>
         <Value>
@@ -4967,7 +5124,7 @@
     </Objects>
     <Description>Shadow Temple objects</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -4996,8 +5153,8 @@
           <Data>0005</Data>
           <Description>Faster guillotine blade</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0006</Data>
+        <Value repeat="+">
+          <Data>0006</Data>
           <Description>Graphical glitches, same as 2 or 3 (unsure)</Description>
         </Value>
       </Variable>
@@ -5013,7 +5170,7 @@
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>??? (always 01?)</Description>
         <UI />
       </Variable>
@@ -5029,7 +5186,7 @@
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -5050,8 +5207,8 @@
           <Data>03</Data>
           <Description>Nothing</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0004</Data>
+        <Value repeat="+">
+          <Data>0004</Data>
           <Description>Crashes after area is loaded</Description>
         </Value>
       </Variable>
@@ -5084,7 +5241,7 @@
     </Objects>
     <Description>Shop shelves</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5099,8 +5256,8 @@
           <Data>0002</Data>
           <Description>Granite (Goron)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -5119,7 +5276,7 @@
     </Objects>
     <Description>Morpha</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5143,15 +5300,15 @@
     <Description>Big Octo</Description>
     <Comment>Slicing it in the back will make it jump to the y location of its room, which is typically below most floors</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Sits there, mini-boss music starts, slice it to make it move (no teleport), green target</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Already running around, yellow target this time, no music</Description>
         </Value>
       </Variable>
@@ -5170,9 +5327,9 @@
     </Objects>
     <Description>Lord Jabu-Jabu objects</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>Giant Octo's platform</Description>
@@ -5189,12 +5346,12 @@
           <Data>03</Data>
           <Description>Lowering platform, triggered when jumped on and sets Switch Flag</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">04</Data>
+        <Value uihide="true" repeat="+">
+          <Data>04</Data>
           <Description>Graphical glitch, unknown</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="FF00"  default="FF" nullable="true">
+      <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true">
         <Description>Nullable Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -5206,7 +5363,7 @@
     </Objects>
     <Description>Sage Saria (Cutscene)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5217,8 +5374,8 @@
           <Data>0001</Data>
           <Description>doesn't talk</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Nothing</Description>
         </Value>
         <Value>
@@ -5260,8 +5417,8 @@
           <Data>0001</Data>
           <Description>?</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0002</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0002</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -5279,14 +5436,14 @@
       - FFFF = Giant Rock
     </Comment-Other>
     <Variables>
-      <Variable maskType="&amp;" mask="FF00"  default="FF" nullable="true">
+      <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true">
         <Description>Nullable Switch Flag</Description>
         <Comment>Invisible if value is FF?</Comment>
         <UI name="switchflag" />
       </Variable>
-      <Variable  mask="00FF" default="FF" >
+      <Variable mask="00FF" default="FF">
         <Description>? (Always FF)</Description>
-        <UI  name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -5296,11 +5453,11 @@
     </Objects>
     <Description>Bombable walls (Fire Temple)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="3F00"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="3F00" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -5324,11 +5481,11 @@
     </Objects>
     <Description>2D Bombable Wall</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>Unknown</Description>
         <UI />
         <Value>
@@ -5377,11 +5534,11 @@
     </Objects>
     <Description>Lake Hylia Objects</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF"  default="FF" nullable="true">
+      <Variable maskType="&amp;" mask="00FF" default="FF" nullable="true">
         <Description>Nullable Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -5400,8 +5557,8 @@
           <Data>03</Data>
           <Description>Nothing</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">04</Data>
+        <Value uihide="true" repeat="+">
+          <Data>04</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -5420,7 +5577,7 @@
     </Objects>
     <Description>Bottom of the Well water level changer</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <Comment>If set, water level is lowered</Comment>
         <UI name="switchflag" />
@@ -5447,7 +5604,7 @@
     </Objects>
     <Description>Horseback Minigames</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <Comment>FIXME</Comment>
         <UI name="select" />
@@ -5471,16 +5628,16 @@
           <Data>0004</Data>
           <Description>Timer appears, gunshot noise</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0005</Data>
+        <Value repeat="+">
+          <Data>0005</Data>
           <Description>Nothing</Description>
         </Value>
-        <Value>
-          <Data repeat="+">000B</Data>
+        <Value repeat="+">
+          <Data>000B</Data>
           <Description>Nothing, crashes when you activate Map Select</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0010</Data>
+        <Value repeat="+">
+          <Data>0010</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -5506,7 +5663,7 @@
     </Objects>
     <Description>Tentacle from inside Lord Jabu-Jabu</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -5521,8 +5678,8 @@
           <Data>0002</Data>
           <Description>Grayish blue with some red</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>Already dead</Description>
         </Value>
       </Variable>
@@ -5534,7 +5691,7 @@
     </Objects>
     <Description>Jabu-Jabu Electrified Tentacle</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -5557,8 +5714,8 @@
           <Data>0004</Data>
           <Description>Dark brownish</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0005</Data>
+        <Value repeat="+">
+          <Data>0005</Data>
           <Description>Blackish gray</Description>
         </Value>
       </Variable>
@@ -5585,7 +5742,7 @@
     </Objects>
     <Description>Forest Temple ladder</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" default="0000" >
+      <Variable maskType="&amp;" mask="FFFF" default="0000">
         <Description>Default</Description>
         <UI name="none" />
         <Value>
@@ -5602,7 +5759,7 @@
     </Objects>
     <Description>Forest Temple objects</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -5617,7 +5774,7 @@
       <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true">
         <Description>Nullable Switch Flag</Description>
         <Comment>Metal gate only</Comment>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -5627,9 +5784,9 @@
     </Objects>
     <Description>Forest Temple Well Water</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="003F" nullable="true" default ="3F">
+      <Variable maskType="&amp;" mask="003F" nullable="true" default="3F">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -5639,7 +5796,7 @@
     </Objects>
     <Description>Death Mountain cloud ring</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" default="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -5669,9 +5826,9 @@
     </Objects>
     <Description>Switches (Inside Lord Jabu-Jabu)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Blue Switch, resets if not held down</Description>
@@ -5696,14 +5853,14 @@
           <Description>Really tall yellow button</Description>
           <Comment>Only pressed when hit with slingshot or explosives</Comment>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">0005</Data>
+        <Value uihide="true" repeat="+">
+          <Data>0005</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="3F00" default="3F" nullable="true">
         <Description>Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -5722,7 +5879,7 @@
     </Objects>
     <Description>Ganondorf Boss</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -5742,9 +5899,9 @@
     </Objects>
     <Description>Bongo Bongo's hand</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
-        <UI />
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Left hand</Description>
@@ -5833,8 +5990,8 @@
           <Data>0015</Data>
           <Description>Invisible, only large shadow is present (Lens of Truth reveal nothing)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0016</Data>
+        <Value repeat="+">
+          <Data>0016</Data>
           <Description>Same as 12</Description>
         </Value>
       </Variable>
@@ -5846,15 +6003,15 @@
     </Objects>
     <Description>Spike enemy (Water Temple)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" default="0000">
+        <Description>Type</Description>
+        <UI name="none" />
         <Value>
           <Data>0000</Data>
           <Description>Normal</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Does not open (possibly waiting for some trap to spring?)</Description>
         </Value>
       </Variable>
@@ -5865,7 +6022,37 @@
       <Object>00E6</Object>
     </Objects>
     <Description>Frog Song Spot and Frogs</Description>
-    <Variables />
+    <Variables>
+      <Variable mask="FFFF">
+        <Description>Type</Description>
+        <Comment>FIXME</Comment>
+        <UI name="select" />
+        <Value>
+          <Data>0000</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0001</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0002</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0003</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0004</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0005</Data>
+          <Description>?</Description>
+        </Value>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="00EE">
     <Objects>
@@ -5873,9 +6060,9 @@
     </Objects>
     <Description>Deku Shield</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Collectible Deku Shield</Description>
@@ -5884,8 +6071,8 @@
           <Data>0001</Data>
           <Description>Burning Deku shield</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -5897,37 +6084,41 @@
     </Objects>
     <Description>Red Ice</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FF00">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
-          <Data repeat="+">0000</Data>
+          <Data>00</Data>
           <Description>Large crystal</Description>
         </Value>
         <Value>
-          <Data repeat="+">0100</Data>
+          <Data>01</Data>
           <Description>Smaller crystal</Description>
         </Value>
         <Value>
-          <Data repeat="+">0200</Data>
+          <Data>02</Data>
           <Description>Crystal platform</Description>
         </Value>
         <Value>
-          <Data repeat="+">0300</Data>
+          <Data>03</Data>
           <Description>Meltable ice sheet</Description>
         </Value>
         <Value>
-          <Data repeat="+">0400</Data>
+          <Data>04</Data>
           <Description>Giant crystal</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0500</Data>
+        <Value uihide="true">
+          <Data>05</Data>
           <Description>Crashes</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0600</Data>
+        <Value uihide="true">
+          <Data>0600</Data>
           <Description>Nothing</Description>
         </Value>
+      </Variable>
+      <Variable mask="00FF" default="FF" nullable="true">
+        <Description>Nullable Switch Flag</Description>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -5937,15 +6128,15 @@
     </Objects>
     <Description>Blue Flame</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" default="FFFF">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Group of small blue flames, disappear</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Blue flame, disappears</Description>
         </Value>
         <Value>
@@ -5996,8 +6187,8 @@
           <Data>0000</Data>
           <Description>Normal</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>No bright sphere, first one dies off quickly</Description>
         </Value>
       </Variable>
@@ -6085,8 +6276,8 @@
           <Data>0003</Data>
           <Description>Skull top</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0004</Data>
+        <Value repeat="+">
+          <Data>0004</Data>
           <Description>Glitchy graphics, can’t see object, behaves like the gate</Description>
         </Value>
       </Variable>
@@ -6101,7 +6292,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -6143,8 +6334,8 @@
           <Data>0002</Data>
           <Description>No shadow</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -6166,24 +6357,24 @@
       <Variable maskType="&amp;" mask="FFFF" default="">
         <Description>#N/A</Description>
         <UI />
-        <Value>
-          <Data repeat="+">0000</Data>
+        <Value repeat="+">
+          <Data>0000</Data>
           <Description>Wearing red vest over blue shirt, no hat</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0064</Data>
+        <Value repeat="+">
+          <Data>0064</Data>
           <Description>Normal fish</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0073</Data>
+        <Value repeat="+">
+          <Data>0073</Data>
           <Description>Hylian Loach</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0100</Data>
+        <Value repeat="+">
+          <Data>0100</Data>
           <Description>Huge Hylian Loach</Description>
         </Value>
-        <Value>
-          <Data repeat="+">8000</Data>
+        <Value repeat="+">
+          <Data>8000</Data>
           <Description>Pond stuff, still no hat</Description>
         </Value>
       </Variable>
@@ -6195,7 +6386,7 @@
     </Objects>
     <Description>Movable Block</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FF00"  default="FF" nullable="true">
+      <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true">
         <Description>Nullable Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -6274,12 +6465,12 @@
           <Data>0001</Data>
           <Description>Rushing white particles to one point (???)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Nothing</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0005</Data>
+        <Value repeat="+">
+          <Data>0005</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -6326,7 +6517,7 @@
       If switch flags 1C-1E are 1 and a Meg Torch is attached to a flag that is 0, Meg spawns. Killing Meg sets the Meg Torch flag, and 1B is set to 0
     </Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -6383,8 +6574,8 @@
           <Data>0001</Data>
           <Description>Nothing</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Fence</Description>
         </Value>
       </Variable>
@@ -6422,36 +6613,60 @@
         <Description>#N/A</Description>
         <UI />
         <Value>
-          <Data object-id="00C6">0000</Data>
+          <Data>0000</Data>
           <Description>Bottle</Description>
+          <Meta>
+            <Object>00C6</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="010B">0001</Data>
+          <Data>0001</Data>
           <Description>Bottle with letter</Description>
+          <Meta>
+            <Object>010B</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00DC">0002</Data>
+          <Data>0002</Data>
           <Description>Hylian shield</Description>
+          <Meta>
+            <Object>00DC</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00BE">0003</Data>
+          <Data>0003</Data>
           <Description>Quiver</Description>
+          <Meta>
+            <Object>00BE</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00DB">0004</Data>
+          <Data>0004</Data>
           <Description>Silver Scale</Description>
+          <Meta>
+            <Object>00DB</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00DB">0005</Data>
+          <Data>0005</Data>
           <Description>Golden scale</Description>
+          <Meta>
+            <Object>00DB</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00AA">0006</Data>
+          <Data>0006</Data>
           <Description>Small key</Description>
+          <Meta>
+            <Object>00AA</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0158">0007</Data>
+          <Data>0007</Data>
           <Description>Fire Arrow</Description>
+          <Meta>
+            <Object>0158</Object>
+          </Meta>
         </Value>
       </Variable>
     </Variables>
@@ -6593,7 +6808,7 @@
           <Comment>12</Comment>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -6601,7 +6816,7 @@
         <Description>Number of collectibles spawned</Description>
         <Comment>Type 02 only</Comment>
         <UI name="num">
-            <Param id="display">int</Param>
+          <Param id="display">int</Param>
         </UI>
       </Variable>
       <Variable altvar="ZRot" maskType="&amp;" mask="00FF">
@@ -6641,7 +6856,7 @@
     </Objects>
     <Description>Iron Knuckle</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="3F00"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="3F00" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -6665,8 +6880,8 @@
           <Data>03</Data>
           <Description>White, standing</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0B</Data>
+        <Value repeat="+">
+          <Data>0B</Data>
           <Description>White, no armor falls off when at low health</Description>
         </Value>
       </Variable>
@@ -6771,12 +6986,12 @@
           <Data>000B</Data>
           <Description>Never speaks, and Link is sadly very patient...</Description>
         </Value>
-        <Value>
-          <Data repeat="+">000C</Data>
+        <Value repeat="+">
+          <Data>000C</Data>
           <Description>Pocket Egg?</Description>
         </Value>
-        <Value>
-          <Data repeat="+">8000</Data>
+        <Value repeat="+">
+          <Data>8000</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -6800,7 +7015,7 @@
           <Description>Navi wants to speak through C-Up</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="3F00"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="3F00" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -7486,8 +7701,8 @@
           <Data>0003</Data>
           <Description>Immobile flame, dies</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0004</Data>
+        <Value repeat="+">
+          <Data>0004</Data>
           <Description>Flame sound effect</Description>
         </Value>
       </Variable>
@@ -7499,39 +7714,39 @@
     </Objects>
     <Description>Flying Pot</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
-        <Value>
-          <Data repeat="+">0000</Data>
+        <Value repeat="+">
+          <Data>0000</Data>
           <Description>Green Rupee</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0100</Data>
+        <Value repeat="+">
+          <Data>0100</Data>
           <Description>Bombs</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0200</Data>
+        <Value repeat="+">
+          <Data>0200</Data>
           <Description>Deku Seeds</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0300</Data>
+        <Value repeat="+">
+          <Data>0300</Data>
           <Description>Deku Nuts</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0400</Data>
+        <Value repeat="+">
+          <Data>0400</Data>
           <Description>Deku Seeds</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0500</Data>
+        <Value repeat="+">
+          <Data>0500</Data>
           <Description>Giant Purple Rupee</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0600</Data>
+        <Value repeat="+">
+          <Data>0600</Data>
           <Description>Goron Vest</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0700</Data>
+        <Value repeat="+">
+          <Data>0700</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -7557,15 +7772,15 @@
     </Objects>
     <Description>Zora's Domain waterfall</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Waterfall and large water patch</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Water patches for King's chamber</Description>
         </Value>
       </Variable>
@@ -7577,16 +7792,17 @@
     </Objects>
     <Description>Frezzard</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Immobile</Description>
         </Value>
         <Value>
-          <Data repeat="+">00FF</Data>
+          <Data>FFFF</Data>
           <Description>Mobile</Description>
+          <Comment>Hidden When Spawned</Comment>
         </Value>
       </Variable>
     </Variables>
@@ -7605,15 +7821,15 @@
     </Objects>
     <Description>Rotating windmill mechanism</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Rotating platform</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0100</Data>
+        <Value repeat="+">
+          <Data>0100</Data>
           <Description>Thick stone door</Description>
         </Value>
       </Variable>
@@ -7634,33 +7850,42 @@
     <Description>Single Bush/Grass</Description>
     <Comment> Liftable &amp; cut-able</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="0003" >
+      <Variable maskType="&amp;" mask="0003">
         <Description>Type</Description>
         <UI />
         <Value>
-          <Data object-id="0002">00</Data>
+          <Data>00</Data>
           <Description>Normal shrub. Random drops.</Description>
+          <Meta>
+            <Object>0002</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="012B">01</Data>
+          <Data>01</Data>
           <Description>Cut-able, regenerating grass. Custom random drops</Description>
           <Comment>Drops: Heart, Arrows or Deku Seeds</Comment>
+          <Meta>
+            <Object>012B</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="012B">02</Data>
+          <Data>02</Data>
           <Description>Cut-able grass</Description>
           <Comment>Set drop table via Random Drop Table param</Comment>
+          <Meta>
+            <Object>012B</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>03</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="0010" >
+      <Variable maskType="&amp;" mask="0010">
         <Description>Spawns set of 3 bugs</Description>
         <UI name="bitflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>Random Drop Table</Description>
         <UI name="randomdrop" />
         <Value>
@@ -7685,19 +7910,19 @@
     <Description>Brown boulder</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>?</Description>
         <UI />
         <Value>
           <Data>00</Data>
           <Description>Normal</Description>
         </Value>
-        <Value>
-          <Data repeat="+">80</Data>
+        <Value repeat="+">
+          <Data>80</Data>
           <Description>Makes puzzle solved sound when destroyed</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -7710,9 +7935,9 @@
     <Description>Switches</Description>
     <Comment>Makes puzzle solved sound the first time it's pressed</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="000F" >
+      <Variable maskType="&amp;" mask="000F">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>Floor switch</Description>
@@ -7733,30 +7958,30 @@
           <Data>04</Data>
           <Description>Targetable Crystal Switch</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">05</Data>
+        <Value uihide="true" repeat="+">
+          <Data>05</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="0010" >
+      <Variable maskType="&amp;" mask="0010">
         <Description>Can be toggled</Description>
         <UI name="bitflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="0020" >
+      <Variable maskType="&amp;" mask="0020">
         <Description>Floor switches reset (zero switch flag) when not held down</Description>
         <Comment>Rusted included</Comment>
         <UI name="bitflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="0040" >
+      <Variable maskType="&amp;" mask="0040">
         <Description>Triggers all switches with same switch flag</Description>
         <Comment>crystal switches only?</Comment>
         <UI name="bitflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="0080" >
+      <Variable maskType="&amp;" mask="0080">
         <Description>Switch is frozen in ice</Description>
         <UI name="bitflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="3F00" default="003F" nullable="true" >
+      <Variable maskType="&amp;" mask="3F00" default="003F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -7780,7 +8005,7 @@
           <Description>Small</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="F000" >
+      <Variable maskType="&amp;" mask="F000">
         <Description>Platform's rise height (80 unit increments)</Description>
         <UI name="numupdown">
           <Param id="unit">Unit</Param>
@@ -7788,7 +8013,7 @@
           <Param id="min">0</Param>
         </UI>
       </Variable>
-      <Variable maskType="&amp;" mask="0F00" >
+      <Variable maskType="&amp;" mask="0F00">
         <Description>Platform Travel Speed</Description>
         <Comment>
           - 1 = Very slow
@@ -7829,7 +8054,7 @@
     <Description>Stone Hookshot target</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -7863,7 +8088,7 @@
     <Description>Music Staff (Ocarina) spot</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="1C00" >
+      <Variable maskType="&amp;" mask="1C00">
         <Description>Spot Type</Description>
         <UI />
         <Value>
@@ -7895,7 +8120,7 @@
           <Description>Puzzle Spot</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="03C0" >
+      <Variable maskType="&amp;" mask="03C0">
         <Description>Song to play</Description>
         <Comment>Puzzle Spot only?</Comment>
         <UI />
@@ -7944,7 +8169,7 @@
           <Description>All 6 non-warp songs / Preset song</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -7956,7 +8181,7 @@
     </Objects>
     <Description>Horseback Archery target (arrow hitbox)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -7981,7 +8206,7 @@
     <Description>Rolling Boulder</Description>
     <Comment>FIXME: Variable, Z-Rotation</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="0300" >
+      <Variable maskType="&amp;" mask="0300">
         <Description>Pattern</Description>
         <UI name="select" />
         <Value>
@@ -8004,7 +8229,7 @@
           <Comment>As in Fire Temple boulder maze</Comment>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Path Id</Description>
         <UI name="path" />
       </Variable>
@@ -8016,7 +8241,7 @@
     </Objects>
     <Description>Sparkling Rupee</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -8039,8 +8264,8 @@
           <Data>0004</Data>
           <Description>Green rupees underground, not collectible (BETA)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0005</Data>
+        <Value repeat="+">
+          <Data>0005</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -8060,7 +8285,7 @@
     <Description>Carpenters</Description>
     <Comment>Dialog softlock if talked to outside of set scenes</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -8103,10 +8328,10 @@
     <Description>Zelda's Magic to Open Gates</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Value</Description>
         <Comment>pattern repeats after 003F (Probably 3B-&gt;3F cycle)</Comment>
-        <UI />
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Cannot see anything while object is visible.  Navi is capable of targeting it, but gives no information.</Description>
@@ -8252,7 +8477,7 @@
     </Objects>
     <Description>White clothed Gerudo</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -8263,8 +8488,8 @@
           <Data>0001</Data>
           <Description>Whistleblower</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -8276,7 +8501,7 @@
     </Objects>
     <Description>Block placement actor</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <Comment>Set flag when block is placed on top of actor</Comment>
         <UI name="switchflag" />
@@ -8297,16 +8522,17 @@
     </Objects>
     <Description>Enemy Arwing (Alpha)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Cutscene start</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
-          <Description>No cutscene (required if you spawn more than four or five of these)</Description>
+        <Value repeat="+">
+          <Data>0001</Data>
+          <Description>No cutscene</Description>
+          <Comment>required if you spawn more than four or five of these</Comment>
         </Value>
       </Variable>
     </Variables>
@@ -8324,17 +8550,10 @@
     </Objects>
     <Description>Medigoron</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
-        <Value>
-          <Data>0000</Data>
-          <Description>Blue lock-on spot</Description>
-        </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
-          <Description>Crashes</Description>
-        </Value>
+      <Variable maskType="&amp;" mask="003F" default="003F" nullable="true">
+        <Description>Switch Flag</Description>
+        <Comment>Won't say his normal dialog unless the flag Medigoron is bound to is set</Comment>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -8343,7 +8562,12 @@
       <Object>0127</Object>
     </Objects>
     <Description>Bean seller</Description>
-    <Variables />
+    <Variables>
+      <Variable mask="FFFF" default="FFFF">
+        <Description>Default</Description>
+        <UI name="none" />
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="013F">
     <Objects>
@@ -8351,14 +8575,37 @@
     </Objects>
     <Description>Carpenter's son</Description>
     <Comment>FIXME: (ignores you?)</Comment>
-    <Variables />
+    <Variables>
+      <Variable mask="FFFF" default="0000">
+        <Description>Default</Description>
+        <UI name="none" />
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0140">
     <Objects>
       <Object>0129</Object>
     </Objects>
     <Description>Ingo's Gates (Lon Lon Ranch)</Description>
-    <Variables />
+    <Variables>
+      <Variable mask="FFFF" default="0000">
+        <Description>Type</Description>
+        <Comment>FIXME</Comment>
+        <UI name="select" />
+        <Value>
+          <Data>0000</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0001</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>0003</Data>
+          <Description>?</Description>
+        </Value>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0141">
     <Objects>
@@ -8366,7 +8613,7 @@
     </Objects>
     <Description>Square signpost</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Text Id</Description>
         <Comment>Value + 0x0300</Comment>
         <UI name="textid">
@@ -8652,8 +8899,8 @@
           <Data>45</Data>
           <Description>Visit the / House of the Know-It-All Brothers / to get answers to all your / item-related questions!</Description>
         </Value>
-        <Value>
-          <Data repeat="+">46</Data>
+        <Value repeat="+">
+          <Data>46</Data>
           <Description>Pocket Egg</Description>
         </Value>
       </Variable>
@@ -8665,19 +8912,23 @@
     </Objects>
     <Description>Hyrule Castle guard</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Whistleblower</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Stands there, does nothing</Description>
         </Value>
+        <Value uihide="true" repeat="+">
+          <Data>8000</Data>
+          <Description>Whistleblower</Description>
+        </Value>
         <Value>
-          <Data repeat="+">8000</Data>
+          <Data>FFFF</Data>
           <Description>Whistleblower</Description>
         </Value>
       </Variable>
@@ -8689,9 +8940,9 @@
     </Objects>
     <Description>Hopping Cucco, not solid</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FFFF" default="0001">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Non-solid cucco, hops oddly every once in awhile and only goes in one direction</Description>
@@ -8700,12 +8951,12 @@
           <Data>0001</Data>
           <Description>Invisible, solid cucco, doesn’t move, can be attacked but will only smoke and molt</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Invisible cucco, cannot be attacked it seems, no idea what it does, but you can hear it</Description>
         </Value>
-        <Value>
-          <Data repeat="+">8000</Data>
+        <Value uihide="true" repeat="+">
+          <Data>8000</Data>
           <Description>Same as 0</Description>
         </Value>
       </Variable>
@@ -8723,25 +8974,82 @@
       <Object>0180</Object>
     </Objects>
     <Description>Stone blocking entrance to Bottom of the Well</Description>
-    <Variables />
+    <Variables>
+      <Variable mask="FFFF" default="FFFF">
+        <Description>Default</Description>
+        <UI name="none" />
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0146">
     <Objects>
       <Object>00BC</Object>
     </Objects>
     <Description>Saria</Description>
-    <Variables />
+    <Variables>
+      <Variable mask="FFFF" default="0000">
+        <Description>Default</Description>
+        <UI name="none" />
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0147">
     <Objects>
       <Object>0001</Object>
+      <Object>????</Object>
     </Objects>
-    <Description>Checkable spot</Description>
-    <Comment>
-      FIXME
-      Navi hovers over it in green hue (has the bean seller’s 10 rupee please text)
-    </Comment>
-    <Variables />
+    <Description>Checkable spot (Green Navi)</Description>
+    <Variables>
+      <Variable mask="F800">
+        <Description>Type</Description>
+        <UI name="select" />
+        <Value>
+          <Data>00</Data>
+          <Description>Bean Seller's dialog</Description>
+          <Comment>FIXME: Doesn't work properly?</Comment>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>Temple of Time stone altar dialog</Description>
+        </Value>
+        <Value>
+          <Data>02</Data>
+          <Description>Gravekeeper's diary dialog</Description>
+          <Comment>Navi hovers higher than normal</Comment>
+        </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>Royal Composer Sharp's grave dialog</Description>
+          <Comment>Sets Switch Temp 09, spawns Sharp</Comment>
+          <Meta>
+            <Object>006E</Object>
+            <Flag>29</Flag>
+          </Meta>
+        </Value>
+        <Value>
+          <Data>04</Data>
+          <Description>"Royal Family Tomb" dialog</Description>
+        </Value>
+        <Value>
+          <Data>05</Data>
+          <Description>Royal Composer Flat's grave dialog</Description>
+          <Comment>Sets Temp 08</Comment>
+          <Meta>
+            <Object>006E</Object>
+            <Flag>28</Flag>
+          </Meta>
+        </Value>
+      </Variable>
+      <Variable mask="003F" default="3F" nullable="true">
+        <Description>Switch Flag</Description>
+        <Comment>Spot deactivates when flag is set</Comment>
+        <UI name="switchflag" />
+      </Variable>
+      <Variable mask="07C0" default="1F">
+        <Description>Unused</Description>
+        <UI name="none" />
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0148">
     <Objects>
@@ -8789,11 +9097,11 @@
       scene will crash the game.
     </Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="03C0" >
+      <Variable maskType="&amp;" mask="03C0">
         <Description>Owl</Description>
         <UI />
         <Value>
@@ -8862,7 +9170,7 @@
     <Description>Small rock</Description>
     <Comment>FIXME: may cause glitched graphics in certain places</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -8916,7 +9224,7 @@
     </Objects>
     <Description>Grave flower</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="0003" >
+      <Variable maskType="&amp;" mask="0003">
         <Description>Types</Description>
         <UI />
         <Value>
@@ -8945,7 +9253,7 @@
     <Description>Sun Emblem Trigger (Spirit Temple)</Description>
     <Comment>FIXME: Switch Flag variable</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="0001" >
+      <Variable maskType="&amp;" mask="0001">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -8966,7 +9274,7 @@
     <Description>Rock/Bush groups</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="000F" >
+      <Variable maskType="&amp;" mask="000F">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -8986,12 +9294,12 @@
           <Description>Crashes</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="0010" >
+      <Variable maskType="&amp;" mask="0010">
         <Description>Spawns set of 3 bugs</Description>
         <Comment>FIXME: Untested</Comment>
         <UI name="bitflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>Random Drop Table</Description>
         <UI name="randomdrop" />
       </Variable>
@@ -9083,15 +9391,15 @@
     <Description>Water spout</Description>
     <Comment>FIXME: Document Petrie's findings</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Normal</Description>
         </Value>
-        <Value>
-          <Data repeat="+">2000</Data>
+        <Value repeat="+">
+          <Data>2000</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -9103,7 +9411,7 @@
     </Objects>
     <Description>Whirlpool effect</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9114,8 +9422,8 @@
           <Data>0001</Data>
           <Description>Short and wide</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Same as 0</Description>
         </Value>
       </Variable>
@@ -9134,7 +9442,7 @@
     </Objects>
     <Description>Kokiri Children</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9224,7 +9532,7 @@
     </Objects>
     <Description>Iron Knuckles Room Stuff (Spirit Temple)</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="0001" >
+      <Variable maskType="&amp;" mask="0001">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -9259,7 +9567,7 @@
     <Description>Graveyard boy</Description>
     <Comment>FIXME: Path</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Path Id</Description>
         <UI name="path" />
       </Variable>
@@ -9271,7 +9579,7 @@
     </Objects>
     <Description>Mido</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9290,91 +9598,151 @@
     <Description>Market NPCs</Description>
     <Comment>FIXME: Recheck everything</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="003F" >
+      <Variable maskType="&amp;" mask="003F">
         <Description>Npc</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
-          <Data object-id="0105">0000</Data>
+          <Data>0000</Data>
           <Description>Fat woman in light blue</Description>
+          <Meta>
+            <Object>0105</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="018C">0001</Data>
+          <Data>0001</Data>
           <Description>Fat woman in white, blues &amp; yellow</Description>
+          <Meta>
+            <Object>018C</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0107">0002</Data>
+          <Data>0002</Data>
           <Description>Bearded man in white &amp; green</Description>
+          <Meta>
+            <Object>0107</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0111">0003</Data>
+          <Data>0003</Data>
           <Description>Jogging man (Sakon)</Description>
+          <Meta>
+            <Object>0111</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0107">0004</Data>
+          <Data>0004</Data>
           <Description>Staunch man in black &amp; green</Description>
+          <Meta>
+            <Object>0107</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0111">0005</Data>
+          <Data>0005</Data>
           <Description>Begging man</Description>
+          <Meta>
+            <Object>0111</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="010D">0006</Data>
+          <Data>0006</Data>
           <Description>Old woman in white</Description>
+          <Meta>
+            <Object>010D</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="010C">0007</Data>
+          <Data>0007</Data>
           <Description>Old man in blue</Description>
+          <Meta>
+            <Object>010C</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0108">0008</Data>
+          <Data>0008</Data>
           <Description>Thin woman in lilac</Description>
+          <Meta>
+            <Object>0108</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0111">0009</Data>
+          <Data>0009</Data>
           <Description>Laughing man in red &amp; white</Description>
+          <Meta>
+            <Object>0111</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0111">000A</Data>
+          <Data>000A</Data>
           <Description>Explaining man in blue &amp; white</Description>
+          <Meta>
+            <Object>0111</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0108">000B</Data>
+          <Data>000B</Data>
           <Description>Thin woman in blue &amp; yellow</Description>
+          <Meta>
+            <Object>0108</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0111">000C</Data>
+          <Data>000C</Data>
           <Description>Looking man in crimson</Description>
+          <Meta>
+            <Object>0111</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0107">000D</Data>
+          <Data>000D</Data>
           <Description>Red haired man in green &amp; lilac</Description>
+          <Meta>
+            <Object>0107</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0111">000E</Data>
+          <Data>000E</Data>
           <Description>Bearded, red haired man in green &amp; white</Description>
+          <Meta>
+            <Object>0111</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="010C">000F</Data>
+          <Data>000F</Data>
           <Description>Bald man in brown</Description>
+          <Meta>
+            <Object>010C</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0111">0010</Data>
+          <Data>0010</Data>
           <Description>Man in white</Description>
+          <Meta>
+            <Object>0111</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0107">0011</Data>
+          <Data>0011</Data>
           <Description>Staunch man two shades of green</Description>
+          <Meta>
+            <Object>0107</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="010C">0013</Data>
+          <Data>0013</Data>
           <Description>Bald man in purple</Description>
+          <Meta>
+            <Object>010C</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0107">0014</Data>
+          <Data>0014</Data>
           <Description>Man in two shades of green</Description>
+          <Meta>
+            <Object>0107</Object>
+          </Meta>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="0780" >
+      <Variable maskType="&amp;" mask="0780">
         <Description>Path Id</Description>
         <Comment>NPCs 03 and 07 only</Comment>
         <UI name="path" />
@@ -9431,11 +9799,11 @@
     </Objects>
     <Description>Big Poe</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
-        <Value>
-          <Data repeat="+">0000</Data>
+        <Value repeat="+">
+          <Data>0000</Data>
           <Description>Big Poe</Description>
         </Value>
         <Value>
@@ -9465,15 +9833,15 @@
     </Objects>
     <Description>Hyrule guard</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
           <Data>0000</Data>
           <Description>Time teller</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Crash</Description>
         </Value>
       </Variable>
@@ -9544,148 +9912,253 @@
     <Description>Credits Revelers from Lon Lon</Description>
     <Comment>Each variable requires it's own object</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
-          <Data object-id="00C0">0000</Data>
+          <Data>0000</Data>
           <Description>Drunken Ingo</Description>
+          <Meta>
+            <Object>00C0</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0088">0001</Data>
+          <Data>0001</Data>
           <Description>Drunken Talon</Description>
+          <Meta>
+            <Object>0088</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0133">0002</Data>
+          <Data>0002</Data>
           <Description>Windmill man breakdancing</Description>
+          <Meta>
+            <Object>0133</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00FC">0003</Data>
+          <Data>0003</Data>
           <Description>Encouraging Kokiri Boy</Description>
+          <Meta>
+            <Object>00FC</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00FD">0004</Data>
+          <Data>0004</Data>
           <Description>Encouraging Kokiri Girl</Description>
+          <Meta>
+            <Object>00FD</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="010C">0005</Data>
+          <Data>0005</Data>
           <Description>White-haired man in blue</Description>
+          <Meta>
+            <Object>010C</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0107">0006</Data>
+          <Data>0006</Data>
           <Description>Black-bearded man in white and green</Description>
+          <Meta>
+            <Object>0107</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0115">0007</Data>
+          <Data>0007</Data>
           <Description>Bushy-haired woman in red and black</Description>
+          <Meta>
+            <Object>0115</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="010D">0008</Data>
+          <Data>0008</Data>
           <Description>Little old lady</Description>
+          <Meta>
+            <Object>010D</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0121">0009</Data>
+          <Data>0009</Data>
           <Description>Singing carpenter boss</Description>
+          <Meta>
+            <Object>0121</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0122">000A</Data>
+          <Data>000A</Data>
           <Description>Singing Carpenter</Description>
+          <Meta>
+            <Object>0122</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0122">000B</Data>
+          <Data>000B</Data>
           <Description>Singing Carpenter</Description>
+          <Meta>
+            <Object>0122</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0122">000C</Data>
+          <Data>000C</Data>
           <Description>Singing Carpenter</Description>
+          <Meta>
+            <Object>0122</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0122">000D</Data>
+          <Data>000D</Data>
           <Description>Singing Carpenter</Description>
+          <Meta>
+            <Object>0122</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00FC">000E</Data>
+          <Data>000E</Data>
           <Description>Dancing Kokiri Boy</Description>
+          <Meta>
+            <Object>00FC</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00FD">000F</Data>
+          <Data>000F</Data>
           <Description>Dancing Kokiri Girl</Description>
+          <Meta>
+            <Object>00FD</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0116">0010</Data>
+          <Data>0010</Data>
           <Description>Line-dancing Gerudo1</Description>
+          <Meta>
+            <Object>0116</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0116">0011</Data>
+          <Data>0011</Data>
           <Description>Line-dancing Gerudo2</Description>
+          <Meta>
+            <Object>0116</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0116">0012</Data>
+          <Data>0012</Data>
           <Description>Line-dancing, spikey-haired Gerudo</Description>
+          <Meta>
+            <Object>0116</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00FE">0013</Data>
+          <Data>0013</Data>
           <Description>Dancing Zora</Description>
+          <Meta>
+            <Object>00FE</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00FF">0014</Data>
+          <Data>0014</Data>
           <Description>King Zora</Description>
+          <Meta>
+            <Object>00FF</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00FB">0015</Data>
+          <Data>0015</Data>
           <Description>Sitting Mido</Description>
+          <Meta>
+            <Object>00FB</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0013">0016</Data>
+          <Data>0016</Data>
           <Description>Floating cucco</Description>
+          <Meta>
+            <Object>0013</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0013">0017</Data>
+          <Data>0017</Data>
           <Description>Floating cucco2</Description>
+          <Meta>
+            <Object>0013</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0013">0018</Data>
+          <Data>0018</Data>
           <Description>Walking cucco</Description>
+          <Meta>
+            <Object>0013</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0110">0019</Data>
+          <Data>0019</Data>
           <Description>Cucco lady</Description>
+          <Meta>
+            <Object>0110</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0159">001A</Data>
+          <Data>001A</Data>
           <Description>Potion shopkeeper?</Description>
+          <Meta>
+            <Object>0159</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="013E">001B</Data>
+          <Data>001B</Data>
           <Description>Happy Mask shopkeeper</Description>
+          <Meta>
+            <Object>013E</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="015B">001C</Data>
+          <Data>001C</Data>
           <Description>Fisherman</Description>
+          <Meta>
+            <Object>015B</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="0165">001D</Data>
+          <Data>001D</Data>
           <Description>Bombchu shopkeeper</Description>
+          <Meta>
+            <Object>0165</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00C9">001E</Data>
+          <Data>001E</Data>
           <Description>Dancing Goron</Description>
+          <Meta>
+            <Object>00C9</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00C9">001F</Data>
+          <Data>001F</Data>
           <Description>Belly slapping Goron</Description>
+          <Meta>
+            <Object>00C9</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00C9">0020</Data>
+          <Data>0020</Data>
           <Description>Dancing MegaGoron</Description>
+          <Meta>
+            <Object>00C9</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00C9">0021</Data>
+          <Data>0021</Data>
           <Description>Lying down MegaGoron</Description>
+          <Meta>
+            <Object>00C9</Object>
+          </Meta>
         </Value>
         <Value>
-          <Data object-id="00D0">0022</Data>
+          <Data>0022</Data>
           <Description>Singing Malon</Description>
+          <Meta>
+            <Object>00D0</Object>
+          </Meta>
         </Value>
       </Variable>
     </Variables>
@@ -9705,7 +10178,7 @@
     <Description>Spiral Beams (Great Fairy Fountains)</Description>
     <Comment>Lots of combinations...</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -9724,8 +10197,8 @@
           <Data>0003</Data>
           <Description>Blue spiral beam</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0004</Data>
+        <Value repeat="+">
+          <Data>0004</Data>
           <Description>Black spiral beam</Description>
         </Value>
         <Value>
@@ -9754,7 +10227,7 @@
     <Description>Dialog Spot</Description>
     <Comment>Attracts Navi, makes her green</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="C000" >
+      <Variable maskType="&amp;" mask="C000">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -9774,7 +10247,7 @@
           <Description>Z-Target, No Text</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="3FC0" >
+      <Variable maskType="&amp;" mask="3FC0">
         <Description>Text Id</Description>
         <Comment>0x0200 + Value</Comment>
         <UI name="textid">
@@ -10024,12 +10497,12 @@
           <Data>3C</Data>
           <Description>The Shadow will yield only to one with the eye of truth, handed down in Kakariko Village.</Description>
         </Value>
-        <Value>
-          <Data repeat="+">3D</Data>
+        <Value repeat="+">
+          <Data>3D</Data>
           <Description>You borrowed a Pocket Egg! ...</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -10041,7 +10514,7 @@
     </Objects>
     <Description>Patrolling Gerudo</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -10056,8 +10529,8 @@
           <Data>0002</Data>
           <Description>Purple Gerudo, acts like the one that gives you the membership card</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -10069,14 +10542,14 @@
     </Objects>
     <Description>Timer</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FC00"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="FC00" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <Comment>Set on room clear</Comment>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="03FF" default ="3FF" nullable="true">
+      <Variable maskType="&amp;" mask="03FF" default="3FF" nullable="true">
         <Description>Timer in seconds (capped to 10 minutes)</Description>
-        <UI  name="num">
+        <UI name="num">
           <Param id="display">int</Param>
         </UI>
         <Value>
@@ -10092,7 +10565,7 @@
     </Objects>
     <Description>Cursed Skulltula people</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <Comment>Disappear when gold skulltula requirements are met</Comment>
         <UI name="select" />
@@ -10144,12 +10617,12 @@
           <Data>000B</Data>
           <Description>Hyliantula without an arm (gold skulltulas &lt; 110)</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">000C</Data>
+        <Value uihide="true" repeat="+">
+          <Data>000C</Data>
           <Description>Continues on with this pattern.</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">8000</Data>
+        <Value uihide="true" repeat="+">
+          <Data>8000</Data>
           <Description>Nothing.</Description>
         </Value>
       </Variable>
@@ -10168,15 +10641,15 @@
     </Objects>
     <Description>Zelda's Lullaby effect</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Purple wormhole</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Blue wormhole</Description>
         </Value>
       </Variable>
@@ -10188,9 +10661,9 @@
     </Objects>
     <Description>Song of Storm's effect</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Regular effects, storm begins</Description>
@@ -10199,8 +10672,8 @@
           <Data>0001</Data>
           <Description>Texture-spanning effect only, no storm, music isn't affected, effect does not dissipate</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Same as 0000</Description>
         </Value>
       </Variable>
@@ -10214,7 +10687,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" default="0000">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -10224,11 +10697,11 @@
     </Objects>
     <Description>Sacred Forest Meadow Entities</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="3F00"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="3F00" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -10239,8 +10712,8 @@
           <Data>01</Data>
           <Description>Large vertical gate</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">02</Data>
+        <Value uihide="true" repeat="+">
+          <Data>02</Data>
           <Description>Invisible, glitched gate</Description>
           <Comment>can still attack or run into it</Comment>
         </Value>
@@ -10248,7 +10721,7 @@
       <Variable maskType="&amp;" mask="3F00" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <Comment>Type 01 only</Comment>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -10259,7 +10732,7 @@
     <Description>Stone Elevator (Spirit Temple)</Description>
     <Comment>Sets switch flag/activates when stepped on iirc</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -10272,7 +10745,7 @@
     <Description>Chair and Pillar pieces when destroyed by an Iron Knuckle</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -10287,8 +10760,8 @@
           <Data>0002</Data>
           <Description>Round stone thing, explodes as soon as area loads</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -10302,7 +10775,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="00FF" default="00FF" nullable="true">
         <Description>Nullable Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -10314,7 +10787,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="00FF" default="00FF" nullable="true">
         <Description>Nullable Switch Flag</Description>
-        <UI name="switchflag"/>
+        <UI name="switchflag" />
       </Variable>
     </Variables>
   </Actor>
@@ -10325,7 +10798,7 @@
     <Description>Hint Deku Scrubs (Deku Tree)</Description>
     <Comment>FIXME: text seems to vary depending on the room number you're in</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>?, probably text to display</Description>
         <UI name="select" />
         <Value>
@@ -10341,7 +10814,7 @@
           <Description>Final Deku Scrub</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>?, seems to be used to set up 231/312 puzzle</Description>
         <UI />
         <Value>
@@ -10378,7 +10851,7 @@
     </Objects>
     <Description>Broken Drawbridge, Fencing</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -10398,7 +10871,7 @@
     </Objects>
     <Description>Grounded Sales Scrub</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Item Sold</Description>
         <UI name="select" />
         <Value>
@@ -10449,12 +10922,12 @@
           <Data>000B</Data>
           <Description>Never speaks, and Link is sadly very patient...</Description>
         </Value>
-        <Value uihide="true">
-          <Data repeat="+">000C</Data>
+        <Value uihide="true" repeat="+">
+          <Data>000C</Data>
           <Description>Pocket Egg?</Description>
         </Value>
-        <Value uihide ="true">
-          <Data repeat="+">8000</Data>
+        <Value uihide="true" repeat="+">
+          <Data>8000</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -10474,7 +10947,7 @@
     <Description>Gerudo Fighter</Description>
     <Comment>needs a carpenter to load?</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FF00" >
+      <Variable maskType="&amp;" mask="FF00">
         <Description>Unknown</Description>
         <Comment>FIXME: Switch Flag?</Comment>
         <UI />
@@ -10509,7 +10982,7 @@
     <Description>Dog</Description>
     <Comment>It's possible to make this spawn an infinite number of dogs //FIXME: Direction</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="0FF0" >
+      <Variable maskType="&amp;" mask="0FF0">
         <Description>Direction it runs</Description>
         <Comment>Orientation relative to the object. Also, if you befriend a dog and return to the place with the dog and change this value, another dog will spawn</Comment>
         <UI name="select" />
@@ -10573,16 +11046,16 @@
           <Data>0E</Data>
           <Description>NW</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0F</Data>
+        <Value repeat="+">
+          <Data>0F</Data>
           <Description>First NNW, then SEE</Description>
         </Value>
-        <Value>
-          <Data repeat="+">F0</Data>
+        <Value repeat="+">
+          <Data>F0</Data>
           <Description>No dog</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="000F" >
+      <Variable maskType="&amp;" mask="000F">
         <Description>Color</Description>
         <UI />
         <Value>
@@ -10669,7 +11142,7 @@
       <Variable maskType="&amp;" mask="0007">
         <Description>Type</Description>
         <Comment>Values greater than 4 don't load anything</Comment>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0</Data>
           <Description>Potion Shop Poster</Description>
@@ -10693,7 +11166,7 @@
       </Variable>
       <Variable maskType="&amp;" mask="FF00" default="00">
         <Description>Unknown</Description>
-        <UI/>
+        <UI />
         <Value>
           <Data>00</Data>
           <Description>?</Description>
@@ -10740,11 +11213,11 @@
           <Description>No Skulltula</Description>
         </Value>
       </Variable>
-      <Variable altvar="XRot" maskType="&amp;" mask="00FF" >
+      <Variable altvar="XRot" maskType="&amp;" mask="00FF">
         <Description>Collectible Item Dropped (see actor 0015)</Description>
         <UI name="reflink" />
       </Variable>
-      <Variable altvar="ZRot" maskType="&amp;" mask="003F" >
+      <Variable altvar="ZRot" maskType="&amp;" mask="003F">
         <Description>Collectible Flag</Description>
         <UI name="collectflag" />
       </Variable>
@@ -10759,7 +11232,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -10780,7 +11253,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" default="FFFF">
         <Description>Default</Description>
-        <UI name="none"/>
+        <UI name="none" />
       </Variable>
     </Variables>
   </Actor>
@@ -10812,9 +11285,9 @@
     </Objects>
     <Description>Ganon's Tower magic barrier</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
-        <UI  name="select" />
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Magic barrier</Description>
@@ -10849,8 +11322,8 @@
           <Description>Green core, shadow effect, crashes when shot at</Description>
           <Comment>Use with actor 00C9 (Cutscene Saria), var 0002</Comment>
         </Value>
-        <Value>
-          <Data repeat="+">0007</Data>
+        <Value repeat="+">
+          <Data>0007</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -10863,7 +11336,7 @@
     <Description>Destructible Wall (Zora's Fountain)</Description>
     <Comment>Graphics may glitch when it's destroyed, but will fix after it disappears</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="003F"  default="3F" nullable="true">
+      <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
@@ -10884,15 +11357,15 @@
     <Description>Tower of Rupees</Description>
     <Comment>FIXME: Test things</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="F000" >
+      <Variable maskType="&amp;" mask="F000">
         <Description>Type</Description>
         <UI name="select" />
-        <Value>
-          <Data repeat="+">0</Data>
+        <Value repeat="+">
+          <Data>0</Data>
           <Description>Five blue rupees stacked vertically</Description>
         </Value>
-        <Value>
-          <Data repeat="+">3</Data>
+        <Value repeat="+">
+          <Data>3</Data>
           <Description>Five green rupees in a row</Description>
         </Value>
         <Value>
@@ -10900,12 +11373,12 @@
           <Description>Five green rupees in a row?</Description>
           <Comment>FIXME: Test</Comment>
         </Value>
-        <Value>
-          <Data repeat="+">5</Data>
+        <Value repeat="+">
+          <Data>5</Data>
           <Description>Six green rupees in diamond formation with a red rupee in the center (think medallion screen)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">6</Data>
+        <Value repeat="+">
+          <Data>6</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -10924,10 +11397,10 @@
     </Objects>
     <Description>Haggling townspeople</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Color</Description>
         <Comment>More combinations exist as well.</Comment>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Blue/green textures</Description>
@@ -10974,7 +11447,7 @@
     <Description>Gorons</Description>
     <Comment>FIXME: Variables</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI />
         <Value>
@@ -11029,8 +11502,8 @@
           <Data>000C</Data>
           <Description>Goron that talks about the Great Fairy</Description>
         </Value>
-        <Value>
-          <Data repeat="+">000D</Data>
+        <Value repeat="+">
+          <Data>000D</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -11046,7 +11519,7 @@
         <Description>Nullable Switch Flag</Description>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -11078,9 +11551,9 @@
     </Objects>
     <Description>Ganon Battle rubble</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
-        <UI  name="select"/>
+        <UI name="select" />
         <Value>
           <Data>08</Data>
           <Description>Large block with “sun o’er horizon” emblem on it</Description>
@@ -11109,8 +11582,8 @@
           <Data>0E</Data>
           <Description>Tall wall chunk with some stray stuff sticking out of the top</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0F</Data>
+        <Value repeat="+">
+          <Data>0F</Data>
           <Description>Nothing?</Description>
         </Value>
         <Value>
@@ -11155,7 +11628,7 @@
     <Description>Chunk of stone</Description>
     <Comment>non-solid, possibly Ganon's Tower rubble</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <Comment>
           FIXME: Alternates between the three.
@@ -11173,8 +11646,8 @@
           <Data>0002</Data>
           <Description>Small chunk</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0009</Data>
+        <Value repeat="+">
+          <Data>0009</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -11194,8 +11667,8 @@
           <Data>0000</Data>
           <Description>Default</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -11226,9 +11699,9 @@
         <Comment>If null, Enabled and ignoring switch flag input</Comment>
         <UI name="switchflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="00FF" >
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>00</Data>
           <Description>Nothing</Description>
@@ -11252,7 +11725,7 @@
     </Objects>
     <Description>Web blocked light window</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <Comment>FIXME: Variable, probably switch flag too</Comment>
         <UI />
@@ -11260,8 +11733,8 @@
           <Data>0000</Data>
           <Description>Exists</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0001</Data>
+        <Value repeat="+">
+          <Data>0001</Data>
           <Description>Nothing</Description>
         </Value>
       </Variable>
@@ -11273,9 +11746,9 @@
     </Objects>
     <Description>2D stone wall</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Square stone</Description>
@@ -11288,8 +11761,8 @@
           <Data>0002</Data>
           <Description>Similar to 1, but looks like a different texture</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>Graphics glitchy</Description>
         </Value>
       </Variable>
@@ -11457,8 +11930,8 @@
           <Data>0021</Data>
           <Description>0421 (in normal text box)</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0022</Data>
+        <Value repeat="+">
+          <Data>0022</Data>
           <Description>Text for when you get the Pocket Egg</Description>
         </Value>
       </Variable>
@@ -11478,7 +11951,7 @@
     <Description>Metal gate</Description>
     <Comment>FIXME: Capture Switch Flag</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="F000" >
+      <Variable maskType="&amp;" mask="F000">
         <Description>gate size</Description>
         <UI />
         <Value>
@@ -11489,12 +11962,12 @@
           <Data>1</Data>
           <Description>Bigger gate</Description>
         </Value>
-        <Value>
-          <Data repeat="+">2</Data>
+        <Value repeat="+">
+          <Data>2</Data>
           <Description>crash</Description>
         </Value>
       </Variable>
-      <Variable maskType="&amp;" mask="0F00" >
+      <Variable maskType="&amp;" mask="0F00">
         <Description>Timer</Description>
         <Comment>1 unit 4 Seconds</Comment>
         <UI name="numupdown">
@@ -11503,7 +11976,7 @@
           <Param id="min">0</Param>
         </UI>
       </Variable>
-      <Variable maskType="&amp;" mask="001F" >
+      <Variable maskType="&amp;" mask="001F">
         <Description>identifier (for use with switches)</Description>
         <UI />
       </Variable>
@@ -11516,7 +11989,7 @@
     <Description>Carpenters</Description>
     <Comment>FIXME: paths</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11532,7 +12005,7 @@
     </Objects>
     <Description>Bombchu Bowling alley wall</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11543,8 +12016,8 @@
           <Data>0001</Data>
           <Description>Hole in lower-right</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Hole at top</Description>
         </Value>
       </Variable>
@@ -11600,8 +12073,8 @@
           <Data>0004</Data>
           <Description>Debris</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0005</Data>
+        <Value repeat="+">
+          <Data>0005</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -11644,7 +12117,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="FFFF" default="0000">
         <Description>#N/A</Description>
-        <UI  name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Cow</Description>
@@ -11653,8 +12126,8 @@
           <Data>0001</Data>
           <Description>Tail only</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Crashes</Description>
         </Value>
       </Variable>
@@ -11666,9 +12139,9 @@
     </Objects>
     <Description>Icicles</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
-        <UI name="select"/>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Stalagmite (floor)</Description>
@@ -11683,8 +12156,8 @@
           <Description>Regrowing Stalactite (ceiling)</Description>
           <Comment>falls when Link is underneath</Comment>
         </Value>
-        <Value>
-          <Data repeat="+">0003</Data>
+        <Value repeat="+">
+          <Data>0003</Data>
           <Description>Stalactite (ceiling)</Description>
           <Comment>falls when Link is underneath</Comment>
         </Value>
@@ -11723,7 +12196,7 @@
     <Description>Song of Time effect</Description>
     <Comment>FIXME: Scarecrow's song?</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11734,8 +12207,8 @@
           <Data>0001</Data>
           <Description>purple</Description>
         </Value>
-        <Value>
-          <Data repeat="+">0002</Data>
+        <Value repeat="+">
+          <Data>0002</Data>
           <Description>Same as 0000</Description>
         </Value>
       </Variable>
@@ -11755,7 +12228,7 @@
     </Objects>
     <Description>Circular piece of stone wall</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>#N/A</Description>
         <UI />
         <Value>
@@ -11796,7 +12269,7 @@
     </Objects>
     <Description>Time block</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF" >
+      <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>

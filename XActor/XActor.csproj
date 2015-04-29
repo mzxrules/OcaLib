@@ -57,12 +57,15 @@
     <Compile Include="Gui\BaseControl.Designer.cs">
       <DependentUpon>BaseControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gui\FlagsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\FlagsControl.Designer.cs">
+      <DependentUpon>FlagsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gui\Helper.cs" />
     <Compile Include="Gui\NumControl.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Gui\NumControl.Designer.cs">
-      <DependentUpon>NumControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Gui\SelectControl.cs">
       <SubType>UserControl</SubType>
@@ -87,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\BaseControl.resx">
       <DependentUpon>BaseControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\FlagsControl.resx">
+      <DependentUpon>FlagsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gui\NumControl.resx">
       <DependentUpon>NumControl.cs</DependentUpon>
