@@ -1600,9 +1600,53 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>Room changing black plane</Description>
-    <Comment>FIXME: Variables</Comment>
-    <Variables />
+    <Description>Room changing plane</Description>
+    <Variables>
+      <Variable mask="03C0">
+        <Description>Type</Description>
+        <UI name="select"/>
+        <Value>
+          <Data>00</Data>
+          <Description>Vertical, two way, fades black when approached</Description>
+        </Value>
+        <Value>
+          <Data>01</Data>
+          <Description>Up/Down, one-way, fades black when approached</Description>
+          <Comment>Front to back one way</Comment>
+        </Value>
+        <Value>
+          <Data>02</Data>
+          <Description>Up/Down, two-way, no fade</Description>
+        </Value>
+        <Value>
+          <Data>03</Data>
+          <Description>Vertical, enabled on switch flag, fades black when approached</Description>
+          <Comment>Becomes a two-way transition if the bound switch flag is set</Comment>
+        </Value>
+        <Value>
+          <Data>04</Data>
+          <Description>Vertical, two-way, no fade</Description>
+        </Value>
+        <Value>
+          <Data>05</Data>
+          <Description>Up/Down, two-way, fades black when approached</Description>
+        </Value>
+        <Value>
+          <Data>06</Data>
+          <Description>Vetical, two-way, no fade</Description>
+          <Comment>FIXME: Used in Water Temple, why is this different?</Comment>
+        </Value>
+      </Variable>
+      <Variable mask="003F" default="3F" nullable="true">
+        <Description>Switch Flag</Description>
+        <Comment>Type 03 only</Comment>
+        <UI name="switchflag"/>
+      </Variable>
+      <Variable mask="FC00" default="00">
+        <Description>Transition Actor List Identifier (Engine Reserved)</Description>
+        <UI name="none"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0024">
     <Objects>
@@ -4056,16 +4100,64 @@
     <Description>Fish, Bugs, Butterflies</Description>
     <Comment>FIXME</Comment>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF">
-        <Description>#N/A</Description>
-        <UI />
+      <Variable mask="001F">
+        <Description>Type</Description>
+        <UI name="select"/>
         <Value>
-          <Data>0024</Data>
-          <Description>Lots</Description>
+          <Data>02</Data>
+          <Description>Fish</Description>
         </Value>
         <Value>
-          <Data>3324</Data>
-          <Description>Three</Description>
+          <Data>03</Data>
+          <Description>Bug</Description>
+        </Value>
+        <Value>
+          <Data>04</Data>
+          <Description>Butterfly</Description>
+        </Value>
+      </Variable>
+      <Variable mask="0060" default="1">
+        <Description>?</Description>
+        <Comment>FIXME: Changes spawn behavior?</Comment>
+        <UI name="select"/>
+        <Value>
+          <Data>0</Data>
+          <Description>?</Description>
+        </Value>
+        <Value>
+          <Data>1</Data>
+          <Description>Default</Description>
+        </Value>
+      </Variable>
+      <Variable mask="F000">
+        <Description>Spawn Count</Description>
+        <UI name="num">
+          <Param id="display">int</Param>
+        </UI>
+        <Value>
+          <Data>0</Data>
+          <Description>Set number spawned via lookup table</Description>
+        </Value>
+      </Variable>
+      <Variable mask="0700" default="3">
+        <Description>Spawn Count (Table Look-up)</Description>
+        <Comment>Ignored if spawn count != 0. Values > 3 cause actor to despawn</Comment>
+        <UI name="select"/>
+        <Value>
+          <Data>0</Data>
+          <Description>12</Description>
+        </Value>
+        <Value>
+          <Data>1</Data>
+          <Description>9</Description>
+        </Value>
+        <Value>
+          <Data>2</Data>
+          <Description>8</Description>
+        </Value>
+        <Value>
+          <Data>3</Data>
+          <Description>0</Description>
         </Value>
       </Variable>
     </Variables>
@@ -7819,19 +7911,32 @@
     <Objects>
       <Object>006C</Object>
     </Objects>
-    <Description>Rotating windmill mechanism</Description>
+    <Description>Windmill Setpieces</Description>
+    <Comment>FIXME</Comment>
+    <Comment-Other>
+      Thick Stone Door behavior:
+
+      Doors that spawn in the down position are spawned in room 0. These doors are opened when the switch flag is set,
+      shut when a certain time has passed and force the player to zone out if not passed through. A pass through seems to
+      only be registered if the room changes?
+    </Comment-Other>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF">
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="FF00">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
-          <Data>0000</Data>
+          <Data>00</Data>
           <Description>Rotating platform</Description>
         </Value>
         <Value repeat="+">
-          <Data>0100</Data>
+          <Data>01</Data>
           <Description>Thick stone door</Description>
+          <Comment>Opened when Dampe approaches //FIXME: Investigate more</Comment>
         </Value>
+      </Variable>
+      <Variable mask="00FF" default="FF" nullable="true">
+        <Description>Nullable Switch Flag</Description>
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -9020,7 +9125,7 @@
         <Value>
           <Data>03</Data>
           <Description>Royal Composer Sharp's grave dialog</Description>
-          <Comment>Sets Switch Temp 09, spawns Sharp</Comment>
+          <Comment>Sets Temporary Switch Flag 09, spawns Sharp</Comment>
           <Meta>
             <Object>006E</Object>
             <Flag>29</Flag>
@@ -9033,7 +9138,7 @@
         <Value>
           <Data>05</Data>
           <Description>Royal Composer Flat's grave dialog</Description>
-          <Comment>Sets Temp 08</Comment>
+          <Comment>Sets Temporary Switch Flag 08, spawns Flat</Comment>
           <Meta>
             <Object>006E</Object>
             <Flag>28</Flag>
@@ -9276,7 +9381,7 @@
     <Variables>
       <Variable maskType="&amp;" mask="000F">
         <Description>Type</Description>
-        <UI />
+        <UI  name ="select"/>
         <Value>
           <Data>00</Data>
           <Description>Circle of shrubs with one in the middle, random drops</Description>
@@ -9289,7 +9394,7 @@
           <Data>02</Data>
           <Description>Circle of rocks, random drops</Description>
         </Value>
-        <Value>
+        <Value uihide="true">
           <Data>03</Data>
           <Description>Crashes</Description>
         </Value>
@@ -9299,7 +9404,7 @@
         <Comment>FIXME: Untested</Comment>
         <UI name="bitflag" />
       </Variable>
-      <Variable maskType="&amp;" mask="FF00">
+      <Variable maskType="&amp;" mask="FF00" default ="FF" nullable ="true">
         <Description>Random Drop Table</Description>
         <UI name="randomdrop" />
       </Variable>
@@ -9368,13 +9473,20 @@
       <Object>00F1</Object>
     </Objects>
     <Description>Bombable rock wall</Description>
-    <Variables />
+    <Comment>FIXME: Test for sure</Comment>
+    <Variables>
+      <Variable mask="003F" default="3F" nullable="true">
+        <Description>Switch Flag</Description>
+        <UI name="switchflag"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="015C">
     <Objects>
       <Object>00AF</Object>
     </Objects>
     <Description>Giant three sided Goron statue</Description>
+    <Comment>FIXME: Variable</Comment>
     <Variables />
   </Actor>
   <Actor id="015E">
@@ -9412,8 +9524,9 @@
     <Description>Whirlpool effect</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF">
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <Comment>FIXME: Test</Comment>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Tall and narrow</Description>
@@ -9422,7 +9535,7 @@
           <Data>0001</Data>
           <Description>Short and wide</Description>
         </Value>
-        <Value repeat="+">
+        <Value repeat="+" uihide="true">
           <Data>0002</Data>
           <Description>Same as 0</Description>
         </Value>
@@ -9434,7 +9547,21 @@
       <Object>013C</Object>
     </Objects>
     <Description>Running man (Child version)</Description>
-    <Variables />
+    <Comment>FIXME: Variables</Comment>
+    <Variables>
+      <Variable mask="FF00">
+        <Description>?</Description>
+        <UI name="select"/>
+        <Value>
+          <Data>00</Data>
+          <Description>? (Hyrule Field</Description>
+        </Value>
+        <Value>
+          <Data>FF</Data>
+          <Description>? (Lon Lon Ranch</Description>
+        </Value>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0163">
     <Objects>
@@ -9442,9 +9569,9 @@
     </Objects>
     <Description>Kokiri Children</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF">
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="00FF">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Standing boy</Description>
@@ -9477,6 +9604,11 @@
           <Data>000C</Data>
           <Description>Blond girl</Description>
         </Value>
+      </Variable>
+      <Variable mask="FF00" nullable="true" default="FF">
+        <Description>?</Description>
+        <Comment>FIXME: Test</Comment>
+        <UI/>
       </Variable>
     </Variables>
   </Actor>
@@ -12226,18 +12358,21 @@
     <Objects>
       <Object>004D</Object>
     </Objects>
-    <Description>Circular piece of stone wall</Description>
+    <Description>False Stone Walls (Gerudo Training Grounds)</Description>
+    <Comment>Non-Solid</Comment>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF">
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
-          <Description>Visible (can walk through it; still visible with the Lens of Truth)</Description>
+          <Description>Circular piece of false stone wall</Description>
+          <Comment>Visible, invisible with Lens of Truth</Comment>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Nothing</Description>
+          <Description>Square piece of false stone wall</Description>
+          <Comment>Oriented horizontally</Comment>
         </Value>
       </Variable>
     </Variables>
