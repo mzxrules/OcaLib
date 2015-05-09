@@ -10045,8 +10045,8 @@
     <Comment>Each variable requires it's own object</Comment>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF">
-        <Description>#N/A</Description>
-        <UI />
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
           <Data>0000</Data>
           <Description>Drunken Ingo</Description>
@@ -10112,70 +10112,70 @@
         </Value>
         <Value>
           <Data>0009</Data>
-          <Description>Singing carpenter boss</Description>
+          <Description>Carpenter Boss, Singing</Description>
           <Meta>
             <Object>0121</Object>
           </Meta>
         </Value>
         <Value>
           <Data>000A</Data>
-          <Description>Singing Carpenter</Description>
+          <Description>Carpenter, Singing</Description>
           <Meta>
             <Object>0122</Object>
           </Meta>
         </Value>
         <Value>
           <Data>000B</Data>
-          <Description>Singing Carpenter</Description>
+          <Description>Carpenter, Singing</Description>
           <Meta>
             <Object>0122</Object>
           </Meta>
         </Value>
         <Value>
           <Data>000C</Data>
-          <Description>Singing Carpenter</Description>
+          <Description>Carpenter, Singing</Description>
           <Meta>
             <Object>0122</Object>
           </Meta>
         </Value>
         <Value>
           <Data>000D</Data>
-          <Description>Singing Carpenter</Description>
+          <Description>Carpenter, Singing</Description>
           <Meta>
             <Object>0122</Object>
           </Meta>
         </Value>
         <Value>
           <Data>000E</Data>
-          <Description>Dancing Kokiri Boy</Description>
+          <Description>Kokiri Boy, Dancing</Description>
           <Meta>
             <Object>00FC</Object>
           </Meta>
         </Value>
         <Value>
           <Data>000F</Data>
-          <Description>Dancing Kokiri Girl</Description>
+          <Description>Kokiri Girl, Dancing</Description>
           <Meta>
             <Object>00FD</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0010</Data>
-          <Description>Line-dancing Gerudo1</Description>
+          <Description>Gerudo, Line-dancing 1</Description>
           <Meta>
             <Object>0116</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0011</Data>
-          <Description>Line-dancing Gerudo2</Description>
+          <Description>Gerudo, Line-dancing 2</Description>
           <Meta>
             <Object>0116</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0012</Data>
-          <Description>Line-dancing, spikey-haired Gerudo</Description>
+          <Description>Gerudo, spikey-haired, Line-dancing</Description>
           <Meta>
             <Object>0116</Object>
           </Meta>
@@ -10196,7 +10196,7 @@
         </Value>
         <Value>
           <Data>0015</Data>
-          <Description>Sitting Mido</Description>
+          <Description>Mido, sitting</Description>
           <Meta>
             <Object>00FB</Object>
           </Meta>
@@ -10210,7 +10210,7 @@
         </Value>
         <Value>
           <Data>0017</Data>
-          <Description>Floating cucco2</Description>
+          <Description>Floating cucco 2</Description>
           <Meta>
             <Object>0013</Object>
           </Meta>
@@ -10224,21 +10224,21 @@
         </Value>
         <Value>
           <Data>0019</Data>
-          <Description>Cucco lady</Description>
+          <Description>Cucco Lady</Description>
           <Meta>
             <Object>0110</Object>
           </Meta>
         </Value>
         <Value>
           <Data>001A</Data>
-          <Description>Potion shopkeeper?</Description>
+          <Description>Potion Shopkeeper</Description>
           <Meta>
             <Object>0159</Object>
           </Meta>
         </Value>
         <Value>
           <Data>001B</Data>
-          <Description>Happy Mask shopkeeper</Description>
+          <Description>Happy Mask Salesman</Description>
           <Meta>
             <Object>013E</Object>
           </Meta>
@@ -10252,7 +10252,7 @@
         </Value>
         <Value>
           <Data>001D</Data>
-          <Description>Bombchu shopkeeper</Description>
+          <Description>Bombchu Shopkeeper</Description>
           <Meta>
             <Object>0165</Object>
           </Meta>
@@ -10273,14 +10273,14 @@
         </Value>
         <Value>
           <Data>0020</Data>
-          <Description>Dancing MegaGoron</Description>
+          <Description>Biggoron, dancing</Description>
           <Meta>
             <Object>00C9</Object>
           </Meta>
         </Value>
         <Value>
           <Data>0021</Data>
-          <Description>Lying down MegaGoron</Description>
+          <Description>Medigoron, lying down</Description>
           <Meta>
             <Object>00C9</Object>
           </Meta>

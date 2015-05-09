@@ -27,7 +27,8 @@ namespace mzxrules.XActor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SCRIPT_Ui_Test();
+            outRichTextBox.Text = Document.Serialize();
+            //SCRIPT_Ui_Test();
             //SCRIPT_Select_Width_Test();   
         }
 

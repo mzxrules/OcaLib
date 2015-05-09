@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address\Addresses.cs" />
+    <Compile Include="Addresses.designer.cs" />
     <Compile Include="Address\Addresser.cs" />
+    <Compile Include="Address\Addresses.cs" />
+    <Compile Include="Address\Addresser_Old.cs" />
     <Compile Include="Cutscenes\ActorCommandEntry.cs" />
     <Compile Include="Cutscenes\CameraCommandEntry.cs" />
     <Compile Include="Cutscenes\TextCommandEntry.cs" />
@@ -144,7 +146,14 @@
       <Name>Helper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Addresses.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XSLTFile1.xslt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

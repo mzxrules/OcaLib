@@ -7,13 +7,16 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using mzxrules.OcaLib.Addr2;
+using Domain = mzxrules.OcaLib.Addr2.SpaceDomain;
+using Addr = mzxrules.OcaLib.Addr2.Address;
+
 
 namespace mzxrules.OcaLib
 {
     public static class Addresser
     {
-        static Address.Addresses addresses;
-
+        static Addresses AddressDoc { get; set; }
         static Addresser()
         {
             var stream = Assembly.GetExecutingAssembly()
@@ -22,121 +25,201 @@ namespace mzxrules.OcaLib
 
             XmlSerializer serializer;
 
-            serializer = new XmlSerializer(typeof(Address.Addresses));
+            serializer = new XmlSerializer(typeof(Addresses));
 
             using (XmlReader reader = XmlReader.Create(stream))
             {
-                addresses = (Address.Addresses)serializer.Deserialize(reader);
+                AddressDoc = (Addresses)serializer.Deserialize(reader);
             }
         }
 
         public static bool TryConvertToRam(RomFileToken file, RomVersion version, string addrVar, out int v)
         {
-            int romStart;
-            int romAddr;
-            int ramAddr;
-            if (!TryGetAddress(file, version, "__Start", out romStart)
-                || !TryGetAddress(file, version, addrVar, out romAddr)
-                || !TryGetAddress("ram", version, "CONV_" + file, out ramAddr))
-            {
-                v = 0;
-                return false;
-            }
+            var block = GetBlock(version, file.ToString());
 
-            v = ramAddr + romAddr - romStart;
-            return true;
+            if (TryMagicConverter(block, addrVar, version, Domain.RAM, out v))
+                return true;
+
+            return false;
         }
 
         public static bool TryConvertToRom(RomFileToken file, RomVersion version, uint ramAddr, out int v)
         {
-            int romStart;
-            int ramStart;
-            if (!TryGetAddress(file, version, "__Start", out romStart)
-                || !TryGetAddress("ram", version, "CONV_" + file, out ramStart)
-                ||ramAddr < ramStart)
-            {
-                v = 0;
-                return false;
-            }
-            ramAddr &= 0xFFFFFF;
-            v = romStart + (int)ramAddr - ramStart;
-            return true;
+            
+            throw new NotImplementedException();
+            //int romStart;
+            //int ramStart;
+            //if (!TryGetAddress(file, version, "__Start", out romStart)
+            //    || !TryGetAddress("ram", version, "CONV_" + file, out ramStart)
+            //    || ramAddr < ramStart)
+            //{
+            //    v = 0;
+            //    return false;
+            //}
+            //ramAddr &= 0xFFFFFF;
+            //v = romStart + (int)ramAddr - ramStart;
+            //return true;
         }
 
         public static bool TryGetRam(RomVersion version, string addrVar, out int v)
         {
-            return TryGetAddress("ram", version, addrVar, out v);
+            Block block;
+            v = 0;
+            if (!TryGetBlock(version, addrVar, out block))
+                return false;
+
+            if (!TryMagicConverter(block, addrVar, version, Domain.RAM, out v))
+                return false;
+
+            return true;
+
+            //return TryGetAddress("ram", version, addrVar, out v);
         }
 
         public static bool TryGetRom(RomFileToken file, RomVersion version, string addrVar, out int v)
         {
-            return TryGetAddress(file, version, addrVar, out v);
+            var block = GetBlock(version, file.ToString());
+
+            if (TryMagicConverter(block, addrVar, version, Domain.ROM, out v))
+                return true;
+
+            return false;
         }
 
         public static int GetRom(RomFileToken file, RomVersion version, string addrVar)
         {
-            return GetAddress(file.ToString(), version, addrVar);
+            int addr;
+
+            var block = GetBlock(version, file.ToString());
+
+            if (addrVar == "__Start")
+                TryGetStart(block, version, Domain.ROM, out addr);
+            else
+                TryMagicConverter(block, addrVar, version, Domain.ROM, out addr);
+            return addr;
         }
 
-        private static XElement GetElementOfVersion(string version, XElement e)
+
+        private static bool TryGetStart(Block block, RomVersion version, Domain domain, out int start)
         {
-            var x = from item in e.Elements("Version")
-                    where item.Attribute("v").Value == version.ToString()
-                    select item;
+            start = 0;
+            var startAddr = block.Start.SingleOrDefault(x => x.domain == domain);
 
-            return x.SingleOrDefault();
+            if (startAddr == null
+                || !TryGetAddrValue(startAddr, version, out start))
+                return false;
+            return true;
         }
 
-        #region GetAddress
-        private static bool TryGetAddress(RomFileToken file, RomVersion version, string addrVar, out int value)
+        private static bool TryGetBlock(RomVersion version, string addressIdentifier, out Block block)
         {
-            return TryGetAddress(file.ToString(), version, addrVar, out value);
+            var game = (from a in AddressDoc.Game
+                       where a.name.ToString() == version.Game.ToString()
+                       select a).Single();
+
+            block = (from b in game.Block
+                     where b.Identifier.Any(x => x.id == addressIdentifier)
+                     select b).SingleOrDefault();
+            if (block != null)
+                return true;
+
+            return false;
         }
 
-        private static bool TryGetAddress(string file, RomVersion version, string addrVar, out int value)
+        private static Block GetBlock(RomVersion version, string blockId)
+        {
+            var game = from a in AddressDoc.Game
+                       where a.name.ToString() == version.Game.ToString()
+                       select a;
+
+            var block = (from b in game.Single().Block
+                         where b.name == blockId
+                         select b).SingleOrDefault();
+            return block;
+        }
+
+        private static bool TryMagicConverter(Block block, string ident, RomVersion version, Domain domain, out int result)
+        {
+            int start, lookup;
+            result = 0;
+
+            var lookupAddr = block.Identifier.SingleOrDefault(x => x.id == ident);
+
+            if (lookupAddr == null)
+                return false;
+
+            if (lookupAddr.Item is Addr)
+            {
+                Addr addr = (Addr)lookupAddr.Item;
+
+                if (!TryGetAddrValue(addr, version, out lookup))
+                    return false;
+
+                //if lookup is absolute, and in the same space, we have it
+
+                if (addr.reftype == AddressType.absolute
+                    && addr.domain == domain)
+                {
+                    result = lookup;
+                    return true;
+                }
+
+                //if lookup is absolute, but not in the same space, convert to offset
+                if (addr.reftype == AddressType.absolute && addr.domain != domain)
+                {
+                    int altStart;
+                    Addr altStartAddr;
+
+                    altStartAddr = block.Start.SingleOrDefault(x => x.domain == addr.domain);
+
+                    if (altStartAddr == null
+                        || !TryGetAddrValue(altStartAddr, version, out altStart))
+                        return false;
+
+                    lookup -= altStart;
+                }
+            }
+            else //if (lookupAddr.Item is Offset)
+            {
+                Offset offset = (Offset)lookupAddr.Item;
+                if (!TryGetOffsetValue(offset, out lookup))
+                    return false;
+            }
+
+            if (!TryGetStart(block, version, domain, out start))
+                return false;
+
+            result = start + lookup;
+
+            return true;
+        }
+
+        private static bool TryGetOffsetValue(Offset offset, out int result)
         {
             try
             {
-                value = GetAddress(file, version, addrVar);
+                result = Convert.ToInt32(offset.Value, 16);
                 return true;
             }
             catch
             {
-                value = 0;
+                result = -1;
                 return false;
             }
         }
 
-        private static int GetAddress(string file, RomVersion version, string addrVar)
+        private static bool TryGetAddrValue(Addr2.Address addr, RomVersion version, out int result)
         {
-
-            var gFile = from a in addresses.Games
-                        where a.Name == version.Game.ToString()
-                        select a;
-
-            var aFile = from b in gFile.Single().Files
-                        where b.Filename == file
-                        select b;
-
-            var iAddr = from c in aFile.Single().Items
-                        where c.Variable == addrVar
-                        select c;
-
-            var qualAddr = from d in iAddr.Single().Values
-                           where d.Version == version.ToString()
-                           select d;
-
-            int? address = qualAddr.Single().Address;
-
-
-            if (address == null)
-                throw new ArgumentException(String.Format("{1} does not exist under {0} in Addresses.xml",
-                    file, addrVar));
-
-            return (int)address;
-
+            try
+            {
+                result = Convert.ToInt32(addr.Data.Single(x => x.ver == version.ToString()).Value, 16);
+            }
+            catch
+            {
+                result = -1;
+                return false;
+            }
+            return true;
         }
-        #endregion
-
     }
 }
