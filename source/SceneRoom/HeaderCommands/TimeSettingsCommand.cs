@@ -14,9 +14,9 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public override string Read()
         {
             return string.Format("Time Settings: {0:X2}{1:X2} {2:X2}",
-                command[4],
-                command[5],
-                command[6]);
+                Command[4],
+                Command[5],
+                Command[6]);
         }
     }
 }

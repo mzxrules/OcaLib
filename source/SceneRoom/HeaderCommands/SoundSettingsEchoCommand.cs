@@ -13,7 +13,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ReadSimple()
         {
-            return String.Format("Sound Settings: Echo {0}", command[7]);
+            return String.Format("Sound Settings: Echo {0}", Command[7]);
         }
     }
 }

@@ -70,11 +70,6 @@ namespace mzxrules.OcaLib.Helper
         #endregion
 
         #region UShort
-        //public static void Convert(out ushort result, byte[] array)
-        //{
-        //    Convert(out result, array, 0);
-        //}
-
         public static void Convert(out ushort result, byte[] array, int offset = 0)
         {
             result = ConvertUShort(array, offset);

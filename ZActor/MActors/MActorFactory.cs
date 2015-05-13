@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZActor.OActors;
+using mzxrules.ZActor.OActors;
 
-namespace ZActor.MActors
+namespace mzxrules.ZActor.MActors
 {
     public class MActorFactory
     {

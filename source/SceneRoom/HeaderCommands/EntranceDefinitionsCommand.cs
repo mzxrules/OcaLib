@@ -29,16 +29,19 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public  void Initialize(System.IO.BinaryReader br)
         {
             int maxEntrances;
-            byte[] bShort = new byte[2];
+            byte position;
+            byte room;
 
             br.BaseStream.Position = EntranceDefinitionsAddress;
             maxEntrances = (int)(EntranceDefinitionsEndAddress - EntranceDefinitionsAddress) / 2;
             for (int i = 0; i < maxEntrances; i++)
             {
-                br.Read(bShort, 0, 2);
+                position = br.ReadByte();
+                room = br.ReadByte();
+
                 //if the second or more entrances are 0000, no worky
-                if (i < 1 || bShort[0] != 0 || bShort[1] != 0)
-                    EntranceDefinitions.Add(new EntranceDef(bShort[0], bShort[1]));
+                if (i < 1 ||position != 0 || position != 0)
+                    EntranceDefinitions.Add(new EntranceDef(position, room));
             }
         }
 
@@ -49,8 +52,8 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public override string ReadSimple()
         {
-            return string.Format("Entrance Index Definitions starts at {0}",
-                EntranceDefinitionsAddress.ToString("X8"));
+            return string.Format("Entrance Index Definitions starts at {0:X8}",
+                EntranceDefinitionsAddress);
         }
     }
 }

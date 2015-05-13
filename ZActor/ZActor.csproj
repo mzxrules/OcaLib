@@ -7,7 +7,7 @@
     <ProjectGuid>{85FD7069-D868-431D-87F9-EB76BDF73FC5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ZActor</RootNamespace>
+    <RootNamespace>mzxrules.ZActor</RootNamespace>
     <AssemblyName>ZActor</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

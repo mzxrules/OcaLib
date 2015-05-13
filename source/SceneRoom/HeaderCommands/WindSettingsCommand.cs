@@ -15,10 +15,10 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public override string ReadSimple()
         {
             return string.Format("Wind Settings: Forces Westward {0:X2}, Vertical {1:X2}, Southward {2:X2}, Strength {3:X2}",
-                command[4],
-                command[5],
-                command[6],
-                command[7]);
+                Command[4],
+                Command[5],
+                Command[6],
+                Command[7]);
         }
     }
 }

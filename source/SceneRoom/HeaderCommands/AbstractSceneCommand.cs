@@ -8,9 +8,8 @@ namespace mzxrules.OcaLib.SceneRoom
 {
     public abstract class AbstractSceneCommand
     {
-        public SceneWord Command { get { return command; } set { command = value; } }
-        protected SceneWord command;
-        public int ID { get { return command.Code; } }
+        public SceneWord Command { get; protected set; }
+        public int ID { get { return Command.Code; } }
 
         public abstract string Read();
         public abstract string ReadSimple();

@@ -28,7 +28,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public override string ReadSimple()
         {
             return string.Format("There are {0} environment setting(s). List starts at {1:X8}.",
-                command[1], EnvironmentSettingsAddress);
+                Command[1], EnvironmentSettingsAddress);
         }
         public override string Read()
         {

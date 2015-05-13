@@ -14,10 +14,9 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ReadSimple()
         {
-            SceneWord cmd = command;
             return string.Format("Room Behavior: {0:X2} : {1:X8}",
-                command.Data1,
-                command.Data2);
+                Command.Data1,
+                Command.Data2);
         }
     }
 }

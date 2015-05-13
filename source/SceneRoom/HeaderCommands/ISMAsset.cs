@@ -9,6 +9,5 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
     {
         long Offset { get; set; }
         void Initialize(System.IO.BinaryReader br);
-        //Vector2<long, long> GetAssetBox();
     }
 }

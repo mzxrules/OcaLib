@@ -1,5 +1,5 @@
-﻿using ZActor.OActors;
-using ZActor.MActors;
+﻿using mzxrules.ZActor.OActors;
+using mzxrules.ZActor.MActors;
 using System;
 using System.Collections.Generic;
 using System.Linq;

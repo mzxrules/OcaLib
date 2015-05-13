@@ -15,8 +15,8 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         {
             return string.Format("Sound Settings: Reverb {0}, Playback option {1}, Song {2:X2}.",
                 Command.Data1,
-                (command[6] == 0x13) ? "Always Playing" : command[6].ToString("X2"),
-                command[7]);
+                (Command[6] == 0x13) ? "Always Playing" : Command[6].ToString("X2"),
+                Command[7]);
         }
     }
 }

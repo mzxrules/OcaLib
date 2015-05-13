@@ -1,5 +1,5 @@
-﻿using ZActor.OActors;
-using ZActor.MActors;
+﻿using mzxrules.ZActor.OActors;
+using mzxrules.ZActor.MActors;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +23,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
             if (Game == Game.OcarinaOfTime)
                 NewActor = ActorFactory.NewActor;//ActorList.Add(ActorFactory.NewActor(actorArray));
-            if (Game == mzxrules.OcaLib.Game.MajorasMask)
+            else if (Game == mzxrules.OcaLib.Game.MajorasMask)
                 NewActor = MActorFactory.NewActor;//ActorList.Add(MActorFactory.NewActor(actorArray));
         }
 

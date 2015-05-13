@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace ZActor
+namespace mzxrules.ZActor
 {
     public static class XmlActorDictionary
     {
@@ -239,7 +239,7 @@ namespace ZActor
 
             if (ItemUsage == Usage.SwitchFlag)
             {
-                ZActor.OActors.SwitchFlag sf = (byte)value;
+                mzxrules.ZActor.OActors.SwitchFlag sf = (byte)value;
                 description = sf.ToString();
             }
             else if (Options.TryGetValue(optionValue, out option))

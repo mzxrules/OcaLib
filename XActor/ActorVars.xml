@@ -10012,6 +10012,7 @@
       <Object>0003</Object>
     </Objects>
     <Description>Push Block (With own save point?)</Description>
+    <Comment>Requires Goron Bracelet or better to move as child or adult</Comment>
     <Variables />
   </Actor>
   <Actor id="017E">

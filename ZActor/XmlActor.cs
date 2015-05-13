@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using mzxrules.OcaLib.Helper;
 
-namespace ZActor
+namespace mzxrules.ZActor
 {
     public class XmlActor : OActors.ActorRecord
     {

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ZActor.MActors
+namespace mzxrules.ZActor.MActors
 {
-    public class MActorRecord : ZActor.OActors.ActorRecord
+    public class MActorRecord : mzxrules.ZActor.OActors.ActorRecord
     {
         protected byte ActorDataA;
         protected ushort DayFlags;

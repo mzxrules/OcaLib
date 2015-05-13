@@ -36,13 +36,14 @@ namespace mzxrules.OcaLib
 
         class Dialog
         {
-            public StringBuilder Text { get; private set; }
+            private StringBuilder Text;
             List<IDialogItem> dialogItems = new List<IDialogItem>();
 
             public Dialog()
             {
                 Text = new StringBuilder();
             }
+
             public void Append(IDialogItem item)
             {
                 if (Text.Length > 0)
@@ -52,8 +53,16 @@ namespace mzxrules.OcaLib
                 }
                 dialogItems.Add(item);
             }
+            public void Append(String text)
+            {
+                Text.Append(text);
+            }
+            public void Append(char p)
+            {
+                Text.Append(p);
+            }
 
-            public void Close()
+            public void Complete()
             {
                 if (Text.Length > 0)
                 {
@@ -71,6 +80,7 @@ namespace mzxrules.OcaLib
                 }
                 return sb.ToString();
             }
+
         }
 
         class TextNode : IDialogItem
@@ -143,6 +153,19 @@ namespace mzxrules.OcaLib
                 {
                     return string.Empty;
                 }
+            }
+        }
+
+        class GotoDialog : IDialogItem
+        {
+            public ushort Dialog { get; private set; }
+            public GotoDialog(ushort d)
+            {
+                Dialog = d;
+            }
+            public string Print(DialogWriterSettings settings)
+            {
+                return String.Format("[goto {0:X4}]", Dialog);
             }
         }
 
@@ -262,6 +285,19 @@ namespace mzxrules.OcaLib
             }
         }
 
+        class ItemIcon : IDialogItem
+        {
+            public byte Item { get; private set; }
+            public ItemIcon(byte item)
+            {
+                Item = item;
+            }
+            public string Print(DialogWriterSettings settings)
+            {
+                return string.Format("[Item Icon {0:X2}]", Item);
+            }
+        }
+
         public static string Rewrite_NesEscapeCustomCodes(byte[] s, DialogWriterSettings settings)
         {
             Dialog result = new Dialog();
@@ -277,7 +313,7 @@ namespace mzxrules.OcaLib
                         result.Append(new LineBreak());
                         break;
                     //[02]		end marker
-                    case 0x02: result.Close(); i = s.Length; break;
+                    case 0x02: result.Complete(); i = s.Length; break;
                     //[03]		---
                     //[04]		wait for keypress / box break
                     case 0x04:
@@ -300,31 +336,32 @@ namespace mzxrules.OcaLib
                         result.Append(new Padding(s[i]));
                         break;
                     //[07 xx xx]	continue with message with id xxxx
-                    case 0x07: i++; result.Text.AppendFormat("[goto {0:X4}]",
-                        Endian.ConvertUShort(BitConverter.ToUInt16(s, i))); i++; break;
+                    case 0x07: i++; result.Append(new GotoDialog(Endian.ConvertUShort(s, i))); i++; break;
+                    //.Text.AppendFormat("[goto {0:X4}]", Endian.ConvertUShort(s, i)); i++; 
                     //[08]		pring following text instantly
-                    case 0x08: result.Text.Append("[08]"); break;
+                    case 0x08: result.Append(new CustomCode(0x08)); break;
                     //[09]		disable 08, instant text printing
-                    case 0x09: result.Text.Append("[09]"); break;
+                    case 0x09: result.Append(new CustomCode(0x09)); break;
                     //[0a]		keep box opened, no reaction to keypresses (used in shop item descriptions)
-                    case 0x0A: result.Text.Append("[0A]");  break;
+                    case 0x0A: result.Append(new CustomCode(0x0A));  break;
                     //[0b]		(wait for external action? used in minigame texts)
-                    case 0x0B: result.Text.Append("[0B]"); break;
+                    case 0x0B: result.Append(new CustomCode(0x0B)); break;
                     //[0c xx]		delay text printing by xx
-                    case 0x0C: i++; result.Text.AppendFormat("[0C:{0:X2}]", s[i]); break;
+                    case 0x0C: i++; result.Append(new CustomCode(0x0C, s[i])); break;
+                    //.Text.AppendFormat("[0C:{0:X2}]", s[i]); break;
                     //[0d]		wait for keypress / continue in same box/line
                     case 0x0D: result.Append(new CustomCode(0x0D)); break;
                     //[0e xx]		fade out interface and wait until xx maxes out(??), ignore all following text
-                    case 0x0E: i++; result.Text.AppendFormat("[0E:{0:X2}]", s[i]); break;
+                    case 0x0E: i++; result.Append(new CustomCode(0x0E, s[i])); break;
+                    //result.Text.AppendFormat("[0E:{0:X2}]", s[i]); break;
                     //[0f]		show player name
-                    case 0x0F: result.Text.Append("[Link]"); break;
+                    case 0x0F: result.Append("[Link]"); break;
                     //[10]		init ocarina playing
                     case 0x10: result.Append(new CustomCode(0x10)); break;
                     //[11]		(fade out interface and wait, ignore all following text, no parameters?)
                     case 0x11: result.Append(new CustomCode(0x11)); break;
                     //[12 xx xx]	play sound xx xx
-                    case 0x12: i++; result.Append(new Sound(  //result.Text.AppendFormat("[sound {0:X4}]",
-                        Endian.ConvertUShort(BitConverter.ToUInt16(s, i)))); i++; break;
+                    case 0x12: i++; result.Append(new Sound(Endian.ConvertUShort(s, i))); i++; break;
                     //  xx xx: 0858 item fanfare
                     //         28E3 frog ribbit sound
                     //         28E4 frog ribbit sound
@@ -347,7 +384,8 @@ namespace mzxrules.OcaLib
                     //         6864 ??? used
                     //         (values documented by OriginalLink)
                     //[13 xx]		show item icon xx
-                    case 0x13: i++; result.Text.AppendFormat("[Item Icon {0:X2}]", s[i]); break;
+                    case 0x13: i++; result.Append(new ItemIcon(s[i])); break;
+                        //result.Text.AppendFormat("", s[i]);
                     //  xx: 00 = deku stick
                     //      01 = deku nut
                     //      ...
@@ -362,7 +400,7 @@ namespace mzxrules.OcaLib
                     //[18]		(show result count of something?)
                     case 0x18: break;
                     //[19]		show golden skulltula count
-                    case 0x19: result.Text.Append("[Gold Skulltulas]"); break;
+                    case 0x19: result.Append("[Gold Skulltulas]"); break;
                     //[1a]		following text can't be skipped with B button
                     case 0x1A: break;
                     //[1b]		init two-choice answer selection (i.e. yes/no arrow)
@@ -372,7 +410,7 @@ namespace mzxrules.OcaLib
                     //[1d]		(show result count of something?)
                     case 0x1D: break;
                     //[1e xx]		show minigame result xx
-                    case 0x1E: i++; result.Text.Append(DisplayValue(s[i])); break;
+                    case 0x1E: i++; result.Append(DisplayValue(s[i])); break;
                     //  xx: 00 = horseback archery points
                     //      02 = largest fish caught
                     //      03 = horse race time
@@ -380,8 +418,8 @@ namespace mzxrules.OcaLib
                     //      06 = dampé race time
                     //      ...?
                     //[1f]		show current hyrule time
-                    case 0x1F: result.Text.Append("[World Time]"); break;
-                    default: result.Text.Append(ConvertSpecialChars(s[i])); break;
+                    case 0x1F: result.Append("[World Time]"); break;
+                    default: result.Append(ConvertSpecialChars(s[i])); break;
                 }
             }
             return result.Print(settings);
@@ -389,6 +427,7 @@ namespace mzxrules.OcaLib
 
         private static string Rewrite_JpnEscapeCustomCodes(byte[] data)
         {
+            Dialog dialog = new Dialog();
             StringBuilder sb = new StringBuilder();
 
             Decoder shift_jis_dec;
@@ -435,18 +474,21 @@ namespace mzxrules.OcaLib
 
                     //[01]		line break
                     case 0x000A:
+                        dialog.Append(new LineBreak()); break;
                         //sb.Append("<br>"); break;
-                        sb.AppendLine(); break;
+                        //sb.AppendLine(); break;
 
                     //[02]		end marker
-                    case 0x8170: i = c.Length; break;
+                    case 0x8170: i = c.Length; dialog.Complete(); break;
                     //[03]		---
                     //[04]		wait for keypress / box break
                     case 0x81a5:
+                        dialog.Append(new BoxBreak()); break;
                         //sb.AppendFormat("<br>{0}<br>", c[i]); break;
-                        sb.AppendLine(); sb.AppendLine(c[i].ToString()); break;
+                        //sb.AppendLine(); sb.AppendLine(c[i].ToString()); break;
                     //[05 xx]		use text color xx
-                    case 0x000B: i++; sb.Append(ColorCode((byte)chars[i])); break;
+                    case 0x000B: i++; dialog.Append(new SetTextColor((byte)chars[i])); break;
+                    //sb.Append(ColorCode((byte)chars[i])); break;
                     //  xx: 00 = white
                     //      01 = red
                     //      02 = green
@@ -458,7 +500,8 @@ namespace mzxrules.OcaLib
                     //[06 xx]		print xx spaces
                     case 0x86C7: i++; break;
                     //[07 xx xx]	continue with message with id xx xx (ex. 033a)
-                    case 0x81CB: sb.AppendFormat("[{0} mesg {1:X4}]", c[i], chars[++i]); break;
+                    case 0x81CB: dialog.Append(new GotoDialog(chars[++i])); break;
+                        //sb.AppendFormat("[{0} mesg {1:X4}]", c[i], chars[++i]); break;
                     //[08]		pring following text instantly
                     case 0x8189: break;
                     //[09]		disable 08, instant text printing
@@ -474,13 +517,14 @@ namespace mzxrules.OcaLib
                     //[0e xx]		fade out interface and wait until xx maxes out(??), ignore all following text
 
                     //[0f]		show player name
-                    case 0x874F: sb.Append("[Link]"); break;
+                    case 0x874F: dialog.Append("[Link]"); break;
                     //[10]		init ocarina playing
                     //case 0x10: i++; break;
                     //[11]		(fade out interface and wait, ignore all following text, no parameters?)
                     //case 0x11: i++; break;
                     //[12 xx xx]	play sound xx xx
-                    case 0x81F3: i++; sb.AppendFormat("[sound {0:X4}]", chars[i]); break;
+                    case 0x81F3: i++; dialog.Append(new Sound(chars[i])); break;
+                    //sb.AppendFormat("[sound {0:X4}]", chars[i]); break;
                     //  xx xx: 0858 item fanfare
                     //         28E3 frog ribbit sound
                     //         28E4 frog ribbit sound
@@ -503,7 +547,8 @@ namespace mzxrules.OcaLib
                     //         6864 ??? used
                     //         (values documented by OriginalLink)
                     //[13 xx]		show item icon xx
-                    case 0x819A: i++; sb.AppendFormat("[Item Icon {0:X2}]", chars[i]); break;
+                    case 0x819A: i++; dialog.Append(new ItemIcon((byte)chars[i])); break;
+                        //sb.AppendFormat("[Item Icon {0:X2}]", chars[i]); break;
                     //  xx: 00 = deku stick
                     //      01 = deku nut
                     //      ...
@@ -538,7 +583,7 @@ namespace mzxrules.OcaLib
                     //[1f]		show current hyrule time
                     //case 0x1F: i++; sb.Append("[World Time]"); break;
                     default:
-                        sb.Append(c[i]);
+                        dialog.Append(c[i]);
                         break;
                 }
             }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using mzxrules.OcaLib.Helper;
 
-namespace ZActor.OActors
+namespace mzxrules.ZActor.OActors
 {
     public static class TransitionActorFactory
     {

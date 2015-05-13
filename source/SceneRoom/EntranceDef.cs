@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ZActor.OActors;
+using mzxrules.ZActor.OActors;
 
 namespace mzxrules.OcaLib.SceneRoom
 {
@@ -10,10 +10,10 @@ namespace mzxrules.OcaLib.SceneRoom
     {
         public byte Room;
         public byte Position;
-        public EntranceDef(byte pIndex, byte m)
+        public EntranceDef(byte position, byte room)
         {
-            Room = m;
-            Position = pIndex;
+            Room = room;
+            Position = position;
         }
     }
 }

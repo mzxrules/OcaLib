@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZActor.OActors
+namespace mzxrules.ZActor.OActors
 {
     public enum SwitchFlagAttributes
     {
