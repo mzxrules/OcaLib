@@ -231,6 +231,12 @@
           <Data ver="DBGMQ">BA0BB0</Data>
         </Address>
       </Identifier>
+      <Identifier id="PlayerPauseOverlayTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!--Two records, then after both (0x1C * 2) is start addr for file in ram, and which one is loaded-->
+          <Data ver="N0">B743E0</Data>
+        </Address>
+      </Identifier>
     </Block>
     <Block name="jpn_message_data_static">
       <Start>
@@ -343,6 +349,21 @@
         </Address>
       </Identifier>
 
+      <Identifier id="RAM_HEAP_PTR">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">12BAA0</Data>
+          <Data ver="N1">12BC60</Data>
+          <Data ver="N2" />
+          <Data ver="P0"></Data>
+          <Data ver="P1">129B00</Data>
+          <Data ver="GCNJ" />
+          <Data ver="GCNP" />
+          <Data ver="MQP" />
+          <Data ver="MQJ" />
+          <Data ver="DBGMQ"></Data>
+        </Address>
+      </Identifier>
+      
       <!--Address to a Linked list that maps out certain memory blocks-->
       <Identifier id="RAM_LL_First">
         <Address reftype="absolute" domain="RAM">

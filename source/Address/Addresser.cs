@@ -33,32 +33,20 @@ namespace mzxrules.OcaLib
             }
         }
 
-        public static bool TryConvertToRam(RomFileToken file, RomVersion version, string addrVar, out int v)
+        #region (Try)GetRam
+
+        public static bool TryGetRam(RomFileToken file, RomVersion version, out int v)
         {
             var block = GetBlock(version, file.ToString());
 
-            if (TryMagicConverter(block, addrVar, version, Domain.RAM, out v))
-                return true;
-
-            return false;
+            return TryGetStart(block, version, Domain.RAM, out v);
         }
 
-        public static bool TryConvertToRom(RomFileToken file, RomVersion version, uint ramAddr, out int v)
+        public static bool TryGetRam(RomFileToken file, RomVersion version, string addrVar, out int v)
         {
-            
-            throw new NotImplementedException();
-            //int romStart;
-            //int ramStart;
-            //if (!TryGetAddress(file, version, "__Start", out romStart)
-            //    || !TryGetAddress("ram", version, "CONV_" + file, out ramStart)
-            //    || ramAddr < ramStart)
-            //{
-            //    v = 0;
-            //    return false;
-            //}
-            //ramAddr &= 0xFFFFFF;
-            //v = romStart + (int)ramAddr - ramStart;
-            //return true;
+            var block = GetBlock(version, file.ToString());
+
+            return TryMagicConverter(block, addrVar, version, Domain.RAM, out v);
         }
 
         public static bool TryGetRam(RomVersion version, string addrVar, out int v)
@@ -76,6 +64,27 @@ namespace mzxrules.OcaLib
             //return TryGetAddress("ram", version, addrVar, out v);
         }
 
+        #endregion
+
+        #region (Try)GetRom
+        public static bool TryGetRom(RomFileToken file, RomVersion version, uint ramAddr, out int v)
+        {
+
+            throw new NotImplementedException();
+            //int romStart;
+            //int ramStart;
+            //if (!TryGetAddress(file, version, "__Start", out romStart)
+            //    || !TryGetAddress("ram", version, "CONV_" + file, out ramStart)
+            //    || ramAddr < ramStart)
+            //{
+            //    v = 0;
+            //    return false;
+            //}
+            //ramAddr &= 0xFFFFFF;
+            //v = romStart + (int)ramAddr - ramStart;
+            //return true;
+        }
+
         public static bool TryGetRom(RomFileToken file, RomVersion version, string addrVar, out int v)
         {
             var block = GetBlock(version, file.ToString());
@@ -86,10 +95,18 @@ namespace mzxrules.OcaLib
             return false;
         }
 
+        public static int GetRom(RomFileToken file, RomVersion version)
+        {
+            int addr;
+            var block = GetBlock(version, file.ToString());
+
+            TryGetStart(block, version, Domain.ROM, out addr);
+            return addr;
+        }
+
         public static int GetRom(RomFileToken file, RomVersion version, string addrVar)
         {
             int addr;
-
             var block = GetBlock(version, file.ToString());
 
             if (addrVar == "__Start")
@@ -99,6 +116,7 @@ namespace mzxrules.OcaLib
             return addr;
         }
 
+        #endregion
 
         private static bool TryGetStart(Block block, RomVersion version, Domain domain, out int start)
         {

@@ -69,8 +69,8 @@ namespace mzxrules.OcaLib
             entranceTableAddr = entranceTableBase + (sizeof(Int32) * 3) * entranceSceneIndex + 4;
 
             //Capture pointer
-            if (!Addresser.TryConvertToRom(MRom.FileList.code, Version, (uint)ReadInt32(entranceTableAddr), out entranceAddr)
-                || !Addresser.TryConvertToRom(MRom.FileList.code, Version, (uint)ReadInt32(entranceAddr), out entranceAddr))
+            if (!Addresser.TryGetRom(MRom.FileList.code, Version, (uint)ReadInt32(entranceTableAddr), out entranceAddr)
+                || !Addresser.TryGetRom(MRom.FileList.code, Version, (uint)ReadInt32(entranceAddr), out entranceAddr))
             {
                 return null;
             }
