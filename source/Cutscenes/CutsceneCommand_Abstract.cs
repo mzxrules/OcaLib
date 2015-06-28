@@ -16,5 +16,7 @@ namespace mzxrules.OcaLib.Cutscenes
         protected abstract int GetLength();
 
         public abstract string ReadCommand();
+
+        public abstract void Save(BinaryWriter bw);
     }
 }

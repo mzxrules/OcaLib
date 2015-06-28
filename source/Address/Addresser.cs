@@ -33,6 +33,27 @@ namespace mzxrules.OcaLib
             }
         }
 
+
+        public static bool TryGetOffset(RomVersion version, string addrVar, out int v)
+        {
+            Block block;
+            v = 0;
+
+            if (!TryGetBlock(version, addrVar, out block))
+                return false;
+
+            var lookupAddr = block.Identifier.SingleOrDefault(x => x.id == addrVar);
+
+            if (!(lookupAddr.Item is Offset))
+                return false;
+
+
+            Offset offset = (Offset)lookupAddr.Item;
+            if (!TryGetOffsetValue(offset, out v))
+                return false;
+            return true;
+        }
+
         #region (Try)GetRam
 
         public static bool TryGetRam(RomFileToken file, RomVersion version, out int v)

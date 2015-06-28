@@ -9957,7 +9957,13 @@
       <Object>0156</Object>
     </Objects>
     <Description>Metal bars (Ganon's Castle)</Description>
-    <Variables />
+    <Comment>FIXME: variable</Comment>
+    <Variables>
+      <Variable mask="3F00" default="3F" nullable="true">
+        <Description>Switch Flag</Description>
+        <UI name="switchflag"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="0178">
     <Objects>
@@ -9984,7 +9990,21 @@
       <Object>0060</Object>
     </Objects>
     <Description>Adult Zelda</Description>
-    <Variables />
+    <Comment>Tower Collapse //FIXME: Variable</Comment>
+    <Comment-Other>
+      Sets? Temp Flag 36 for Tower Collapse Timer,
+      listens to Temp Flag 37 to determine whether to play intro cs
+    </Comment-Other>
+    <Variables>
+      <Variable mask="3F00" nullable="true" default="3F">
+        <Description>Switch Flag</Description>
+        <UI name="switchflag"/>
+      </Variable>
+      <Variable mask="00F0" nullable="false">
+        <Description>Path</Description>
+        <UI name="path"/>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="017A">
     <Objects>

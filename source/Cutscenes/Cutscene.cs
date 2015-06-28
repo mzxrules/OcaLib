@@ -122,5 +122,11 @@ namespace mzxrules.OcaLib.Cutscenes
             }
             return sb.ToString();
         }
+
+        public void Save(BinaryWriter bw)
+        {
+            foreach (CutsceneCommand command in Commands)
+                command.Save(bw);
+        }
     }
 }

@@ -34,6 +34,14 @@ namespace mzxrules.OcaLib.Cutscenes
                 Entries[i].Load(this, br);
             }
         }
+        public override void Save(BinaryWriter bw)
+        {
+            bw.WriteBig(Command);
+            bw.WriteBig((Int32)Entries.Count);
+            foreach (TextCommandEntry item in Entries)
+                item.Save(bw);
+        }
+
         public override string ToString()
         {
             return String.Format("{0:X8}: Text Command, {1} entries",

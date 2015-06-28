@@ -50,6 +50,20 @@ namespace mzxrules.OcaLib.Cutscenes
 
         }
 
+        public void Save(BinaryWriter bw)
+        {
+            bw.WriteBig(action);
+            bw.WriteBig(StartFrame);
+            bw.WriteBig(EndFrame);
+            //0x04
+            bw.WriteBig(d);
+            //0x08
+            bw.WriteBig(e);
+            bw.WriteBig(StartVertex);
+            bw.WriteBig(EndVertex);
+            bw.WriteBig(VertexNormal);
+        }
+
         public override string ToString()
         {
             StringBuilder sb;

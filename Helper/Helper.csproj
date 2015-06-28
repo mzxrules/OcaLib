@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryReaderExtension.cs" />
+    <Compile Include="BinaryWriterExtension.cs" />
     <Compile Include="FileAddress.cs" />
     <Compile Include="FileOrder.cs" />
     <Compile Include="CRC.cs" />

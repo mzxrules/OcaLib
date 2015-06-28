@@ -9,7 +9,7 @@ namespace mzxrules.OcaLib.Cutscenes
 {
     class CameraCommand : CutsceneCommand
     {
-        CameraCommandParams p;
+        CameraCommandParams Params;
         List<CameraCommandEntry> entries = new List<CameraCommandEntry>();
 
         public CameraCommand(uint command, BinaryReader br)
@@ -28,8 +28,8 @@ namespace mzxrules.OcaLib.Cutscenes
             CameraCommandEntry entry;
             short startFrame;
 
-            p = new CameraCommandParams(this, br);
-            startFrame = p.StartFrame;
+            Params = new CameraCommandParams(this, br);
+            startFrame = Params.StartFrame;
 
             do
             {
@@ -55,7 +55,7 @@ namespace mzxrules.OcaLib.Cutscenes
                 default: commandType = "Unknown Command"; break;
             }
 
-            return String.Format("{0:X8}: {3} Camera {2} , {1}", Command, p,
+            return String.Format("{0:X8}: {3} Camera {2} , {1}", Command, Params,
                 commandType, relativity);
         }
 
@@ -76,6 +76,14 @@ namespace mzxrules.OcaLib.Cutscenes
                 yield return e;
         }
 
+        public override void Save(BinaryWriter bw)
+        {
+            //Head
+            Params.Save(bw);
+            foreach (CameraCommandEntry item in entries)
+                item.Save(bw);
+        }
+
         class CameraCommandParams : IFrameData
         {
             public const int LENGTH = 8;
@@ -93,6 +101,15 @@ namespace mzxrules.OcaLib.Cutscenes
                 StartFrame = br.ReadBigInt16();
                 EndFrame = br.ReadBigInt16();
                 z = br.ReadBigUInt16();
+            }
+
+            public void Save(BinaryWriter bw)
+            {
+                bw.WriteBig(RootCommand.Command);
+                bw.WriteBig(w);
+                bw.WriteBig(StartFrame);
+                bw.WriteBig(EndFrame);
+                bw.WriteBig(z);
             }
 
             public override string ToString()

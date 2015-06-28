@@ -27,5 +27,11 @@ namespace mzxrules.OcaLib.Helper
             return Endian.ConvertUInt32(b.ReadUInt32());
         }
 
+        public static float ReadBigFloat(this BinaryReader b)
+        {
+            byte[] fl = b.ReadBytes(4);
+            Endian.ReverseBytes(ref fl, 4);
+            return BitConverter.ToSingle(fl, 0);
+        }
     }
 }

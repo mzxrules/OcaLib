@@ -64,5 +64,10 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             yield return this;
         }
+        public override void Save(BinaryWriter bw)
+        {
+            bw.WriteBig(Commands);
+            bw.WriteBig(EndFrame);
+        }
     }
 }

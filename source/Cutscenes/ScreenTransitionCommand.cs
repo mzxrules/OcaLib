@@ -11,7 +11,7 @@ namespace mzxrules.OcaLib.Cutscenes
     {
         const int LENGTH = 0x10;
         uint a;
-        ushort transition;
+        public ushort Transition;
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
         public CutsceneCommand RootCommand
@@ -19,7 +19,7 @@ namespace mzxrules.OcaLib.Cutscenes
             get { return this; }
             set { throw new InvalidOperationException(); }
         }
-        short endFrameD;
+        short EndFrameD;
 
         public ScreenTransitionCommand(uint command, BinaryReader br)
             : base(command, br)
@@ -40,13 +40,22 @@ namespace mzxrules.OcaLib.Cutscenes
             arr = br.ReadBytes(12);
 
             Endian.Convert(out a, arr, 0);
-            Endian.Convert(out transition, arr, 4);
+            Endian.Convert(out Transition, arr, 4);
             Endian.Convert(out startFrame, arr, 6);
             Endian.Convert(out endFrame, arr, 8);
-            Endian.Convert(out endFrameD, arr, 10);
+            Endian.Convert(out EndFrameD, arr, 10);
 
             StartFrame = startFrame;
             EndFrame = endFrame;
+        }
+        public override void Save(BinaryWriter bw)
+        {
+            bw.WriteBig(Command);
+            bw.WriteBig(a);
+            bw.WriteBig(Transition);
+            bw.WriteBig(StartFrame);
+            bw.WriteBig(EndFrame);
+            bw.WriteBig(EndFrameD);
         }
         public override string ReadCommand()
         {
@@ -61,10 +70,10 @@ namespace mzxrules.OcaLib.Cutscenes
             sb.Append(string.Format(
                 "{0:X8}, Transition: {1:X4}, Start: {2:X4} End: {3:X4} End: {4:X4}",
                 a,
-                transition,
+                Transition,
                 StartFrame,
                 EndFrame,
-                endFrameD));
+                EndFrameD));
             return sb.ToString();
         }
         protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()

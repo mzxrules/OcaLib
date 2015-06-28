@@ -29,6 +29,14 @@ namespace mzxrules.OcaLib.Cutscenes
             }
         }
 
+        public override void Save(BinaryWriter bw)
+        {
+            bw.WriteBig(Command);
+            bw.WriteBig(Entries.Count);
+            foreach (ActorCommandEntry item in Entries)
+                item.Save(bw);
+        }
+
         public override string ToString()
         {
             return String.Format("{0:X8}: Actor, Entries: {1:X8}", Command, Entries.Count);

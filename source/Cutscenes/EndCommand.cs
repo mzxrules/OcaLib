@@ -18,6 +18,13 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             br.ReadInt32();
         }
+        public override void Save(BinaryWriter bw)
+        {
+            int a = -1;
+            int b = 0;
+            bw.Write(a);
+            bw.Write(b);
+        }
         public override string ToString()
         {
             return String.Format("{0:X8}: End Cutscene {1:X4}", Command, Index + Length);

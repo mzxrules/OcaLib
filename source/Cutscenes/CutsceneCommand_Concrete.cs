@@ -19,7 +19,7 @@ namespace mzxrules.OcaLib.Cutscenes
         protected CutsceneCommand(uint command, BinaryReader br)
         {
             this.Command = command;
-            Index = br.BaseStream.Position;
+            Index = br.BaseStream.Position - 4;
         }
 
         public override string ReadCommand()
@@ -32,5 +32,9 @@ namespace mzxrules.OcaLib.Cutscenes
             throw new InvalidOperationException();
         }
 
+        public override void Save(BinaryWriter bw)
+        {
+            throw new InvalidOperationException();
+        }
     }
 }

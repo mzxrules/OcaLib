@@ -25,6 +25,10 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public bool IsLastEntry { get { return (Terminator == 0xFF); } }
 
+        public CutsceneCommand RootCommand { get; set; }
+        public short StartFrame { get; set; }
+        public short EndFrame { get; set; }
+
         public void Load(CutsceneCommand cmd, short startFrame, BinaryReader br)
         {
             byte[] arr;
@@ -50,6 +54,22 @@ namespace mzxrules.OcaLib.Cutscenes
             RootCommand = cmd;
         }
 
+        public void Save(BinaryWriter bw)
+        {
+            //0x00
+            bw.Write(Terminator);
+            bw.Write(Rotation);
+            bw.WriteBig(Frames);
+            //0x04
+            bw.WriteBig(AngleOfView);
+            //0x08
+            bw.WriteBig(x);
+            bw.WriteBig(y);
+            //0x0C
+            bw.WriteBig(z);
+            bw.WriteBig(d);
+        }
+
         public override string ToString()
         {
             return String.Format("{0:X2} Frames: {1:X4} Roll: {7:F2}, View Angle: {2:F4} ({3}, {4}, {5}) {6:X4}",
@@ -61,24 +81,6 @@ namespace mzxrules.OcaLib.Cutscenes
                 z,
                 d,
                 (float)Rotation * 180 / 128);
-        }
-
-        public CutsceneCommand RootCommand
-        {
-            get;
-            set;
-        }
-
-        public short StartFrame
-        {
-            get;
-            set;
-        }
-
-        public short EndFrame
-        {
-            get;
-            set;
         }
     }
 }

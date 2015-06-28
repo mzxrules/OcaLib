@@ -48,7 +48,7 @@ namespace mzxrules.OcaLib.Helper
         }
 
         
-        #region Short
+        #region Int16
 
         public static void Convert(ref short v)
         {
@@ -58,9 +58,18 @@ namespace mzxrules.OcaLib.Helper
         {
             result = ConvertShort(array, offset);
         }
+        public static Int16 ConvertInt16(Int16 v)
+        {
+            return ConvertShort(v);
+        }
         public static short ConvertShort(short v)
         {
             return (short)(((v & 0xff) << 8) | ((v >> 8) & 0xff));
+        }
+
+        public static Int16 ConvertInt16(byte[] array, int offset)
+        {
+            return ConvertShort(array, offset);
         }
         public static short ConvertShort(byte[] array, int offset)
         {
@@ -69,12 +78,16 @@ namespace mzxrules.OcaLib.Helper
 
         #endregion
 
-        #region UShort
+        #region UInt16
         public static void Convert(out ushort result, byte[] array, int offset = 0)
         {
             result = ConvertUShort(array, offset);
         }
 
+        public static UInt16 ConvertUInt16(byte[] array, int offset)
+        {
+            return ConvertUShort(array, offset);
+        }
         public static ushort ConvertUShort(byte[] array, int offset)
         {
             return (ushort)((array[offset] << 8) + array[offset + 1]);
@@ -84,7 +97,10 @@ namespace mzxrules.OcaLib.Helper
         {
             v = ConvertUShort(v);
         }
-
+        public static UInt16 ConvertUInt16(ushort v)
+        {
+            return ConvertUShort(v);
+        }
         public static ushort ConvertUShort(ushort v)
         {
             return (ushort)(((v & 0xff) << 8) | ((v >> 8) & 0xff));

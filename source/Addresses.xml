@@ -364,6 +364,18 @@
         </Address>
       </Identifier>
       
+      <Identifier id ="RAM_DUMB_GLOBAL_CONTEXT">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">114DE0</Data>
+        </Address>
+      </Identifier>
+      
+      <Identifier id ="RAM_INNER_HEAP_PTR">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">11BEF0</Data>
+        </Address>
+      </Identifier>
+      
       <!--Address to a Linked list that maps out certain memory blocks-->
       <Identifier id="RAM_LL_First">
         <Address reftype="absolute" domain="RAM">
