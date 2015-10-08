@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class WolfosActor : ActorRecord
+    class WolfosActor : ActorRecord_Wrapper
     {
         SwitchFlag flag;
         public WolfosActor(byte[] record, params int[] p)

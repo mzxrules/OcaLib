@@ -7,7 +7,7 @@ using System.Text;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    class TextCommandEntry : IFrameData
+    public class TextCommandEntry : IFrameData
     {
         public const int LENGTH = 12;
         public ushort TextId;

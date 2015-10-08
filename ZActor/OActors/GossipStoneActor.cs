@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class GossipStoneActor:ActorRecord
+    class GossipStoneActor:ActorRecord_Wrapper
     {
 
         public GossipStoneActor(byte[] record, params int[] p)

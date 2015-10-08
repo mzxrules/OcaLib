@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mzxrules.ZActor.OActors
 {
-    class TempleOfTimeActors : ActorRecord
+    class TempleOfTimeActors : ActorRecord_Wrapper
     {
         public TempleOfTimeActors(byte[] record, params int[] p)
             : base(record)

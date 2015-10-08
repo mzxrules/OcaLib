@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class IronKnuckleRoomActor : ActorRecord
+    class IronKnuckleRoomActor : ActorRecord_Wrapper
     {
         byte type;
         public IronKnuckleRoomActor(byte[] record, params int[] p)

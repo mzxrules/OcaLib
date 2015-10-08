@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    public class InvisibleCollectableActor : ActorRecord
+    public class InvisibleCollectableActor : ActorRecord_Wrapper
     {
         byte a1;
         byte t8;

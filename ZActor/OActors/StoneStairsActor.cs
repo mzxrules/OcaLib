@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class StoneStairsActor : ActorRecord
+    class StoneStairsActor : ActorRecord_Wrapper
     {
         SwitchFlag flags;
         public StoneStairsActor(byte[] record, params int[] p)

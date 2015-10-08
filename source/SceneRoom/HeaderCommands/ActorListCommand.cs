@@ -1,9 +1,8 @@
-﻿using mzxrules.ZActor.OActors;
-using mzxrules.ZActor.MActors;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using mzxrules.OcaLib.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
@@ -22,9 +21,9 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             Game = game;
 
             if (Game == Game.OcarinaOfTime)
-                NewActor = ActorFactory.NewActor;//ActorList.Add(ActorFactory.NewActor(actorArray));
+                NewActor = ActorFactory.OcarinaActors;
             else if (Game == mzxrules.OcaLib.Game.MajorasMask)
-                NewActor = MActorFactory.NewActor;//ActorList.Add(MActorFactory.NewActor(actorArray));
+                NewActor = ActorFactory.MaskActors;
         }
 
         public override string Read()
@@ -85,10 +84,10 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
                 br.Read(actorArray, 0, ActorRecord.SIZE);
                 ActorList.Add(NewActor(actorArray));
                 //if (Game == Game.OcarinaOfTime)
-                //    ActorList.Add(ActorFactory.NewActor(actorArray));
-                //if (Game == OcarinaPlayer.Game.MajorasMask)
-                //    ActorList.Add(MActorFactory.NewActor(actorArray));
-                //ActorList.Add(new XmlActor(actorArray));
+                //    ActorList.Add(ActorFactory.OcarinaActorFactory(actorArray));
+                //if (Game == mzxrules.OcaLib.Game.MajorasMask)
+                //    ActorList.Add(ActorFactory.MaskActorFactory(actorArray));
+                ////ActorList.Add(new XmlActor(actorArray));
             }
         }
         public List<ActorRecord> GetActors()

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    class CutsceneCommand : AbstractCutsceneCommand
+    public class CutsceneCommand : AbstractCutsceneCommand
     {
         public IEnumerable<IFrameData> IFrameDataEnum { get { return GetIFrameDataEnumerator(); } }
 
@@ -16,11 +16,12 @@ namespace mzxrules.OcaLib.Cutscenes
                 yield return null;
         }
 
-        protected CutsceneCommand(uint command, BinaryReader br)
+        protected CutsceneCommand(int command, BinaryReader br)
         {
             this.Command = command;
             Index = br.BaseStream.Position - 4;
         }
+        protected CutsceneCommand() { }
 
         public override string ReadCommand()
         {
@@ -33,6 +34,16 @@ namespace mzxrules.OcaLib.Cutscenes
         }
 
         public override void Save(BinaryWriter bw)
+        {
+            throw new InvalidOperationException();
+        }
+
+        public override void AddEntry(IFrameData item)
+        {
+            throw new InvalidOperationException();
+        }
+
+        public override void DeleteEntry(IFrameData item)
         {
             throw new InvalidOperationException();
         }

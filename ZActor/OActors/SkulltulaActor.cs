@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class SkulltulaActor:ActorRecord
+    class SkulltulaActor:ActorRecord_Wrapper
     {
         byte type;
         public SkulltulaActor(byte[] record, params int[] p)

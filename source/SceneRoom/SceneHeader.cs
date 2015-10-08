@@ -1,6 +1,6 @@
-﻿using mzxrules.OcaLib.Helper;
+﻿using mzxrules.OcaLib.Actor;
+using mzxrules.OcaLib.Helper;
 using mzxrules.OcaLib.SceneRoom.Commands;
-using mzxrules.ZActor.OActors;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -7,7 +7,7 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.ZActor
 {
-    public class XmlActor : OActors.ActorRecord
+    public class XmlActor : OActors.ActorRecord_Wrapper
     {
         //public static int SIZE = 0x10;
         //public ushort Actor;

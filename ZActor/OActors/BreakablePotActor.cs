@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class BreakablePotActor : ActorRecord
+    class BreakablePotActor : ActorRecord_Wrapper
     {
         CollectableFlag flags;
         byte drop;

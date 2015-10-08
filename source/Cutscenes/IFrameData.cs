@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    interface IFrameData
+    public interface IFrameData
     {
         CutsceneCommand RootCommand { get; set; }
         short StartFrame { get; set; }

@@ -7,20 +7,48 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    class CameraCommand : CutsceneCommand
+    public class CameraCommand : CutsceneCommand, IFrameData
     {
-        CameraCommandParams Params;
-        List<CameraCommandEntry> entries = new List<CameraCommandEntry>();
+        public CutsceneCommand RootCommand { get { return this; } set { throw new InvalidOperationException(); } }
+        public CameraCommand.Type CommandType { get { return GetCameraCommandType(); } }
 
-        public CameraCommand(uint command, BinaryReader br)
+        const int LENGTH = 12;
+        public short StartFrame { get; set; }
+        public short EndFrame { get; set; }
+
+        public ushort UnknownA;
+        public ushort zero;
+
+        public List<CameraCommandEntry> Entries = new List<CameraCommandEntry>();
+
+        public CameraCommand(int command, BinaryReader br)
             : base(command, br)
         {
             Load(br);
         }
-
-        protected override int GetLength()
+        public CameraCommand(int command)
         {
-            return (4 + CameraCommandParams.LENGTH + (CameraCommandEntry.LENGTH * entries.Count));
+            Load(command);
+        }
+
+        public CameraCommand(int command, short startFrame, short endFrame)
+        {
+            Load(command, startFrame, endFrame);
+        }
+
+        public override void DeleteEntry(IFrameData i)
+        {
+            CameraCommandEntry entry = (CameraCommandEntry)i;
+            Entries.Remove(entry);
+        }
+
+        private void Load(int command, short startFrame = 0, short endFrame = 0)
+        {
+            Command = command;
+            UnknownA = 1;
+            StartFrame = startFrame;
+            EndFrame = endFrame;
+            zero = 0;
         }
 
         private void Load(BinaryReader br)
@@ -28,8 +56,12 @@ namespace mzxrules.OcaLib.Cutscenes
             CameraCommandEntry entry;
             short startFrame;
 
-            Params = new CameraCommandParams(this, br);
-            startFrame = Params.StartFrame;
+            UnknownA = br.ReadBigUInt16();
+            StartFrame = br.ReadBigInt16();
+            EndFrame = br.ReadBigInt16();
+            zero = br.ReadBigUInt16();
+
+            startFrame = StartFrame;
 
             do
             {
@@ -37,9 +69,22 @@ namespace mzxrules.OcaLib.Cutscenes
                 entry.Load(this, startFrame, br);
                 startFrame += (short)entry.Frames;
 
-                entries.Add(entry);
+                Entries.Add(entry);
             }
             while (!entry.IsLastEntry);
+        }
+
+
+        private CameraCommand.Type GetCameraCommandType()
+        {
+            switch (Command)
+            {
+                case 01: return CameraCommand.Type.Position;
+                case 05: return CameraCommand.Type.Position;
+                case 02: return CameraCommand.Type.FocusPoint;
+                case 06: return CameraCommand.Type.FocusPoint;
+                default: return CameraCommand.Type.Invalid;
+            }
         }
 
         public override string ToString()
@@ -55,8 +100,17 @@ namespace mzxrules.OcaLib.Cutscenes
                 default: commandType = "Unknown Command"; break;
             }
 
-            return String.Format("{0:X8}: {3} Camera {2} , {1}", Command, Params,
+            return String.Format("{0:X8}: {3} Camera {2}, {1}", Command, ParamsToString(),
                 commandType, relativity);
+        }
+
+        public string ParamsToString()
+        {
+            return String.Format("{0:X4} Start: {1:X4} End: {2:X4} {3:X4}",
+                UnknownA,
+                StartFrame,
+                EndFrame,
+                zero);
         }
 
         public override string ReadCommand()
@@ -65,61 +119,39 @@ namespace mzxrules.OcaLib.Cutscenes
 
             result = new StringBuilder();
             result.AppendLine(ToString());
-            foreach (CameraCommandEntry e in entries)
+            foreach (CameraCommandEntry e in Entries)
                 result.AppendLine("   " + e.ToString());
             return result.ToString();
         }
 
+        protected override int GetLength()
+        {
+            return (LENGTH + (CameraCommandEntry.LENGTH * Entries.Count));
+        }
+
         protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
         {
-            foreach (IFrameData e in entries)
+            yield return this;
+            foreach (IFrameData e in Entries)
                 yield return e;
         }
 
         public override void Save(BinaryWriter bw)
         {
             //Head
-            Params.Save(bw);
-            foreach (CameraCommandEntry item in entries)
+            bw.WriteBig(Command);
+            bw.WriteBig(UnknownA);
+            bw.WriteBig(StartFrame);
+            bw.WriteBig(EndFrame);
+            bw.WriteBig(zero);
+            foreach (CameraCommandEntry item in Entries)
                 item.Save(bw);
         }
-
-        class CameraCommandParams : IFrameData
+        public enum Type
         {
-            public const int LENGTH = 8;
-            public CutsceneCommand RootCommand { get; set; }
-            public short StartFrame { get; set; }
-            public short EndFrame { get; set; }
-
-            public ushort w;
-            public ushort z;
-
-            public CameraCommandParams(CutsceneCommand cmd, BinaryReader br)
-            {
-                RootCommand = cmd;
-                w = br.ReadBigUInt16();
-                StartFrame = br.ReadBigInt16();
-                EndFrame = br.ReadBigInt16();
-                z = br.ReadBigUInt16();
-            }
-
-            public void Save(BinaryWriter bw)
-            {
-                bw.WriteBig(RootCommand.Command);
-                bw.WriteBig(w);
-                bw.WriteBig(StartFrame);
-                bw.WriteBig(EndFrame);
-                bw.WriteBig(z);
-            }
-
-            public override string ToString()
-            {
-                return String.Format("{0:X4} Start: {1:X4} End: {2:X4} {3:X4}",
-                    w,
-                    StartFrame,
-                    EndFrame,
-                    z);
-            }
+            FocusPoint,
+            Position,
+            Invalid
         }
     }
 }

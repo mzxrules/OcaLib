@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class LargeCrateActor : ActorRecord
+    class LargeCrateActor : ActorRecord_Wrapper
     {
         public LargeCrateActor(byte[] record, params int[] p)
             : base(record)

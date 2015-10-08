@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class MoveableBlockActor:ActorRecord
+    class MoveableBlockActor:ActorRecord_Wrapper
     {
         SwitchFlag flag;
         byte color;

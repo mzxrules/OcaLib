@@ -1,8 +1,5 @@
-﻿using System;
+﻿using mzxrules.OcaLib.Actor;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using mzxrules.ZActor.OActors;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {

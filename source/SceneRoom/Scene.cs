@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using mzxrules.ZActor.OActors;
 using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.SceneRoom

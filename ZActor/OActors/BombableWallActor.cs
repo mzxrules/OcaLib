@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class BombableWallActor: ActorRecord, ISwitchFlag
+    class BombableWallActor: ActorRecord_Wrapper, ISwitchFlag
     {
         bool dodongoCutscene;
         public SwitchFlag Flag { get { return flag; } set { flag = value; } }

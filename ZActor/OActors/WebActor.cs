@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class WebActor : ActorRecord
+    class WebActor : ActorRecord_Wrapper
     {
         SwitchFlag setWhenBrokenFlag;
         SwitchFlag burnFlag;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mzxrules.ZActor.OActors
 {
-    class BasicSwitchActor : ActorRecord, ISwitchFlag
+    class BasicSwitchActor : ActorRecord_Wrapper, ISwitchFlag
     {
         byte type;
         bool frozen;

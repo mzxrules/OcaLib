@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class BlockSpotSwitchActor:ActorRecord
+    class BlockSpotSwitchActor:ActorRecord_Wrapper
     {
         SwitchFlag flag;
         public BlockSpotSwitchActor(byte[] record, params int[] p)

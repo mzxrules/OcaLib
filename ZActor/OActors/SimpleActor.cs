@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class SimpleActor:ActorRecord
+    class SimpleActor:ActorRecord_Wrapper
     {
         private string name;
 

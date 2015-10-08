@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class GrottoActor : ActorRecord
+    class GrottoActor : ActorRecord_Wrapper
     {
         bool type;
         byte appearOn;

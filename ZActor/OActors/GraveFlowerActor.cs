@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class GraveFlowerActor: ActorRecord
+    class GraveFlowerActor: ActorRecord_Wrapper
     {
         public GraveFlowerActor(byte[] record, params int[] p)
             : base(record)

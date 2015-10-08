@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class TimeBlockActor:ActorRecord, ISwitchFlag
+    class TimeBlockActor:ActorRecord_Wrapper, ISwitchFlag
     {
         public SwitchFlag Flag { get { return flag; } set { flag = value; } }
         SwitchFlag flag;

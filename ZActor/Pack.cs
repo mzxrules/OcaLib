@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mzxrules.ZActor
 {
+    [Obsolete("This class is deprecated. Use Helper.Endian.Shift instead")]
     public static class Pack
     {
         public static bool AsBool(UInt16 value, UInt16 mask)

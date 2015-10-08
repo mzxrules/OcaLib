@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class PoeSistersTorch : ActorRecord
+    class PoeSistersTorch : ActorRecord_Wrapper
     {
         SwitchFlag flag;
         byte color;

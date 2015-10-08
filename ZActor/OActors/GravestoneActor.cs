@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class GravestoneActor: ActorRecord
+    class GravestoneActor: ActorRecord_Wrapper
     {
         bool type;
         public GravestoneActor(byte[] record, params int[] p)

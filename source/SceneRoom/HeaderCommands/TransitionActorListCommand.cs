@@ -1,11 +1,12 @@
-﻿using mzxrules.ZActor.OActors;
-using mzxrules.ZActor.MActors;
+﻿//using mzxrules.ZActor.OActors;
+//using mzxrules.ZActor.MActors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Text;
 using mzxrules.OcaLib.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
@@ -46,7 +47,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             for (int i = 0; i < TransitionActors; i++)
             {
                 br.Read(actorArray, 0, 16);
-                TransitionActorList.Add(TransitionActorFactory.New(actorArray));
+                TransitionActorList.Add(ActorFactory.OcarinaTransitionActors(actorArray));
             }
         }
 

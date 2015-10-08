@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class WellWaterActor:ActorRecord
+    class WellWaterActor:ActorRecord_Wrapper
     {
         SwitchFlag flag;
         public WellWaterActor(byte[] record, params int[] p)

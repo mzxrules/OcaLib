@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class FlyingPotActor : ActorRecord
+    class FlyingPotActor : ActorRecord_Wrapper
     {
         CollectableFlag flag;
         public FlyingPotActor(byte[] record, params int[] p)

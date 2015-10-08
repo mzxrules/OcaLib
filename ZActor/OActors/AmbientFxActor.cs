@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class AmbientFxActor : ActorRecord
+    class AmbientFxActor : ActorRecord_Wrapper
     {
         byte type;
         public AmbientFxActor(byte[] record, params int[] p)

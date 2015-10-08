@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class FlameCircleActor:ActorRecord
+    class FlameCircleActor:ActorRecord_Wrapper
     {
         byte type;
         byte camera;

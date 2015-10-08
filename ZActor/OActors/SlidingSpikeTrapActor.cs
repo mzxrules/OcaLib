@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class SlidingSpikeTrapActor:ActorRecord
+    class SlidingSpikeTrapActor:ActorRecord_Wrapper
     {
         public SlidingSpikeTrapActor(byte[] record, params int[] p)
             : base(record)

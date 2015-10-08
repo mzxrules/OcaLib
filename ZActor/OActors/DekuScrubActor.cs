@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class DekuScrubActor:ActorRecord
+    class DekuScrubActor:ActorRecord_Wrapper
     {
         public DekuScrubActor(byte[] record, params int[] p)
             : base(record)

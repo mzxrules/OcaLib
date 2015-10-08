@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class GroundedSalesScrubActor:ActorRecord
+    class GroundedSalesScrubActor:ActorRecord_Wrapper
     {
 
         public GroundedSalesScrubActor(byte[] record, params int[] p)

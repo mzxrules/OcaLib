@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class GreenNaviSpotActor:ActorRecord
+    class GreenNaviSpotActor:ActorRecord_Wrapper
     {
         public GreenNaviSpotActor(byte[] record, params int[] p)
             : base(record)

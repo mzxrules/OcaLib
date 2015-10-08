@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class BombflowerActor:ActorRecord
+    class BombflowerActor:ActorRecord_Wrapper
     {
         public BombflowerActor(byte[] record, params int[] p)
             : base(record)

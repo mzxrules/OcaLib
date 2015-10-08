@@ -1,15 +1,12 @@
-﻿using mzxrules.OcaLib.Helper;
+﻿using mzxrules.OcaLib.Actor;
+using mzxrules.OcaLib.Helper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using mzxrules.ZActor.OActors;
 
 namespace mzxrules.ZActor.MActors
 {
     public class MActorFactory
     {
-        public static MActorRecord NewActor(byte[] record)
+        public static ActorRecord NewActor(byte[] record)
         {
             ushort actor;
             MActorRecord ar = new MActorRecord(record);
@@ -39,7 +36,7 @@ namespace mzxrules.ZActor.MActors
             }
         }
     }
-    public class MTransitionActor : TransitionActor
+    public class MTransitionActor : OcaLib.Actor.TransitionActor
     {
         byte SwitchToFrontRoom;
         byte SwitchToFrontCamera;
@@ -90,30 +87,14 @@ namespace mzxrules.ZActor.MActors
                 (varString.Length > 0)? varString + ", ": "",
                 PrintCoordAndRotation());
         }
-        protected override string GetActorName()
-        {
-            return "UnknownTransitionActor";
-        }
-        protected string PrintTransition()
+
+        new protected string PrintTransition()
         {
             return String.Format("{0:D2} {1:X2} -> {2:D2} {3:X2}",
                 SwitchToBackRoom,
                 SwitchToBackCamera,
                 SwitchToFrontRoom,
                 SwitchToFrontCamera);
-        }
-    }
-    
-    //Link actor.
-    public class LinkActor : MActorRecord
-    {
-        public LinkActor(byte[] record)
-            : base(record)
-        {
-        }
-        protected override string GetActorName()
-        {
-            return "Link";
         }
     }
 }

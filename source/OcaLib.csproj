@@ -30,6 +30,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Experiment|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Experiment\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -40,6 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actor\ActorFactory.cs" />
+    <Compile Include="Actor\ActorRecord.cs" />
+    <Compile Include="Actor\LinkActor.cs" />
+    <Compile Include="Actor\TransitionActor.cs" />
     <Compile Include="Addresses.designer.cs" />
     <Compile Include="Address\Addresser.cs" />
     <Compile Include="Address\Addresses.cs" />
@@ -101,7 +114,6 @@
     <Compile Include="Cutscenes\ActorCommand.cs" />
     <Compile Include="Cutscenes\CameraCommand.cs" />
     <Compile Include="Cutscenes\CutsceneCommand_Concrete.cs" />
-    <Compile Include="Cutscenes\HeaderCommand.cs" />
     <Compile Include="SceneRoom\SceneHeader.cs" />
     <Compile Include="SceneRoom\HeaderCommands\SkyboxModifierCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\SkyboxSettingsCommand.cs" />
@@ -137,10 +149,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ZActor\ZActor.csproj">
-      <Project>{85fd7069-d868-431d-87f9-eb76bdf73fc5}</Project>
-      <Name>ZActor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Helper\Helper.csproj">
       <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
       <Name>Helper</Name>

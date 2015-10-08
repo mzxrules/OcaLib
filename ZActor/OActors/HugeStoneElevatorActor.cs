@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class HugeStoneElevatorActor:ActorRecord 
+    class HugeStoneElevatorActor:ActorRecord_Wrapper 
     {
         byte speed;
         byte height;

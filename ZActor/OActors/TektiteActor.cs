@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class TektiteActor : ActorRecord
+    class TektiteActor : ActorRecord_Wrapper
     {
         public TektiteActor(byte[] record, params int[] p)
             : base(record)

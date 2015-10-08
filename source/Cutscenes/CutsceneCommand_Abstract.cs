@@ -6,10 +6,10 @@ using System.IO;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    abstract class AbstractCutsceneCommand
+    public abstract class AbstractCutsceneCommand
     {
         protected abstract IEnumerable<IFrameData> GetIFrameDataEnumerator();
-        public UInt32 Command { get; protected set; }
+        public Int32 Command { get; protected set; }
         public long Index { get; protected set; } 
         public int Length { get { return GetLength(); } }
 
@@ -18,5 +18,9 @@ namespace mzxrules.OcaLib.Cutscenes
         public abstract string ReadCommand();
 
         public abstract void Save(BinaryWriter bw);
+
+        public abstract void AddEntry(IFrameData item);
+
+        public abstract void DeleteEntry(IFrameData item);
     }
 }

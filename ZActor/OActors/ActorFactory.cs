@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mzxrules.OcaLib.Actor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace mzxrules.ZActor.OActors
             actor = (ushort)((record[0] << 8) + record[1]);
             switch (actor)
             {
-                case 0x0000: return new LinkActor(record);
+                case 0x0000: return new OcaLib.Actor.LinkActor(record);
                 case 0x0002: return new StalfosActor(record, 0x0032);
                 case 0x0007: return new SimpleActor(record, "Dissipating Flames", 0x0001);
                 case 0x0008: return new DecorativeFlameActor(record, 0x0001);
@@ -434,17 +435,5 @@ namespace mzxrules.ZActor.OActors
         }
     }
     
-    //Believe this is the Link actor.
-    public class LinkActor : ActorRecord
-    {
-        public LinkActor(byte[] record)
-            : base(record)
-        {
-        }
-        protected override string GetActorName()
-        {
-            return "Link";
-        }
-    }
 
 }

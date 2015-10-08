@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class CollectibleActor:ActorRecord
+    class CollectibleActor:ActorRecord_Wrapper
     {
         byte type;
         CollectableFlag flags;

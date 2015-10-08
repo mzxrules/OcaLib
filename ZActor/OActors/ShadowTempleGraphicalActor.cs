@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class ShadowTempleGraphicalActor : ActorRecord
+    class ShadowTempleGraphicalActor : ActorRecord_Wrapper
     {
         byte type;
         public ShadowTempleGraphicalActor(byte[] record, params int[] p)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class TimerActor:ActorRecord
+    class TimerActor:ActorRecord_Wrapper
     {
         SwitchFlag flag; //write on map clear
         int timerSecs; //clock timer to clear room, in in seconds

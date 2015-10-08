@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class BubbleActor:ActorRecord
+    class BubbleActor:ActorRecord_Wrapper
     {
         public BubbleActor(byte[] record, params int[] p)
             : base(record)

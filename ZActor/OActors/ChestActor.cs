@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class ChestActor : ActorRecord
+    class ChestActor : ActorRecord_Wrapper
     {
         static string[] ChestTypeDefs = new string[]
         {

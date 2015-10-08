@@ -7,7 +7,7 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    class ScreenTransitionCommand : CutsceneCommand, IFrameData
+    public class ScreenTransitionCommand : CutsceneCommand, IFrameData
     {
         const int LENGTH = 0x10;
         uint a;
@@ -21,14 +21,19 @@ namespace mzxrules.OcaLib.Cutscenes
         }
         short EndFrameD;
 
-        public ScreenTransitionCommand(uint command, BinaryReader br)
+        public ScreenTransitionCommand(int command, BinaryReader br)
             : base(command, br)
         {
             Load(br);
         }
-        protected override int GetLength()
+
+        public ScreenTransitionCommand(short start, short end, ushort transition)
         {
-            return LENGTH;
+            Command = 0x2D;
+            Transition = transition;
+            StartFrame = start;
+            EndFrame = end;
+            EndFrameD = end;
         }
        
         private void Load(BinaryReader br)
@@ -48,6 +53,7 @@ namespace mzxrules.OcaLib.Cutscenes
             StartFrame = startFrame;
             EndFrame = endFrame;
         }
+
         public override void Save(BinaryWriter bw)
         {
             bw.WriteBig(Command);
@@ -55,7 +61,7 @@ namespace mzxrules.OcaLib.Cutscenes
             bw.WriteBig(Transition);
             bw.WriteBig(StartFrame);
             bw.WriteBig(EndFrame);
-            bw.WriteBig(EndFrameD);
+            bw.WriteBig(EndFrame);//EndframeD
         }
         public override string ReadCommand()
         {
@@ -79,6 +85,11 @@ namespace mzxrules.OcaLib.Cutscenes
         protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
         {
             yield return this;
+        }
+
+        protected override int GetLength()
+        {
+            return LENGTH;
         }
     }
 }

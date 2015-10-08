@@ -2823,6 +2823,11 @@
         <Description>Type</Description>
         <UI name="select" />
         <Value>
+          <Data>FFFE</Data>
+          <Description>Spawning in from crystal</Description>
+          <Comment>Combine with Link's gentle fall spawn in</Comment>
+        </Value>
+        <Value>
           <Data>0000</Data>
           <Description>Normal</Description>
         </Value>
@@ -2848,7 +2853,8 @@
         </Value>
         <Value>
           <Data>0006</Data>
-          <Description>Nothing</Description>
+          <Description>Spawn in from child blue warp</Description>
+          <Comment>Combine with Link's gentle fall</Comment>
         </Value>
         <Value>
           <Data>0007</Data>
@@ -9655,7 +9661,9 @@
     <Objects>
       <Object>0001</Object>
     </Objects>
-    <Description>?</Description>
+    <Description>Minigame Items</Description>
+    <Comment>Displays an item that will be won by completing Bombchu Bowling/Slingshot minigames
+    //FIXME: Variable</Comment>
     <Variables />
   </Actor>
   <Actor id="0169">

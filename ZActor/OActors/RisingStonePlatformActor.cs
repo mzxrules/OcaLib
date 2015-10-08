@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class RisingStonePlatformActor : ActorRecord
+    class RisingStonePlatformActor : ActorRecord_Wrapper
     {
         public RisingStonePlatformActor(byte[] record, params int[] p)
             : base(record)

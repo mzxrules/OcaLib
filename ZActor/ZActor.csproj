@@ -32,6 +32,15 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Experiment|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Experiment\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,7 +58,7 @@
     <Compile Include="OActors\ActorFactory.cs" />
     <Compile Include="OActors\GreeneryActor.cs" />
     <Compile Include="OActors\GrottoActor.cs" />
-    <Compile Include="Shared\ActorRecord.cs" />
+    <Compile Include="Shared\ActorRecord_Wrapper.cs" />
     <Compile Include="OActors\AmbientFxActor.cs" />
     <Compile Include="OActors\ArmosStatueActor.cs" />
     <Compile Include="OActors\BabyDodongoActor.cs" />
@@ -133,6 +142,10 @@
     <ProjectReference Include="..\Helper\Helper.csproj">
       <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
       <Name>Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\OcaLib.csproj">
+      <Project>{ec69e9e2-4cfb-43f9-8e37-cb6a52935e4c}</Project>
+      <Name>OcaLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

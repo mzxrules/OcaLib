@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class SpiritTempleChainPlatformActor : ActorRecord
+    class SpiritTempleChainPlatformActor : ActorRecord_Wrapper
     {
         SwitchFlag flags;
         public SpiritTempleChainPlatformActor(byte[] record, params int[] p)

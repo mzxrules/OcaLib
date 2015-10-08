@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class BrownBoulderActor:ActorRecord
+    class BrownBoulderActor:ActorRecord_Wrapper
     {
         bool type;
         SwitchFlag flags;

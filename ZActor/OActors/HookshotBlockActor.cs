@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class HookshotBlockActor:ActorRecord
+    class HookshotBlockActor:ActorRecord_Wrapper
     {
         public HookshotBlockActor(byte[] record, params int[] p)
             : base(record)

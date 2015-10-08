@@ -1,12 +1,9 @@
 ﻿using mzxrules.OcaLib.Helper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace mzxrules.ZActor.MActors
 {
-    public class MActorRecord : mzxrules.ZActor.OActors.ActorRecord
+    public class MActorRecord : mzxrules.ZActor.OActors.ActorRecord_Wrapper
     {
         protected byte ActorDataA;
         protected ushort DayFlags;

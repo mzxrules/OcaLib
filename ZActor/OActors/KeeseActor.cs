@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class KeeseActor:ActorRecord
+    class KeeseActor:ActorRecord_Wrapper
     {
         byte type;
         public KeeseActor(byte[] record, params int[] p)

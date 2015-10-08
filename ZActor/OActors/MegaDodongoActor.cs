@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class MegaDodongoActor: ActorRecord
+    class MegaDodongoActor: ActorRecord_Wrapper
     {
         public MegaDodongoActor(byte[] record, params int[] p)
             : base(record)

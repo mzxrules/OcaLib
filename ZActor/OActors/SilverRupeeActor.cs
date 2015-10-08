@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class SilverRupeeActor:ActorRecord
+    class SilverRupeeActor:ActorRecord_Wrapper
     {
         ushort type;
         SwitchFlag flags;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class MegatonStatueActor:ActorRecord
+    class MegatonStatueActor:ActorRecord_Wrapper
     {
         SwitchFlag flag;
         byte type;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class FlareDancerActor: ActorRecord
+    class FlareDancerActor: ActorRecord_Wrapper
     {
         public FlareDancerActor(byte[] record):base(record)
         {

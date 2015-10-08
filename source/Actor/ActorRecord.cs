@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using mzxrules.OcaLib.Helper;
-
-namespace mzxrules.ZActor.OActors
+//OCA LIB **********************************
+namespace mzxrules.OcaLib.Actor
 {
     public class ActorRecord
     {
@@ -47,8 +43,8 @@ namespace mzxrules.ZActor.OActors
             return String.Format("{0:X4}:{1:X4} {2}{3}{4} {5}",
                 Actor,
                 Variable,
-                (actorName.Length > 0) ? actorName + ", " : "", 
-                (variables.Length>0)? variables + ", ":"",
+                (actorName.Length > 0) ? actorName + ", " : "",
+                (variables.Length > 0) ? variables + ", " : "",
                 PrintCoord(),
                 PrintRotation());
         }
@@ -62,8 +58,8 @@ namespace mzxrules.ZActor.OActors
             return String.Format("{0:X4},{1:X4},{2},{3},{4},{5},{6},{7:X4},{8:X4},{9:X4}",
                 Actor,
                 Variable,
-                actorName.Replace(',',';'),
-                variables.Replace(',',';'),
+                actorName.Replace(',', ';'),
+                variables.Replace(',', ';'),
                 coords.x, coords.y, coords.z,
                 rotation.x, rotation.y, rotation.z);
         }
@@ -91,7 +87,7 @@ namespace mzxrules.ZActor.OActors
         {
             return string.Format("({0:X4}, {1:X4}, {2:X4})",
                   rotation.x,
-                  rotation.y, 
+                  rotation.y,
                   rotation.z);
         }
         public string PrintCoordAndRotation()
@@ -102,6 +98,5 @@ namespace mzxrules.ZActor.OActors
         {
             return ((float)rx / (float)ushort.MaxValue) * 360.0f;
         }
-
     }
 }

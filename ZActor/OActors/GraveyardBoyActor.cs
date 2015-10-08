@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class GraveyardBoyActor:ActorRecord
+    class GraveyardBoyActor:ActorRecord_Wrapper
     {
         byte path;
         public GraveyardBoyActor(byte[] record, params int[] p)

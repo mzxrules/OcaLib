@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class CheckSpotActor:ActorRecord
+    class CheckSpotActor:ActorRecord_Wrapper
     {
         byte type;
         byte dialog;

@@ -6,10 +6,10 @@ using System.IO;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    class EndCommand : CutsceneCommand
+    public class EndCommand : CutsceneCommand
     {
         const int LENGTH = 8;
-        public EndCommand(uint command, BinaryReader br)
+        public EndCommand(int command, BinaryReader br)
             :base(command, br)
         {
             Load(br);

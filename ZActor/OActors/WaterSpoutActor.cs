@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class WaterSpoutActor : ActorRecord
+    class WaterSpoutActor : ActorRecord_Wrapper
     {
         ChestFlag flag;
 

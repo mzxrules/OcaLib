@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class CutsceneActor : ActorRecord
+    class CutsceneActor : ActorRecord_Wrapper
     {
         byte type;
         public CutsceneActor(byte[] record, params int[] p)

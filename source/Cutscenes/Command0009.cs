@@ -7,11 +7,11 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    class Command0009 : CutsceneCommand
+    public class Command0009 : CutsceneCommand
     {
         const int LENGTH = 8;
         List<ThisEntry> entries = new List<ThisEntry>();
-        public Command0009(uint command, BinaryReader br)
+        public Command0009(int command, BinaryReader br)
             : base(command, br)
         {
             Load(br);

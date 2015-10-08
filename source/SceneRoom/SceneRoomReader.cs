@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using mzxrules.ZActor.OActors;
 using mzxrules.OcaLib.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.OcaLib.SceneRoom
 {

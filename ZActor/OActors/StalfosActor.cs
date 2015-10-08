@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class StalfosActor:ActorRecord
+    class StalfosActor:ActorRecord_Wrapper
     {
         byte type;
         bool minibossMusic;

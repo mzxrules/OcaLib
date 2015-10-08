@@ -163,6 +163,28 @@ namespace mzxrules.OcaLib.Helper
             return ConvertUInt32((UInt32)((v >> 32) & 0xFFFFFFFF)) | ((UInt64)ConvertUInt32((UInt32)v) << 32);
         }
 
+        public static void Convert(out float v, byte[] array, int offset = 0)
+        {
+            byte[] temp = new byte[4];
+            Array.Copy(array, offset, temp, 0, 4);
+            Endian.ReverseBytes(ref temp, 4);
+            v = BitConverter.ToSingle(temp, 0);
+        }
+
+        public static void Convert(Vector3<short> v, byte[] arr, int offset)
+        {
+            Endian.Convert(out v.x, arr, offset + 0);
+            Endian.Convert(out v.y, arr, offset + 2);
+            Endian.Convert(out v.z, arr, offset + 4);
+        }
+
+        public static void Convert(Vector3<ushort> v, byte[] arr, int offset)
+        {
+            Endian.Convert(out v.x, arr, offset + 0);
+            Endian.Convert(out v.y, arr, offset + 2);
+            Endian.Convert(out v.z, arr, offset + 4);
+        }
+
         public static void Convert(Vector3<uint> v, byte[] arr, int offset)
         {
             Endian.Convert(out v.x, arr, offset + 0);
@@ -187,6 +209,7 @@ namespace mzxrules.OcaLib.Helper
             v.z = BitConverter.ToSingle(arr2, 8);
             
         }
+
 
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mzxrules.ZActor.OActors
 {
-    class RegenGrassActor : ActorRecord
+    class RegenGrassActor : ActorRecord_Wrapper
     {
         public RegenGrassActor(byte[] record, params int[] p)
             : base(record)

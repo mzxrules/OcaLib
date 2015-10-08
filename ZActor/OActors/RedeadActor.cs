@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class RedeadActor: ActorRecord
+    class RedeadActor: ActorRecord_Wrapper
     {
         bool gibdo;
         byte type;

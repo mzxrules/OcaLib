@@ -7,12 +7,12 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    class ActorCommand : CutsceneCommand
+    public class ActorCommand : CutsceneCommand
     {
         const int LENGTH = 8;
         List<ActorCommandEntry> Entries = new List<ActorCommandEntry>();
 
-        public ActorCommand(uint command, BinaryReader br)
+        public ActorCommand(int command, BinaryReader br)
             : base(command, br)
         {
             Load(br);
@@ -35,6 +35,11 @@ namespace mzxrules.OcaLib.Cutscenes
             bw.WriteBig(Entries.Count);
             foreach (ActorCommandEntry item in Entries)
                 item.Save(bw);
+        }
+
+        public override void DeleteEntry(IFrameData i)
+        {
+            Entries.Remove((ActorCommandEntry)i);
         }
 
         public override string ToString()

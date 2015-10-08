@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class ClearBlockActor : ActorRecord
+    class ClearBlockActor : ActorRecord_Wrapper
     {
         SwitchFlag flag;
         public ClearBlockActor(byte[] record, params int[] p)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class BeamosActor: ActorRecord 
+    class BeamosActor: ActorRecord_Wrapper 
     {
         //TODO: Actor variables
         public BeamosActor(byte[] record, params int[] p)

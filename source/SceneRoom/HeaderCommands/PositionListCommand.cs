@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using mzxrules.OcaLib.Helper;
-using mzxrules.ZActor.OActors;
 using System.IO;
-
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
@@ -14,7 +13,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public long Offset { get; set; }
         public long PositionListAddress { get { return Offset; } set { Offset = value; } }
         public int Positions;
-        public List<LinkActor> PositionList { get; set; }
+        public List<ActorRecord> PositionList { get; set; }
 
         public override void SetCommand(SceneWord command)
         {
@@ -33,7 +32,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public void Initialize(BinaryReader sr)
         {
-            PositionList = new List<LinkActor>();
+            PositionList = new List<ActorRecord>();
             byte[] positionRecord = new byte[ActorRecord.SIZE];
 
             sr.BaseStream.Position = PositionListAddress;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mzxrules.ZActor.OActors
 {
-    public class NaviInfospotActor : ActorRecord
+    public class NaviInfospotActor : ActorRecord_Wrapper
     {
         const int TEXT_CAP = 80;
         bool naviIcon;

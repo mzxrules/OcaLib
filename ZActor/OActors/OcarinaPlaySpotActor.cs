@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class OcarinaPlaySpotActor:ActorRecord
+    class OcarinaPlaySpotActor:ActorRecord_Wrapper
     {
         SwitchFlag flag;
         byte song;

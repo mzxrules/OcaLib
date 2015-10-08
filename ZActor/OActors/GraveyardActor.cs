@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class GraveyardActor:ActorRecord
+    class GraveyardActor:ActorRecord_Wrapper
     {
         byte type;
         SwitchFlag flags;

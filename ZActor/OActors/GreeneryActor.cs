@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.ZActor.OActors
 {
-    class GreeneryActor : ActorRecord
+    class GreeneryActor : ActorRecord_Wrapper
     {
         byte dropType;
         byte type;
