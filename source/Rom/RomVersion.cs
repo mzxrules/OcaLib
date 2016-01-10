@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace mzxrules.OcaLib
+﻿namespace mzxrules.OcaLib
 {
+    /// <summary>
+    /// Adapter class designed to let you pass in equivalent enumerations when requested
+    /// </summary>
     public class RomVersion
     {
         public Game Game { get; private set; }
@@ -13,14 +11,14 @@ namespace mzxrules.OcaLib
 
         private RomVersion(ORom.Build build)
         {
-            Game = mzxrules.OcaLib.Game.OcarinaOfTime;
+            Game = Game.OcarinaOfTime;
             OVer = build;
             MVer = MRom.Build.UNKNOWN;
         }
 
         private RomVersion(MRom.Build build)
         {
-            Game = mzxrules.OcaLib.Game.MajorasMask;
+            Game = Game.MajorasMask;
             OVer = ORom.Build.UNKNOWN;
             MVer = build;
         }
@@ -53,11 +51,10 @@ namespace mzxrules.OcaLib
         {
             switch (Game)
             {
-                case Game.OcarinaOfTime: return this.OVer.ToString(); 
+                case Game.OcarinaOfTime: return this.OVer.ToString();
                 case Game.MajorasMask: return this.MVer.ToString();
                 default: return base.ToString();
             }
-
         }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using mzxrules.Helper;
+using System;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -26,7 +23,7 @@ namespace mzxrules.ZActor.OActors
         }
         public SwitchFlag(UInt16 variable, UInt16 mask)
         {
-            value = (byte)((variable & mask) >> Pack.GetShift(mask));
+            value = Shift.AsByte(variable, mask); //(byte)((variable & mask) >> Shift.GetShift(mask));
         }
 
         public static implicit operator byte(SwitchFlag s)

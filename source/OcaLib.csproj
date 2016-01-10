@@ -57,8 +57,9 @@
     <Compile Include="Address\Addresser.cs" />
     <Compile Include="Address\Addresses.cs" />
     <Compile Include="Address\Addresser_Old.cs" />
-    <Compile Include="Cutscenes\ActorCommandEntry.cs" />
+    <Compile Include="Cutscenes\ActionEntry.cs" />
     <Compile Include="Cutscenes\CameraCommandEntry.cs" />
+    <Compile Include="Cutscenes\IFrameCollection.cs" />
     <Compile Include="Cutscenes\TextCommandEntry.cs" />
     <Compile Include="Rom\RomFileToken.cs" />
     <Compile Include="Rom\MRom.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="Rom\VFileTable_Abstract.cs" />
     <Compile Include="Rom\VFileTable.cs" />
     <Compile Include="Rom\FileList.cs" />
-    <Compile Include="Cutscenes\Command0009.cs" />
+    <Compile Include="Cutscenes\Command09.cs" />
     <Compile Include="Cutscenes\Cutscene.cs" />
     <Compile Include="Cutscenes\EndCommand.cs" />
     <Compile Include="Cutscenes\ExitCommand.cs" />

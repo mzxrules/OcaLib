@@ -133,7 +133,6 @@
     <Compile Include="OActors\WebActor.cs" />
     <Compile Include="OActors\WellWaterActor.cs" />
     <Compile Include="OActors\WolfosActor.cs" />
-    <Compile Include="Pack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlActor.cs" />
     <Compile Include="XmlActorDictionary.cs" />

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using mzxrules.Helper;
+using System;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -14,8 +12,8 @@ namespace mzxrules.ZActor.OActors
             : base(record, p)
         {
             flags = new SwitchFlag(Variable, 0x3F);
-            type = Pack.AsByte(Variable, 0xFC00);
-            torchCount = Pack.AsByte(Variable, 0x03C0);
+            type = Shift.AsByte(Variable, 0xFC00);
+            torchCount = Shift.AsByte(Variable, 0x03C0);
         }
         //TODO: Actor Variables
         protected override string GetActorName()

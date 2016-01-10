@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using mzxrules.Helper;
+using System;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -31,10 +29,10 @@ namespace mzxrules.ZActor.OActors
         public ChestActor(byte[] record, params int[] p)
             : base(record, p)
         {
-            chestType = Pack.AsByte(Variable, 0xF000);
-            rewardItem = Pack.AsByte(Variable, 0x0FE0); //(byte)((Variable & 0xFF0) >> 5);
-            chestFlag =  Pack.AsByte(Variable, 0x001F);
-            sceneFlag = Pack.AsByte(rotation.z, 0x003F);
+            chestType = Shift.AsByte(Variable, 0xF000);
+            rewardItem = Shift.AsByte(Variable, 0x0FE0); //(byte)((Variable & 0xFF0) >> 5);
+            chestFlag =  Shift.AsByte(Variable, 0x001F);
+            sceneFlag = Shift.AsByte(rotation.z, 0x003F);
         }
         protected override string GetActorName()
         {

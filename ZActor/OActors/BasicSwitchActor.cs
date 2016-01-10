@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using mzxrules.Helper;
+using System;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -20,12 +17,12 @@ namespace mzxrules.ZActor.OActors
             : base(record)
         {
             objectDependencies = p;
-            type        = Pack.AsByte(Variable, 0x000F);
-            frozen      = Pack.AsBool(Variable, 0x0080);
-            unknown     = Pack.AsBool(Variable, 0x0040);
-            blueSwitch  = Pack.AsBool(Variable, 0x0020);
-            toggle      = Pack.AsBool(Variable, 0x0010);
-            flag        = Pack.AsByte(Variable, 0x3F00);
+            type        = Shift.AsByte(Variable, 0x000F);
+            frozen      = Shift.AsBool(Variable, 0x0080);
+            unknown     = Shift.AsBool(Variable, 0x0040);
+            blueSwitch  = Shift.AsBool(Variable, 0x0020);
+            toggle      = Shift.AsBool(Variable, 0x0010);
+            flag        = Shift.AsByte(Variable, 0x3F00);
         }
         protected override string GetActorName()
         {

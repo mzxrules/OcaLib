@@ -7,13 +7,13 @@ using System.IO;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    public class ActorCommandEntry : IFrameData
+    public class ActionEntry : IFrameData
     {
         public CutsceneCommand RootCommand { get; set; }
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
         public const int LENGTH = 0x30;
-        public ushort action;
+        public ushort Action;
         public short d;
 
         UInt16 e, f;
@@ -21,7 +21,7 @@ namespace mzxrules.OcaLib.Cutscenes
         public Vector3<int> EndVertex = new Vector3<int>();
         public Vector3<float> VertexNormal = new Vector3<float>();
 
-        public ActorCommandEntry(CutsceneCommand cmd, BinaryReader br)
+        public ActionEntry(CutsceneCommand cmd, BinaryReader br)
         {
             Load(cmd, br);
         }
@@ -34,7 +34,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
             arr = br.ReadBytes(LENGTH);
 
-            Endian.Convert(out action, arr, 0);
+            Endian.Convert(out Action, arr, 0);
             Endian.Convert(out startFrame, arr, 2);
             Endian.Convert(out endFrame, arr, 4);
             Endian.Convert(out d, arr, 6);
@@ -53,7 +53,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public void Save(BinaryWriter bw)
         {
-            bw.WriteBig(action);
+            bw.WriteBig(Action);
             bw.WriteBig(StartFrame);
             bw.WriteBig(EndFrame);
             //0x04
@@ -74,7 +74,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
             sb.Append(
                 String.Format("Action: {0:X4}, Start: {1:X4}, End: {2:X4}, {3:X4} {4:X4} {5:X4}",
-                action,
+                Action,
                 StartFrame,
                 EndFrame,
                 d,

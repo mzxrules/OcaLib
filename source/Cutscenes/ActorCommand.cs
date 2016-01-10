@@ -7,10 +7,10 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    public class ActorCommand : CutsceneCommand
+    public class ActorCommand : CutsceneCommand, IFrameCollection
     {
         const int LENGTH = 8;
-        List<ActorCommandEntry> Entries = new List<ActorCommandEntry>();
+        public List<ActionEntry> Entries = new List<ActionEntry>();
 
         public ActorCommand(int command, BinaryReader br)
             : base(command, br)
@@ -25,7 +25,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
             for (int i = 0; i < EntryCount; i++)
             {
-                Entries.Add(new ActorCommandEntry(this, br));
+                Entries.Add(new ActionEntry(this, br));
             }
         }
 
@@ -33,18 +33,40 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             bw.WriteBig(Command);
             bw.WriteBig(Entries.Count);
-            foreach (ActorCommandEntry item in Entries)
+            foreach (ActionEntry item in Entries)
                 item.Save(bw);
         }
 
-        public override void DeleteEntry(IFrameData i)
+        public override void RemoveEntry(IFrameData i)
         {
-            Entries.Remove((ActorCommandEntry)i);
+            Entries.Remove((ActionEntry)i);
         }
 
         public override string ToString()
         {
-            return String.Format("{0:X8}: Actor, Entries: {1:X8}", Command, Entries.Count);
+            return String.Format("{0:X4}: {2}, Entries: {1:X8}",
+                Command, Entries.Count, GetActorName());
+        }
+
+        private string GetActorName()
+        {
+            switch (Command)
+            {
+                case 0x03: return "Title Logo";
+                case 0x04: return "Environment Settings";
+                case 0x0A: return "Link";
+                case 0x27: return "Rauru (08)";
+                case 0x29: return "Darunia (10)";
+                case 0x2A: return "Ruto (Adult) (11)";
+                case 0x2B: return "Saria (12)";
+                case 0x2C: return "Sage? (13)";
+                case 0x2F: return "Sheik (12)";
+                case 0x3E: return "Navi";
+                case 0x55: return "Zelda (Adult)";
+                case 0x56: return "Music";
+                case 0x7C: return "Music Long Fade (Action 4)";
+                default: return "Actor";
+            }
         }
 
         public override string ReadCommand()
@@ -53,20 +75,25 @@ namespace mzxrules.OcaLib.Cutscenes
             sb = new StringBuilder();
 
             sb.AppendLine(ToString());
-            foreach (ActorCommandEntry e in Entries)
+            foreach (ActionEntry e in Entries)
                 sb.AppendLine("   " + e.ToString());
             return sb.ToString();
         }
 
         protected override int GetLength()
         {
-            return Entries.Count * ActorCommandEntry.LENGTH + LENGTH;
+            return Entries.Count * ActionEntry.LENGTH + LENGTH;
         }
 
         protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
         {
             foreach (IFrameData fd in Entries)
                 yield return fd;
+        }
+
+        public override void AddEntry(IFrameData item)
+        {
+            Entries.Add((ActionEntry)item);
         }
     }
 }

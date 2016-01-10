@@ -43,7 +43,7 @@ namespace mzxrules.OcaLib.Cutscenes
             throw new InvalidOperationException();
         }
 
-        public override void DeleteEntry(IFrameData item)
+        public override void RemoveEntry(IFrameData item)
         {
             throw new InvalidOperationException();
         }

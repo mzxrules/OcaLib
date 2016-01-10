@@ -1,8 +1,7 @@
-﻿using System;
+﻿using mzxrules.OcaLib.Helper;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using mzxrules.OcaLib.Helper;
+using System.IO;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
@@ -27,7 +26,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             }
         }
 
-        public void Initialize(System.IO.BinaryReader sr)
+        public void Initialize(BinaryReader sr)
         {
             byte[] virtualAddress;
             
@@ -41,6 +40,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
                 RoomAddresses.Add(new FileAddress(virtualAddress));
             }
         }
+
         public override string Read()
         {
             string result;
@@ -52,6 +52,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             }
             return result;
         }
+
         public override string ReadSimple()
         {
             return string.Format("There are {0} room(s). List starts at {1:X8}",

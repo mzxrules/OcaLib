@@ -14,20 +14,18 @@ namespace mzxrules.OcaLib.Helper
         }
         public static void Write(Stream sw)
         {
-            //uint32_t crc[2], d, r, t1, t2, t3, t4, t5, t6 = 0xDF26F436;
             uint[] crc = new uint[2];
-            uint d, r, t1, t2, t3, t4, t5, t6 = 0xDF26F436;
-
             byte[] data = new byte[0x00101000];
+			
+            uint d, r, t1, t2, t3, t4, t5, t6 = 0xDF26F436;
 
             t1 = t2 = t3 = t4 = t5 = t6;
 
-            sw.Position = 0; //rewind(fp);
-            sw.Read(data, 0, 0x00101000);//fread(data, 1, 0x00101000, fp);
+            sw.Position = 0; 
+            sw.Read(data, 0, 0x00101000);
 
             for (int i = 0x00001000; i < 0x00101000; i += 4)
             {
-                //int blerg = (data[i] << 24) | (data[i + 1] << 16) | (data[i + 2] << 8) | data[i + 3];
                 d = (uint)((data[i] << 24) | (data[i + 1] << 16) | (data[i + 2] << 8) | data[i + 3]);
                 if ((t6 + d) < t6) t4++;
                 t6 += d;
@@ -48,9 +46,7 @@ namespace mzxrules.OcaLib.Helper
                 crc[1] = (crc[1] >> 24) | ((crc[1] >> 8) & 0xFF00) | ((crc[1] << 8) & 0xFF0000) | ((crc[1] << 24) & 0xFF000000);
             }
             
-            //Seek 0x10 from orgin? //fseek(fp, 0x10, SEEK_SET);
-            //Write CRC //fwrite(crc, 1, 8, fp);
-
+            //Seek to 0x10 from rom start
             sw.Position = 0x10;
             BinaryWriter br = new BinaryWriter(sw);
             br.Write(crc[0]);

@@ -36,7 +36,7 @@ namespace mzxrules.OcaLib.Cutscenes
             Load(command, startFrame, endFrame);
         }
 
-        public override void DeleteEntry(IFrameData i)
+        public override void RemoveEntry(IFrameData i)
         {
             CameraCommandEntry entry = (CameraCommandEntry)i;
             Entries.Remove(entry);

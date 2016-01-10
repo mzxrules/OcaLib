@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace mzxrules.OcaLib.Cutscenes
@@ -21,6 +19,6 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public abstract void AddEntry(IFrameData item);
 
-        public abstract void DeleteEntry(IFrameData item);
+        public abstract void RemoveEntry(IFrameData item);
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using mzxrules.Helper;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -12,7 +9,7 @@ namespace mzxrules.ZActor.OActors
             : base(record)
         {
             objectDependencies = p;
-            flag = (byte)((Variable & 0x3F00) >> 8);
+            flag = Shift.AsByte(Variable, 0x3F00);
         }
         protected override string GetActorName()
         {

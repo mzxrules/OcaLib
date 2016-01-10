@@ -7,7 +7,7 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    public class TextCommand : CutsceneCommand
+    public class TextCommand : CutsceneCommand, IFrameCollection
     {
         const int LENGTH = 8;
         public List<TextCommandEntry> Entries = new List<TextCommandEntry>();
@@ -17,6 +17,7 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             Load(br);
         }
+
         protected override int GetLength()
         {
             return TextCommandEntry.LENGTH * Entries.Count + LENGTH;
@@ -35,7 +36,7 @@ namespace mzxrules.OcaLib.Cutscenes
             }
         }
 
-        public override void DeleteEntry(IFrameData item)
+        public override void RemoveEntry(IFrameData item)
         {
             Entries.Remove((TextCommandEntry)item);
         }
@@ -50,10 +51,11 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            return String.Format("{0:X8}: Text Command, {1} entries",
+            return String.Format("{0:X4}: Text Command, {1} entries",
                 Command,
                 Entries.Count);
         }
+
         public override string ReadCommand()
         {
             StringBuilder r = new StringBuilder();

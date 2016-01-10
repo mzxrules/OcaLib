@@ -1,4 +1,5 @@
-﻿using mzxrules.OcaLib.Actor;
+﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -10,8 +11,8 @@ namespace mzxrules.ZActor.OActors
             : base(record)
         {
 
-            flags = (byte)(Variable & 0x3F);
-            type = (byte)((Variable & 0xFC0) >> 6);
+            flags = Shift.AsByte(Variable, 0x003F);
+            type =  Shift.AsByte(Variable, 0x0FC0);
         }
         protected override string GetActorName()
         {

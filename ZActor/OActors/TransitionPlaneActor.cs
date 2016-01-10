@@ -1,4 +1,5 @@
-﻿using mzxrules.OcaLib.Actor;
+﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -9,8 +10,8 @@ namespace mzxrules.ZActor.OActors
         public TransitionPlaneActor(byte[] record)
             : base(record)
         {
-            flag = Pack.AsByte(Variable, 0x003F);
-            type = Pack.AsUInt16(Variable, 0xFFC0);
+            flag = Shift.AsByte(Variable, 0x003F);
+            type = Shift.AsUInt16(Variable, 0xFFC0);
         }
         //public override string Print()
         //{

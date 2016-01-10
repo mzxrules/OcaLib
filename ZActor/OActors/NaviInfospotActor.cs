@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using mzxrules.Helper;
+using System;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -16,9 +13,9 @@ namespace mzxrules.ZActor.OActors
             : base(record)
         {
             objectDependencies = p;
-            naviIcon = Pack.AsBool(Variable, 0x8000);
+            naviIcon = Shift.AsBool(Variable, 0x8000);
             flag = new SwitchFlag(Variable, 0x3F00);
-            dialog = Pack.AsByte(Variable, 0x00FF);
+            dialog = Shift.AsByte(Variable, 0x00FF);
         }
         protected override string GetActorName()
         {

@@ -7,11 +7,11 @@ using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    public class Command0009 : CutsceneCommand
+    public class Command09 : CutsceneCommand, IFrameCollection
     {
         const int LENGTH = 8;
         List<ThisEntry> entries = new List<ThisEntry>();
-        public Command0009(int command, BinaryReader br)
+        public Command09(int command, BinaryReader br)
             : base(command, br)
         {
             Load(br);
@@ -27,10 +27,17 @@ namespace mzxrules.OcaLib.Cutscenes
             }
 
         }
+        public override void Save(BinaryWriter bw)
+        {
+            bw.WriteBig(Command);
+            bw.WriteBig(entries.Count);
+            foreach (var item in entries)
+                item.Save(bw);
+        }
 
         public override string ToString()
         {
-            return String.Format("{0:X8} entries {1:X8}",
+            return String.Format("{0:X4} entries {1:X8}",
                 Command,
                 entries.Count);
         }
@@ -51,6 +58,16 @@ namespace mzxrules.OcaLib.Cutscenes
         protected override int GetLength()
         {
             return entries.Count * ThisEntry.LENGTH + LENGTH;
+        }
+
+        public override void AddEntry(IFrameData item)
+        {
+            entries.Add((ThisEntry)item);
+        }
+
+        public override void RemoveEntry(IFrameData item)
+        {
+            entries.Remove((ThisEntry)item);
         }
 
         protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
@@ -81,6 +98,17 @@ namespace mzxrules.OcaLib.Cutscenes
                 s5 = br.ReadBigUInt16();
                 s6 = br.ReadBigUInt16();
             }
+
+            internal void Save(BinaryWriter bw)
+            {
+                bw.WriteBig(int1);
+                bw.WriteBig(StartFrame);
+                bw.WriteBig(EndFrame);
+                bw.WriteBig(s4);
+                bw.WriteBig(s5);
+                bw.WriteBig(s6);
+            }
+
             public override string ToString()
             {
                 return string.Format("{0:X4} Frame Start: {1:X4} Frame End {2:X4} {3:X4} {4:X4} {5:X4}",

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using mzxrules.Helper;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -17,10 +14,10 @@ namespace mzxrules.ZActor.OActors
             : base(record)
         {
             //Mask FCFF?
-            type = Pack.AsBool(Variable, 0x1000);
-            appearOn = Pack.AsByte(Variable, 0x0300);
-            contents = Pack.AsByte(Variable, 0x00E0);
-            flag = Pack.AsByte(Variable, 0x001F);
+            type = Shift.AsBool(Variable, 0x1000);
+            appearOn = Shift.AsByte(Variable, 0x0300);
+            contents = Shift.AsByte(Variable, 0x00E0);
+            flag = Shift.AsByte(Variable, 0x001F);
             destination = this.rotation.z;
         }
         protected override string GetActorName()

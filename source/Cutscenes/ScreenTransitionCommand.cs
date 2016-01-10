@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
 using mzxrules.OcaLib.Helper;
@@ -72,8 +71,8 @@ namespace mzxrules.OcaLib.Cutscenes
             StringBuilder sb;
 
             sb = new StringBuilder();
-            sb.AppendLine(String.Format("{0:X8}: Screen Transition fx", Command));
-            sb.Append(string.Format(
+            sb.AppendLine(string.Format("{0:X4}: Screen Transition fx", Command));
+            sb.AppendLine(string.Format(
                 "{0:X8}, Transition: {1:X4}, Start: {2:X4} End: {3:X4} End: {4:X4}",
                 a,
                 Transition,

@@ -67,7 +67,7 @@ namespace mzxrules.OcaLib.Cutscenes
                         case 0x02: goto case 1;
                         case 0x05: goto case 1;
                         case 0x06: goto case 1;
-                        case 0x09: cmd = new Command0009(commandId, br); break;
+                        case 0x09: cmd = new Command09(commandId, br); break;
                         case 0x13: cmd = new TextCommand(commandId, br); break;
                         case 0x2D: cmd = new ScreenTransitionCommand(commandId, br); break;
                         default: cmd = new ActorCommand(commandId, br); break;
@@ -138,7 +138,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
 
         /// <summary>
-        /// Generates a verbose dump of a cutscene, ordering instructions by occurence within the file
+        /// Generates a verbose dump of a cutscene, ordering instructions by occurrence within the file
         /// </summary>
         /// <returns>The output text</returns>
         public string PrintByOccurrence()
@@ -184,7 +184,7 @@ namespace mzxrules.OcaLib.Cutscenes
             CutsceneCommand lastRoot = null;
 
             foreach (IFrameData f in Commands
-                .SelectMany(x => x.IFrameDataEnum)
+                .SelectMany(x =>  x.IFrameDataEnum)
                 .OrderBy(x => x.StartFrame))
             {
                 if (f.StartFrame > time)

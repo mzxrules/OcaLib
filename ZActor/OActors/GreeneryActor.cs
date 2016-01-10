@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using mzxrules.Helper;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -65,8 +63,8 @@ namespace mzxrules.ZActor.OActors
             : base(record)
         {
             objectDependencies = p;
-            dropType = Pack.AsByte(Variable, 0xFF00);
-            type = Pack.AsByte(Variable, 0x00FF);
+            dropType = Shift.AsByte(Variable, 0xFF00);
+            type = Shift.AsByte(Variable, 0x00FF);
         }
 
         protected override string GetActorName()

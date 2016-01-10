@@ -12,12 +12,23 @@ namespace mzxrules.OcaLib.Cutscenes
         const int LENGTH = 8 + 8;
         public CutsceneCommand RootCommand { get; set; }
 
-        int Unknown;
+        int Unknown = 1;
 
         public ushort Asm;
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
         short endFrame2;
+
+        public ExitCommand(ushort asm, short start, short end )
+        {
+            RootCommand = this;
+            Command = 0x3E8;
+
+            Asm = asm;
+            StartFrame = start;
+            EndFrame = end;
+            endFrame2 = end;
+        }
 
         public ExitCommand(ExitCommand copy)
         {
@@ -72,7 +83,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            return String.Format("{0:X8}: Exit Command, {1} entries",
+            return String.Format("{0:X4}: Exit Command, {1} entries",
                 Command,
                 Unknown)
                 + Environment.NewLine + "   " +

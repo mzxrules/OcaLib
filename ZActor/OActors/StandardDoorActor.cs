@@ -1,4 +1,5 @@
 ﻿using mzxrules.OcaLib.Actor;
+using mzxrules.Helper;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -9,8 +10,8 @@ namespace mzxrules.ZActor.OActors
         public StandardDoorActor(byte[] record)
             : base(record)
         {
-            flag = (byte)(Variable & 0x3F);
-            locked = ((Variable & 0x80) > 0);
+            flag = Shift.AsByte(Variable, 0x003F);
+            locked = Shift.AsBool(Variable, 0x80);
         }
         protected override string GetActorName()
         {
