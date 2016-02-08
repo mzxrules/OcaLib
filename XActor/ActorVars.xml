@@ -12430,11 +12430,13 @@
   <Actor id="01D1">
     <Objects>
       <Object>0190</Object>
+      <Object>00A8</Object>
     </Objects>
     <Description>Time block</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
+        <Comment>B80D Causes block to not spawn as a child, but spawn as an Adult</Comment>
         <UI name="select" />
         <Value>
           <Data>0000</Data>

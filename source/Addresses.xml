@@ -95,7 +95,7 @@
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">110A0</Data>
           <Data ver="N1" />
-          <Data ver="N2" />
+          <Data ver="N2">116E0</Data>
           <Data ver="P0" />
           <Data ver="P1" />
           <Data ver="GCNJ" />
@@ -364,9 +364,11 @@
         </Address>
       </Identifier>
       
-      <Identifier id ="RAM_DUMB_GLOBAL_CONTEXT">
+      <Identifier id ="RAM_GLOBAL_CONTEXT">
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">114DE0</Data>
+          <Data ver="N1">114FA0</Data>
+          <Data ver="N2">115490</Data>
         </Address>
       </Identifier>
       

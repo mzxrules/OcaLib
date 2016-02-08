@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace mzxrules.OcaLib.Helper
 {
@@ -12,6 +13,7 @@ namespace mzxrules.OcaLib.Helper
                 Write(fs);
             }
         }
+
         public static void Write(Stream sw)
         {
             uint[] crc = new uint[2];
@@ -51,6 +53,61 @@ namespace mzxrules.OcaLib.Helper
             BinaryWriter br = new BinaryWriter(sw);
             br.Write(crc[0]);
             br.Write(crc[1]);
+        }
+
+        public static FileEncoding VerifyRom(Stream rom, UInt64 TargetCrc)
+        {
+            UInt64 crc_File;
+            using (BinaryReader br = new BinaryReader(rom))
+            {
+                br.BaseStream.Position = 0x10;
+                crc_File = br.ReadUInt64();
+                Endian.Convert(ref crc_File);
+            }
+            //crc_File now contains the crc from file with proper endianness
+
+            //if big endian
+            if (TargetCrc == crc_File)
+                return FileEncoding.BigEndian32;
+
+            //if rom is Little Endian (32 bit)
+            if (TargetCrc == CRC.ConvertToLittleEndian32(crc_File))
+            {
+                return FileEncoding.LittleEndian32;
+            }
+
+            //if rom is Little Endian 16 bit
+            else if (TargetCrc == CRC.ConvertToLittleEndian16(crc_File))
+            {
+                return FileEncoding.LittleEndian16;
+            }
+            return FileEncoding.Error;
+        }
+
+        private static UInt64 ConvertToLittleEndian32(UInt64 crc)
+        {
+            byte[] crcLeft;
+            byte[] crcRight;
+            crcLeft = BitConverter.GetBytes((UInt32)(crc >> 32));
+            crcRight = BitConverter.GetBytes((UInt32)crc);
+
+            crcLeft = crcLeft.Reverse().ToArray();
+            crcRight = crcRight.Reverse().ToArray();
+
+            return (((UInt64)BitConverter.ToUInt32(crcLeft, 0)) << 32 | BitConverter.ToUInt32(crcRight, 0));
+        }
+
+        private static UInt64 ConvertToLittleEndian16(UInt64 crc)
+        {
+            UInt64 resultCrc = 0;
+            UInt16 intermediate;
+            for (int i = 3; i >= 0; i--)
+            {
+                intermediate = Endian.ConvertUShort((ushort)(crc >> (16 * i)));
+                resultCrc |= ((UInt64)(intermediate)) << (16 * i);
+
+            }
+            return resultCrc;
         }
     }
 }

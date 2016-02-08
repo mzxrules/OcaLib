@@ -50,5 +50,36 @@ namespace mzxrules.OcaLib.Helper
                 sw.WriteByte(0);
             return true;
         }
+        public static bool IsDifferentTo(this Stream a, Stream b)
+        {
+            long aPos;
+            long bPos;
+
+            //Should probably throw an exception, but eh
+            if (!a.CanSeek || !b.CanSeek)
+                throw new NotImplementedException("Can't compare non-seekable stream");
+            
+            if (a.Length != b.Length)
+                return true;
+            
+            aPos = a.Position;
+            bPos = b.Position;
+
+            a.Position = 0;
+            b.Position = 0;
+
+            while (a.Position < a.Length)
+            {
+                if (a.ReadByte() != b.ReadByte())
+                {
+                    a.Position = aPos;
+                    b.Position = bPos;
+                    return true;
+                }
+            }
+            a.Position = aPos;
+            b.Position = bPos;
+            return false;
+        }
     }
 }
