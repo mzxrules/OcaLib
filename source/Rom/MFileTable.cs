@@ -127,7 +127,7 @@ namespace mzxrules.OcaLib
 
         public FileAddress GetOvl_EffectAddress(int index)
         {
-            return GetFileByRomTable("ovl_EffectTable_Start", index, 7 * sizeof(Int32));
+            return GetFileByRomTable("ParticleTable_Start", index, 7 * sizeof(Int32));
         }
 
         private FileAddress GetFileByRomTable(string table, int index, int size, int offset = 0)
@@ -138,7 +138,7 @@ namespace mzxrules.OcaLib
             valueAddr = Addresser.GetRom(MRom.FileList.code, Version, table);
             valueAddr += index * size + offset;
             readValue = ReadInt32(valueAddr);
-            return GetVirtualAddress(readValue);
+            return GetVRomAddress(readValue);
         }
 
         #endregion

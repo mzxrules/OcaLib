@@ -40,7 +40,7 @@ namespace mzxrules.OcaLib.Actor
 
             actorName = GetActorName();
             variables = GetVariable();
-            return String.Format("{0:X4}:{1:X4} {2}{3}{4} {5}",
+            return string.Format("{0:X4}:{1:X4} {2}{3}{4} {5}",
                 Actor,
                 Variable,
                 (actorName.Length > 0) ? actorName + ", " : "",
@@ -55,7 +55,7 @@ namespace mzxrules.OcaLib.Actor
 
             actorName = GetActorName();
             variables = GetVariable();
-            return String.Format("{0:X4},{1:X4},{2},{3},{4},{5},{6},{7:X4},{8:X4},{9:X4}",
+            return string.Format("{0:X4},{1:X4},{2},{3},{4},{5},{6},{7:X4},{8:X4},{9:X4}",
                 Actor,
                 Variable,
                 actorName.Replace(',', ';'),
@@ -73,7 +73,7 @@ namespace mzxrules.OcaLib.Actor
         }
         protected string PrintWithoutActor()
         {
-            return String.Format("{0:X4}, {1} {2}",
+            return string.Format("{0:X4}, {1} {2}",
                   Variable,
                   PrintCoord(),
                   PrintRotation());
@@ -94,9 +94,9 @@ namespace mzxrules.OcaLib.Actor
         {
             return PrintCoord() + " " + PrintRotation();
         }
-        protected static float Degrees(ushort rx)
+        protected static float Degrees(ushort v)
         {
-            return ((float)rx / (float)ushort.MaxValue) * 360.0f;
+            return ((float)v / ushort.MaxValue) * 360.0f;
         }
     }
 }

@@ -49,10 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor\ActorFactory.cs" />
-    <Compile Include="Actor\ActorRecord.cs" />
-    <Compile Include="Actor\LinkActor.cs" />
-    <Compile Include="Actor\TransitionActor.cs" />
+    <Compile Include="VirtualTable\GameContextRecord.cs" />
+    <Compile Include="VirtualTable\OverlayTableRecord.cs" />
+    <Compile Include="SceneRoom\Actor\ActorFactory.cs" />
+    <Compile Include="SceneRoom\Actor\ActorRecord.cs" />
+    <Compile Include="SceneRoom\Actor\LinkActor.cs" />
+    <Compile Include="SceneRoom\Actor\TransitionActor.cs" />
     <Compile Include="Addresses.designer.cs" />
     <Compile Include="Address\Addresser.cs" />
     <Compile Include="Address\Addresses.cs" />
@@ -135,7 +137,9 @@
     <Compile Include="SceneRoom\SceneRoomReader.cs" />
     <Compile Include="Rom\OVersioning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VirtualTable\OvlActor.cs" />
+    <Compile Include="VirtualTable\ActorOverlayRecord.cs" />
+    <Compile Include="VirtualTable\ParticleEffectOverlayRecord.cs" />
+    <Compile Include="VirtualTable\PlayPauseOverlayRecord.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

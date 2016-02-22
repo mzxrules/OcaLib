@@ -1,12 +1,13 @@
 ﻿using mzxrules.OcaLib.Helper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace mzxrules.OcaLib
 {
-    public class OvlActor
+    public class ActorOverlayRecord : OverlayTableRecord
     {
         #region Structure
         /* 00: [Vrom] File Start, End
@@ -18,10 +19,10 @@ namespace mzxrules.OcaLib
          */
 
         //Main data structure
-        public FileAddress Vrom;
-        public FileAddress Vram;
+        //public FileAddress VRom;
+        //public FileAddress VRam;
         //uint ramFileStart;
-        public uint VramActorInfo;
+        public uint VRamActorInfo;
         public uint RamFileName;
         public uint Unknown;
         #endregion
@@ -29,30 +30,33 @@ namespace mzxrules.OcaLib
         #region Extended Fields
 
         public const int LENGTH = 0x20;
-        
-        public FileAddress RamAddress
-        {
-            get { return _RamAddress; }
-        }
-        protected FileAddress _RamAddress;
 
-        public int Actor
-        {
-            get { return _Actor; }
-        }
-        protected int _Actor;
+        public FileAddress RamAddress { get; protected set; }
+
+        public int Actor { get; protected set; }
 
         #endregion
 
-        protected OvlActor() { }
+        protected ActorOverlayRecord() { }
 
+        public ActorOverlayRecord(int index, BinaryReader br)
+        {
+            Actor = index;
+            VRom = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
+            VRam = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
 
-        public OvlActor(int index, byte[] data)
+            /* ramFileStart = */ br.ReadBigUInt32();
+            VRamActorInfo = br.ReadBigUInt32();
+            RamFileName = br.ReadBigUInt32();
+            Unknown = br.ReadBigUInt32();
+        }
+
+        public ActorOverlayRecord(int index, byte[] data)
         {
             Create(index, data, false);
         }
 
-        protected OvlActor(int index, byte[] data, bool LittleWord)
+        protected ActorOverlayRecord(int index, byte[] data, bool LittleWord)
         {
             Create(index, data, LittleWord);
         }
@@ -70,16 +74,16 @@ namespace mzxrules.OcaLib
         private void Create(int index, List<uint> data)
         {
             uint ramFileStart;
-            _Actor = index;
-            Vrom = new FileAddress(data[0], data[1]);
-            Vram = new FileAddress(data[2], data[3]);
+            Actor = index;
+            VRom = new FileAddress(data[0], data[1]);
+            VRam = new FileAddress(data[2], data[3]);
 
             ramFileStart = data[4];
-            VramActorInfo = data[5];
+            VRamActorInfo = data[5];
             RamFileName = data[6];
             Unknown = data[7];
 
-            _RamAddress = new FileAddress(ramFileStart, ramFileStart + Vrom.Size);
+            RamAddress = new FileAddress(ramFileStart, ramFileStart + VRom.Size);
         }
 
 
@@ -87,7 +91,7 @@ namespace mzxrules.OcaLib
         {
             List<uint> d = new List<uint>();
 
-            for (int i = 0; i < OvlActor.LENGTH; i += 4)
+            for (int i = 0; i < ActorOverlayRecord.LENGTH; i += 4)
             {
                 var v = BitConverter.ToUInt32(data, i);
                 d.Add(Endian.ConvertUInt32(v));
@@ -99,7 +103,7 @@ namespace mzxrules.OcaLib
         {
             List<uint> d = new List<uint>();
 
-            for (int i = 0; i < OvlActor.LENGTH; i += 4)
+            for (int i = 0; i < ActorOverlayRecord.LENGTH; i += 4)
             {
                 var v = BitConverter.ToUInt32(data, i);
                 d.Add(v);

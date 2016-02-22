@@ -31,8 +31,6 @@ namespace mzxrules.OcaLib
                 {
                     br.BaseStream.Position = 0x10;
                     ulong a = (br.ReadBigUInt32() << 32) + br.ReadBigUInt32();
-
-                    //ORom.BuildInformation.
                 }
             }
             catch

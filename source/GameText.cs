@@ -561,7 +561,7 @@ namespace mzxrules.OcaLib
                 case 0xAA: return "[Control Stick]";
                 case 0xAB: return "[D-pad]";
                 default:
-                    return (s > 0x9F) ? String.Format("[!! {0:X2}]", s) : ((char)s).ToString();
+                    return (s > 0x9F) ? string.Format("[!! {0:X2}]", s) : ((char)s).ToString();
             }
         }
     }

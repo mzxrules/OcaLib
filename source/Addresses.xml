@@ -119,7 +119,7 @@
           <Data ver="DBGMQ">BC24C0</Data>
         </Address>
       </Identifier>
-      <Identifier id="ovl_EffectTable_Start">
+      <Identifier id="ParticleTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!--ovl_effect table 7 words:
         VA start, end, vram start, end-->
@@ -151,7 +151,7 @@
           <Data ver="DBGMQ">B8D440</Data>
         </Address>
       </Identifier>
-      <Identifier id="UnknownTable_Start">
+      <Identifier id="GameContextTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!-- 0x30 in size
     ???,      fileVromStart,  fileVromEnd,  ov? vramStart,

@@ -64,9 +64,9 @@ namespace mzxrules.OcaLib
         }
 
         /// <summary>
-        /// Returns a stream pointed to the decompressed file at the given address
+        /// Returns a reference to a decompressed file
         /// </summary>
-        /// <param name="record"></param>
+        /// <param name="record">The DMA address used to reference the file</param>
         /// <returns></returns>
         protected RomFile GetFile(FileRecord record)
         {
@@ -107,7 +107,6 @@ namespace mzxrules.OcaLib
         /// Returns a stream pointed to the decompressed file at the given address
         /// </summary>
         /// <param name="file"></param>
-        /// <param name="record"></param>
         /// <returns></returns>
         public RomFile GetFile(RomFileToken file)
         {
@@ -116,12 +115,21 @@ namespace mzxrules.OcaLib
 
         #endregion
 
-
+        /// <summary>
+        /// Returns a file without attempting to decompress it.  
+        /// </summary>
+        /// <param name="virtualAddress">Address containing the location of the file</param>
+        /// <returns>Returns a stream containing the file</returns>
         public Stream GetPhysicalFile(FileAddress virtualAddress)
         {
             return GetPhysicalFile(virtualAddress.Start);
         }
 
+        /// <summary>
+        /// Returns a file without attempting to decompress it.
+        /// </summary>
+        /// <param name="virtualAddress">Address containing the location of the file</param>
+        /// <returns></returns>
         public Stream GetPhysicalFile(long virtualAddress)
         {
             MemoryStream ms;
@@ -199,7 +207,7 @@ namespace mzxrules.OcaLib
         /// </summary>
         /// <param name="address">The file's VROM address. Must match FileAddress's Vrom.Start</param>
         /// <returns>The returned FileAddress</returns>
-        public FileAddress GetVirtualAddress(long address)
+        public FileAddress GetVRomAddress(long address)
         {
             FileRecord record;
 
