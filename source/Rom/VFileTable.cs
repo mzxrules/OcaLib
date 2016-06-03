@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace mzxrules.OcaLib
 {
-    public class VFileTable : AbstractVFileTable, IDisposable, IEnumerable<FileRecord>
+    public class VFileTable : AbstractVFileTable, /*IDisposable,*/ IEnumerable<FileRecord>
     {
-        protected Dictionary<long, FileRecord> DmaTable { get { return dmaFile.Table; } }
-        protected DmaData dmaFile;
+        protected Dictionary<long, FileRecord> DmaTable { get { return DmaFile.Table; } }
+        protected DmaData DmaFile;
         public RomVersion Version { get; protected set; }
 
-        protected string romLoc;
+        protected string RomLocation;
 
         byte[] CachedFile;
         FileAddress CachedFileAddress;
@@ -26,7 +26,7 @@ namespace mzxrules.OcaLib
 
         public override FileAddress GetDmaDataStart()
         {
-            return dmaFile.Address.VirtualAddress;
+            return DmaFile.Address.VirtualAddress;
         }
 
         private void ResetFileCache()
@@ -80,7 +80,7 @@ namespace mzxrules.OcaLib
                 return new RomFile(record, ms, Version);
             }
 
-            using (FileStream fs = new FileStream(romLoc, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(RomLocation, FileMode.Open, FileAccess.Read))
             {
                 data = new byte[record.DataAddress.Size];
                 fs.Position = record.DataAddress.Start;
@@ -139,7 +139,7 @@ namespace mzxrules.OcaLib
             if (!DmaTable.TryGetValue(virtualAddress, out tableRecord))
                 throw new Exception();
 
-            using (FileStream fs = new FileStream(romLoc, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(RomLocation, FileMode.Open, FileAccess.Read))
             {
                 data = new byte[tableRecord.DataAddress.Size];
                 fs.Position = tableRecord.DataAddress.Start;
@@ -232,6 +232,7 @@ namespace mzxrules.OcaLib
         public void Dispose()
         {
         }
+        
 
         public IEnumerator<FileRecord> GetEnumerator()
         {

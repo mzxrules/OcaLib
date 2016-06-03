@@ -1,12 +1,19 @@
-﻿namespace mzxrules.OcaLib
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace mzxrules.OcaLib
 {
     /// <summary>
     /// Adapter class designed to let you pass in equivalent enumerations when requested
     /// </summary>
+    [DataContract]
     public class RomVersion
     {
+        [DataMember]
         public Game Game { get; private set; }
+        [DataMember]
         ORom.Build OVer { get;  set; }
+        [DataMember]
         MRom.Build MVer { get;  set; }
 
         private RomVersion(ORom.Build build)
@@ -47,14 +54,42 @@
             return v.Game;
         }
 
+        public bool IsCustomBuild()
+        {
+            if (Game == Game.OcarinaOfTime)
+                return OVer == ORom.Build.CUSTOM;
+            else if (Game == Game.MajorasMask)
+                return MVer == MRom.Build.CUSTOM;
+            return false;
+        }
+
+        public string GetGroup()
+        {
+            if (MVer == MRom.Build.J0
+                || MVer == MRom.Build.J1
+                || MVer == MRom.Build.GCNJ)
+                return "J";
+            return null;
+        }
+
         public override string ToString()
         {
             switch (Game)
             {
-                case Game.OcarinaOfTime: return this.OVer.ToString();
-                case Game.MajorasMask: return this.MVer.ToString();
+                case Game.OcarinaOfTime: return OVer.ToString();
+                case Game.MajorasMask: return MVer.ToString();
                 default: return base.ToString();
             }
+        }
+
+        public Type GetInternalType()
+        {
+            if (Game == Game.OcarinaOfTime)
+                return OVer.GetType();
+            else if (Game == Game.MajorasMask)
+                return MVer.GetType();
+            else return GetType();
+                
         }
     }
 }

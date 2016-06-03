@@ -1,4 +1,5 @@
-﻿using mzxrules.OcaLib.Helper;
+﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,8 +23,8 @@ namespace mzxrules.OcaLib
         //public FileAddress VRom;
         //public FileAddress VRam;
         //uint ramFileStart;
-        public uint VRamActorInfo;
-        public uint RamFileName;
+        public N64Ptr VRamActorInfo;
+        public N64Ptr RamFileName;
         public uint Unknown;
         #endregion
 
@@ -65,15 +66,15 @@ namespace mzxrules.OcaLib
         {
             List<uint> d;
             if (LittleWord)
-                d = GetData_Ram(data);
+                d = GetData_Ram(data, LENGTH);
             else
-                d = GetData_Rom(data);
+                d = GetData_Rom(data, LENGTH);
 
             Create(index, d);
         }
         private void Create(int index, List<uint> data)
         {
-            uint ramFileStart;
+            N64Ptr ramFileStart;
             Actor = index;
             VRom = new FileAddress(data[0], data[1]);
             VRam = new FileAddress(data[2], data[3]);
@@ -83,33 +84,7 @@ namespace mzxrules.OcaLib
             RamFileName = data[6];
             Unknown = data[7];
 
-            RamAddress = new FileAddress(ramFileStart, ramFileStart + VRom.Size);
+            RamAddress = new FileAddress(ramFileStart, ramFileStart + VRam.Size);
         }
-
-
-        public static List<uint> GetData_Rom(byte[] data)
-        {
-            List<uint> d = new List<uint>();
-
-            for (int i = 0; i < ActorOverlayRecord.LENGTH; i += 4)
-            {
-                var v = BitConverter.ToUInt32(data, i);
-                d.Add(Endian.ConvertUInt32(v));
-            }
-            return d;
-        }
-
-        public static List<uint> GetData_Ram(byte[] data)
-        {
-            List<uint> d = new List<uint>();
-
-            for (int i = 0; i < ActorOverlayRecord.LENGTH; i += 4)
-            {
-                var v = BitConverter.ToUInt32(data, i);
-                d.Add(v);
-            }
-            return d;
-        }
-
     }
 }

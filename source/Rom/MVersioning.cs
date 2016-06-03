@@ -5,17 +5,6 @@ using System.Text;
 
 namespace mzxrules.OcaLib
 {
-    public partial class Rom
-    {
-        public enum Language
-        {
-            Japanese,
-            English,
-            French,
-            German
-        }
-    }
-
     public partial class MRom
     {
         public class BuildInformation
@@ -72,15 +61,6 @@ namespace mzxrules.OcaLib
             }
         }
 
-
-        internal enum Bank
-        {
-            unknown0 = 0,
-            unknown1 = 1,
-            scene = 2,
-            map = 3
-        }
-
         private static Rom.Language[] SupportedLanguages = new Language[] { 
             Rom.Language.Japanese,
             Rom.Language.English,
@@ -91,28 +71,21 @@ namespace mzxrules.OcaLib
         {
             UNKNOWN,
             CUSTOM,
-            U0, //NTSC 1.0
-            //N1, //NTSC 1.1
-            //N2, //NTSC 1.2
-
-            //P0, //PAL 1.0 
-            //P1, //PAL 1.1
-
-            //GCNJ,
-            //GCNP,
+            J0,
+            J1,
+            U0,
+            P0,
+            P1,
+            GCNJ,
+            GCNU,
+            GCNP,
+            DBG, 
 
         }
 
         private static Build[] SupportedBuilds = new Build[] {
-            Build.U0, //NTSC 1.0
-            //Build.N1,  //NTSC 1.1
-            //Build.N2, //NTSC 1.2
-
-            //Build.P0, //PAL 1.0 
-            //Build.P1, //PAL 1.1
-
-            //Build.GCNJ,
-            ////yield return Build.GCNP;
+            Build.J0,
+            Build.U0,
 
 
         };
@@ -126,6 +99,7 @@ namespace mzxrules.OcaLib
 
         public static IEnumerable<Build> GetSupportedBuilds()
         {
+            yield return Build.J0;
             yield return Build.U0; //NTSC 1.0
             //yield return Build.N1; //NTSC 1.1
             //yield return Build.N2; //NTSC 1.2

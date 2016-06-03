@@ -1,4 +1,5 @@
-﻿using mzxrules.OcaLib.Helper;
+﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Helper;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,8 +17,8 @@ namespace mzxrules.OcaLib
         /* 0x0C */ //int VRamStart; //if applicable
         /* 0x10 */ //int VRamEnd;   //if applicable
         /* 0x14 */ uint unknown2;
-        /* 0x18 */ uint VRamUnknown1; //Possibly execution point?
-        /* 0x1C */ uint VRamUnknown2; //Possibly execution point?
+        /* 0x18 */ N64Ptr VRamUnknown1; //Possibly execution point?
+        /* 0x1C */ N64Ptr VRamUnknown2; //Possibly execution point?
 
         /* 0x20-0x2C */ //unknown
 
@@ -36,6 +37,17 @@ namespace mzxrules.OcaLib
         { }
 
         public GameContextRecord (int index, BinaryReader br)
+        {
+            Initialize(index, br);
+        }
+
+        public GameContextRecord(int index, byte[] data)
+        {
+            using (BinaryReader br = new BinaryReader(new MemoryStream(data)))
+                Initialize(index, br);
+        }
+
+        private void Initialize(int index, BinaryReader br)
         {
             unknown1 = br.ReadBigUInt32();
             VRom = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());

@@ -18,12 +18,12 @@ namespace mzxrules.OcaLib.Helper
         public static bool DecodeSize(Stream sr, out long sizeInt)
         {
             int[] size = new int[1];
-            byte[] buf = new byte[sizeof(Int32)];
+            byte[] buf = new byte[sizeof(int)];
 
             sr.Position += 4;
-            sr.Read(buf, 0, sizeof(Int32));
-            Endian.ReverseBytes(ref buf, sizeof(Int32));
-            Buffer.BlockCopy(buf, 0, size, 0, sizeof(Int32));
+            sr.Read(buf, 0, sizeof(int));
+            Endian.ReverseBytes(ref buf, sizeof(int));
+            Buffer.BlockCopy(buf, 0, size, 0, sizeof(int));
             sizeInt = size[0];
             sr.Position -= 8;
             return true;
@@ -41,13 +41,13 @@ namespace mzxrules.OcaLib.Helper
             byte[] result;
             int[] size;
 
-            buf = new byte[sizeof(Int32)];
+            buf = new byte[sizeof(int)];
             size = new int[1];
 
             sr.Position += 4;
-            sr.Read(buf, 0, sizeof(Int32));
-            Endian.ReverseBytes(ref buf, sizeof(Int32));
-            Buffer.BlockCopy(buf, 0, size, 0, sizeof(Int32));
+            sr.Read(buf, 0, sizeof(int));
+            Endian.ReverseBytes(ref buf, sizeof(int));
+            Buffer.BlockCopy(buf, 0, size, 0, sizeof(int));
             sr.Position += 8;
 
             buf = new byte[yaz0BlockSize];
@@ -67,8 +67,8 @@ namespace mzxrules.OcaLib.Helper
         {
             int srcPlace = 0, dstPlace = 0; //current read/write positions
 
-            UInt32 validBitCount = 0; //number of valid bits left in "code" byte
-            Byte currCodeByte = 0;//set on first pass
+            int validBitCount = 0; //number of valid bits left in "code" byte
+            byte currCodeByte = 0;//set on first pass
 
             dst = new byte[uncompressedSize];
 
@@ -141,18 +141,18 @@ namespace mzxrules.OcaLib.Helper
         /// <param name="pos"></param>
         /// <param name="pMatchPos"></param>
         /// <returns></returns>
-        static UInt32 simpleEnc(byte[] src, int size, int pos, ref UInt32 /* u32* */ pMatchPos)
+        static UInt32 simpleEnc(byte[] src, int size, int pos, ref uint /* u32* */ pMatchPos)
         //u32 simpleEnc(u8* src, int size, int pos, u32 *pMatchPos)
         {
             int startPos = pos - 0x1000;
-            UInt32 numBytes = 1;
-            UInt32 matchPos = 0;
+            int numBytes = 1;
+            int matchPos = 0;
             int sizeMinusPos = size - pos; //Replaces J loop terminating condition
 
             if (startPos < 0)
                 startPos = 0;
 
-            //hack to improve efficiency of the algo in situations with sequences of similar bytes
+            //limits forward seeking to the maximum number of bytes that can be encoded
             if (sizeMinusPos > 0xff + 0x12)
                 sizeMinusPos = 0xff + 0x12;
 
@@ -166,20 +166,20 @@ namespace mzxrules.OcaLib.Helper
                 }
                 if (j > numBytes)
                 {
-                    numBytes = (UInt32)j;
-                    matchPos = (UInt32)i;
+                    numBytes = j;
+                    matchPos = i;
                 }
             }
-            pMatchPos = matchPos; //*pMatchPos = matchPos;
+            pMatchPos = (uint)matchPos; //*pMatchPos = matchPos;
             if (numBytes == 2)
                 numBytes = 1;
-            return numBytes;
+            return (uint)numBytes;
         }
 
         class StaticEncodeVars
         {
-            public UInt32 numBytes1;
-            public UInt32 matchPos;
+            public uint numBytes1;
+            public uint matchPos;
             public int prevFlag;
         }
 
@@ -191,12 +191,11 @@ namespace mzxrules.OcaLib.Helper
         /// <param name="pos"></param>
         /// <param name="pMatchPos"></param>
         /// <returns></returns>
-        static UInt32 nintendoEnc(byte[] src, int size, int pos, ref UInt32 /* u32* */ pMatchPos, StaticEncodeVars var)
+        static UInt32 nintendoEnc(byte[] src, int size, int pos, ref uint pMatchPos, StaticEncodeVars var)
         //u32 nintendoEnc(u8* src, int size, int pos, u32 *pMatchPos)
         {
-            int startPos = pos - 0x1000;
-            UInt32 numBytes = 1;
-            //var.prevFlag = 0;         //static int prevFlag = 0;
+            //int startPos = pos - 0x1000;
+            uint numBytes = 1;
 
             // if prevFlag is set, it means that the previous position was determined by look-ahead try.
             // so just use it. this is not the best optimization, but nintendo's choice for speed.
@@ -231,26 +230,18 @@ namespace mzxrules.OcaLib.Helper
             encodeTask.Start();
             return encodeTask;
         }
-
-        //public static Task TestTask(Progress<long> p)
-        //{
-        //    p += 1;
-        //}
-
+        
         public static int Encode(byte[] src, int srcSize, Stream dstFile)
-        //int encodeYaz0(u8* src, int srcSize, FILE* dstFile)
         {
             Ret r = new Ret(0, 0);
             byte[] dst = new byte[24]; // 8 codes * 3 bytes maximum
             int dstSize = 0;
-            //int percent = -1;     //compression complete percentage
 
-            UInt32 validBitCount = 0; //number of valid bits left in "code" byte
+            uint validBitCount = 0; //number of valid bits left in "code" byte
             byte currCodeByte = 0;
 
-            UInt32 numBytes;
-            UInt32 matchPos = 0; //uninitialized, modified to compile
-            UInt32 srcPosBak;
+            uint numBytes;
+            uint matchPos = 0;
 
             StaticEncodeVars var = new StaticEncodeVars();
 
@@ -268,13 +259,7 @@ namespace mzxrules.OcaLib.Helper
             while (r.srcPos < srcSize)
             {
                 numBytes = nintendoEnc(src, srcSize, r.srcPos, ref matchPos, var); //matchPos passed ref &matchpos
-
-                if (numBytes > 0x111)
-                {
-                    r.srcPos += 0;
-                }
-
-
+                
                 if (numBytes < 3)
                 {
                     //straight copy
@@ -315,34 +300,26 @@ namespace mzxrules.OcaLib.Helper
                 //write eight codes
                 if (validBitCount == 8)
                 {
-                    dstFile.WriteByte(currCodeByte); //fwrite(&currCodeByte, 1, 1, dstFile);
-                    dstFile.Write(dst, 0, r.dstPos); //fwrite(dst, 1, r.dstPos, dstFile);
-                    //fflush(dstFile);
-                    dstSize += r.dstPos + 1;
+                    dstFile.WriteByte(currCodeByte);
+                    dstFile.Write(dst, 0, r.dstPos); 
 
-                    srcPosBak = (UInt32)r.srcPos;
+                    dstSize += r.dstPos + 1;
+                    
                     currCodeByte = 0;
                     validBitCount = 0;
                     r.dstPos = 0;
                 }
-                //if ((r.srcPos + 1) * 100 / srcSize != percent)
-                //{
-                //    percent = (r.srcPos + 1) * 100 / srcSize;
-                //    //printf("\r %3d%%", percent);
-                //}
             }
             if (validBitCount > 0)
             {
-                dstFile.WriteByte(currCodeByte); //fwrite(&currCodeByte, 1, 1, dstFile);
-                dstFile.Write(dst, 0, r.dstPos); //fwrite(dst, 1, r.dstPos, dstFile);
+                dstFile.WriteByte(currCodeByte); 
+                dstFile.Write(dst, 0, r.dstPos); 
                 dstSize += r.dstPos + 1;
 
                 currCodeByte = 0;
                 validBitCount = 0;
                 r.dstPos = 0;
             }
-            //printf("\r done\n", percent);
-            //dstFile.Close();
             dstFile.Position = 0;
             return dstSize;
         }

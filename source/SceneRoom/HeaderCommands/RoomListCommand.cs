@@ -48,7 +48,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             result = ReadSimple();
             foreach (FileAddress address in RoomAddresses)
             {
-                result += string.Format("{0}{1:X8}", Environment.NewLine, address.Start);
+                result += string.Format("{0}{1:X8} {2:X8}", Environment.NewLine, address.Start, address.End);
             }
             return result;
         }

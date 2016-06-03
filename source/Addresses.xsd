@@ -43,7 +43,7 @@
   <xs:complexType name="Identifier">
     <xs:choice>
       <xs:element name="Address" type="Address"/>
-      <xs:element name="Offset" type="Offset"/>
+      <xs:element name="Offset" type="Offset" maxOccurs="unbounded"/>
     </xs:choice>
     <xs:attribute name="id" type="xs:string" use="required"/>
   </xs:complexType>
@@ -65,11 +65,11 @@
   </xs:complexType>
 
   <xs:complexType name="Offset">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="id" type="xs:string"/>
-      </xs:extension>
-    </xs:simpleContent>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="id" type="xs:string"/>
+        </xs:extension>
+      </xs:simpleContent>
   </xs:complexType>
 
   <xs:simpleType name="AddressType">

@@ -161,7 +161,6 @@ namespace mzxrules.XActor
 
         private void ActorObjectRelationshipsFromXml()
         {
-            throw new NotImplementedException();
             XActors actorList;
             StringBuilder sb = new StringBuilder();
             List<Tuple<string, string>> ActorToObjects = new List<Tuple<string,string>>();

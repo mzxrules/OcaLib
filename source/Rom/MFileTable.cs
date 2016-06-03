@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using mzxrules.OcaLib.Helper;
 
 namespace mzxrules.OcaLib
 {
     public class MFileTable : VFileTable
     {
-        public MFileTable(string romLoc, MRom.Build version)
+        public MFileTable(string romLocation, MRom.Build version)
         {
-            using (FileStream fs = new FileStream(romLoc, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(romLocation, FileMode.Open, FileAccess.Read))
             {
-                dmaFile = new DmaData(fs, version);
+                DmaFile = new DmaData(fs, version);
             }
 
-            this.romLoc = romLoc;
-            this.Version = version;
+            RomLocation = romLocation;
+            Version = version;
         }
 
         #region GetFile
@@ -33,23 +32,18 @@ namespace mzxrules.OcaLib
                 default: throw new NotImplementedException();
             }
         }
-
-        public RomFile GetSceneFile_old(int i)
-        {
-            FileAddress sceneFile = GetSceneVirtualAddress(i);
-            if (sceneFile.Start != 0)
-                return GetFile(sceneFile);
-            return null;
-        }
+        
         public override RomFile GetSceneFile(int i)
         {
+            FileAddress sceneFile;
             byte? sceneIndex;
             sceneIndex = GetInternalSceneIndex(i);
 
             if (sceneIndex == null)
                 return null;
-            return GetFile(GetSceneVirtualAddress((sbyte)sceneIndex));
-            //return GetFile(0x01F0D000);//GetSceneVirtualAddress(i));
+
+            sceneFile = GetSceneVirtualAddress((sbyte)sceneIndex);
+            return GetFile(sceneFile);
         }
 
         /// <summary>
@@ -149,10 +143,7 @@ namespace mzxrules.OcaLib
             int sceneAddress;
             FileRecord fileRecord;
             List<long> addr = new List<long>();
-
-            //if (version == MRom.Build.DBGMQ)
-            //    throw new Exception();
-
+            
             startAddress = Addresser.GetRom(MRom.FileList.code, Version, "SceneTable_Start");
             fileRecord = GetFileStart(startAddress);
 

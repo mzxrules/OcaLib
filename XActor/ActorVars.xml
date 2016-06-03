@@ -1682,15 +1682,15 @@
         </Value>
         <Value repeat="+">
           <Data>80</Data>
-          <Description>Single Lizalfos, no mini-boss music</Description>
+          <Description>Lizalfos, no mini-boss music</Description>
         </Value>
         <Value>
-          <Data>00FE</Data>
+          <Data>FE</Data>
           <Description>Dinolfos, no mini-boss music</Description>
         </Value>
         <Value>
-          <Data>00FF</Data>
-          <Description>Dinolfos, no mini-boss music, drops down from ceiling</Description>
+          <Data>FF</Data>
+          <Description>Lizalfos, no mini-boss music, drops down from ceiling</Description>
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="FF00" default="FF" nullable="true">
@@ -3692,9 +3692,9 @@
   </Actor>
   <Actor id="008B">
     <Objects>
-      <Object>00AD</Object>
+      <Object>????</Object>
     </Objects>
-    <Description>Spiritual stones</Description>
+    <Description>Spiritual Stones, Medallions, Triforce</Description>
     <Variables>
       <Variable maskType="&amp;" mask="F000">
         <Description>Unknown</Description>
@@ -3707,89 +3707,158 @@
         <Value>
           <Data>00</Data>
           <Description>Corrupted, actors and interface gone</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>01</Data>
           <Description>Corrupted, actors and interface gone</Description>
           <Comment>in Sutaru, Navi and certain other things are invisible, but the interface and Link are not</Comment>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>02</Data>
           <Description>Fading blue glow (Ruto’s teleportation?)</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>03</Data>
           <Description>Corrupted (black polygons spew outwards), disappears after changing its form once</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>04</Data>
           <Description>Actors and Link are gone, interface goes in and out, loud rumbling sound (goddess)</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>05</Data>
           <Description>Same as 04</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>06</Data>
           <Description>Same as 04</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>07</Data>
           <Description>Same as 03</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>08</Data>
           <Description>Crashes</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>09</Data>
-          <Description>Corrupted, Actors, Link, and interface are gone</Description>
+          <Description>Fire Medallion</Description>
+          <Meta>
+            <Object>00BA</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>0A</Data>
-          <Description>Corrupted textures overtake screen</Description>
-          <Comment>on Sutaru, a giant gray triangle appears in the center, interface and Link gone</Comment>
+          <Description>Water Medallion</Description>
+          <Meta>
+            <Object>00BA</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>0B</Data>
-          <Description>Same as 09</Description>
+          <Description>Forest Medallion</Description>
+          <Meta>
+            <Object>00BA</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>0C</Data>
-          <Description>Same as 09</Description>
+          <Description>Spirit Medallion</Description>
+          <Meta>
+            <Object>00BA</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>0D</Data>
-          <Description>Same as 0A</Description>
-          <Comment>on Sutaru, corrupted textures overtake the screen</Comment>
+          <Description>Shadow Medallion</Description>
+          <Meta>
+            <Object>00BA</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>0E</Data>
           <Description>Crashes</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>0F</Data>
           <Description>??? (actor performs beq on this value)</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>10</Data>
           <Description>Similar to 00, portal or vortex sound (possibly from the sages?), returns to normal when sound finishes</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
+        </Value>
+        <Value>
+          <Data>12</Data>
+          <Description>?</Description>
+          <Comment>Loaded in Chamber of Sages</Comment>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>13</Data>
           <Description>Kokiri Emerald</Description>
+          <Meta>
+            <Object>00AD</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>14</Data>
           <Description>Goron's Ruby</Description>
+          <Meta>
+            <Object>00AD</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>15</Data>
           <Description>Zora's Sapphire</Description>
+          <Meta>
+            <Object>00AD</Object>
+          </Meta>
         </Value>
         <Value>
           <Data>17</Data>
           <Description>Corrupted, actors and interface gone</Description>
+          <Meta>
+            <Object>????</Object>
+          </Meta>
         </Value>
         <Value repeat="+">
           <Data>18</Data>
@@ -4173,6 +4242,26 @@
       <Object>0024</Object>
     </Objects>
     <Description>Skullwalltula and Gold Skulltulas</Description>
+    <Comment-Other>
+      FFFF - FIXME
+      - 0000+ [0000] = Skullwalltula
+      - 2000+ [2000] = Golden Skulltula on ground, damaged, discovery sound, Navi can target it and thinks it’s a Skullwalltula
+      - 2100+ [2100] = Golden Skulltula
+      - 4000+ [4000] = Same as 2000
+      - 4100+ [4100] = Same as 2100
+      - 6000+ [6000] = Same as 2000
+      - 6100+ [6100] = Golden Skulltula jumps out and lands on ground, discovery sound
+      - 8000+ [8000] = Same as 2000
+      - 8100+ [8100] = Same as 2100
+      - A000+ [A000] = Same as 2000
+      - A100+ [A100] = Same as 2100
+      - C000+ [C000] = Same as 2000
+      - C100+ [C100] = Same as 2100
+      - D000+ [D000] = Same as 6100
+      - E000+ [E000] = Same as 2000
+      - E100+ [E100] = Same as 2100
+      - F000+ [F000] = Same as 6100
+    </Comment-Other>
     <Variables>
       <Variable maskType="&amp;" mask="E000">
         <Description>Type</Description>
@@ -4322,78 +4411,6 @@
         <Value>
           <Data>80</Data>
           <Description>Skulltulla 8</Description>
-        </Value>
-      </Variable>
-      <Variable maskType="&amp;" mask="FFFF">
-        <Description>FIXME</Description>
-        <UI />
-        <Value repeat="+">
-          <Data>0000</Data>
-          <Description>Skullwalltula</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>2000</Data>
-          <Description>Golden Skulltula on ground, damaged, discovery sound, Navi can target it and thinks it’s a Skullwalltula</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>2100</Data>
-          <Description>Golden Skulltula</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>4000</Data>
-          <Description>Same as 2000</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>4100</Data>
-          <Description>Same as 2100</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>6000</Data>
-          <Description>Same as 2000</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>6100</Data>
-          <Description>Golden Skulltula jumps out and lands on ground, discovery sound</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>8000</Data>
-          <Description>Same as 2000</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>8100</Data>
-          <Description>Same as 2100</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>A000</Data>
-          <Description>Same as 2000</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>A100</Data>
-          <Description>Same as 2100</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>C000</Data>
-          <Description>Same as 2000</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>C100</Data>
-          <Description>Same as 2100</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>D000</Data>
-          <Description>Same as 6100</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>E000</Data>
-          <Description>Same as 2000</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>E100</Data>
-          <Description>Same as 2100</Description>
-        </Value>
-        <Value repeat="+">
-          <Data>F000</Data>
-          <Description>Same as 6100</Description>
         </Value>
       </Variable>
     </Variables>
@@ -9560,11 +9577,11 @@
         <UI name="select"/>
         <Value>
           <Data>00</Data>
-          <Description>? (Hyrule Field</Description>
+          <Description>? (Hyrule Field)</Description>
         </Value>
         <Value>
           <Data>FF</Data>
-          <Description>? (Lon Lon Ranch</Description>
+          <Description>? (Lon Lon Ranch)</Description>
         </Value>
       </Variable>
     </Variables>

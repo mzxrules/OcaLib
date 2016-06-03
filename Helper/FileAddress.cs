@@ -19,7 +19,7 @@ namespace mzxrules.OcaLib.Helper
         {
             int[] list = new int[2];
 
-            Endian.ReverseBytes(ref data, sizeof(Int32));
+            Endian.ReverseBytes(ref data, sizeof(int));
             Buffer.BlockCopy(data, 0, list, 0, 8);
             Start = list[0];
             End = list[1];

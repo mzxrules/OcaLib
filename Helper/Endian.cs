@@ -167,35 +167,35 @@ namespace mzxrules.OcaLib.Helper
         {
             byte[] temp = new byte[4];
             Array.Copy(array, offset, temp, 0, 4);
-            Endian.ReverseBytes(ref temp, 4);
+            ReverseBytes(ref temp, 4);
             v = BitConverter.ToSingle(temp, 0);
         }
 
         public static void Convert(Vector3<short> v, byte[] arr, int offset)
         {
-            Endian.Convert(out v.x, arr, offset + 0);
-            Endian.Convert(out v.y, arr, offset + 2);
-            Endian.Convert(out v.z, arr, offset + 4);
+            Convert(out v.x, arr, offset + 0);
+            Convert(out v.y, arr, offset + 2);
+            Convert(out v.z, arr, offset + 4);
         }
 
         public static void Convert(Vector3<ushort> v, byte[] arr, int offset)
         {
-            Endian.Convert(out v.x, arr, offset + 0);
-            Endian.Convert(out v.y, arr, offset + 2);
-            Endian.Convert(out v.z, arr, offset + 4);
+            Convert(out v.x, arr, offset + 0);
+            Convert(out v.y, arr, offset + 2);
+            Convert(out v.z, arr, offset + 4);
         }
 
         public static void Convert(Vector3<uint> v, byte[] arr, int offset)
         {
-            Endian.Convert(out v.x, arr, offset + 0);
-            Endian.Convert(out v.y, arr, offset + 4);
-            Endian.Convert(out v.z, arr, offset + 8);
+            Convert(out v.x, arr, offset + 0);
+            Convert(out v.y, arr, offset + 4);
+            Convert(out v.z, arr, offset + 8);
         }
         public static void Convert(Vector3<int> v, byte[] arr, int offset)
         {
-            Endian.Convert(out v.x, arr, offset + 0);
-            Endian.Convert(out v.y, arr, offset + 4);
-            Endian.Convert(out v.z, arr, offset + 8);
+            Convert(out v.x, arr, offset + 0);
+            Convert(out v.y, arr, offset + 4);
+            Convert(out v.z, arr, offset + 8);
         }
         public static void Convert(Vector3<float> v, byte[] arr, int offset)
         {
@@ -209,7 +209,5 @@ namespace mzxrules.OcaLib.Helper
             v.z = BitConverter.ToSingle(arr2, 8);
             
         }
-
-
     }
 }

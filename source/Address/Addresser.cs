@@ -21,8 +21,7 @@ namespace mzxrules.OcaLib
         {
             var stream = Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream("mzxrules.OcaLib.Addresses.xml");
-
-
+            
             XmlSerializer serializer;
 
             serializer = new XmlSerializer(typeof(Addresses));
@@ -34,7 +33,7 @@ namespace mzxrules.OcaLib
         }
 
 
-        public static bool TryGetOffset(RomVersion version, string addrVar, out int v)
+        public static bool TryGetOffset(string addrVar, RomVersion version, out int v)
         {
             Block block;
             v = 0;
@@ -44,11 +43,17 @@ namespace mzxrules.OcaLib
 
             var lookupAddr = block.Identifier.SingleOrDefault(x => x.id == addrVar);
 
-            if (!(lookupAddr.Item is Offset))
+            if (!(lookupAddr.Item.Count > 0 && lookupAddr.Item[0] is Offset))
                 return false;
 
+            var lookupSet = lookupAddr.Item.Cast<Offset>().ToList();
+            
+            Offset offset = lookupSet.SingleOrDefault(x => x.id == version.GetGroup());
+            
+            if (offset == null)
+                return false;
+            
 
-            Offset offset = (Offset)lookupAddr.Item;
             if (!TryGetOffsetValue(offset, out v))
                 return false;
             return true;
@@ -63,14 +68,14 @@ namespace mzxrules.OcaLib
             return TryGetStart(block, version, Domain.RAM, out v);
         }
 
-        public static bool TryGetRam(RomFileToken file, RomVersion version, string addrVar, out int v)
+        public static bool TryGetRam(string addrVar, RomFileToken file, RomVersion version, out int v)
         {
             var block = GetBlock(version, file.ToString());
 
             return TryMagicConverter(block, addrVar, version, Domain.RAM, out v);
         }
 
-        public static bool TryGetRam(RomVersion version, string addrVar, out int v)
+        public static bool TryGetRam(string addrVar, RomVersion version, out int v)
         {
             Block block;
             v = 0;
@@ -90,20 +95,20 @@ namespace mzxrules.OcaLib
         #region (Try)GetRom
         public static bool TryGetRom(RomFileToken file, RomVersion version, uint ramAddr, out int v)
         {
+            int romStart;
+            int ramStart;
+            ramAddr &= 0xFFFFFF;
+            var block = GetBlock(version, file.ToString());
+            if (!TryGetStart(block, version, Domain.ROM, out romStart)
+                || !TryGetStart(block, version, Domain.RAM, out ramStart)
+                || ramAddr < ramStart)
+            {
+                v = 0;
+                return false;
+            }
 
-            throw new NotImplementedException();
-            //int romStart;
-            //int ramStart;
-            //if (!TryGetAddress(file, version, "__Start", out romStart)
-            //    || !TryGetAddress("ram", version, "CONV_" + file, out ramStart)
-            //    || ramAddr < ramStart)
-            //{
-            //    v = 0;
-            //    return false;
-            //}
-            //ramAddr &= 0xFFFFFF;
-            //v = romStart + (int)ramAddr - ramStart;
-            //return true;
+            v = romStart + (int)ramAddr - ramStart;
+            return true;
         }
 
         public static bool TryGetRom(RomFileToken file, RomVersion version, string addrVar, out int v)
@@ -181,15 +186,16 @@ namespace mzxrules.OcaLib
         {
             int start, lookup;
             result = 0;
+            lookup = 0;
 
             var lookupAddr = block.Identifier.SingleOrDefault(x => x.id == ident);
 
             if (lookupAddr == null)
                 return false;
 
-            if (lookupAddr.Item is Addr)
+            if (lookupAddr.Item.Count > 0 && lookupAddr.Item[0] is Addr)
             {
-                Addr addr = (Addr)lookupAddr.Item;
+                Addr addr = (Addr)lookupAddr.Item[0];
 
                 if (!TryGetAddrValue(addr, version, out lookup))
                     return false;
@@ -218,9 +224,16 @@ namespace mzxrules.OcaLib
                     lookup -= altStart;
                 }
             }
-            else //if (lookupAddr.Item is Offset)
+            else if (lookupAddr.Item.Count > 0 && lookupAddr.Item[0] is Offset)
             {
-                Offset offset = (Offset)lookupAddr.Item;
+
+                var lookupSet = lookupAddr.Item.Cast<Offset>().ToList();
+
+                Offset offset = lookupSet.SingleOrDefault(x => x.id == version.GetGroup());
+
+                if (offset == null)
+                    return false;
+                
                 if (!TryGetOffsetValue(offset, out lookup))
                     return false;
             }

@@ -5,12 +5,20 @@ using System.Text;
 
 namespace mzxrules.OcaLib
 {
-    public partial class Rom
+    public class Rom
     {
         public string FileLocation { get; set; }
         public VFileTable Files { get; set; }
         public RomVersion Version { get { return Files.Version; } }
         public bool IsCompressed { get; set; }
+
+        public enum Language
+        {
+            Japanese,
+            English,
+            French,
+            German
+        }
 
         protected Rom(string fileLocation, RomVersion version)
         {

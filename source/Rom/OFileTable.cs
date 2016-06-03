@@ -17,10 +17,10 @@ namespace mzxrules.OcaLib
         {
             using (FileStream fs = new FileStream(romLoc, FileMode.Open, FileAccess.Read))
             {
-                dmaFile = new DmaData(fs, version);
+                DmaFile = new DmaData(fs, version);
             }
 
-            this.romLoc = romLoc;
+            this.RomLocation = romLoc;
             this.Version = version;
         }
 
@@ -46,8 +46,11 @@ namespace mzxrules.OcaLib
         {
             if (Version == ORom.Build.DBGMQ && i < 110
                 || i < 101)
+            {
                 return GetFile(GetSceneVirtualAddress(i));
-            return null;
+            }
+            else
+                return null;
         }
 
         private Stream GetActorFile(int i)

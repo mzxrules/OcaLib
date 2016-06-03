@@ -42,6 +42,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,7 +79,7 @@
     <Compile Include="Cutscenes\TextCommand.cs" />
     <Compile Include="Rom\DmaData.cs" />
     <Compile Include="Rom\Game.cs" />
-    <Compile Include="GameText_Rewrite.cs" />
+    <Compile Include="Text\GameText_Rewrite.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="MBlock.cs" />
     <Compile Include="Rom\MVersioning.cs" />
@@ -126,7 +127,7 @@
     <Compile Include="SceneRoom\HeaderCommands\TimeSettingsCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\TransitionActorListCommand.cs" />
     <Compile Include="SpiritHack.cs" />
-    <Compile Include="GameText.cs" />
+    <Compile Include="Text\GameText.cs" />
     <Compile Include="Rom\OFileTable.cs" />
     <Compile Include="SceneRoom\ISceneRoomHeader.cs" />
     <Compile Include="SceneRoom\Room.cs" />

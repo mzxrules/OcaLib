@@ -1168,16 +1168,17 @@ namespace mzxrules.OcaLib.Addr2 {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=true)]
     public partial class Identifier {
-        
-        private object itemField;
-        
+
+        private List<object> itemField = new List<object>();
+
         private string idField;
         
         private static System.Xml.Serialization.XmlSerializer serializer;
         
+
         [System.Xml.Serialization.XmlElementAttribute("Address", typeof(Address), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        [System.Xml.Serialization.XmlElementAttribute("Offset", typeof(Offset), Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public object Item {
+        [System.Xml.Serialization.XmlElementAttribute("Offset", typeof(Offset), Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public List<object> Item {
             get {
                 return this.itemField;
             }

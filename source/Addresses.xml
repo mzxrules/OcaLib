@@ -20,7 +20,6 @@
     </Block>
     <Block name="dmadata">
       <Start>
-        <!--<Identifier id="__Start">-->
         <Address reftype="absolute" domain="ROM">
           <!--First record in the file table-->
           <Data ver="N0">7430</Data>
@@ -78,7 +77,6 @@
     </Block>
     <Block name="code">
       <Start>
-        <!--<Identifier id="__Start">-->
         <Address reftype="absolute" domain="ROM">
           <Data ver="N0">A87000</Data>
           <Data ver="N1">A87000</Data>
@@ -91,7 +89,6 @@
           <Data ver="MQJ" />
           <Data ver="DBGMQ">A94000</Data>
         </Address>
-        <!--<Identifier id="CONV_code">-->
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">110A0</Data>
           <Data ver="N1" />
@@ -235,12 +232,13 @@
         <Address reftype="absolute" domain="ROM">
           <!--Two records, then after both (0x1C * 2) is start addr for file in ram, and which one is loaded-->
           <Data ver="N0">B743E0</Data>
+          <Data ver="MQP">B723E0</Data>
+          <Data ver="DBGMQ">BA4340</Data>
         </Address>
       </Identifier>
     </Block>
     <Block name="jpn_message_data_static">
       <Start>
-        <!--<Identifier id="__Start">-->
         <Address reftype="absolute" domain="ROM">
           <Data ver="N0">8EB000</Data>
           <Data ver="N1">8EB000</Data>
@@ -252,7 +250,6 @@
     </Block>
     <Block name="nes_message_data_static">
       <Start>
-        <!--<Identifier id="__Start">-->
         <Address reftype="absolute" domain="ROM">
           <Data ver="N0">92D000</Data>
           <Data ver="N1">92D000</Data>
@@ -269,7 +266,6 @@
     </Block>
     <Block name="ger_message_data_static">
       <Start>
-        <!--<Identifier id="__Start">-->
         <Address reftype="absolute" domain="ROM">
           <Data ver="P0">8F4000</Data>
           <Data ver="P1">8F4000</Data>
@@ -281,7 +277,6 @@
     </Block>
     <Block name="fra_message_data_static">
       <Start>
-        <!--<Identifier id="__Start">-->
         <Address reftype="absolute" domain="ROM">
           <Data ver="P0">930000</Data>
           <Data ver="P1">930000</Data>
@@ -303,23 +298,27 @@
           <Data ver="P1">1C6520</Data>
         </Address>
       </Start>
+      
       <!-- Address of the actor category linked list table -->
       <Identifier id="ACTOR_CAT_LL_Start">
         <Offset>001C30</Offset>
         <!--1CA0D0-->
+      
+      <!--Address containing the start of the table for loaded obj files-->
+      <!--0x08 = num loaded object files "OBJ_COUNT_ADDR"-->
+      <!--0x0C = start of table "OBJ_LIST_START_ADDR"-->
       </Identifier>
-      <!--Address containing the number of loaded object files-->
-      <Identifier id="OBJ_COUNT_ADDR">
-        <Offset>117AC</Offset>
-        <!--1D9C4C-->
+      <Identifier id ="OBJ_ALLOC_TABLE">
+        <Offset>117A4</Offset>
       </Identifier>
-
-      <!--Address to a list of the currently loaded object file set-->
-      <Identifier id="OBJ_LIST_START_ADDR">
-        <Offset>117B0</Offset>
-        <!--1D9C50-->
+      
+      <!--Address to struct that manages room allocation-->
+      <Identifier id ="ROOM_ALLOC_ADDR">
+        <Offset>11CE4</Offset>
       </Identifier>
+      
       <!--Start pointer to actor linked list-->
+      <!--Lazy fuck-->
       <Identifier id="OVL_LL_First">
         <Offset>012560</Offset>
         <!--1DAA00-->
@@ -349,7 +348,15 @@
         </Address>
       </Identifier>
 
+      <Identifier id="RAM_SEGMENT_TABLE">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">120C38</Data>
+          <Data ver="DBGMQ">166FA8</Data>
+        </Address>
+      </Identifier>
+
       <Identifier id="RAM_HEAP_PTR">
+      <!-- Main Heap reference -->
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">12BAA0</Data>
           <Data ver="N1">12BC60</Data>
@@ -360,7 +367,15 @@
           <Data ver="GCNP" />
           <Data ver="MQP" />
           <Data ver="MQJ" />
-          <Data ver="DBGMQ"></Data>
+          <Data ver="DBGMQ">175610</Data>
+        </Address>
+      </Identifier>
+      
+      <Identifier id ="RAM_INNER_HEAP_PTR">
+      <!-- "Actor" Heap reference-->
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="N0">11BEF0</Data>
+          <Data ver="DBGMQ">15FF80</Data>
         </Address>
       </Identifier>
       
@@ -369,16 +384,13 @@
           <Data ver="N0">114DE0</Data>
           <Data ver="N1">114FA0</Data>
           <Data ver="N2">115490</Data>
+          <Data ver="DBGMQ">157DA0</Data>
         </Address>
       </Identifier>
       
-      <Identifier id ="RAM_INNER_HEAP_PTR">
-        <Address reftype="absolute" domain="RAM">
-          <Data ver="N0">11BEF0</Data>
-        </Address>
-      </Identifier>
       
       <!--Address to a Linked list that maps out certain memory blocks-->
+      <!-- No longer used by Spectrum-->
       <Identifier id="RAM_LL_First">
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">1C6E60</Data>
@@ -390,60 +402,138 @@
           <Data ver="GCNP" />
           <Data ver="MQP" />
           <Data ver="MQJ" />
-          <Data ver="DBGMQ">212090</Data>
+          <Data ver="DBGMQ">2109E0</Data>
         </Address>
       </Identifier>
 
     </Block>
   </Game>
+  
+  <!--*************MM**************-->
   <Game name="MajorasMask">
-    <!--*************MM**************-->
+    <Block name="(none)">
+      <Start>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0"></Data>
+          <Data ver="J1"></Data>
+          <Data ver="U0"></Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCNJ"></Data>
+          <Data ver="GCNU"></Data>
+          <Data ver="GCNP"></Data>
+          <Data ver="DBG"></Data>
+        </Address>
+      </Start>
+    </Block>
     <Block name="dmadata">
       <Start>
-        <!--<Identifier id="__Start">-->
         <Address reftype="absolute" domain="ROM">
           <!--First record in the file table-->
+          <Data ver="J0">1C110</Data>
           <Data ver="U0">1A500</Data>
         </Address>
       </Start>
     </Block>
+    
     <Block name="code">
       <Start>
-        <!--<Identifier id="__Start">-->
         <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">B5F000</Data>
           <Data ver="U0">B3C000</Data>
         </Address>
-        <!--<Identifier id="CONV_code">-->
         <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">A76A0</Data>
           <Data ver="U0">A5AC0</Data>
         </Address>
       </Start>
       <Identifier id="SceneTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!-- scene count =?-->
+          <Data ver="J0">C76510</Data>
           <Data ver="U0">C5A1E0</Data>
         </Address>
       </Identifier>
       <Identifier id="EntranceIndexTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!--Record Count = 110?-->
+          <Data ver ="J0">C77F84</Data>
           <Data ver="U0">C5BC60</Data>
         </Address>
       </Identifier>
       <Identifier id="ActorTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!--Count = 0x2B2-->
+          <Data ver="J0">C617C0</Data>
           <Data ver="U0">C45510</Data>
         </Address>
       </Identifier>
     </Block>
+
+    <Block name="GlobalContext">
+      <Start>
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">3E6CC0</Data>
+        </Address>
+      </Start>
+      <Identifier id="OBJ_ALLOC_TABLE">
+        <Offset id="J">17D68</Offset> <!--3FEA58 in MM J0, End also follows immediately-->
+        <Offset>17D88</Offset>
+      </Identifier>
+    
+      <!--Address to struct that manages room allocation-->
+      <Identifier id ="ROOM_ALLOC_ADDR">
+        <Offset id="J">186E8</Offset>
+        <Offset>18708</Offset>
+      </Identifier>
+    </Block>
+    
     <Block name="ram">
       <Start>
-        <!--<Identifier id="start">-->
         <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">0</Data>
           <Data ver="U0">0</Data>
         </Address>
       </Start>
+      <Identifier id ="SRAM_START">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">1EF460</Data>
+          <Data ver="J1">1EF710</Data>
+          <Data ver="U0">1EF670</Data>
+          <Data ver="P0">1E6B50</Data>
+          <Data ver="P1">1E6EF0</Data>
+          <Data ver="GCNJ">1ED820</Data>
+          <Data ver="GCNU">1ED830</Data>
+          <Data ver="GCNP">1E5480</Data>
+          <Data ver="DBG">23F790</Data>
+        </Address>
+      </Identifier>
+        
+      <Identifier id="RAM_HEAP_PTR">
+      <!-- Main Heap reference -->
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">9E920</Data>
+          <Data ver="U0">9CD20</Data>
+          <Data ver="P0">9CE70</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id ="RAM_GLOBAL_CONTEXT">
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">1E3DA0</Data>
+          <Data ver="U0">1BD8C0</Data>
+          <Data ver="P0">1BE050</Data>
+        </Address>
+      </Identifier>
+      <Identifier id ="RAM_INNER_HEAP_PTR">
+      <!-- "Actor" Heap reference-->
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="J0">1F5280</Data>
+          <Data ver="U0">1F5100</Data>
+          <Data ver="P0">1EC5E0</Data>
+        </Address>
+      </Identifier>
+        
       <Identifier id="OVL_LL_First">
         <Address reftype="absolute" domain="RAM">
           <Data ver="U0">3FFDA0</Data>

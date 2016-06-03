@@ -18,6 +18,13 @@ namespace mzxrules.OcaLib.Cutscenes
             Load(br);
         }
         
+        public ActorCommand(int command, ActionEntry entry)
+        {
+            Command = command;
+            entry.RootCommand = this;
+            Entries.Add(entry);
+        }
+        
         private void Load(BinaryReader br)
         {
             int EntryCount;
@@ -44,7 +51,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            return String.Format("{0:X4}: {2}, Entries: {1:X8}",
+            return string.Format("{0:X4}: {2}, Entries: {1:X8}",
                 Command, Entries.Count, GetActorName());
         }
 

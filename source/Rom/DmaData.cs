@@ -106,7 +106,7 @@ namespace mzxrules.OcaLib
 
                 if (fileVirtualAddress.Start == 0
                     && fileVirtualAddress.End == 0)
-                    break;
+                    continue;
 
                 fileRecord = new FileRecord(fileVirtualAddress, filePhysicalAddress, i);
                 Table.Add(fileRecord.VirtualAddress.Start, fileRecord);
