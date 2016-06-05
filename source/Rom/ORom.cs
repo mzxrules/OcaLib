@@ -14,11 +14,11 @@ namespace mzxrules.OcaLib
         public new OFileTable Files { get { return (OFileTable) base.Files; } }
         public GameText Text { get; set; }
 
-        public ORom(string fileLocation, ORom.Build version)
+        public ORom(string fileLocation, Build version)
             : base(fileLocation, version)
         {
-            Text = new GameText(this);
-            SceneCount = (Version == ORom.Build.DBGMQ) ? 109 : 100;
+            //Text = new GameText(this);
+            SceneCount = (Version == Build.DBGMQ) ? 109 : 100;
         }
 
         public bool DetectRom(string file, out ORom rom)

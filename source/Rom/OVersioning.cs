@@ -26,7 +26,7 @@ namespace mzxrules.OcaLib
             static BuildInformation()
             {
                 builds = new BuildInformation[] {
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.UNKNOWN, _Name = "Unknown", _Localization = ORom.Localization.UNKNOWN},
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.UNKNOWN, _Name = "Unknown", _Localization = Localization.UNKNOWN},
 
                     new BuildInformation { _CRC = 0xEC7011B77616D72B, _Version = Build.N0, _Name = "NTSC 1.0", _Localization = Localization.NTSC },
                     new BuildInformation { _CRC = 0xD43DA81F021E1E19, _Version = Build.N1, _Name = "NTSC 1.1", _Localization = Localization.NTSC },
@@ -35,11 +35,12 @@ namespace mzxrules.OcaLib
                     new BuildInformation { _CRC = 0xB044B569373C1985, _Version = Build.P0, _Name = "PAL 1.0", _Localization = Localization.PAL },
                     new BuildInformation { _CRC = 0xB2055FBD0BAB4E0C, _Version = Build.P1, _Name = "PAL 1.1", _Localization = Localization.PAL },
 
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCNJ, _Name = "NTSC GCN", _Localization = Localization.NTSC },
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCNP, _Name = "NTSC PAL", _Localization = Localization.NTSC },
+                    new BuildInformation { _CRC = 0xF611F4BAC584135C, _Version = Build.GCJ, _Name = "NTSC-J GCN", _Localization = Localization.NTSC },
+                    new BuildInformation { _CRC = 0xF3DD35BA4152E075, _Version = Build.GCU, _Name = "NTSC-U GCN", _Localization = Localization.NTSC },
+                    new BuildInformation { _CRC = 0x09465AC3F8CB501B, _Version = Build.GCP, _Name = "PAL GCN", _Localization = Localization.PAL },
             
-                    new BuildInformation { _CRC = 0xF3DD35BA4152E075, _Version = Build.MQJ, _Name = "US Master Quest", _Localization = ORom.Localization.NTSC},
-                    //new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.MQJ, _Name = "NTSC Master Quest", _Localization = Localization.NTSC },
+                    new BuildInformation { _CRC = 0xF43B45BA2F0E9B6F, _Version = Build.MQJ, _Name = "JPN Master Quest", _Localization = Localization.NTSC},
+                    new BuildInformation { _CRC = 0xF034001AAE47ED06, _Version = Build.MQU, _Name = "USA Master Quest", _Localization = Localization.NTSC},
                     new BuildInformation { _CRC = 0x1D4136F3AF63EEA9, _Version = Build.MQP, _Name = "PAL Master Quest", _Localization = Localization.PAL },
                     new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.DBGMQ, _Name = "Debug Master Quest", _Localization = Localization.PAL },
                 };
@@ -71,11 +72,11 @@ namespace mzxrules.OcaLib
             map = 3
         }
 
-        private static Language[] SupportedLanguages = new Language[] { 
-            Rom.Language.Japanese,
-            Rom.Language.English,
-            Rom.Language.German,
-            Rom.Language.French, };
+        private static Language[] SupportedLanguages = new Language[] {
+            Language.Japanese,
+            Language.English,
+            Language.German,
+            Language.French, };
 
         public enum Build
         {
@@ -88,31 +89,31 @@ namespace mzxrules.OcaLib
             P0, //PAL 1.0 
             P1, //PAL 1.1
 
-            GCNJ,
-            GCNP,
+            GCJ, //NTSC-J GCN
+            GCU, //NTSC-U GCN
+            GCP, //PAL GCN
 
-            MQJ,
-            MQP,
-            DBGMQ,
+            MQJ, //NTSC-J GCN MQ
+            MQU, //NTSC-U GCN MQ
+            MQP, //PAL GCN MQ
 
-            //non-official builds
-            DUNGRUSH,
-            DUNGRUSH2,
+            DBGMQ, //PAL MQ Debug
         }
 
         private static Build[] SupportedBuilds = new Build[] {
             Build.N0, //NTSC 1.0
-            Build.N1,  //NTSC 1.1
+            Build.N1, //NTSC 1.1
             Build.N2, //NTSC 1.2
 
             Build.P0, //PAL 1.0 
             Build.P1, //PAL 1.1
 
-            Build.GCNJ,
-            //yield return Build.GCNP;
+            Build.GCJ,
+            Build.GCP,
 
+            Build.MQJ,
             Build.MQP,
-            //yield return Build.MQJ; 
+
             Build.DBGMQ,
 
         };
@@ -133,7 +134,7 @@ namespace mzxrules.OcaLib
             yield return Build.P0; //PAL 1.0 
             yield return Build.P1; //PAL 1.1
 
-            yield return Build.GCNJ;
+            yield return Build.GCJ;
             //yield return Build.GCNP;
 
             yield return Build.MQP;
@@ -154,40 +155,33 @@ namespace mzxrules.OcaLib
         }
 
 
-        public static IEnumerable<ORom.Language> GetSupportedLanguages(Build b)
+        public static IEnumerable<Language> GetSupportedLanguages(Build b)
         {
-            return GetSupportedLanguages(GetLocalization(b));
-        }
-
-        public static IEnumerable<ORom.Language> GetSupportedLanguages(Localization l)
-        {
-            switch (l)
+            switch (GetLocalization(b))
             {
                 case Localization.NTSC: return new Language[] { Language.Japanese, Language.English };
                 case Localization.PAL: return new Language[] { Language.English, Language.German, Language.French };
                 default: return null;
             }
         }
-
+        
         public static bool IsBuildNintendo(Build build)
         {
             if (build == Build.UNKNOWN
-                || build == Build.CUSTOM
-                || build == Build.DUNGRUSH
-                || build == Build.DUNGRUSH2)
+                || build == Build.CUSTOM)
                 return false;
             return true;
         }
 
-        public static IEnumerable<ORom.Language> GetAllSupportedLanguages()
+        public static IEnumerable<Language> GetAllSupportedLanguages()
         {
-            yield return ORom.Language.Japanese;
-            yield return ORom.Language.English;
-            yield return ORom.Language.German;
-            yield return ORom.Language.French;
+            yield return Language.Japanese;
+            yield return Language.English;
+            yield return Language.German;
+            yield return Language.French;
         }
 
-        public IEnumerable<ORom.Language> GetSupportedLanguages()
+        public IEnumerable<Language> GetSupportedLanguages()
         {
             return GetSupportedLanguages(Version);
         }

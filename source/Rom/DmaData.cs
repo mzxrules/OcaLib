@@ -93,7 +93,7 @@ namespace mzxrules.OcaLib
 
             positionEnd = GetEndAddress(br);
 
-            length = (positionEnd - position) / 0x10 + 1;
+            length = (positionEnd - position) / 0x10;
 
             for (int i = 0; i < length; i++)
             {
