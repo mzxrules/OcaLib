@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using mzxrules.OcaLib.Addr2;
+using System;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
-using mzxrules.OcaLib.Addr2;
-using Domain = mzxrules.OcaLib.Addr2.SpaceDomain;
 using Addr = mzxrules.OcaLib.Addr2.Address;
+using Domain = mzxrules.OcaLib.Addr2.SpaceDomain;
 
 
 namespace mzxrules.OcaLib
@@ -47,8 +43,15 @@ namespace mzxrules.OcaLib
                 return false;
 
             var lookupSet = lookupAddr.Item.Cast<Offset>().ToList();
-            
+
+            var group = version.GetGroup();
+
             Offset offset = lookupSet.SingleOrDefault(x => x.id == version.GetGroup());
+
+            if (offset == null && group != null)
+            {
+                offset = lookupSet.SingleOrDefault(x => x.id == null);
+            }
             
             if (offset == null)
                 return false;

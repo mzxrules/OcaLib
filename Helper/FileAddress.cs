@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace mzxrules.OcaLib.Helper
+namespace mzxrules.Helper
 {
     [Serializable]
     public struct FileAddress

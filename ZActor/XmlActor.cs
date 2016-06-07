@@ -1,5 +1,5 @@
 ﻿using System;
-using mzxrules.OcaLib.Helper;
+using mzxrules.Helper;
 
 namespace mzxrules.ZActor
 {

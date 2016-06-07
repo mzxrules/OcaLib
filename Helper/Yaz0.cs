@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace mzxrules.OcaLib.Helper
+namespace mzxrules.Helper
 {
     public class Yaz0
     {

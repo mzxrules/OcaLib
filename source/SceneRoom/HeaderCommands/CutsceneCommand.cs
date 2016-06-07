@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using mzxrules.Helper;
+using System;
 using System.IO;
-using mzxrules.OcaLib.Helper;
+using System.Text;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {

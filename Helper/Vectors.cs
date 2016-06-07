@@ -1,4 +1,4 @@
-﻿namespace mzxrules.OcaLib.Helper
+﻿namespace mzxrules.Helper
 {
     public class Vector2<T1>
     {

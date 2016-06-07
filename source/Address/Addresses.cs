@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace mzxrules.OcaLib.Address
 {
-    [SerializableAttribute()]
+    [Serializable()]
     [XmlRoot("Addresses", Namespace = "", IsNullable = false)]
     public partial class Addresses
     {
@@ -19,7 +17,7 @@ namespace mzxrules.OcaLib.Address
         }
     }
 
-    [SerializableAttribute()]
+    [Serializable()]
     public partial class Game
     {
         [XmlAttribute("name")]
@@ -35,7 +33,7 @@ namespace mzxrules.OcaLib.Address
 
     }
 
-    [SerializableAttribute()]
+    [Serializable()]
     public partial class File
     {
         [XmlAttribute("n")]
@@ -51,7 +49,7 @@ namespace mzxrules.OcaLib.Address
     }
 
 
-    [SerializableAttribute()]
+    [Serializable()]
     public partial class Item
     {
         [XmlAttribute("var")]
@@ -61,7 +59,7 @@ namespace mzxrules.OcaLib.Address
         public List<Value> Values { get; set; }
     }
 
-    [SerializableAttribute()]
+    [Serializable()]
     public partial class Value
     {
         [XmlAttribute("v")]

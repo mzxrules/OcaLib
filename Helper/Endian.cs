@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace mzxrules.OcaLib.Helper
+namespace mzxrules.Helper
 {
     public static class Endian
     {

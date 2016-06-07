@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace mzxrules.OcaLib
 {
@@ -61,11 +59,11 @@ namespace mzxrules.OcaLib
             }
         }
 
-        private static Rom.Language[] SupportedLanguages = new Language[] { 
-            Rom.Language.Japanese,
-            Rom.Language.English,
-            Rom.Language.German,
-            Rom.Language.French, };
+        private static Language[] SupportedLanguages = new Language[] { 
+            Language.Japanese,
+            Language.English,
+            Language.German,
+            Language.French, };
 
         public enum Build
         {
@@ -144,12 +142,12 @@ namespace mzxrules.OcaLib
         }
 
 
-        public static IEnumerable<Rom.Language> GetSupportedLanguages(RomVersion b)
+        public static IEnumerable<Language> GetSupportedLanguages(RomVersion b)
         {
             return GetSupportedLanguages(GetLocalization(b));
         }
 
-        public static IEnumerable<Rom.Language> GetSupportedLanguages(Localization l)
+        public static IEnumerable<Language> GetSupportedLanguages(Localization l)
         {
             switch (l)
             {
@@ -167,15 +165,15 @@ namespace mzxrules.OcaLib
             return true;
         }
 
-        public static IEnumerable<Rom.Language> GetAllSupportedLanguages()
+        public static IEnumerable<Language> GetAllSupportedLanguages()
         {
-            yield return Rom.Language.Japanese;
-            yield return Rom.Language.English;
-            yield return Rom.Language.German;
-            yield return Rom.Language.French;
+            yield return Language.Japanese;
+            yield return Language.English;
+            yield return Language.German;
+            yield return Language.French;
         }
 
-        public IEnumerable<Rom.Language> GetSupportedLanguages()
+        public IEnumerable<Language> GetSupportedLanguages()
         {
             return GetSupportedLanguages(Version);
         }

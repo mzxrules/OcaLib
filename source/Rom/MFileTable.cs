@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using mzxrules.OcaLib.Helper;
+using mzxrules.Helper;
 
 namespace mzxrules.OcaLib
 {

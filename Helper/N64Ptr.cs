@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace mzxrules.Helper
+﻿namespace mzxrules.Helper
 {
     public class N64Ptr
     {
@@ -32,6 +27,10 @@ namespace mzxrules.Helper
         public static implicit operator uint(N64Ptr ptr)
         {
             return (uint)ptr.Pointer;
+        }
+        public static explicit operator int(N64Ptr ptr)
+        {
+            return (int)ptr.Pointer;
         }
 
         public static bool operator ==(N64Ptr a, N64Ptr b)

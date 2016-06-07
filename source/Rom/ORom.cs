@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using mzxrules.OcaLib.Helper;
+using mzxrules.Helper;
 
 namespace mzxrules.OcaLib
 {
@@ -12,12 +12,20 @@ namespace mzxrules.OcaLib
     public partial class ORom : Rom
     {
         public new OFileTable Files { get { return (OFileTable) base.Files; } }
-        public GameText Text { get; set; }
+        public GameText Text
+        {
+            get
+            {
+                if (_Text == null)
+                    _Text = new GameText(this);
+                return _Text;
+            }
+        }
+        private GameText _Text;
 
         public ORom(string fileLocation, Build version)
             : base(fileLocation, version)
         {
-            //Text = new GameText(this);
             SceneCount = (Version == Build.DBGMQ) ? 109 : 100;
         }
 

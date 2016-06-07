@@ -340,12 +340,11 @@
       <Identifier id="ACTOR_CAT_LL_Start">
         <Offset>001C30</Offset>
         <!--1CA0D0-->
-      
+      </Identifier>
+
       <!--Address containing the start of the table for loaded obj files-->
       <!--0x08 = num loaded object files "OBJ_COUNT_ADDR"-->
       <!--0x0C = start of table "OBJ_LIST_START_ADDR"-->
-      </Identifier>
-      
       <Identifier id ="OBJ_ALLOC_TABLE">
         <Offset>117A4</Offset>
       </Identifier>
@@ -491,7 +490,14 @@
         <Address reftype="absolute" domain="ROM">
           <!--First record in the file table-->
           <Data ver="J0">1C110</Data>
+          <Data ver="J1">1C050</Data>
           <Data ver="U0">1A500</Data>
+          <Data ver="P0">1A650</Data>
+          <Data ver="P1">1A8D0</Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU">1AE90</Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG">24F50</Data>
         </Address>
       </Start>
     </Block>
@@ -500,32 +506,67 @@
       <Start>
         <Address reftype="absolute" domain="ROM">
           <Data ver="J0">B5F000</Data>
+          <Data ver="J1"></Data>
           <Data ver="U0">B3C000</Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
         </Address>
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">A76A0</Data>
+          <Data ver="J1"></Data>
           <Data ver="U0">A5AC0</Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
         </Address>
       </Start>
       <Identifier id="SceneTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!-- scene count =?-->
           <Data ver="J0">C76510</Data>
+          <Data ver="J1"></Data>
           <Data ver="U0">C5A1E0</Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
         </Address>
       </Identifier>
       <Identifier id="EntranceIndexTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!--Record Count = 110?-->
           <Data ver ="J0">C77F84</Data>
+          <Data ver="J1"></Data>
           <Data ver="U0">C5BC60</Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
         </Address>
       </Identifier>
       <Identifier id="ActorTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!--Count = 0x2B2-->
           <Data ver="J0">C617C0</Data>
+          <Data ver="J1"></Data>
           <Data ver="U0">C45510</Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
         </Address>
       </Identifier>
     </Block>
@@ -546,13 +587,25 @@
         <Offset id="J">186E8</Offset>
         <Offset>18708</Offset>
       </Identifier>
+
+      <!-- Address of the actor category linked list table -->
+      <Identifier id="ACTOR_CAT_LL_Start">
+        <Offset>001CB0</Offset>
+        <!--1CA0D0-->
+      </Identifier>
     </Block>
     
     <Block name="ram">
       <Start>
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">0</Data>
+          <Data ver="J1">0</Data>
           <Data ver="U0">0</Data>
+          <Data ver="P1">0</Data>
+          <Data ver="GCJ">0</Data>
+          <Data ver="GCU">0</Data>
+          <Data ver="GCP">0</Data>
+          <Data ver="DBG">0</Data>
         </Address>
       </Start>
       <Identifier id ="SRAM_START">
@@ -573,24 +626,42 @@
       <!-- Main Heap reference -->
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">9E920</Data>
+          <Data ver="J1"></Data>
           <Data ver="U0">9CD20</Data>
           <Data ver="P0">9CE70</Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
         </Address>
       </Identifier>
 
       <Identifier id ="RAM_GLOBAL_CONTEXT">
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">1E3DA0</Data>
+          <Data ver="J1"></Data>
           <Data ver="U0">1BD8C0</Data>
           <Data ver="P0">1BE050</Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
         </Address>
       </Identifier>
       <Identifier id ="RAM_INNER_HEAP_PTR">
       <!-- "Actor" Heap reference-->
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">1F5280</Data>
+          <Data ver="J1"></Data>
           <Data ver="U0">1F5100</Data>
           <Data ver="P0">1EC5E0</Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
         </Address>
       </Identifier>
         

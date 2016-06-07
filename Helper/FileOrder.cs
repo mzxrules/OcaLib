@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace mzxrules.OcaLib.Helper
+namespace mzxrules.Helper
 {
     public enum FileEncoding
     {
