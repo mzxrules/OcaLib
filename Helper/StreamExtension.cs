@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace mzxrules.Helper
@@ -47,6 +49,42 @@ namespace mzxrules.Helper
                 sw.WriteByte(0);
             return true;
         }
+        
+        public static IEnumerable<int[]> GetDelta(this Stream a, Stream b, int max = -1)
+        {
+            long aPos, bPos;
+            BinaryReader brA = new BinaryReader(a);
+            BinaryReader brB = new BinaryReader(b);
+            int vA, vB;
+
+            if (!a.CanSeek || !b.CanSeek)
+                throw new NotImplementedException("Can't compare non-seekable stream");
+            
+            aPos = a.Position;
+            bPos = b.Position;
+
+            a.Position = 0;
+            b.Position = 0;
+
+
+            while (a.Position < a.Length)
+            {
+                vA = brA.ReadBigInt32();
+                vB = brB.ReadBigInt32();
+
+                if (vA != vB)
+                {
+                    yield return new int[] { (int)a.Position, vA, vB };
+                    max--;
+                    if (max == 0)
+                        break;
+                }
+
+            }
+            a.Position = aPos;
+            b.Position = bPos;
+        }
+
         public static bool IsDifferentTo(this Stream a, Stream b)
         {
             long aPos;

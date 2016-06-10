@@ -494,10 +494,22 @@
           <Data ver="U0">1A500</Data>
           <Data ver="P0">1A650</Data>
           <Data ver="P1">1A8D0</Data>
-          <Data ver="GCJ"></Data>
+          <Data ver="GCJ">1AE90</Data>
           <Data ver="GCU">1AE90</Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG">24F50</Data>
+          <Data ver="GCP">1AE90</Data>
+          <Data ver="DBG">24F60</Data>
+        </Address>
+        <Address reftype="absolute" domain="RAM">
+          <!--About 6330 before code start-->
+          <Data ver="J0">A14B0</Data>
+          <Data ver="J1">A13F0</Data>
+          <Data ver="U0">9F8B0</Data>
+          <Data ver="P0">9FA00</Data>
+          <Data ver="P1">9FC80</Data>
+          <Data ver="GCJ">A0270</Data>
+          <Data ver="GCU">A0270</Data>
+          <Data ver="GCP">A0270</Data>
+          <Data ver="DBG">B0740</Data>
         </Address>
       </Start>
     </Block>
@@ -506,61 +518,105 @@
       <Start>
         <Address reftype="absolute" domain="ROM">
           <Data ver="J0">B5F000</Data>
-          <Data ver="J1"></Data>
+          <Data ver="J1">B5F000</Data>
           <Data ver="U0">B3C000</Data>
-          <Data ver="P0"></Data>
-          <Data ver="P1"></Data>
-          <Data ver="GCJ"></Data>
-          <Data ver="GCU"></Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG"></Data>
+          <Data ver="P0">C8A000</Data>
+          <Data ver="P1">C8A000</Data>
+          <Data ver="GCJ">B45000</Data>
+          <Data ver="GCU">B4B000</Data>
+          <Data ver="GCP">C99000</Data>
+          <Data ver="DBG">C95000</Data>
         </Address>
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">A76A0</Data>
-          <Data ver="J1"></Data>
+          <Data ver="J1">A75E0</Data>
           <Data ver="U0">A5AC0</Data>
-          <Data ver="P0"></Data>
-          <Data ver="P1"></Data>
-          <Data ver="GCJ"></Data>
-          <Data ver="GCU"></Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG"></Data>
+          <Data ver="P0">A5D60</Data>
+          <Data ver="P1">A5FE0</Data>
+          <Data ver="GCJ">A6420</Data>
+          <Data ver="GCU">A6440</Data>
+          <Data ver="GCP">A65A0</Data>
+          <Data ver="DBG">B6AC0</Data>
         </Address>
       </Start>
+      <Identifier id="ParticleTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">C60C90</Data>
+          <Data ver="J1">C60F90</Data>
+          <Data ver="U0">C449E0</Data>
+          <Data ver="P0">D93260</Data>
+          <Data ver="P1">D93380</Data>
+          <Data ver="GCJ">C4BB80</Data>
+          <Data ver="GCU">C51AC0</Data>
+          <Data ver="GCP">DA0380</Data>
+          <Data ver="DBG">DD4F20</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="ActorTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <!--Count = 0x2B2-->
+          <Data ver="J0">C617C0</Data>
+          <Data ver="J1">C61AC0</Data>
+          <Data ver="U0">C45510</Data>
+          <Data ver="P0">D93A00</Data>
+          <Data ver="P1">D93B20</Data>
+          <Data ver="GCJ">C4C320</Data>
+          <Data ver="GCU">C52260</Data>
+          <Data ver="GCP">DA0B20</Data>
+          <Data ver="DBG">DD5A50</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="GameContextTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">C70100</Data>
+          <Data ver="J1">C70400</Data>
+          <Data ver="U0">C53E50</Data>
+          <Data ver="P0">DA2340</Data>
+          <Data ver="P1">DA2460</Data>
+          <Data ver="GCJ">C5AC60</Data>
+          <Data ver="GCU">C60BA0</Data>
+          <Data ver="GCP">DAF460</Data>
+          <Data ver="DBG">DE4D60</Data>
+        </Address>
+      </Identifier>
+
+      <Identifier id="ObjectTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">C74FB0</Data>
+          <Data ver="J1">C75280</Data>
+          <Data ver="U0">C58C80</Data>
+          <Data ver="P0">DA7300</Data>
+          <Data ver="P1">DA7420</Data>
+          <Data ver="GCJ">C5FA10</Data>
+          <Data ver="GCU">C659F0</Data>
+          <Data ver="GCP">DB4420</Data>
+          <Data ver="DBG">DE9D50</Data>
+        </Address>
+      </Identifier>
+
       <Identifier id="SceneTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!-- scene count =?-->
           <Data ver="J0">C76510</Data>
-          <Data ver="J1"></Data>
+          <Data ver="J1">C767E0</Data>
           <Data ver="U0">C5A1E0</Data>
-          <Data ver="P0"></Data>
-          <Data ver="P1"></Data>
-          <Data ver="GCJ"></Data>
-          <Data ver="GCU"></Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG"></Data>
+          <Data ver="P0">DA8860</Data>
+          <Data ver="P1">DA8980</Data>
+          <Data ver="GCJ">C60F70</Data>
+          <Data ver="GCU">C66F50</Data>
+          <Data ver="GCP">DB5980</Data>
+          <Data ver="DBG">DEB2B0</Data>
         </Address>
       </Identifier>
+      
       <Identifier id="EntranceIndexTable_Start">
         <Address reftype="absolute" domain="ROM">
           <!--Record Count = 110?-->
           <Data ver ="J0">C77F84</Data>
           <Data ver="J1"></Data>
           <Data ver="U0">C5BC60</Data>
-          <Data ver="P0"></Data>
-          <Data ver="P1"></Data>
-          <Data ver="GCJ"></Data>
-          <Data ver="GCU"></Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG"></Data>
-        </Address>
-      </Identifier>
-      <Identifier id="ActorTable_Start">
-        <Address reftype="absolute" domain="ROM">
-          <!--Count = 0x2B2-->
-          <Data ver="J0">C617C0</Data>
-          <Data ver="J1"></Data>
-          <Data ver="U0">C45510</Data>
           <Data ver="P0"></Data>
           <Data ver="P1"></Data>
           <Data ver="GCJ"></Data>
@@ -626,42 +682,42 @@
       <!-- Main Heap reference -->
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">9E920</Data>
-          <Data ver="J1"></Data>
+          <Data ver="J1">9E860</Data>
           <Data ver="U0">9CD20</Data>
           <Data ver="P0">9CE70</Data>
-          <Data ver="P1"></Data>
-          <Data ver="GCJ"></Data>
-          <Data ver="GCU"></Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG"></Data>
+          <Data ver="P1">9D0F0</Data>
+          <Data ver="GCJ">9D6E0</Data>
+          <Data ver="GCU">9D6E0</Data>
+          <Data ver="GCP">9D6E0</Data>
+          <Data ver="DBG">A77D0</Data>
         </Address>
       </Identifier>
 
       <Identifier id ="RAM_GLOBAL_CONTEXT">
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">1E3DA0</Data>
-          <Data ver="J1"></Data>
-          <Data ver="U0">1BD8C0</Data>
-          <Data ver="P0">1BE050</Data>
-          <Data ver="P1"></Data>
-          <Data ver="GCJ"></Data>
-          <Data ver="GCU"></Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG"></Data>
+          <Data ver="J1">1E4050</Data>
+          <Data ver="U0">1BD8C0</Data> <!--Different Global Context Variable!-->
+          <Data ver="P0">1BE050</Data> <!--Different Global Context Variable!-->
+          <Data ver="P1">1DB840</Data>
+          <Data ver="GCJ">1E2170</Data>
+          <Data ver="GCU">1E2180</Data>
+          <Data ver="GCP">1BC9B0</Data>
+          <Data ver="DBG">2340D0</Data>
         </Address>
       </Identifier>
       <Identifier id ="RAM_INNER_HEAP_PTR">
       <!-- "Actor" Heap reference-->
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">1F5280</Data>
-          <Data ver="J1"></Data>
+          <Data ver="J1">1F5530</Data>
           <Data ver="U0">1F5100</Data>
           <Data ver="P0">1EC5E0</Data>
-          <Data ver="P1"></Data>
-          <Data ver="GCJ"></Data>
-          <Data ver="GCU"></Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG"></Data>
+          <Data ver="P1">1EC980</Data>
+          <Data ver="GCJ">1F32B0</Data>
+          <Data ver="GCU">1F32C0</Data>
+          <Data ver="GCP">1EAF10</Data>
+          <Data ver="DBG">245260</Data>
         </Address>
       </Identifier>
         

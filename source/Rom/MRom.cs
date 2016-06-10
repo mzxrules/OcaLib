@@ -8,7 +8,6 @@ namespace mzxrules.OcaLib
     public partial class MRom: Rom
     {
         public new MFileTable Files { get { return (MFileTable) base.Files; } }
-        //public MRom.Build Version { get { return Files.Version; } }
         public GameText Text { get; set; }
 
         public MRom(string fileLocation, MRom.Build version)
@@ -16,6 +15,5 @@ namespace mzxrules.OcaLib
         {
             SceneCount = 0x6E;
         }
-
     }
 }

@@ -74,9 +74,9 @@ namespace mzxrules.OcaLib
             U0,
             P0,
             P1,
-            GCNJ,
-            GCNU,
-            GCNP,
+            GCJ,
+            GCU,
+            GCP,
             DBG, 
 
         }

@@ -16,7 +16,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
         protected CutsceneCommand(int command, BinaryReader br)
         {
-            this.Command = command;
+            Command = command;
             Index = br.BaseStream.Position - 4;
         }
         protected CutsceneCommand() { }
