@@ -46,7 +46,7 @@ namespace mzxrules.OcaLib
                 };
             }
 
-            public static ORom.BuildInformation Get(Build v)
+            public static BuildInformation Get(Build v)
             {
                 return builds.SingleOrDefault(x => x._Version == v);
             }
@@ -101,6 +101,7 @@ namespace mzxrules.OcaLib
         }
 
         private static Build[] SupportedBuilds = new Build[] {
+
             Build.N0, //NTSC 1.0
             Build.N1, //NTSC 1.1
             Build.N2, //NTSC 1.2
@@ -110,12 +111,13 @@ namespace mzxrules.OcaLib
 
             Build.GCJ,
             Build.GCP,
+            Build.GCP,
 
             Build.MQJ,
+            Build.MQU,
             Build.MQP,
 
             Build.DBGMQ,
-
         };
 
         public enum Localization
@@ -125,7 +127,7 @@ namespace mzxrules.OcaLib
             PAL
         }
 
-        public static IEnumerable<Build> GetSupportedBuilds()
+        public static IEnumerable<RomVersion> GetSupportedBuilds()
         {
             yield return Build.N0; //NTSC 1.0
             yield return Build.N1; //NTSC 1.1
@@ -135,12 +137,14 @@ namespace mzxrules.OcaLib
             yield return Build.P1; //PAL 1.1
 
             yield return Build.GCJ;
-            //yield return Build.GCNP;
+            yield return Build.GCP;
+            yield return Build.GCP;
 
+            yield return Build.MQJ;
+            yield return Build.MQU;
             yield return Build.MQP;
-            //yield return Build.MQJ; 
-            yield return Build.DBGMQ;
 
+            yield return Build.DBGMQ;
         }
 
         public static Localization GetLocalization(Build v)

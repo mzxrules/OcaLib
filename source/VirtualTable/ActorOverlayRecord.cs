@@ -28,7 +28,7 @@ namespace mzxrules.OcaLib
 
         public const int LENGTH = 0x20;
 
-        public FileAddress RamAddress { get; protected set; }
+        public FileAddress Ram { get; protected set; }
 
         public int Actor { get; protected set; }
 
@@ -80,7 +80,7 @@ namespace mzxrules.OcaLib
             RamFileName = data[6];
             Unknown = data[7];
 
-            RamAddress = new FileAddress(ramFileStart, ramFileStart + VRam.Size);
+            Ram = new FileAddress(ramFileStart, ramFileStart + VRam.Size);
         }
     }
 }

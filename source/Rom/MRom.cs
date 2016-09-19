@@ -13,7 +13,7 @@ namespace mzxrules.OcaLib
         public MRom(string fileLocation, MRom.Build version)
             : base(fileLocation, version)
         {
-            SceneCount = 0x6E;
+            Scenes = 0x6E;
         }
     }
 }

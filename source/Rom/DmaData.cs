@@ -22,7 +22,7 @@ namespace mzxrules.OcaLib
         /// The file's location independent of compression state
         /// </summary>
         public FileAddress DataAddress { get; private set; }
-        public bool IsCompressed { get { return PhysicalAddress.End != 0; } }
+        public bool IsCompressed => PhysicalAddress.End != 0; //{ get { return PhysicalAddress.End != 0; } }
         public int Index = -1;
 
         public FileRecord(FileRecord fileRecord)
@@ -58,15 +58,15 @@ namespace mzxrules.OcaLib
         public Dictionary<long, FileRecord> Table;
         public FileRecord Address { get; private set; }
 
-        public DmaData (Stream s, ORom.Build version)
+        public DmaData (Stream s, RomVersion version)
         {
-            int address = Addresser.GetRom(ORom.FileList.dmadata, version, "__Start");
-            Initialize(s, address);
-        }
+            RomFileToken token = ORom.FileList.invalid;
+            if (version.Game == Game.OcarinaOfTime)
+                token = ORom.FileList.dmadata;
+            else if (version.Game == Game.MajorasMask)
+                token = MRom.FileList.dmadata;
 
-        public DmaData(Stream s, MRom.Build version)
-        {
-            int address = Addresser.GetRom(MRom.FileList.dmadata, version, "__Start");
+            int address = Addresser.GetRom(token, version, "__Start");
             Initialize(s, address);
         }
 
@@ -109,7 +109,12 @@ namespace mzxrules.OcaLib
                     continue;
 
                 fileRecord = new FileRecord(fileVirtualAddress, filePhysicalAddress, i);
-                Table.Add(fileRecord.VirtualAddress.Start, fileRecord);
+                if (Table.ContainsKey(fileRecord.VirtualAddress.Start))
+                {
+
+                }
+                else
+                    Table.Add(fileRecord.VirtualAddress.Start, fileRecord);
             }
             FileRecord addr;
             Table.TryGetValue(address, out addr);

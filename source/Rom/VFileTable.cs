@@ -8,7 +8,7 @@ namespace mzxrules.OcaLib
 {
     public class VFileTable : AbstractVFileTable, /*IDisposable,*/ IEnumerable<FileRecord>
     {
-        protected Dictionary<long, FileRecord> DmaTable { get { return DmaFile.Table; } }
+        protected Dictionary<long, FileRecord> DmaTable => DmaFile.Table;
         protected DmaData DmaFile;
         public RomVersion Version { get; protected set; }
 
@@ -16,6 +16,39 @@ namespace mzxrules.OcaLib
 
         byte[] CachedFile;
         FileAddress CachedFileAddress;
+
+        //"Code" file metadata for file lookups
+        protected class FileRefTable
+        {
+            public string StartKey { get; }
+            public int RecSize { get; }
+            public int FileStartOff { get; }
+            public int FileEndOff { get; }
+
+            public FileRefTable()
+            {
+                StartKey = null;
+            }
+
+            public FileRefTable (string key, int size, int off)
+            {
+                StartKey = key;
+                RecSize = size;
+                FileStartOff = off;
+                FileEndOff = off + 4;
+            }
+        }
+
+        protected FileRefTable SceneTable = new FileRefTable();
+        protected FileRefTable TitleCardTable = new FileRefTable();
+        protected FileRefTable HyruleSkyboxTable = new FileRefTable();
+
+        FileRefTable ActorTable = new FileRefTable("ActorTable_Start", 0x20, 0);
+        FileRefTable ObjectTable = new FileRefTable("ObjectTable_Start", 0x08, 0);
+        FileRefTable ParticleTable = new FileRefTable("ParticleTable_Start", 0x1C, 0);
+        FileRefTable GameContextTable = new FileRefTable("GameContextTable_Start", 0x30, 4);
+        FileRefTable PlayerPauseTable = new FileRefTable("PlayerPauseOverlayTable_Start", 0x1C, 4);
+
 
         protected VFileTable() { }
 
@@ -44,7 +77,18 @@ namespace mzxrules.OcaLib
         /// <returns></returns>
         public RomFile GetFile(FileAddress virtualAddress)
         {
-            return GetFile(virtualAddress.Start);
+            FileRecord record, temp;
+
+            temp = new FileRecord(virtualAddress, new FileAddress(virtualAddress.Start, 0), -1);
+
+            if (DmaTable.TryGetValue(virtualAddress.Start, out record))
+            {
+                if (virtualAddress.Size != record.VirtualAddress.Size)
+                    record = temp;
+            }
+            else
+                record = temp;
+            return GetFile(record);
         }
 
         /// <summary>
@@ -55,7 +99,7 @@ namespace mzxrules.OcaLib
         /// <returns></returns>
         public RomFile GetFile(long virtualAddress)
         {
-            FileRecord record;            //file we're looking up
+            FileRecord record; //file we're looking up
 
             if (!DmaTable.TryGetValue(virtualAddress, out record))
                 throw new Exception();
@@ -108,11 +152,8 @@ namespace mzxrules.OcaLib
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        public RomFile GetFile(RomFileToken file)
-        {
-            return GetFile(Addresser.GetRom(file, Version, "__Start"));
-        }
-
+        public RomFile GetFile(RomFileToken file) => GetFile(Addresser.GetRom(file, Version, "__Start"));
+        
         #endregion
 
         /// <summary>
@@ -120,11 +161,8 @@ namespace mzxrules.OcaLib
         /// </summary>
         /// <param name="virtualAddress">Address containing the location of the file</param>
         /// <returns>Returns a stream containing the file</returns>
-        public Stream GetPhysicalFile(FileAddress virtualAddress)
-        {
-            return GetPhysicalFile(virtualAddress.Start);
-        }
-
+        public Stream GetPhysicalFile(FileAddress virtualAddress) => GetPhysicalFile(virtualAddress.Start);
+        
         /// <summary>
         /// Returns a file without attempting to decompress it.
         /// </summary>
@@ -157,7 +195,7 @@ namespace mzxrules.OcaLib
         /// <returns>The FileRecord of the containing file, or null if no file contains the given address</returns>
         public FileRecord GetFileStart(long virtualAddress)
         {
-            return DmaTable.SingleOrDefault(x => x.Value.VirtualAddress.Start <= virtualAddress
+            return DmaTable.FirstOrDefault(x => x.Value.VirtualAddress.Start <= virtualAddress
                 && virtualAddress < x.Value.VirtualAddress.End).Value;
         }
 
@@ -243,5 +281,150 @@ namespace mzxrules.OcaLib
         {
             return DmaTable.Values.GetEnumerator();
         }
+
+
+        #region FetchAddresses
+
+        public FileAddress GetSceneVirtualAddress(int scene)
+        {
+            return GetFileByRomTable(SceneTable, scene);
+        }
+
+
+        public FileAddress GetActorVirtualAddress(int actor)
+        {
+            return GetFileByRomTable(ActorTable, actor);
+        }
+
+        public FileAddress GetObjectVirtualAddress(int obj)
+        {
+            //oot obj 0x00E3, 0x00FB malformed references
+            return GetFileByRomTable(ObjectTable, obj);
+        }
+
+        public FileAddress GetParticleEffectAddress(int index)
+        {
+            return GetFileByRomTable(ParticleTable, index);
+        }
+
+        public FileAddress GetGameContextAddress(int i)
+        {
+            return GetFileByRomTable(GameContextTable, i);
+        }
+
+        public FileAddress GetPlayPauseAddress(int i)
+        {
+            return GetFileByRomTable(PlayerPauseTable , i);
+        }
+
+        protected FileAddress GetFileByRomTable(FileRefTable refTable, int index)
+        {
+            string table = refTable.StartKey;
+            int size = refTable.RecSize;
+            int offset = refTable.FileStartOff;
+            int recordAddr, startAddr, endAddr;
+            RomFileToken token = ORom.FileList.invalid;
+            if (Version.Game == Game.OcarinaOfTime)
+                token = ORom.FileList.code;
+            if (Version.Game == Game.MajorasMask)
+                token = MRom.FileList.code;
+
+            recordAddr = Addresser.GetRom(token, Version, table);
+            startAddr = recordAddr + (index * size) + offset;
+            startAddr = ReadInt32(startAddr);
+            endAddr = recordAddr + (index * size) + refTable.FileEndOff;
+            endAddr = ReadInt32(endAddr);
+            FileAddress result = new FileAddress();
+            try
+            {
+                result = GetVRomAddress(startAddr);
+            }
+            catch
+            {
+                result = new FileAddress(startAddr, endAddr);
+            }
+
+            return result;
+        }
+        
+        #endregion
+
+
+
+        #region GetOverlayRecord
+        public ActorOverlayRecord GetActorOverlayRecord(int actor)
+        {
+            int addr;
+            RomFileToken token = ORom.FileList.invalid;
+            if (Version.Game == Game.OcarinaOfTime)
+                token = ORom.FileList.code;
+            if (Version.Game == Game.MajorasMask)
+                token = MRom.FileList.code;
+
+            RomFile code = GetFile(token);
+            if (!Addresser.TryGetRom(token, Version, ActorTable.StartKey, out addr))
+            {
+                return null;
+            }
+            code.Stream.Position = code.Record.GetRelativeAddress(addr + (actor * 0x20));
+            return new ActorOverlayRecord(actor, new BinaryReader(code));
+        }
+
+        public GameContextRecord GetGameContextRecord(int index)
+        {
+            int addr;
+            RomFileToken token = ORom.FileList.invalid;
+            if (Version.Game == Game.OcarinaOfTime)
+                token = ORom.FileList.code;
+            if (Version.Game == Game.MajorasMask)
+                token = MRom.FileList.code;
+
+            RomFile code = GetFile(token);
+            if (!Addresser.TryGetRom(token, Version, GameContextTable.StartKey, out addr))
+            {
+                return null;
+            }
+            code.Stream.Position = code.Record.GetRelativeAddress(addr + (index * 0x30));
+            return new GameContextRecord(index, new BinaryReader(code));
+        }
+
+        public ParticleEffectOverlayRecord GetParticleEffectOverlayRecord(int index)
+        {
+            int addr;
+            RomFileToken token = ORom.FileList.invalid;
+            if (Version.Game == Game.OcarinaOfTime)
+                token = ORom.FileList.code;
+            if (Version.Game == Game.MajorasMask)
+                token = MRom.FileList.code;
+
+            RomFile code = GetFile(token);
+            if (!Addresser.TryGetRom(token, Version, ParticleTable.StartKey, out addr))
+            {
+                return null;
+            }
+            code.Stream.Position = code.Record.GetRelativeAddress(addr + (index * 0x1C));
+            return new ParticleEffectOverlayRecord(index, new BinaryReader(code));
+        }
+
+        public PlayPauseOverlayRecord GetPlayPauseOverlayRecord(int index)
+        {
+            int addr;
+            RomFileToken token = ORom.FileList.invalid;
+            if (Version.Game == Game.OcarinaOfTime)
+                token = ORom.FileList.code;
+            if (Version.Game == Game.MajorasMask)
+                token = MRom.FileList.code;
+
+            RomFile code = GetFile(token);
+            if (!Addresser.TryGetRom(token, Version, PlayerPauseTable.StartKey, out addr))
+            {
+                return null;
+            }
+            code.Stream.Position = code.Record.GetRelativeAddress(addr + (index * 0x1C));
+            return new PlayPauseOverlayRecord(index, new BinaryReader(code));
+        }
+
+        #endregion
+        
     }
 }

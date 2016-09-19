@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace mzxrules.OcaLib.SceneRoom.Commands
+﻿namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     class SoundSettingsEchoCommand : SceneCommand
     {
@@ -13,7 +8,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ReadSimple()
         {
-            return String.Format("Sound Settings: Echo {0}", Command[7]);
+            return string.Format("Sound Settings: Echo {0}", Command[7]);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using mzxrules.Helper;
 using System;
 using System.IO;
-using System.Text;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
@@ -27,14 +26,11 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public override string Read()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(ReadSimple());
-            //sb.Append(cutscene.PrintCutsceneByCommandOrder());
-            return sb.ToString();
+            return ReadSimple();
         }
         public override string ReadSimple()
         {
-            return String.Format("Cutscene starts at {0:X8}", CutsceneAddress);
+            return string.Format("Cutscene starts at {0:X8}", CutsceneAddress);
         }
 
         public void Initialize(BinaryReader br)

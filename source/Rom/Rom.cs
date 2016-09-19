@@ -12,12 +12,19 @@ namespace mzxrules.OcaLib
         public RomVersion Version { get { return Files.Version; } }
         public bool IsCompressed { get; set; }
 
+
+        public int Scenes { get; set; }
+        public int Objects { get; set; }
+        public int Particles { get; set; }
+        public int Actors { get; set; }
+
         public enum Language
         {
             Japanese,
             English,
             French,
-            German
+            German,
+            Spanish
         }
 
         protected Rom(string fileLocation, RomVersion version)
@@ -49,7 +56,5 @@ namespace mzxrules.OcaLib
             else
                 return null;
         }
-
-        public int SceneCount { get; set; }
     }
 }

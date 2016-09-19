@@ -24,25 +24,26 @@ namespace mzxrules.OcaLib
             static BuildInformation()
             {
                 builds = new BuildInformation[] {
-                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.UNKNOWN, _Name = "Unknown", _Localization = MRom.Localization.UNKNOWN},
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.UNKNOWN, _Name = "Unknown", _Localization = Localization.UNKNOWN},
 
-                    //new BuildInformation { _CRC = 0xEC7011B77616D72B, _Version = Build.N0, _Name = "NTSC 1.0", _Localization = Localization.NTSC },
-                    //new BuildInformation { _CRC = 0xD43DA81F021E1E19, _Version = Build.N1, _Name = "NTSC 1.1", _Localization = Localization.NTSC },
-                    //new BuildInformation { _CRC = 0x693BA2AEB7F14E9F, _Version = Build.N2, _Name = "NTSC 1.2", _Localization = Localization.NTSC },
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.J0, _Name = "NTSC-J 1.0", _Localization = Localization.NTSCJ},
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.J1, _Name = "NTSC-J 1.1", _Localization = Localization.NTSCJ},
 
-                    //new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.P0, _Name = "PAL 1.0", _Localization = Localization.PAL },
-                    //new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.P1, _Name = "PAL 1.1", _Localization = Localization.PAL },
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.U0, _Name = "NTSC-U 1.0", _Localization = Localization.NTSCU},
 
-                    //new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCNJ, _Name = "NTSC GCN", _Localization = Localization.NTSC },
-                    //new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCNP, _Name = "NTSC PAL", _Localization = Localization.NTSC },
-            
-                    //new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.MQJ, _Name = "NTSC Master Quest", _Localization = Localization.NTSC },
-                    //new BuildInformation { _CRC = 0x1D4136F3AF63EEA9, _Version = Build.MQP, _Name = "PAL Master Quest", _Localization = Localization.PAL },
-                    //new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.DBGMQ, _Name = "Debug Master Quest", _Localization = Localization.PAL },
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.P0, _Name = "PAL 1.0", _Localization = Localization.PAL},
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.P1, _Name = "PAL 1.1", _Localization = Localization.PAL},
+
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCJ, _Name = "GCJ 1.0", _Localization = Localization.NTSCJ},
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCU, _Name = "GCU 1.0", _Localization = Localization.NTSCU},
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.GCP, _Name = "GCP 1.0", _Localization = Localization.PAL},
+
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.DBG, _Name = "PAL DBG", _Localization = Localization.PAL},
+                    
                 };
             }
 
-            public static MRom.BuildInformation Get(Build v)
+            public static BuildInformation Get(Build v)
             {
                 return builds.SingleOrDefault(x => x._Version == v);
             }
@@ -81,32 +82,38 @@ namespace mzxrules.OcaLib
 
         }
 
-        private static Build[] SupportedBuilds = new Build[] {
-            Build.J0,
-            Build.U0,
-
-
+        private static List<RomVersion> SupportedBuilds = new List<RomVersion> {
+             Build.J0,
+             Build.J1,
+             Build.U0,
+             Build.P0,
+             Build.P1,
+             Build.GCJ,
+             Build.GCU,
+             Build.GCP,
+             Build.DBG,
         };
 
         public enum Localization
         {
             UNKNOWN,
-            NTSC,
+            NTSCJ,
+            NTSCU,
             PAL
         }
 
-        public static IEnumerable<Build> GetSupportedBuilds()
+        public static IEnumerable<RomVersion> GetSupportedBuilds()
         {
             yield return Build.J0;
-            yield return Build.U0; //NTSC 1.0
-            //yield return Build.N1; //NTSC 1.1
-            //yield return Build.N2; //NTSC 1.2
+            yield return Build.J1;
+            yield return Build.U0;
+            yield return Build.P0;
+            yield return Build.P1;
+            yield return Build.GCJ;
+            yield return Build.GCU;
+            yield return Build.GCP;
+            yield return Build.DBG;
 
-            //yield return Build.P0; //PAL 1.0 
-            //yield return Build.P1; //PAL 1.1
-
-            //yield return Build.GCNJ;
-            //yield return Build.GCNP;
         }
 
         public static Localization GetLocalization(RomVersion v)
@@ -151,8 +158,9 @@ namespace mzxrules.OcaLib
         {
             switch (l)
             {
-                case Localization.NTSC: return new Language[] { Language.Japanese, Language.English };
-                case Localization.PAL: return new Language[] { Language.English, Language.German, Language.French };
+                case Localization.NTSCJ: return new Language[] { Language.Japanese };
+                case Localization.NTSCU: return new Language[] { Language.English };
+                case Localization.PAL: return new Language[] { Language.English, Language.German, Language.French, Language.Spanish };
                 default: return null;
             }
         }

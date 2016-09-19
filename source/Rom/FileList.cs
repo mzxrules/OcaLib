@@ -72,6 +72,7 @@
             nes_message_data_static,
             ger_message_data_static,
             fra_message_data_static,
+            spa_message_data_static,
             staff_message_data_static,
             map_grand_static,
             map_48x85_static,

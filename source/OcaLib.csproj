@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntranceTableRecord.cs" />
+    <Compile Include="Rom\VFileTable_Data.cs" />
     <Compile Include="VirtualTable\GameContextRecord.cs" />
     <Compile Include="VirtualTable\OverlayTableRecord.cs" />
     <Compile Include="SceneRoom\Actor\ActorFactory.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="VirtualTable\ActorOverlayRecord.cs" />
     <Compile Include="VirtualTable\ParticleEffectOverlayRecord.cs" />
     <Compile Include="VirtualTable\PlayPauseOverlayRecord.cs" />
+    <Compile Include="VirtualTable\SceneTableRecord.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -155,12 +158,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Helper\Helper.csproj">
-      <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
-      <Name>Helper</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Addresses.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -169,6 +166,13 @@
     <Content Include="SceneRoom\Notes.txt" />
     <Content Include="XSLTFile1.xslt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Helper\Helper.csproj">
+      <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
+      <Name>Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

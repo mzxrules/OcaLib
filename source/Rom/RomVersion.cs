@@ -12,9 +12,9 @@ namespace mzxrules.OcaLib
         [DataMember]
         public Game Game { get; private set; }
         [DataMember]
-        ORom.Build OVer { get;  set; }
+        ORom.Build OVer { get; set; }
         [DataMember]
-        MRom.Build MVer { get;  set; }
+        MRom.Build MVer { get; set; }
 
         private RomVersion(ORom.Build build)
         {
@@ -100,6 +100,50 @@ namespace mzxrules.OcaLib
         {
             return v.Game;
         }
+
+        public static bool operator== (RomVersion a, RomVersion b)
+        {
+            // If both are null, or both are same instance, return true.
+            if (ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            // If one is null, but not both, return false.
+            if (((object)a == null) || ((object)b == null))
+            {
+                return false;
+            }
+            return a.Game == b.Game && a.OVer == b.OVer && a.MVer == b.MVer;
+        }
+
+        public static bool operator!= (RomVersion a, RomVersion b)
+        {
+            return !(a == b);
+        }
+
+        //public override bool Equals(object obj)
+        //{
+        //    // If parameter is null return false.
+        //    if (obj == null)
+        //        return false;
+
+        //    // If parameter cannot be cast to Point return false.
+        //    RomVersion p = obj as RomVersion;
+        //    if ((System.Object)p == null)
+        //    {
+        //        return false;
+        //    }
+
+        //    // Return true if the fields match:
+        //    if (Game != p.Game)
+        //        return false;
+
+        //    if (Game == Game.OcarinaOfTime)
+        //        return OVer == p.OVer;
+        //    else
+        //        return MVer == p.MVer;
+        //}
 
         public bool IsCustomBuild()
         {

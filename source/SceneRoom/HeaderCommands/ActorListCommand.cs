@@ -22,7 +22,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
             if (Game == Game.OcarinaOfTime)
                 NewActor = ActorFactory.OcarinaActors;
-            else if (Game == mzxrules.OcaLib.Game.MajorasMask)
+            else if (Game == Game.MajorasMask)
                 NewActor = ActorFactory.MaskActors;
         }
 
@@ -39,7 +39,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ReadSimple()
         {
-            return String.Format("There are {0} actor(s). List starts at {1:X8}",
+            return string.Format("There are {0} actor(s). List starts at {1:X8}",
                 Actors,
                 ActorListAddress);
         }
@@ -83,11 +83,6 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             {
                 br.Read(actorArray, 0, ActorRecord.SIZE);
                 ActorList.Add(NewActor(actorArray));
-                //if (Game == Game.OcarinaOfTime)
-                //    ActorList.Add(ActorFactory.OcarinaActorFactory(actorArray));
-                //if (Game == mzxrules.OcaLib.Game.MajorasMask)
-                //    ActorList.Add(ActorFactory.MaskActorFactory(actorArray));
-                ////ActorList.Add(new XmlActor(actorArray));
             }
         }
         public List<ActorRecord> GetActors()

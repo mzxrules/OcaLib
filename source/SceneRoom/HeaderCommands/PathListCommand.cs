@@ -79,8 +79,12 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             {
                 Address = address;
                 br.BaseStream.Position = address;
-                for (int i = 0; i < nodes; i++)
-                    PathPoints.Add(new Vector3<short>(br.ReadBigInt16(), br.ReadBigInt16(), br.ReadBigInt16()));
+
+                if (address < br.BaseStream.Length)
+                {
+                    for (int i = 0; i < nodes; i++)
+                        PathPoints.Add(new Vector3<short>(br.ReadBigInt16(), br.ReadBigInt16(), br.ReadBigInt16()));
+                }
             }
 
             public override string ToString()

@@ -26,7 +26,10 @@ namespace mzxrules.OcaLib
         public ORom(string fileLocation, Build version)
             : base(fileLocation, version)
         {
-            SceneCount = (Version == Build.DBGMQ) ? 109 : 100;
+            Scenes = (Version == Build.DBGMQ) ? 109 : 100;
+            Actors = 0x1D7;
+            Objects = 0x192;
+            Particles = 0x26;
         }
 
         public bool DetectRom(string file, out ORom rom)

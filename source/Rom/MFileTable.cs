@@ -8,15 +8,15 @@ namespace mzxrules.OcaLib
 {
     public class MFileTable : VFileTable
     {
-        public MFileTable(string romLocation, MRom.Build version)
+        public MFileTable(string romLocation, RomVersion version)
         {
             using (FileStream fs = new FileStream(romLocation, FileMode.Open, FileAccess.Read))
             {
                 DmaFile = new DmaData(fs, version);
             }
-
             RomLocation = romLocation;
             Version = version;
+            SceneTable = new FileRefTable("SceneTable_Start", 0x10, 0);
         }
 
         #region GetFile
@@ -29,6 +29,7 @@ namespace mzxrules.OcaLib
                 case Rom.Language.English: return GetFile(MRom.FileList.nes_message_data_static);
                 case Rom.Language.German: return GetFile(MRom.FileList.ger_message_data_static);
                 case Rom.Language.French: return GetFile(MRom.FileList.fra_message_data_static);
+                case Rom.Language.Spanish: return GetFile(MRom.FileList.spa_message_data_static);
                 default: throw new NotImplementedException();
             }
         }
@@ -43,6 +44,8 @@ namespace mzxrules.OcaLib
                 return null;
 
             sceneFile = GetSceneVirtualAddress((sbyte)sceneIndex);
+            if (sceneFile.Start == 0)
+                return null;
             return GetFile(sceneFile);
         }
 
@@ -76,88 +79,20 @@ namespace mzxrules.OcaLib
             return (byte?)sceneIndex;
         }
 
-        private Stream GetActorFile(int i)
-        {
-            return GetFile(GetActorVirtualAddress(i));
-        }
-
-        private Stream GetObjectFile(int i)
-        {
-            return GetFile(GetObjectVirtualAddress(i));
-        }
-
         #endregion
 
         #region FetchAddresses
 
-        public FileAddress GetActorVirtualAddress(int actor)
-        {
-            return GetFileByRomTable("ActorTable_Start", actor, 8 * sizeof(Int32));
-        }
 
-        public FileAddress GetObjectVirtualAddress(int obj)
-        {
-            if (obj == 0xE3
-                || obj == 0xFB) //malformed object reference?
-                return new FileAddress();
+        //public FileAddress GetTitleCardVirtualAddress(int scene)
+        //{
+        //    return GetFileByRomTable("SceneTable_Start", scene, 5 * sizeof(Int32), 2 * sizeof(Int32));
+        //}
 
-            return GetFileByRomTable("ObjectTable_Start", obj, 2 * sizeof(Int32));
-        }
-
-        public FileAddress GetSceneVirtualAddress(int scene)
-        {
-            return GetFileByRomTable("SceneTable_Start", scene, 4 * sizeof(Int32));
-        }
-
-        public FileAddress GetTitleCardVirtualAddress(int scene)
-        {
-            return GetFileByRomTable("SceneTable_Start", scene, 5 * sizeof(Int32), 2 * sizeof(Int32));
-        }
-
-        public FileAddress GetHyruleFieldSkyboxFile(int id)
-        {
-            return GetFileByRomTable("HyruleSkyboxTable_Start", id, 2 * sizeof(Int32));
-        }
-
-        public FileAddress GetOvl_EffectAddress(int index)
-        {
-            return GetFileByRomTable("ParticleTable_Start", index, 7 * sizeof(Int32));
-        }
-
-        private FileAddress GetFileByRomTable(string table, int index, int size, int offset = 0)
-        {
-            int valueAddr;
-            int readValue;
-
-            valueAddr = Addresser.GetRom(MRom.FileList.code, Version, table);
-            valueAddr += index * size + offset;
-            readValue = ReadInt32(valueAddr);
-            return GetVRomAddress(readValue);
-        }
-
+        //public FileAddress GetHyruleFieldSkyboxFile(int id)
+        //{
+        //    return GetFileByRomTable("HyruleSkyboxTable_Start", id, 2 * sizeof(Int32));
+        //}
         #endregion
-
-        public long GetFirstSceneFile()
-        {
-            int startAddress;
-            int sceneAddress;
-            FileRecord fileRecord;
-            List<long> addr = new List<long>();
-            
-            startAddress = Addresser.GetRom(MRom.FileList.code, Version, "SceneTable_Start");
-            fileRecord = GetFileStart(startAddress);
-
-            using (BinaryReader reader = new BinaryReader(GetFile(fileRecord)))
-            {
-                for (int scene = 0; scene < 0; scene++)
-                {
-                    reader.BaseStream.Position
-                        = fileRecord.GetRelativeAddress((scene * sizeof(Int32) * 5) + startAddress);
-                    sceneAddress = reader.ReadBigInt32();
-                    addr.Add(sceneAddress);
-                }
-            }
-            return addr.Min();
-        }
     }
 }

@@ -12,6 +12,20 @@ namespace mzxrules.OcaLib.SceneRoom
     /// </summary>
     public static class SceneRoomReader
     {
+        struct SceneRoomSetup
+        {
+            public int Scene;
+            public int Room;
+            public int Setup;
+
+            public SceneRoomSetup(int scene, int room, int setup)
+            {
+                Scene = scene;
+                Room = room;
+                Setup = setup;
+            }
+        }
+
         public static Scene InitializeScene(int number, RomFile file)
         {
             BinaryReader br;
@@ -27,7 +41,14 @@ namespace mzxrules.OcaLib.SceneRoom
             //    && number == 6)
             //    SpiritHack.LoadSpiritSceneHeader(br, scene);
             //else
+            //try
+            //{
                 LoadISceneRoomHeader(br, scene);
+            //}
+            //catch
+            //{
+            //    scene = null;
+            //}
             return scene;
         }
 
@@ -58,9 +79,9 @@ namespace mzxrules.OcaLib.SceneRoom
         //    SpiritHack.LoadSpiritRoomHeader(br, item, roomNo);
         //    return item;
         //}
-        
+
         #region InitializeMembers
-        
+
         private static void LoadISceneRoomHeader(BinaryReader br, ISceneRoomHeader item)
         {
             SceneHeader header;
@@ -183,6 +204,166 @@ namespace mzxrules.OcaLib.SceneRoom
             return result.ToString();
         }
 
+        public static string GetObjectsById(Rom r, int id)
+        {
+            return PrintCollectionById(r, id, ObjectListPrintout);
+
+            //var result = CreateCollectionById<ushort>(r, id, r.Scene.GetObjectsWithId);
+        }
+
+        public static string GetActorsById(Rom r, int id)
+        {
+            return PrintCollectionById(r, id, ActorListPrintout);
+        }
+
+        public static string GetCommandsById(Rom r, int id)
+        {
+            return PrintCollectionById(r, id, CommandListPrintout);
+        }
+
+
+        delegate int PrintList(int id, SceneHeader header, int sceneId, int roomId, StringBuilder result);
+
+        private static string PrintCollectionById(Rom rom, int id, PrintList PrintListFunction)
+        {
+            Scene scene;
+            List<FileAddress> roomAddresses;
+            Room room;
+            int sceneId;
+            int roomId;
+            StringBuilder result;
+            int count = 0;
+
+            result = new StringBuilder();
+            result.AppendLine("Scene,Setup,Room");
+            for (sceneId = 0; sceneId < rom.Scenes; sceneId++)
+            {
+                //set room negative to denote scene level actors
+                roomId = -1;
+
+                //load scene
+                var sceneFile = rom.Files.GetSceneFile(sceneId);
+
+                scene = InitializeScene(sceneId, sceneFile);
+                if (scene == null)
+                    continue;
+
+                //scene level actors
+                count += PrintListFunction(id, scene.Header, sceneId, roomId, result);
+
+                //load room list
+                roomAddresses = scene.Header.GetRoomAddresses();
+
+                for (roomId = 0; roomId < roomAddresses.Count; roomId++)
+                {
+                    try
+                    {
+                        room = InitializeRoom(rom.Files.GetFile(roomAddresses[roomId]));
+                        count += PrintListFunction(id, room.Header, sceneId, roomId, result);
+                    }
+                    catch { }
+                }
+            }
+            result.AppendLine("Total: " + count.ToString());
+            return result.ToString();
+        }
+        
+        private static List<ItemLocation<T>> CreateCollectionById<T>(Rom rom, int id, CreateListThings<T> CreateThings)
+        {
+            Scene scene;
+            List<FileAddress> roomAddresses;
+            Room room;
+            List<ItemLocation<T>> result = new List<ItemLocation<T>>();
+            
+            for (int sceneId = 0; sceneId < rom.Scenes; sceneId++)
+            {
+                //load scene
+                var sceneFile = rom.Files.GetSceneFile(sceneId);
+
+                scene = InitializeScene(sceneId, sceneFile);
+                if (scene == null)
+                    continue;
+
+                //scene level actors
+                //set room negative to denote scene level actors
+                result.AddRange(CreateList<T>(id, scene.Header, sceneId, -1, CreateThings));
+
+                //load room list
+                roomAddresses = scene.Header.GetRoomAddresses();
+
+                for (int roomId = 0; roomId < roomAddresses.Count; roomId++)
+                {
+                    try
+                    {
+                        room = InitializeRoom(rom.Files.GetFile(roomAddresses[roomId]));
+                        result.AddRange(CreateList<T>(id, scene.Header, sceneId, roomId, CreateThings));
+                    }
+                    catch { }
+                }
+            }
+            return result;
+        }
+        
+        private static List<ItemLocation<T>> CreateList<T>(int id, SceneHeader header, int scene, int room, CreateListThings<T> del)
+        {
+            List<ItemLocation<T>> result = new List<ItemLocation<T>>();
+            List<List<T>> test = del(id);
+
+            for (int i = 0; i < test.Count; i++)
+            {
+                SceneRoomSetup srs = new SceneRoomSetup(scene, room, i);
+                foreach (var item in test[i])
+                    result.Add(new ItemLocation<T>(item, srs));
+            }
+            return result;
+        }
+
+        class ItemLocation<T>
+        {
+            public T Item { get; set; }
+            public SceneRoomSetup Location { get; set; }
+
+            public ItemLocation(T i, SceneRoomSetup loc)
+            {
+                Item = i;
+                Location = loc;
+            }
+        }
+
+        delegate List<List<T>> CreateListThings<T>(int id);
+
+
+        private static int ObjectListPrintout(int id, SceneHeader header, int sceneId, int roomId, StringBuilder result)
+        {
+            List<List<ushort>> objectList = header.GetObjectsWithId(id);
+            AppendObjectList(objectList, sceneId, roomId, result);
+            return GetSublistCount(objectList);
+        }
+
+        private static int ActorListPrintout(int id, SceneHeader header, int sceneId, int roomId, StringBuilder result)
+        {
+            List<List<ActorRecord>> actorList = header.GetActorsWithId(id);
+            AppendActorList(actorList, sceneId, roomId, result);
+            return GetSublistCount(actorList);
+        }
+
+        private static int CommandListPrintout(int id, SceneHeader header, int sceneId, int roomId, StringBuilder result)
+        {
+            List<List<SceneCommand>> commandList = header.GetAllCommandsWithId(id);
+            AppendCommandList(commandList, sceneId, roomId, result);
+            return GetSublistCount(commandList);
+        }
+
+        public static int GetSublistCount<T>(List<List<T>> list)
+        {
+            int count = 0;
+            foreach (List<T> sublist in list)
+            {
+                count += sublist.Count;
+            }
+            return count;
+        }
+
         private static void AppendActorList(List<List<ActorRecord>> actorList, int scene, int room, StringBuilder result)
         {
             List<ActorRecord> setupList;
@@ -221,7 +402,7 @@ namespace mzxrules.OcaLib.SceneRoom
                         scene,
                         setup,
                         room);
-                    result.AppendLine(locationStr + String.Join(" ", list));
+                    result.AppendLine(locationStr + string.Join(" ", list));
 
                     //foreach (ushort obj in setupList)
                     //{
@@ -230,97 +411,7 @@ namespace mzxrules.OcaLib.SceneRoom
                 }
             }
         }
-
-        delegate int PrintList(int id, SceneHeader header, int sceneId, int roomId, StringBuilder result);
-
-        private static string PrintCollectionById(Rom rom, int id, PrintList PrintListFunction)
-        {
-            Scene scene;
-            List<FileAddress> roomAddresses;
-            Room room;
-            int sceneId;
-            int roomId;
-            StringBuilder result;
-            int count = 0;
-
-            result = new StringBuilder();
-            result.AppendLine("Scene,Setup,Room");
-            for (sceneId = 0; sceneId < rom.SceneCount; sceneId++)
-            {
-                //set room negative to denote scene level actors
-                roomId = -1;
-
-                //load scene
-                scene = InitializeScene(sceneId, rom.Files.GetSceneFile(sceneId));
-                if (scene == null)
-                    continue;
-
-                //scene level actors
-                count += PrintListFunction(id, scene.Header, sceneId, roomId, result);
-
-                //load room list
-                roomAddresses = scene.Header.GetRoomAddresses();
-
-                for (roomId = 0; roomId < roomAddresses.Count; roomId++)
-                {
-                    try
-                    {
-                        room = InitializeRoom(rom.Files.GetFile(roomAddresses[roomId]));
-                        count += PrintListFunction(id, room.Header, sceneId, roomId, result);
-                    }
-                    catch { }
-                }
-            }
-            result.AppendLine("Total: " + count.ToString());
-            return result.ToString();
-        }
-
-        private static int ObjectListPrintout(int id, SceneHeader header, int sceneId, int roomId, StringBuilder result)
-        {
-            List<List<ushort>> objectList = header.GetObjectsWithId(id);
-            AppendObjectList(objectList, sceneId, roomId, result);
-            return GetSublistCount(objectList);
-        }
-
-        private static int ActorListPrintout(int id, SceneHeader header, int sceneId, int roomId, StringBuilder result)
-        {
-            List<List<ActorRecord>> actorList = header.GetActorsWithId(id);
-            AppendActorList(actorList, sceneId, roomId, result);
-            return GetSublistCount(actorList);
-        }
-
-        private static int CommandListPrintout(int id, SceneHeader header, int sceneId, int roomId, StringBuilder result)
-        {
-            List<List<SceneCommand>> commandList = header.GetAllCommandsWithId(id);
-            AppendCommandList(commandList, sceneId, roomId, result);
-            return GetSublistCount(commandList);
-        }
-
-        public static string GetObjectsById(Rom r, int id)
-        {
-            return PrintCollectionById(r, id, ObjectListPrintout);
-        }
-
-        public static string GetActorsById(Rom r, int id)
-        {
-            return PrintCollectionById(r, id, ActorListPrintout);
-        }
-
-        public static string GetCommandsById(Rom r, int id)
-        {
-            return PrintCollectionById(r, id, CommandListPrintout);
-        }
-
-        public static int GetSublistCount<T>(List<List<T>> list)
-        {
-            int count = 0;
-            foreach (List<T> sublist in list)
-            {
-                count += sublist.Count;
-            }
-            return count;
-        }
-
+        
         private static void AppendCommandList(List<List<SceneCommand>> commandList, int scene, int room, StringBuilder result)
         {
             List<SceneCommand> setupList;

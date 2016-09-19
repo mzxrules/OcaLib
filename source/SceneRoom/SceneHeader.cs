@@ -87,10 +87,10 @@ namespace mzxrules.OcaLib.SceneRoom
                 case HeaderCommands.Collision:          //0x03
                     command = new CollisionCommand();
                     break;
-                case HeaderCommands.RoomList:            //0x04
+                case HeaderCommands.RoomList:           //0x04
                     command = new RoomListCommand();
                     break;
-                case HeaderCommands.WindSettings:              //0x05
+                case HeaderCommands.WindSettings:       //0x05
                     command = new WindSettingsCommand();
                     break;
                 case HeaderCommands.EntranceDefs:       //0x06
@@ -99,10 +99,10 @@ namespace mzxrules.OcaLib.SceneRoom
                 case HeaderCommands.SpecialObject:      //0x07
                     command = new SpecialObjectCommand();
                     break;
-                case HeaderCommands.RoomBehavior:        //0x08
+                case HeaderCommands.RoomBehavior:       //0x08
                     command = new RoomBehaviorCommand();
                     break;
-                case HeaderCommands.RoomMesh:            //0x0A
+                case HeaderCommands.RoomMesh:           //0x0A
                     command = new RoomMeshCommand();
                     break;
                 case HeaderCommands.ObjectList:         //0x0B
@@ -141,13 +141,13 @@ namespace mzxrules.OcaLib.SceneRoom
                 case HeaderCommands.Cutscene:           //0x17
                     command = new CutsceneCommand();
                     break;
-                case HeaderCommands.AlternateHeaders:    //0x18
+                case HeaderCommands.AlternateHeaders:   //0x18
                     command = new AlternateHeadersCommand(Game);
                     break;
                 case HeaderCommands.JpegBackground:     //0x19
                     command = new JpegBackgroundCommand();
                     break;
-                default: command = new SceneCommand(); //throw new NotImplementedException();
+                default: command = new SceneCommand(); 
                     break;
             }
 

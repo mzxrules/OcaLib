@@ -231,6 +231,13 @@ namespace mzxrules.Helper
             return encodeTask;
         }
         
+        /// <summary>
+        /// Writes compressed file to given stream, starting at stream's position.
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="srcSize"></param>
+        /// <param name="dstFile"></param>
+        /// <returns></returns>
         public static int Encode(byte[] src, int srcSize, Stream dstFile)
         {
             Ret r = new Ret(0, 0);
@@ -320,7 +327,6 @@ namespace mzxrules.Helper
                 validBitCount = 0;
                 r.dstPos = 0;
             }
-            dstFile.Position = 0;
             return dstSize;
         }
     }
