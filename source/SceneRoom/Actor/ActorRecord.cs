@@ -1,5 +1,6 @@
 ﻿using System;
 using mzxrules.Helper;
+using System.IO;
 //OCA LIB **********************************
 namespace mzxrules.OcaLib.Actor
 {
@@ -28,6 +29,13 @@ namespace mzxrules.OcaLib.Actor
         }
         protected ActorRecord()
         {
+        }
+        public virtual void Serialize(BinaryWriter bw)
+        {
+            bw.WriteBig(Actor);
+            bw.WriteBig(coords);
+            bw.WriteBig(rotation);
+            bw.WriteBig(Variable);
         }
         public virtual Vector3<short> GetCoords()
         {
@@ -98,5 +106,7 @@ namespace mzxrules.OcaLib.Actor
         {
             return ((float)v / ushort.MaxValue) * 360.0f;
         }
+
+
     }
 }

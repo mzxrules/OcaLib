@@ -4,7 +4,8 @@
     {
         public override string Read()
         {
-            return ReadSimple();
+            return $"Room Behavior: ? {Command.Data1:X2}, Show invisible actors? {(Command.Data2 & 0xFF00) > 0}, "
+                + $"Idle Animation {(Command.Data2 & 0xFF):X2}";
         }
         public override string ReadSimple()
         {

@@ -108,7 +108,7 @@
     <Compile Include="SceneRoom\HeaderCommands\EnvironmentSettingsCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\ExitListCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\IActorList.cs" />
-    <Compile Include="SceneRoom\HeaderCommands\ISMAsset.cs" />
+    <Compile Include="SceneRoom\HeaderCommands\ISegmentAddressAsset.cs" />
     <Compile Include="SceneRoom\HeaderCommands\JpegBackgroundCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\RoomBehaviorCommand.cs" />
     <Compile Include="SceneRoom\HeaderCommands\RoomListCommand.cs" />

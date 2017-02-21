@@ -5,39 +5,32 @@ using System.IO;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    public class RoomListCommand : SceneCommand, IBankRefAsset
+    public class RoomListCommand : SceneCommand, ISegmentAddressAsset
     {
-        public long Offset { get; set; }
-        public long RoomListAddress { get { return Offset; } set { Offset = value; } }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int RoomListAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public int Rooms { get; set; }
         public List<FileAddress> RoomAddresses { get; set; }
 
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
-            Rooms = command[1];
-            if (command[4] == (byte)ORom.Bank.scene)
-            {
-                RoomListAddress = (Endian.ConvertInt32(command, 4) & 0xFFFFFF);
-            }
-            else
-            {
+            Rooms = Command.Data1;
+            SegmentAddress = Command.Data2;
+
+            if (command[4] != (byte)ORom.Bank.scene)
                 throw new Exception();
-            }
         }
 
-        public void Initialize(BinaryReader sr)
+        public void Initialize(BinaryReader br)
         {
-            byte[] virtualAddress;
-            
-            virtualAddress = new byte[sizeof(Int32) * 2];
-
-            sr.BaseStream.Position = RoomListAddress;
             RoomAddresses = new List<FileAddress>();
+            br.BaseStream.Position = RoomListAddress;
+
             for (int i = 0; i < Rooms; i++)
             {
-                sr.Read(virtualAddress, 0, sizeof(Int32) * 2);
-                RoomAddresses.Add(new FileAddress(virtualAddress));
+                var fileAddress = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
+                RoomAddresses.Add(fileAddress);
             }
         }
 
@@ -46,6 +39,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             string result;
 
             result = ReadSimple();
+
             foreach (FileAddress address in RoomAddresses)
             {
                 result += string.Format("{0}{1:X8} {2:X8}", Environment.NewLine, address.Start, address.End);

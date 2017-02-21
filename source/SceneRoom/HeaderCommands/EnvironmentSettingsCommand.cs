@@ -3,21 +3,16 @@ using System;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class EnvironmentSettingsCommand : SceneCommand, IBankRefAsset
+    class EnvironmentSettingsCommand : SceneCommand, ISegmentAddressAsset
     {
-        public long Offset { get; set; }
-        public long EnvironmentSettingsAddress { get { return Offset; } set { Offset = value; } }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int EnvironmentSettingsAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
-            if (command[4] == (byte)ORom.Bank.scene)
-            {
-                EnvironmentSettingsAddress = (Endian.ConvertInt32(command, 4) & 0xFFFFFF);
-            }
-            else
-            {
+            SegmentAddress = Command.Data2;
+            if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
                 throw new Exception();
-            }
         }
         public void Initialize(System.IO.BinaryReader br)
         {

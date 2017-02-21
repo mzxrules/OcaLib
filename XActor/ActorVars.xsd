@@ -132,6 +132,4 @@
       <xs:enumeration value="numupdown" />
     </xs:restriction>
   </xs:simpleType>
-
-
 </xs:schema>

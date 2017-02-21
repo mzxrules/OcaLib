@@ -1,20 +1,17 @@
-﻿//using mzxrules.ZActor.OActors;
-//using mzxrules.ZActor.MActors;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using System.Text;
 using mzxrules.Helper;
 using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class TransitionActorListCommand : SceneCommand, IActorList, IBankRefAsset
+    class TransitionActorListCommand : SceneCommand, IActorList, ISegmentAddressAsset
     {
         Game Game { get; set; }
-        public long Offset { get; set; }
-        public long TransitionActorAddress { get { return Offset; } set { Offset = value; } }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int TransitionActorAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public List<TransitionActor> TransitionActorList = new List<TransitionActor>();
         public int TransitionActors { get; set; }
 
@@ -26,15 +23,10 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
-            TransitionActors = command[1];
-            if (command[4] == (byte)ORom.Bank.scene)
-            {
-                TransitionActorAddress = (Endian.ConvertInt32(command, 4) & 0xFFFFFF);
-            }
-            else
-            {
+            TransitionActors =  Command.Data1;
+            SegmentAddress = Command.Data2;
+            if (command[4] != (byte)ORom.Bank.scene)
                 throw new Exception();
-            }
         }
 
         public void Initialize(BinaryReader br)
@@ -44,7 +36,13 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             actorArray = new byte[ActorRecord.SIZE];
 
             br.BaseStream.Position = TransitionActorAddress;
-            for (int i = 0; i < TransitionActors; i++)
+            
+            var readRemaining = br.BaseStream.Length - br.BaseStream.Position;
+            var maxLoops = readRemaining / ActorRecord.SIZE;
+
+            var loop = (maxLoops > TransitionActors) ? TransitionActors : maxLoops;
+            
+            for (int i = 0; i < loop; i++)
             {
                 br.Read(actorArray, 0, 16);
                 TransitionActorList.Add(ActorFactory.OcarinaTransitionActors(actorArray));

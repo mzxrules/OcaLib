@@ -859,7 +859,7 @@
         </Value>
         <Value>
           <Data>69</Data>
-          <Description>Blue (5) Rupee</Description>
+          <Description>Deku Seeds (30) or blue (5) rupee</Description>
         </Value>
         <Value>
           <Data>6A</Data>
@@ -1728,7 +1728,7 @@
     <Objects>
       <Object>001C</Object>
     </Objects>
-    <Description>Ghoma</Description>
+    <Description>Gohma</Description>
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
@@ -1811,7 +1811,7 @@
     <Objects>
       <Object>001E</Object>
     </Objects>
-    <Description>Ghoma Larva</Description>
+    <Description>Gohma Larva</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
@@ -1963,7 +1963,7 @@
     <Objects>
       <Object>0022</Object>
     </Objects>
-    <Description>Electric Tailparisans</Description>
+    <Description>Electric Tailpasaran</Description>
     <Variables>
       <Variable mask="FFFF" default="FFFF">
         <Description>Default</Description>
@@ -2493,7 +2493,7 @@
     <Objects>
       <Object>008A</Object>
     </Objects>
-    <Description>Shiek</Description>
+    <Description>Sheik</Description>
     <Variables />
   </Actor>
   <Actor id="0049">
@@ -6372,29 +6372,33 @@
     </Objects>
     <Description>Shadow Temple truth spinner</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF">
+      <Variable maskType="&amp;" mask="00FF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
-          <Data>0000</Data>
+          <Data>00</Data>
           <Description>Bird statue with push block attached, rotates</Description>
         </Value>
         <Value>
-          <Data>0001</Data>
+          <Data>01</Data>
           <Description>Circular platform (supposed to open if you choose poorly)</Description>
         </Value>
         <Value>
-          <Data>0002</Data>
+          <Data>02</Data>
           <Description>Gate, blocks one-way (like most do)</Description>
         </Value>
         <Value>
-          <Data>0003</Data>
+          <Data>03</Data>
           <Description>Skull top</Description>
         </Value>
         <Value repeat="+">
-          <Data>0004</Data>
+          <Data>04</Data>
           <Description>Glitchy graphics, can’t see object, behaves like the gate</Description>
         </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask="3F00">
+        <Description>Switch Flag</Description>
+        <UI name="switchflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -7829,41 +7833,45 @@
     </Objects>
     <Description>Flying Pot</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF">
-        <Description>#N/A</Description>
-        <UI />
-        <Value repeat="+">
-          <Data>0000</Data>
-          <Description>Green Rupee</Description>
+      <Variable maskType="&amp;" mask="FF00">
+        <Description>Drop</Description>
+        <UI name="select" />
+        <Value>
+          <Data>00</Data>
+          <Description>Heart or Green Rupee</Description>
         </Value>
-        <Value repeat="+">
-          <Data>0100</Data>
+        <Value>
+          <Data>01</Data>
           <Description>Bombs</Description>
         </Value>
-        <Value repeat="+">
-          <Data>0200</Data>
+        <Value>
+          <Data>02</Data>
           <Description>Deku Seeds</Description>
         </Value>
-        <Value repeat="+">
-          <Data>0300</Data>
+        <Value>
+          <Data>03</Data>
           <Description>Deku Nuts</Description>
         </Value>
-        <Value repeat="+">
-          <Data>0400</Data>
+        <Value>
+          <Data>04</Data>
           <Description>Deku Seeds</Description>
         </Value>
-        <Value repeat="+">
-          <Data>0500</Data>
+        <Value>
+          <Data>05</Data>
           <Description>Giant Purple Rupee</Description>
         </Value>
-        <Value repeat="+">
-          <Data>0600</Data>
+        <Value>
+          <Data>06</Data>
           <Description>Goron Vest</Description>
         </Value>
-        <Value repeat="+">
-          <Data>0700</Data>
+        <Value>
+          <Data>FF</Data>
           <Description>Nothing</Description>
         </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask="003F">
+        <Description>Collectible Flag</Description>
+        <UI name="collectflag"/>
       </Variable>
     </Variables>
   </Actor>
@@ -9295,54 +9303,53 @@
     <Objects>
       <Object>0002</Object>
     </Objects>
-    <Description>Small rock</Description>
-    <Comment>FIXME: may cause glitched graphics in certain places</Comment>
+    <Description>Liftable Rock</Description>
+    <Comment>FIXME: may cause glitched graphics in certain places
+    &amp; F000 and &amp; 00C0 combine to make a switch flag for some purpose
+    &amp; 000F, if > 0, Young Link will be able to lift the gray rocks</Comment>
+    <Comment-Other>
+    </Comment-Other>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF">
-        <Description>#N/A</Description>
-        <UI />
+      <Variable maskType="&amp;" mask="0001">
+        <Description>Type</Description>
+        <UI name="select" />
         <Value>
-          <Data>0000</Data>
+          <Data>0</Data>
           <Description>Small rock, random drops</Description>
         </Value>
         <Value>
-          <Data>0001</Data>
-          <Description>Large light-gray rock, cannot pick up as Young Link, no drop</Description>
+          <Data>1</Data>
+          <Description>Large light-gray rock, can't pick up as Young Link, no drop</Description>
+        </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask ="0010">
+        <Description>Spawns Bugs</Description>
+        <UI name="bitflag"/>
+        <Value>
+          <Data>0</Data>
+          <Description>No</Description>
         </Value>
         <Value>
-          <Data>0002</Data>
-          <Description>Same as 0000</Description>
+          <Data>1</Data>
+          <Description>Yes</Description>
         </Value>
-        <Value>
-          <Data>0003</Data>
-          <Description>Large light-gray rock, can pick up as Young Link, no drop</Description>
-        </Value>
-        <Value>
-          <Data>0004</Data>
-          <Description>Same as 0000</Description>
-        </Value>
-        <Value>
-          <Data>0005</Data>
-          <Description>Same as 0003</Description>
-          <Comment>continues in this pattern*</Comment>
-        </Value>
-        <Value>
-          <Data>0090</Data>
-          <Description>Small rock, spawns bugs when you lift it, no drop</Description>
-        </Value>
-        <Value>
-          <Data>0091</Data>
-          <Description>Large light-gray rock, spawns bugs when you lift it, cannot pick up as Young Link, no drop</Description>
-        </Value>
-        <Value>
-          <Data>0092</Data>
-          <Description>Same as 0090</Description>
-        </Value>
-        <Value>
-          <Data>0093</Data>
-          <Description>Large light-gray rock, spawns bugs when you lift it, can pick up as Young Link, no drop</Description>
-          <Comment>continues in this pattern*</Comment>
-        </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask="0020">
+        <Description>?</Description>
+        <UI name="bitflag"/>
+      </Variable>
+      <Variable maskType="&amp;" mask="0F00">
+        <Description>Random Drop Table</Description>
+        <Comment>0-12, anything higher becomes drop table 0</Comment>
+        <UI name="randomdrop"/>
+      </Variable>
+      <Variable maskType="&amp;" mask="F000">
+        <Description>Switch Flag (High Bits)</Description>
+        <UI/>
+      </Variable>
+      <Variable maskType="&amp;" mask="00C0">
+        <Description>Switch Flag (Low Bits)</Description>
+        <UI/>
       </Variable>
     </Variables>
   </Actor>

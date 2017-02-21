@@ -3,23 +3,18 @@ using System;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class CollisionCommand : SceneCommand, IBankRefAsset
+    class CollisionCommand : SceneCommand, ISegmentAddressAsset
     {
-        public long Offset { get; set; }
-        public long CollisionHeaderAddress { get { return Offset; } set { Offset = value; } }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int CollisionHeaderAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public CollisionMesh Mesh;
 
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
-            if (command[4] == (byte)ORom.Bank.scene)
-            {
-                CollisionHeaderAddress = (Endian.ConvertInt32(command, 4) & 0xFFFFFF);
-            }
-            else
-            {
+            SegmentAddress = Command.Data2;
+            if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
                 throw new Exception();
-            }
         }
 
         public void Initialize(System.IO.BinaryReader br)

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace mzxrules.OcaLib.SceneRoom.Commands
+﻿namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     class SkyboxModifierCommand : SceneCommand
     {
         public override string Read()
         {
-            return ReadSimple();
+            return $"Skybox Settings: Disable Sky? {Command.Data2 >> 24 > 0}, Disable Sun/Moon? {(Command.Data2 & 0xFF0000) >> 16 > 0}";
         }
         public override string ReadSimple()
         {

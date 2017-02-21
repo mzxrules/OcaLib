@@ -1,5 +1,6 @@
 ﻿using mzxrules.Helper;
 using System;
+using System.IO;
 
 namespace mzxrules.OcaLib.Actor
 {
@@ -28,13 +29,25 @@ namespace mzxrules.OcaLib.Actor
         protected TransitionActor()
         {
         }
+        public override void Serialize(BinaryWriter bw)
+        {
+            bw.Write(SwitchToFrontRoom);
+            bw.Write(SwitchToFrontCamera);
+            bw.Write(SwitchToBackRoom);
+            bw.Write(SwitchToBackCamera);
+            bw.WriteBig(Actor);
+            bw.WriteBig(coords);
+            bw.WriteBig(rotation.y);
+            bw.WriteBig(Variable);
+        }
+
         public override string Print()
         {
             string varString;
 
             varString = GetVariable();
             return
-                String.Format("{0}, {1:X4}:{2:X4}, {3}, {4}{5}",
+                string.Format("{0}, {1:X4}:{2:X4}, {3}, {4}{5}",
                 PrintTransition(),
                 Actor,
                 Variable,
@@ -48,7 +61,7 @@ namespace mzxrules.OcaLib.Actor
         }
         protected string PrintTransition()
         {
-            return String.Format("{0:D2} {1:X2} -> {2:D2} {3:X2}",
+            return string.Format("{0:D2} {1:X2} -> {2:D2} {3:X2}",
                 SwitchToBackRoom,
                 SwitchToBackCamera,
                 SwitchToFrontRoom,

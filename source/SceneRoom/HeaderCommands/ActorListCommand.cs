@@ -6,11 +6,11 @@ using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class ActorListCommand: SceneCommand, IActorList, IBankRefAsset
+    class ActorListCommand : SceneCommand, IActorList, ISegmentAddressAsset
     {
         Game Game { get; set; }
-        public long Offset { get; set; }
-        public long ActorListAddress { get { return Offset; } set { Offset = value; } }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int ActorListAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public int Actors { get; set; }
         public List<ActorRecord> ActorList = new List<ActorRecord>();
         private delegate ActorRecord GetActorRecord(byte[] data);
@@ -24,6 +24,16 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
                 NewActor = ActorFactory.OcarinaActors;
             else if (Game == Game.MajorasMask)
                 NewActor = ActorFactory.MaskActors;
+        }
+
+        public override void SetCommand(SceneWord command)
+        {
+            base.SetCommand(command);
+            Actors = command.Data1;
+            SegmentAddress = command.Data2;
+            if (SegmentAddress.Segment != (byte)ORom.Bank.map
+                && SegmentAddress.Segment != (byte)ORom.Bank.scene)
+                throw new Exception();
         }
 
         public override string Read()
@@ -60,19 +70,6 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
                 result.AddRange(ActorList);
             }
             return result;
-        }
-        public override void SetCommand(SceneWord command)
-        {
-            base.SetCommand(command);
-            Actors = command.Data1;
-            if (command[4] == (Byte)ORom.Bank.map || command[4] == (Byte)ORom.Bank.scene)
-            {
-                ActorListAddress = (Endian.ConvertInt32(command, 4) & 0xFFFFFF); 
-            }
-            else
-            {
-                throw new Exception();
-            }
         }
         public void Initialize(BinaryReader br)
         {

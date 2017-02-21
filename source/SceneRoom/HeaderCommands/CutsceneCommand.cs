@@ -4,24 +4,19 @@ using System.IO;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class CutsceneCommand : SceneCommand//, IBankRefAsset
+    class CutsceneCommand : SceneCommand, ISegmentAddressAsset
     {
-        public long Offset { get; set; }
-        public long CutsceneAddress { get { return Offset; } set { Offset = value; } }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int CutsceneAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public bool ContainsCutscene = false;
         Cutscenes.Cutscene cutscene;
 
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
-            if (command[4] == (byte)ORom.Bank.scene)
-            {
-                CutsceneAddress = (Endian.ConvertInt32(command, 4) & 0xFFFFFF);
-            }
-            else
-            {
+            SegmentAddress = Command.Data2;
+            if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
                 throw new Exception();
-            }
         }
 
         public override string Read()
@@ -35,6 +30,8 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public void Initialize(BinaryReader br)
         {
+            return;
+
             long seekback = br.BaseStream.Position;
             br.BaseStream.Position = CutsceneAddress;
             cutscene = new Cutscenes.Cutscene(br.BaseStream);

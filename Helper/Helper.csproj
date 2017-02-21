@@ -60,6 +60,7 @@
     <Compile Include="Endian.cs" />
     <Compile Include="N64Ptr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SegmentAddress.cs" />
     <Compile Include="Shift.cs" />
     <Compile Include="StreamExtension.cs" />
     <Compile Include="Vectors.cs" />

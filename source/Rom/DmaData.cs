@@ -141,5 +141,10 @@ namespace mzxrules.OcaLib
         {
             return ((IEnumerable<FileRecord>)Table).Where(x => x.IsCompressed == false);
         }
+
+        public static object SingleOrDefault(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -27,6 +27,8 @@ namespace mzxrules.OcaLib.SceneRoom
 
         List<SceneCommand> cmds = new List<SceneCommand>();
 
+        public long Offset { get; private set; }
+
         public SceneHeader(Game game)
         {
             Game = game;
@@ -39,18 +41,19 @@ namespace mzxrules.OcaLib.SceneRoom
         /// <param name="seek">offset to the start of the scene header</param>
         public void Load(BinaryReader br, long seek)
         {
-            SceneWord command;
             bool KeepReading = true;
             long seekBackTop;
+            Offset = seek;
 
             seekBackTop = br.BaseStream.Position;
             br.BaseStream.Position = seek;
 
             while (KeepReading)
             {
-                command = new SceneWord();
+                SceneWord command = new SceneWord();
                 br.Read(command, 0, 8);
-                SetCommand((HeaderCommands)command.Code, command);
+
+                SetCommand(command, br.BaseStream.Position - 8);
                 if ((HeaderCommands)command.Code == HeaderCommands.End)
                 {
                     KeepReading = false;
@@ -73,10 +76,11 @@ namespace mzxrules.OcaLib.SceneRoom
             }
         }
 
-        public void SetCommand(HeaderCommands id, SceneWord sceneWord)
+        public void SetCommand(SceneWord sceneWord, long HeaderOffset)
         {
             SceneCommand command;
-            switch (id)
+             
+            switch ((HeaderCommands)sceneWord.Code)
             {
                 case HeaderCommands.PositionList:       //0x00
                     command = new PositionListCommand();
@@ -152,12 +156,13 @@ namespace mzxrules.OcaLib.SceneRoom
             }
 
             command.SetCommand(sceneWord);
+            command.OffsetFromFile = HeaderOffset;
             cmds.Add(command);
         }
 
         public void InitializeAssets(BinaryReader br)
         {
-            foreach (IBankRefAsset asset in cmds.Where(x => x is IBankRefAsset && !(x is AlternateHeadersCommand)))
+            foreach (ISegmentAddressAsset asset in cmds.Where(x => x is ISegmentAddressAsset && !(x is AlternateHeadersCommand)))
             {
                 if (asset is ExitListCommand)
                 {
@@ -198,25 +203,25 @@ namespace mzxrules.OcaLib.SceneRoom
         /// Gets alternate setup count for scene files only
         /// </summary>
         /// <returns></returns>
-        public long AltHeaderEnd()
+        public int AltHeaderEnd()
         {
             SceneCommand sc;
 
             sc = this[HeaderCommands.PositionList];
 
             if (sc != null)
-                return ((IBankRefAsset)sc).Offset;
-            else if ((IBankRefAsset)this[HeaderCommands.ObjectList] != null)
-                return ((IBankRefAsset)this[HeaderCommands.ObjectList]).Offset;
+                return ((ISegmentAddressAsset)sc).SegmentAddress.Offset;
+            else if ((ISegmentAddressAsset)this[HeaderCommands.ObjectList] != null)
+                return ((ISegmentAddressAsset)this[HeaderCommands.ObjectList]).SegmentAddress.Offset;
             else 
-                return ((IBankRefAsset)this[HeaderCommands.RoomMesh]).Offset;
+                return ((ISegmentAddressAsset)this[HeaderCommands.RoomMesh]).SegmentAddress.Offset;
         }
         #endregion
 
         public long ExitListEnd()
         {
             if (this[HeaderCommands.EnvironmentSettings] != null)
-                return ((IBankRefAsset)this[HeaderCommands.EnvironmentSettings]).Offset;
+                return ((ISegmentAddressAsset)this[HeaderCommands.EnvironmentSettings]).SegmentAddress.Offset;
             else return 0;
         }
 

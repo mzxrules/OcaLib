@@ -5,14 +5,14 @@ using System.IO;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    public class AlternateHeadersCommand : SceneCommand, IBankRefAsset
+    public class AlternateHeadersCommand : SceneCommand, ISegmentAddressAsset
     {
         Game Game { get; set; }
-        public long HeaderListAddress { get { return Offset; } set { Offset = value; } }
-        public long HeaderListEndAddress { get; set; }
+        public int HeaderListAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
+        public int HeaderListEndAddress { get; set; }
         public List<SceneHeader> HeaderList = new List<SceneHeader>();
         public List<long> HeaderOffsetsList = new List<long>();
-        public long Offset { get; set; }
+        public SegmentAddress SegmentAddress { get; set; }
 
         public AlternateHeadersCommand(Game game)
         {
@@ -22,11 +22,9 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
-            if (command[4] == (byte)ORom.Bank.scene || command[4] == (byte)ORom.Bank.map)
-            {
-                HeaderListAddress = base.Command.Data2 & 0xFFFFFF;
-            }
-            else
+            SegmentAddress = Command.Data2;
+            if (command[4] != (byte)ORom.Bank.scene 
+                && command[4] != (byte)ORom.Bank.map)
                 throw new Exception();
         }
 
@@ -40,7 +38,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
             //If there are an impossibly high number of headers, only parse the maximum of 20
             if (headerCount >= 0x14)
-                headerCount = 0x14;//throw new ArgumentOutOfRangeException();
+                headerCount = 0x14;
 
             //Read the header offset list
             br.BaseStream.Position = HeaderListAddress;

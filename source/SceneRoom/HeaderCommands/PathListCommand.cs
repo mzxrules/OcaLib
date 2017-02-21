@@ -6,23 +6,18 @@ using mzxrules.Helper;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class PathListCommand : SceneCommand, IBankRefAsset
+    class PathListCommand : SceneCommand, ISegmentAddressAsset
     {
-        public long Offset { get; set; }
-        public long PathListAddress { get { return Offset; } set { Offset = value; } }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int PathListAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         private List<Path> Paths = new List<Path>();
 
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
-            if (command[4] == (byte)ORom.Bank.scene)
-            {
-                PathListAddress = (Endian.ConvertInt32(command, 4) & 0xFFFFFF);
-            }
-            else
-            {
+            SegmentAddress = Command.Data2;
+            if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
                 throw new Exception();
-            }
         }
         public void Initialize(System.IO.BinaryReader br)
         {

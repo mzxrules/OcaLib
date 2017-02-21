@@ -15,7 +15,7 @@ namespace mzxrules.Helper
 
     public static class FileOrder
     {
-        const int BUFFER_SIZE = 0x2000;
+        const int BUFFER_SIZE = 0x4000;
 
         public static void ToBigEndian32(Stream source, Stream output, FileEncoding sourceEncoding)
         {
@@ -27,7 +27,7 @@ namespace mzxrules.Helper
                 case FileEncoding.LittleEndian32: sourceEndian = Endian.Order.Little32; outEndian = Endian.Order.Big32; break;
                 default: throw new NotImplementedException();
             }
-            FileOrder.ConvertData(source, sourceEndian, output, outEndian);
+            ConvertData(source, sourceEndian, output, outEndian);
         }
 
         /// <summary>
@@ -84,22 +84,44 @@ namespace mzxrules.Helper
             }
         }
 
+        /// <summary>
+        /// Reverses the byte order of stream
+        /// </summary>
+        /// <param name="source">Source stream to alter</param>
+        /// <param name="write">Destination stream to alter</param>
+        /// <param name="size">Size of the word to reverse</param>
+        /// <returns>True if the process was completed</returns>
         private static bool FlipData(Stream source, Stream write, int size)
         {
             byte[] word = new byte[size];
+            byte[] temp = new byte[size];
             byte[] buffer = new byte[BUFFER_SIZE];
 
 
-            //FIXME: Out of bounds issues
-            for (int i = 0; i < source.Length; i += BUFFER_SIZE)
+            int count, length;
+            int offset = 0;
+
+            while ((count = source.Read(buffer, offset, buffer.Length - offset)) != 0)
             {
-                source.Read(buffer, 0, BUFFER_SIZE);
-                for (int j = 0; j < BUFFER_SIZE; j += size)
+                int inBuffer = count + offset;
+                length = (inBuffer / size) * size;
+                offset = (inBuffer % size);
+
+                //flip
+                for (int j = 0; j < length; j += size)
                 {
                     Array.Copy(buffer, j, word, 0, size);
                     write.Write(word.Reverse().ToArray(), 0, size);
                 }
+                //move 
+                if (offset != 0)
+                {
+                    Array.Copy(buffer, length, buffer, 0, size);
+                }
             }
+            //if source stream isn't aligned like it should be, there will be some unswapped bytes
+            //i say fuck 'm
+
             return true;
         }
     }

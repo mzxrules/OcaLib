@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using mzxrules.Helper;
-
-namespace mzxrules.OcaLib.SceneRoom.Commands
+﻿namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     class WindSettingsCommand : SceneCommand
     {

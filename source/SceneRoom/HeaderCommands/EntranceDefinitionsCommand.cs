@@ -4,24 +4,19 @@ using System.Collections.Generic;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class EntranceDefinitionsCommand: SceneCommand, IBankRefAsset
+    class EntranceDefinitionsCommand: SceneCommand, ISegmentAddressAsset
     {
-        public long Offset { get; set; }
-        public long EntranceDefinitionsAddress { get { return Offset; } set { Offset = value; } }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int EntranceDefinitionsAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public long EntranceDefinitionsEndAddress { get; set; }
         public List<EntranceDef> EntranceDefinitions = new List<EntranceDef>();
 
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
-            if (command[4] == (byte)ORom.Bank.scene)
-            {
-                EntranceDefinitionsAddress = (Endian.ConvertInt32(command, 4) & 0xFFFFFF);
-            }
-            else
-            {
+            SegmentAddress = Command.Data2;
+            if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
                 throw new Exception();
-            }
         }
 
         public  void Initialize(System.IO.BinaryReader br)

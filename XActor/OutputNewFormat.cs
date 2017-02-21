@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace mzxrules.XActor
 {
@@ -36,7 +33,7 @@ namespace mzxrules.XActor
 
             foreach (XVariable var in actor.Variables)
             {
-                if (var.altvar !=  AltVarTypes.Var)
+                if (var.altvar != AltVarTypes.Var)
                 {
                     sb.AppendLine();
                     if (var.altvar == AltVarTypes.XRot)
@@ -67,10 +64,10 @@ namespace mzxrules.XActor
         /// </summary>
         /// <param name="sb"></param>
         /// <param name="var"></param>
-        private static void PrintVariable(StringBuilder sb,  XVariable var)
+        private static void PrintVariable(StringBuilder sb, XVariable var)
         {
             sb.AppendFormat(" {0} {1} - {2} ",
-                (var.maskType == MaskType.And)? "&":"|",
+                (var.maskType == MaskType.And) ? "&" : "|",
                 var.mask,
                 var.Description);
             PrintComments(sb, var.Comment, true);
@@ -89,9 +86,9 @@ namespace mzxrules.XActor
                 obj = string.Join(", ", value.Meta.Object);
             sb.AppendFormat("  - {0}{1} [{2:X4}]{3} = {4}",
                 value.Data,
-                (!String.IsNullOrEmpty(value.repeat)) ? "+" : " ",
+                (!string.IsNullOrEmpty(value.repeat)) ? "+" : " ",
                 Shift(int.Parse(value.Data, System.Globalization.NumberStyles.HexNumber), mask),
-                (!String.IsNullOrEmpty(obj)) ? String.Format(" ({0})", obj) : "",
+                (!string.IsNullOrEmpty(obj)) ? string.Format(" ({0})", obj) : "",
                 value.Description);
             PrintComments(sb, value.Comment, true);
             sb.AppendLine();
@@ -138,7 +135,8 @@ namespace mzxrules.XActor
             {
                 if (commentLines.Length == 1)
                 {
-                    sb.Append(@" //" + commentLines[0].Trim());
+                    var comment = commentLines[0].Trim();
+                    sb.Append($" //{comment}");
                     return;
                 }
                 else
@@ -162,9 +160,7 @@ namespace mzxrules.XActor
                 }
                 emptyLine = false;
                 firstLine = false;
-                sb.AppendLine(String.Format(@"//{0}",
-                    s
-                    ));
+                sb.AppendLine($"//{s}");
             }
         }
     }

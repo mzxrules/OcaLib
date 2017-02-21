@@ -1,9 +1,10 @@
-﻿namespace mzxrules.OcaLib.SceneRoom.Commands
+﻿using mzxrules.Helper;
+namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class RoomMeshCommand:SceneCommand, IBankRefAsset
+    class RoomMeshCommand : SceneCommand, ISegmentAddressAsset
     {
-        public long Offset { get; set; }
-        public long RoomMeshAddress { get { return Offset; } set { Offset = value ;} }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int RoomMeshAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public void Initialize(System.IO.BinaryReader br)
         {
 

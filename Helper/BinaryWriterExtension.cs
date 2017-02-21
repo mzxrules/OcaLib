@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace mzxrules.Helper
 {
@@ -33,6 +30,18 @@ namespace mzxrules.Helper
             byte[] d = BitConverter.GetBytes(v);
             Endian.ReverseBytes(ref d);
             bw.Write(d);
+        }
+        public static void WriteBig(this BinaryWriter bw, Vector3<short> v)
+        {
+            WriteBig(bw, v.x);
+            WriteBig(bw, v.y);
+            WriteBig(bw, v.z);
+        }
+        public static void WriteBig(this BinaryWriter bw, Vector3<ushort> v)
+        {
+            WriteBig(bw, v.x);
+            WriteBig(bw, v.y);
+            WriteBig(bw, v.z);
         }
         public static void WriteBig(this BinaryWriter bw, Vector3<int> v)
         {

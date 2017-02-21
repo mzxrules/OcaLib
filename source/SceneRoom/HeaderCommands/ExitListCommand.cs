@@ -6,20 +6,17 @@ using mzxrules.Helper;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class ExitListCommand : SceneCommand, IBankRefAsset
+    class ExitListCommand : SceneCommand, ISegmentAddressAsset
     {
-        public long Offset { get; set; }
-        public long ExitListAddress { get { return Offset; } set { Offset = value; } }
+        public SegmentAddress SegmentAddress { get; set; }
+        public int ExitListAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public long EndOffset { get; set; }
         public List<ushort> ExitList = new List<ushort>();
         public override void SetCommand(SceneWord command)
         {
             base.SetCommand(command);
-            if (command[4] == (byte)ORom.Bank.scene)
-            {
-                ExitListAddress = (Endian.ConvertInt32(command, 4) & 0xFFFFFF);
-            }
-            else
+            SegmentAddress = Command.Data2;
+            if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
                 throw new Exception();
         }
 
@@ -29,10 +26,10 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             ushort index;
             if (EndOffset != 0)
             {
-                count = (EndOffset - Offset) / 2;
+                count = (EndOffset - ExitListAddress) / 2;
                 if (count > 0x20)
                     throw new ArgumentOutOfRangeException();
-                br.BaseStream.Position = Offset;
+                br.BaseStream.Position = ExitListAddress;
                 for (int i = 0; i < count; i++)
                 {
                     Endian.Convert(out index, br.ReadBytes(2));

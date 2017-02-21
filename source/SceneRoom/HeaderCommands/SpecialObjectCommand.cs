@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using mzxrules.Helper;
-
-namespace mzxrules.OcaLib.SceneRoom.Commands
+﻿namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     class SpecialObjectCommand: SceneCommand
     {
@@ -14,7 +8,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public override string ReadSimple()
         {
-            return String.Format("Special Objects {0:X2} {1:X8}",
+            return string.Format("Elf_Message {0}, Load Object {1:X4}",
                 Command.Data1,
                 Command.Data2);
         }
