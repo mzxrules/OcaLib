@@ -58,25 +58,26 @@ namespace mzxrules.OcaLib.Cutscenes
             for (int i = 0; i < commands + 1; i++)
             {
                 cmd = null;
+                var index = br.BaseStream.Position;
                 commandId = br.ReadBigInt32();
                 if (commandId > 0 && commandId < 0x91)
                 {
                     switch ((byte)commandId)
                     {
-                        case 0x01: cmd = new CameraCommand(commandId, br); break;
+                        case 0x01: cmd = new CameraCommand(commandId, br, index); break;
                         case 0x02: goto case 1;
                         case 0x05: goto case 1;
                         case 0x06: goto case 1;
-                        case 0x09: cmd = new Command09(commandId, br); break;
-                        case 0x13: cmd = new TextCommand(commandId, br); break;
-                        case 0x2D: cmd = new ScreenTransitionCommand(commandId, br); break;
-                        default: cmd = new ActorCommand(commandId, br); break;
+                        case 0x09: cmd = new Command09(commandId, br, index); break;
+                        case 0x13: cmd = new TextCommand(commandId, br, index); break;
+                        case 0x2D: cmd = new ScreenTransitionCommand(commandId, br, index); break;
+                        default: cmd = new ActorCommand(commandId, br, index); break;
                     }
                 }
                 else if (commandId == 0x3E8)
-                    cmd = new ExitCommand(commandId, br);
+                    cmd = new ExitCommand(commandId, br, index);
                 else if (commandId == -1)
-                    cmd = new EndCommand(commandId, br);
+                    cmd = new EndCommand(commandId, br, index);
 
                 if (cmd != null)
                     Commands.Add(cmd);
@@ -183,7 +184,7 @@ namespace mzxrules.OcaLib.Cutscenes
             StringBuilder sb = new StringBuilder();
             CutsceneCommand lastRoot = null;
 
-            foreach (IFrameData f in Commands
+            foreach (IFrameData f in Commands.OfType<IFrameCollection>()
                 .SelectMany(x =>  x.IFrameDataEnum)
                 .OrderBy(x => x.StartFrame))
             {

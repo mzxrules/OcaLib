@@ -48,26 +48,16 @@ namespace mzxrules.OcaLib
             Unknown = br.ReadBigUInt32();
         }
 
+        /// <summary>
+        /// Initializes the actor overlay record. Assumes data is stored in Big Endian form
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="data"></param>
         public ActorOverlayRecord(int index, byte[] data)
         {
-            Create(index, data, false);
+            Create(index, GetData_Rom(data, LENGTH));
         }
-
-        protected ActorOverlayRecord(int index, byte[] data, bool LittleWord)
-        {
-            Create(index, data, LittleWord);
-        }
-
-        private void Create(int index, byte[] data, bool LittleWord)
-        {
-            List<uint> d;
-            if (LittleWord)
-                d = GetData_Ram(data, LENGTH);
-            else
-                d = GetData_Rom(data, LENGTH);
-
-            Create(index, d);
-        }
+        
         private void Create(int index, List<uint> data)
         {
             N64Ptr ramFileStart;

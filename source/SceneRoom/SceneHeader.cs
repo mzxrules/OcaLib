@@ -83,7 +83,7 @@ namespace mzxrules.OcaLib.SceneRoom
             switch ((HeaderCommands)sceneWord.Code)
             {
                 case HeaderCommands.PositionList:       //0x00
-                    command = new PositionListCommand();
+                    command = new PositionListCommand(Game);
                     break;
                 case HeaderCommands.ActorList:          //0x01
                     command = new ActorListCommand(Game);
@@ -167,6 +167,11 @@ namespace mzxrules.OcaLib.SceneRoom
                 if (asset is ExitListCommand)
                 {
                     ((ExitListCommand)asset).EndOffset = ExitListEnd();
+                }
+                else if (asset is EntranceDefinitionsCommand)
+                {
+                    var v = (PositionListCommand)cmds.Single(x => x.ID == (int)HeaderCommands.PositionList);
+                    ((EntranceDefinitionsCommand)asset).Entrances = v.Positions;
                 }
                 asset.Initialize(br);
             }

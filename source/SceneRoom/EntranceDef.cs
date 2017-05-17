@@ -9,5 +9,9 @@
             Room = room;
             Position = position;
         }
+        public override string ToString()
+        {
+            return $"Spawn {Position:D2}, Room {Room:D2}";
+        }
     }
 }

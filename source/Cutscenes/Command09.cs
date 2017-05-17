@@ -11,8 +11,11 @@ namespace mzxrules.OcaLib.Cutscenes
     {
         const int LENGTH = 8;
         List<ThisEntry> entries = new List<ThisEntry>();
-        public Command09(int command, BinaryReader br)
-            : base(command, br)
+
+        public IEnumerable<IFrameData> IFrameDataEnum => GetIFrameDataEnumerator();
+        
+        public Command09(int command, BinaryReader br, long index)
+            : base(command, br, index)
         {
             Load(br);
         }
@@ -37,9 +40,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            return String.Format("{0:X4} entries {1:X8}",
-                Command,
-                entries.Count);
+            return $"{Command:X4} entries {entries.Count:X8}";
         }
 
         public override string ReadCommand()
@@ -60,17 +61,17 @@ namespace mzxrules.OcaLib.Cutscenes
             return entries.Count * ThisEntry.LENGTH + LENGTH;
         }
 
-        public override void AddEntry(IFrameData item)
+        public  void AddEntry(IFrameData item)
         {
             entries.Add((ThisEntry)item);
         }
 
-        public override void RemoveEntry(IFrameData item)
+        public  void RemoveEntry(IFrameData item)
         {
             entries.Remove((ThisEntry)item);
         }
 
-        protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
+        public IEnumerable<IFrameData> GetIFrameDataEnumerator()
         {
             foreach (IFrameData fd in entries)
                 yield return fd;

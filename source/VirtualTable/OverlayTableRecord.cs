@@ -1,8 +1,6 @@
 ﻿using mzxrules.Helper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace mzxrules.OcaLib
 {
@@ -24,16 +22,16 @@ namespace mzxrules.OcaLib
             return d;
         }
 
-        protected static List<uint> GetData_Ram(byte[] data, int LENGTH)
-        {
-            List<uint> d = new List<uint>();
+        //protected static List<uint> GetData_Ram(byte[] data, int LENGTH)
+        //{
+        //    List<uint> d = new List<uint>();
 
-            for (int i = 0; i < LENGTH; i += 4)
-            {
-                var v = BitConverter.ToUInt32(data, i);
-                d.Add(v);
-            }
-            return d;
-        }
+        //    for (int i = 0; i < LENGTH; i += 4)
+        //    {
+        //        var v = BitConverter.ToUInt32(data, i);
+        //        d.Add(v);
+        //    }
+        //    return d;
+        //}
     }
 }

@@ -79,7 +79,7 @@ namespace mzxrules.OcaLib.SceneRoom
         {
             string result;
 
-            result = String.Format("Offset to vertex array {0:X8}" + Environment.NewLine
+            result = string.Format("Offset to vertex array {0:X8}" + Environment.NewLine
                 + "Offset to polygon array {1:X8}" + Environment.NewLine
                 + "Offset to polygon type defs {2:X8}" + Environment.NewLine
                 + "Offset to camera data {3:X8}" + Environment.NewLine

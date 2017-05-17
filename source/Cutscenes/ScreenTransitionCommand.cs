@@ -20,8 +20,8 @@ namespace mzxrules.OcaLib.Cutscenes
         }
         short EndFrameD;
 
-        public ScreenTransitionCommand(int command, BinaryReader br)
-            : base(command, br)
+        public ScreenTransitionCommand(int command, BinaryReader br, long index)
+            : base(command, br, index)
         {
             Load(br);
         }
@@ -81,7 +81,7 @@ namespace mzxrules.OcaLib.Cutscenes
                 EndFrameD));
             return sb.ToString();
         }
-        protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
+        public IEnumerable<IFrameData> GetIFrameDataEnumerator()
         {
             yield return this;
         }

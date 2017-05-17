@@ -12,8 +12,10 @@ namespace mzxrules.OcaLib.Cutscenes
         const int LENGTH = 8;
         public List<ActionEntry> Entries = new List<ActionEntry>();
 
-        public ActorCommand(int command, BinaryReader br)
-            : base(command, br)
+        public IEnumerable<IFrameData> IFrameDataEnum => throw new NotImplementedException();
+
+        public ActorCommand(int command, BinaryReader br, long index)
+            : base(command, br, index)
         {
             Load(br);
         }
@@ -44,7 +46,7 @@ namespace mzxrules.OcaLib.Cutscenes
                 item.Save(bw);
         }
 
-        public override void RemoveEntry(IFrameData i)
+        public void RemoveEntry(IFrameData i)
         {
             Entries.Remove((ActionEntry)i);
         }
@@ -83,7 +85,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
             sb.AppendLine(ToString());
             foreach (ActionEntry e in Entries)
-                sb.AppendLine("   " + e.ToString());
+                sb.AppendLine($"   {e}");
             return sb.ToString();
         }
 
@@ -92,13 +94,13 @@ namespace mzxrules.OcaLib.Cutscenes
             return Entries.Count * ActionEntry.LENGTH + LENGTH;
         }
 
-        protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
+        public IEnumerable<IFrameData> GetIFrameDataEnumerator()
         {
             foreach (IFrameData fd in Entries)
                 yield return fd;
         }
 
-        public override void AddEntry(IFrameData item)
+        public void AddEntry(IFrameData item)
         {
             Entries.Add((ActionEntry)item);
         }

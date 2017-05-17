@@ -9,10 +9,23 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 {
     class PositionListCommand : SceneCommand, IActorList, ISegmentAddressAsset
     {
+        Game Game { get; set; }
         public SegmentAddress SegmentAddress { get; set; }
         public int PositionListAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
         public int Positions;
         public List<ActorRecord> PositionList { get; set; }
+        private delegate ActorRecord GetActorRecord(byte[] data);
+        GetActorRecord NewActor;
+
+        public PositionListCommand(Game game)
+        {
+            Game = game;
+
+            if (Game == Game.OcarinaOfTime)
+                NewActor = ActorFactory.OcarinaActors;
+            else if (Game == Game.MajorasMask)
+                NewActor = ActorFactory.MaskActors;
+        }
 
         public override void SetCommand(SceneWord command)
         {
@@ -33,7 +46,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             for (int i = 0; i < Positions; i++)
             {
                 sr.Read(positionRecord, 0, 16);
-                PositionList.Add(new LinkActor(positionRecord));
+                PositionList.Add(NewActor(positionRecord));
             }
         }
 
@@ -42,7 +55,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             string result;
 
             result = ReadSimple();
-            foreach (LinkActor p in PositionList)
+            foreach (var p in PositionList)
             {
                 result += Environment.NewLine + p.Print();
             }

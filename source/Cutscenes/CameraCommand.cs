@@ -6,7 +6,7 @@ using System.Text;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    public class CameraCommand : CutsceneCommand, IFrameData
+    public class CameraCommand : CutsceneCommand, IFrameCollection, IFrameData
     {
         public CutsceneCommand RootCommand { get { return this; } set { throw new InvalidOperationException(); } }
         public CameraCommand.Type CommandType { get { return GetCameraCommandType(); } }
@@ -15,16 +15,19 @@ namespace mzxrules.OcaLib.Cutscenes
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
 
+        public IEnumerable<IFrameData> IFrameDataEnum => throw new NotImplementedException();
+
         public ushort UnknownA;
         public ushort zero;
 
         public List<CameraCommandEntry> Entries = new List<CameraCommandEntry>();
 
-        public CameraCommand(int command, BinaryReader br)
-            : base(command, br)
+        public CameraCommand(int command, BinaryReader br, long index)
+            : base(command, br, index)
         {
             Load(br);
         }
+
         public CameraCommand(int command)
         {
             Load(command);
@@ -35,7 +38,12 @@ namespace mzxrules.OcaLib.Cutscenes
             Load(command, startFrame, endFrame);
         }
 
-        public override void RemoveEntry(IFrameData i)
+        public void AddEntry(IFrameData d)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveEntry(IFrameData i)
         {
             CameraCommandEntry entry = (CameraCommandEntry)i;
             Entries.Remove(entry);
@@ -119,7 +127,7 @@ namespace mzxrules.OcaLib.Cutscenes
             result = new StringBuilder();
             result.AppendLine(ToString());
             foreach (CameraCommandEntry e in Entries)
-                result.AppendLine("   " + e.ToString());
+                result.AppendLine($"   {e}");
             return result.ToString();
         }
 
@@ -128,7 +136,7 @@ namespace mzxrules.OcaLib.Cutscenes
             return (LENGTH + (CameraCommandEntry.LENGTH * Entries.Count));
         }
 
-        protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
+        public IEnumerable<IFrameData> GetIFrameDataEnumerator()
         {
             yield return this;
             foreach (IFrameData e in Entries)
@@ -146,6 +154,7 @@ namespace mzxrules.OcaLib.Cutscenes
             foreach (CameraCommandEntry item in Entries)
                 item.Save(bw);
         }
+
         public enum Type
         {
             FocusPoint,

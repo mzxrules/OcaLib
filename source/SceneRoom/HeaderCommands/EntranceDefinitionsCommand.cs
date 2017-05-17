@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class EntranceDefinitionsCommand: SceneCommand, ISegmentAddressAsset
+    class EntranceDefinitionsCommand : SceneCommand, ISegmentAddressAsset
     {
         public SegmentAddress SegmentAddress { get; set; }
         public int EntranceDefinitionsAddress { get { return SegmentAddress.Offset; } set { SegmentAddress.Offset = value; } }
-        public long EntranceDefinitionsEndAddress { get; set; }
         public List<EntranceDef> EntranceDefinitions = new List<EntranceDef>();
+        public int Entrances = 0;
 
         public override void SetCommand(SceneWord command)
         {
@@ -19,34 +19,38 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
                 throw new Exception();
         }
 
-        public  void Initialize(System.IO.BinaryReader br)
+        public void Initialize(System.IO.BinaryReader br)
         {
             int maxEntrances;
             byte position;
             byte room;
 
             br.BaseStream.Position = EntranceDefinitionsAddress;
-            maxEntrances = (int)(EntranceDefinitionsEndAddress - EntranceDefinitionsAddress) / 2;
+            maxEntrances = Entrances;
             for (int i = 0; i < maxEntrances; i++)
             {
                 position = br.ReadByte();
                 room = br.ReadByte();
 
                 //if the second or more entrances are 0000, no worky
-                if (i < 1 ||position != 0 || position != 0)
+                if (i < 1 || position != 0 || position != 0)
                     EntranceDefinitions.Add(new EntranceDef(position, room));
             }
         }
 
         public override string Read()
         {
-            return ReadSimple();
+            string result = ReadSimple();
+            foreach (var item in EntranceDefinitions)
+            {
+                result += $"{Environment.NewLine}  {item}";
+            }
+            return result;
         }
 
         public override string ReadSimple()
         {
-            return string.Format("Entrance Index Definitions starts at {0:X8}",
-                EntranceDefinitionsAddress);
+            return $"Entrance Index Definitions starts at {EntranceDefinitionsAddress:X8}";
         }
     }
 }

@@ -4,44 +4,45 @@ using System.IO;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    public class CutsceneCommand : AbstractCutsceneCommand
+    //public interface ILength
+    //{
+    //    int Length { get; }
+    //}
+
+    public class CutsceneCommand // : AbstractCutsceneCommand
     {
-        public IEnumerable<IFrameData> IFrameDataEnum { get { return GetIFrameDataEnumerator(); } }
+        //protected abstract IEnumerable<IFrameData> GetIFrameDataEnumerator();
+        public Int32 Command { get; protected set; }
+        public long Index { get; protected set; }
+        public int Length { get { return GetLength(); } }
 
-        protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
-        {
-            if (false)
-                yield return null;
-        }
+        //public IEnumerable<IFrameData> IFrameDataEnum { get { return GetIFrameDataEnumerator(); } }
 
-        protected CutsceneCommand(int command, BinaryReader br)
+        //protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
+        //{
+        //    if (false)
+        //        yield return null;
+        //}
+
+        protected CutsceneCommand(int command, BinaryReader br, long index)
         {
             Command = command;
-            Index = br.BaseStream.Position - 4;
+            Index = index;
+            //Index = br.BaseStream.Position - 4;
         }
         protected CutsceneCommand() { }
 
-        public override string ReadCommand()
+        public virtual string ReadCommand()
         {
             throw new InvalidOperationException();
         }
 
-        protected override int GetLength()
+        protected virtual int GetLength()
         {
             throw new InvalidOperationException();
         }
 
-        public override void Save(BinaryWriter bw)
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override void AddEntry(IFrameData item)
-        {
-            throw new InvalidOperationException();
-        }
-
-        public override void RemoveEntry(IFrameData item)
+        public virtual void Save(BinaryWriter bw)
         {
             throw new InvalidOperationException();
         }

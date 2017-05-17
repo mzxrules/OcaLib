@@ -6,71 +6,70 @@
       <Object>0015</Object>
     </Objects>
     <Description>Link</Description>
-    <Comment>
-      Objects spawned by game engine.
-      May sometimes cause Z-buffer glitches
-    </Comment>
+    <Comment>Objects spawned by game engine. May sometimes cause Z-buffer glitches</Comment>
     <Variables>
       <Variable maskType="&amp;" mask="0F00" default="F">
         <Description>Spawn Behavior</Description>
         <UI name="select" />
         <Value>
           <Data>0</Data>
-          <Description>Invisible, can't be controlled</Description>
-          <Comment>used for cutscenes without Link</Comment>
+          <Description>Invisible, can't control</Description>
+          <Comment>Used for cutscenes without Link</Comment>
         </Value>
         <Value>
           <Data>1</Data>
-          <Description>Master Sword Pull/Drop animation, overwrites coordinates</Description>
+          <Description>Master Sword Pull &amp; Drop Animation</Description>
+          <Comment>Overwrites coordinates</Comment>
         </Value>
         <Value>
           <Data>2</Data>
-          <Description>Fall gently from the sky</Description>
+          <Description>Spawn: Blue Warp</Description>
           <Comment>used when returning from a blue warp</Comment>
         </Value>
         <Value>
           <Data>3</Data>
-          <Description>Spawn, can't move</Description>
+          <Description>Spawn: Immobile</Description>
         </Value>
         <Value>
           <Data>4</Data>
-          <Description>Spawn, with a high jump (y velocity = 12)</Description>
+          <Description>Spawn: Exit via Grotto</Description>
+          <Comment>Y velocity = 12</Comment>
         </Value>
         <Value>
           <Data>5</Data>
-          <Description>Spawn, warp song</Description>
+          <Description>Spawn: Warp Song</Description>
         </Value>
         <Value>
           <Data>6</Data>
-          <Description>Spawn from Farore's Wind</Description>
+          <Description>Spawn: Farore's Wind</Description>
         </Value>
         <Value>
           <Data>7</Data>
-          <Description>Tossed out animation</Description>
-          <Comment>captured by hyrule guards</Comment>
+          <Description>Spawn: Thrown Out</Description>
         </Value>
         <Value>
           <Data>D</Data>
-          <Description>Spawned, no movement</Description>
+          <Description>Stand</Description>
         </Value>
         <Value>
           <Data>E</Data>
-          <Description>Spawned, slow walk</Description>
+          <Description>Slow Walk Forward</Description>
         </Value>
         <Value>
           <Data>F</Data>
-          <Description>Spawned, retain previous velocity</Description>
+          <Description>Retain Previous Velocity</Description>
+          <Comment>Walk speed set by last exit</Comment>
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="00FF" default="FF" nullable="true">
-        <Description>Spawn Camera Behavior</Description>
-        <Comment>Camera is positioned based on the scene Link spawns in</Comment>
+        <Description>Camera Initial Focus</Description>
+        <Comment>Data defined by scene Link spawns in</Comment>
         <UI name="num">
           <Param id="display">int</Param>
         </UI>
         <Value>
           <Data>FF</Data>
-          <Description>No special positioning</Description>
+          <Description>No Special Positioning</Description>
         </Value>
       </Variable>
     </Variables>
@@ -86,28 +85,28 @@
         <UI name="select" />
         <Value>
           <Data>0000</Data>
-          <Description>Invisible (view with Lens of Truth), Mini-Boss theme</Description>
+          <Description>Invisible (Lens of Truth), Mini-Boss Theme</Description>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Rises out of the ground, miniboss music</Description>
+          <Description>Rises from Ground, Mini-Boss Theme</Description>
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Rises out of the ground, no miniboss music</Description>
-          <Comment>To be paired with 0001</Comment>
+          <Description>Rises from Ground</Description>
+          <Comment>Pair with 0001</Comment>
         </Value>
         <Value>
           <Data>0003</Data>
-          <Description>Drops down from the sky when Link is near, no miniboss music</Description>
+          <Description>Drops From Sky on Approach</Description>
         </Value>
         <Value uihide="true" repeat="+">
           <Data>0004</Data>
-          <Description>Rises out of the ground, miniboss music</Description>
+          <Description>Rises from Ground, Mini-Boss Theme</Description>
         </Value>
         <Value>
           <Data>FFFF</Data>
-          <Description>Rises out of the ground, miniboss music</Description>
+          <Description>Rises from Ground, Mini-Boss Theme</Description>
         </Value>
       </Variable>
     </Variables>
@@ -131,35 +130,35 @@
         <UI name="select" />
         <Value>
           <Data>0001</Data>
-          <Description>Green flames</Description>
+          <Description>Green Flame</Description>
         </Value>
         <Value>
           <Data>0003</Data>
-          <Description>Purple flames</Description>
+          <Description>Purple Flame</Description>
         </Value>
         <Value>
           <Data>0004</Data>
-          <Description>Red bubbles</Description>
+          <Description>Red Bubbles</Description>
         </Value>
         <Value>
           <Data>0005</Data>
-          <Description>Invisible object hovering with shadow for a second, then bursts into purple flames</Description>
+          <Description>Invisible Hovering Object w/Shadow, bursts into purple flames</Description>
         </Value>
         <Value>
           <Data>0009</Data>
-          <Description>Green flames</Description>
+          <Description>Green Flame</Description>
         </Value>
         <Value>
           <Data>000A</Data>
-          <Description>Green flame</Description>
+          <Description>Green Flame</Description>
         </Value>
         <Value>
           <Data>000B</Data>
-          <Description>Purple flame</Description>
+          <Description>Purple Flame</Description>
         </Value>
         <Value>
           <Data>000C</Data>
-          <Description>Green flame</Description>
+          <Description>Green Flame</Description>
         </Value>
       </Variable>
     </Variables>
@@ -175,75 +174,75 @@
         <UI name="select" />
         <Value>
           <Data>0000</Data>
-          <Description>Orange flame</Description>
+          <Description>Large Orange Flame</Description>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Orange flame</Description>
+          <Description>Large Orange Flame</Description>
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Blue flame</Description>
+          <Description>Large Blue Flame</Description>
         </Value>
         <Value>
           <Data>0003</Data>
-          <Description>Green flame</Description>
+          <Description>Large Green Flame</Description>
         </Value>
         <Value>
           <Data>0004</Data>
-          <Description>Small orange flame</Description>
+          <Description>Small Orange Flame</Description>
         </Value>
         <Value>
           <Data>0005</Data>
-          <Description>Orange flame</Description>
+          <Description>Large Orange Flame</Description>
         </Value>
         <Value>
           <Data>0006</Data>
-          <Description>Green flame</Description>
+          <Description>Large Green Flame</Description>
         </Value>
         <Value>
           <Data>0007</Data>
-          <Description>Blue flame</Description>
+          <Description>Large Blue Flame</Description>
         </Value>
         <Value>
           <Data>0008</Data>
-          <Description>Magenta flame</Description>
+          <Description>Large Magenta Flame</Description>
         </Value>
         <Value>
           <Data>0009</Data>
-          <Description>Whitish flame</Description>
+          <Description>Large Pale Orange Flame</Description>
         </Value>
         <Value>
           <Data>000A</Data>
-          <Description>Yellow-white flame</Description>
+          <Description>Large Pale Yellow Flame</Description>
         </Value>
         <Value>
           <Data>000B</Data>
-          <Description>Light green flame</Description>
+          <Description>Large Pale Green Flame</Description>
         </Value>
         <Value>
           <Data>000C</Data>
-          <Description>Light magenta flame</Description>
+          <Description>Large Pale Pink Flame</Description>
         </Value>
         <Value>
           <Data>000D</Data>
-          <Description>Lighter magenta flame</Description>
+          <Description>Large Pale Purple Flame</Description>
         </Value>
         <Value>
           <Data>000E</Data>
-          <Description>Light blue flame</Description>
+          <Description>Large Pale Indigo Flame</Description>
         </Value>
         <Value>
           <Data>000F</Data>
-          <Description>Light blue flame</Description>
+          <Description>Large Pale Blue Flame</Description>
         </Value>
         <Value>
           <Data>83F0</Data>
-          <Description>Small scrolling texture with light</Description>
+          <Description>Candle Flame</Description>
         </Value>
         <Value>
           <Data>FFFF</Data>
-          <Description>Faint blue aura</Description>
+          <Description>Faint Blue Aura</Description>
         </Value>
       </Variable>
     </Variables>
@@ -260,57 +259,67 @@
         <UI name="select" />
         <Value>
           <Data>0000</Data>
-          <Description>Wooden door. Loads rooms</Description>
+          <Description>Wooden Door</Description>
+          <Comment>Loads rooms</Comment>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Double wooden doors, work on both sides. Loads rooms.</Description>
+          <Description>Double Wooden Doors</Description>
+          <Comment>Loads rooms</Comment>
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Single door, locked, Small Key needed</Description>
+          <Description>Small Key Locked Door</Description>
         </Value>
         <Value>
           <Data>0003</Data>
-          <Description>Double wooden door, left door locked, other door is locked on the opposite side. Loads rooms.</Description>
+          <Description>Locked Double Wooden Doors</Description>
+          <Comment>Left door is locked on one side, right door is locked on the other. Loads rooms.</Comment>
         </Value>
         <Value>
           <Data>0004</Data>
-          <Description>Double wooden doors, work on both sides. Loads rooms.</Description>
+          <Description>Double Wooden Two-Way Doors</Description>
+          <Comment>Loads rooms</Comment>
         </Value>
         <Value>
           <Data>0005</Data>
-          <Description>Double wooden doors, work on both sides. Loads rooms.</Description>
+          <Description>Double Wooden Two-Way Doors</Description>
+          <Comment>Loads rooms</Comment>
         </Value>
         <Value>
           <Data>0006</Data>
-          <Description>Double wooden doors, work on both sides. Loads rooms.</Description>
+          <Description>Double Wooden Two-Way Doors</Description>
+          <Comment>Loads rooms</Comment>
         </Value>
         <Value>
           <Data>0007</Data>
-          <Description>Double wooden doors, work on both sides. Loads rooms.</Description>
+          <Description>Double Wooden Two-Way Doors</Description>
+          <Comment>Loads rooms</Comment>
         </Value>
         <Value>
           <Data>0008</Data>
-          <Description>Door is already open and slams shut of its own accord, then says "It won't open!" if you try to open it. </Description>
+          <Description>Ajar Wooden Door</Description>
+          <Comment>Door slams shut on approach, then says "It won't open!" if you try to interact with it.</Comment>
         </Value>
         <Value>
           <Data>000C</Data>
-          <Description>Talking door.  Passable, but appears on both sides.</Description>
-          <Comment>last two values' text matches that of actor 185, but in increments of 1 instead</Comment>
+          <Description>Wooden Two-Way Door with Message</Description>
+          <Comment>Last two values' text matches that of actor 0185, but in increments of 1 instead</Comment>
         </Value>
         <Value repeat="+">
           <Data>0010</Data>
-          <Description>Single door, no area triggering, both-way</Description>
+          <Description>Wooden Two-Way Door</Description>
+          <Comment>Doesn't load room</Comment>
         </Value>
         <Value>
           <Data>03FF</Data>
-          <Description>Double wooden doors, one-way, crashes when try to open</Description>
+          <Description>Double Wooden One-Way Doors</Description>
+          <Comment>FIXME: Game crashes if you try to open them.</Comment>
         </Value>
       </Variable>
       <Variable mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
-        <Comment>Locked doors only</Comment>
+        <Comment>Used by locked doors only</Comment>
         <UI name="switchflag" />
       </Variable>
     </Variables>
@@ -395,7 +404,7 @@
         </Value>
         <Value>
           <Data>03</Data>
-          <Description>Bombchus (10)</Description>
+          <Description>Bombchu (10)</Description>
         </Value>
         <Value>
           <Data>04</Data>
@@ -404,7 +413,7 @@
         <Value>
           <Data>05</Data>
           <Description>Fairy Slingshot</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>06</Data>
@@ -421,7 +430,7 @@
         <Value>
           <Data>09</Data>
           <Description>Longshot</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>0A</Data>
@@ -430,12 +439,12 @@
         <Value>
           <Data>0B</Data>
           <Description>Zelda’s Letter</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>0C</Data>
           <Description>Ocarina of Time</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>0D</Data>
@@ -444,32 +453,32 @@
         <Value>
           <Data>0E</Data>
           <Description>Cojiro</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>0F</Data>
           <Description>Empty Bottle</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>10</Data>
           <Description>Red Potion</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>11</Data>
           <Description>Green Potion</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>12</Data>
           <Description>Blue Potion</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>13</Data>
           <Description>Bottled Fairy</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>14</Data>
@@ -481,87 +490,87 @@
         </Value>
         <Value>
           <Data>16</Data>
-          <Description>Magic Beans (1)</Description>
+          <Description>Magic Bean</Description>
         </Value>
         <Value>
           <Data>17</Data>
           <Description>Skull Mask</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>18</Data>
           <Description>Spooky Mask</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>19</Data>
           <Description>Chicken</Description>
-          <Comment>cutscene open, uses Magic Bean text id</Comment>
+          <Comment>Triggers chest opening cutscene. Uses Magic Bean message ID</Comment>
         </Value>
         <Value>
           <Data>1A</Data>
           <Description>Keaton Mask</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>1B</Data>
           <Description>Bunny Hood</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>1C</Data>
           <Description>Mask of Truth</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>1D</Data>
           <Description>Pocket Egg</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>1E</Data>
           <Description>Pocket Cucco</Description>
-          <Comment>cutscene open, uses Magic Bean text id</Comment>
+          <Comment>Triggers chest opening cutscene, uses Magic Bean message ID</Comment>
         </Value>
         <Value>
           <Data>1F</Data>
           <Description>Odd Mushroom</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>20</Data>
           <Description>Odd Potion</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>21</Data>
           <Description>Poacher’s Saw</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>22</Data>
           <Description>Broken Goron’s Sword</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>23</Data>
           <Description>Prescription</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>24</Data>
           <Description>Eyeball Frog</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>25</Data>
           <Description>World’s Finest Eye Drops</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>26</Data>
           <Description>Claim Check</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>27</Data>
@@ -570,7 +579,7 @@
         <Value>
           <Data>28</Data>
           <Description>Giant’s Knife</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>29</Data>
@@ -603,12 +612,12 @@
         <Value>
           <Data>30</Data>
           <Description>Big Quiver</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>31</Data>
           <Description>Biggest Quiver</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>32</Data>
@@ -617,47 +626,47 @@
         <Value>
           <Data>33</Data>
           <Description>Big Bomb Bag</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>34</Data>
           <Description>Biggest Bomb Bag</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>35</Data>
           <Description>Silver Gauntlets</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>36</Data>
           <Description>Golden Gauntlets</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>37</Data>
           <Description>Silver Scale</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>38</Data>
           <Description>Golden Scale</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>39</Data>
           <Description>Stone of Agony</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>3A</Data>
           <Description>Gerudo Membership Card</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>3B</Data>
           <Description>Fairy Ocarina</Description>
-          <Comment>cutscene open, uses Ocarina of Time text id</Comment>
+          <Comment>Triggers chest opening cutscene. Uses Ocarina of Time message ID</Comment>
         </Value>
         <Value>
           <Data>3C</Data>
@@ -666,27 +675,27 @@
         <Value>
           <Data>3D</Data>
           <Description>Heart Container</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>3E</Data>
           <Description>Piece of Heart</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>3F</Data>
           <Description>Boss Key</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>40</Data>
           <Description>Compass</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>41</Data>
           <Description>Map</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>42</Data>
@@ -705,17 +714,17 @@
         <Value>
           <Data>45</Data>
           <Description>Adult Wallet</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>46</Data>
           <Description>Giant Wallet</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>47</Data>
           <Description>Weird Egg</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>48</Data>
@@ -748,32 +757,32 @@
         <Value>
           <Data>4F</Data>
           <Description>Heart Container</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>50</Data>
           <Description>Lon Lon Milk</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>51</Data>
           <Description>Goron Mask</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>52</Data>
           <Description>Zora Mask</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>53</Data>
           <Description>Gerudo Mask</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>54</Data>
           <Description>Goron Bracelet</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>55</Data>
@@ -786,7 +795,7 @@
         <Value>
           <Data>57</Data>
           <Description>Giant's Knife or Biggoron’s Sword</Description>
-          <Comment>cutscene open, Biggoron's Sword given only when relevent flags are set</Comment>
+          <Comment>Triggers chest opening cutscene, Biggoron's Sword is only given when the relevant flags are set</Comment>
         </Value>
         <Value>
           <Data>58</Data>
@@ -823,7 +832,7 @@
         <Value>
           <Data>60</Data>
           <Description>Deku Seeds Bullet Bag (40)</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>61</Data>
@@ -863,36 +872,36 @@
         </Value>
         <Value>
           <Data>6A</Data>
-          <Description>Bombchus (5)</Description>
+          <Description>Bombchu (5)</Description>
         </Value>
         <Value>
           <Data>6B</Data>
-          <Description>Bombchus (20)</Description>
+          <Description>Bombchu (20)</Description>
         </Value>
         <Value>
           <Data>6C</Data>
           <Description>Bottled Fish</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>6D</Data>
           <Description>Bottled Bug</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>6E</Data>
           <Description>Blue Fire</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>6F</Data>
           <Description>Bottled Poe</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>70</Data>
-          <Description>Bottled Giant Poe</Description>
-          <Comment>cutscene open</Comment>
+          <Description>Bottled Big Poe</Description>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>71</Data>
@@ -917,7 +926,7 @@
         <Value>
           <Data>76</Data>
           <Description>Winner Piece of Heart (Treasure Box Shop)</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>77</Data>
@@ -938,24 +947,27 @@
         <Value>
           <Data>7B</Data>
           <Description>Deku Seeds Bullet Bag (50)</Description>
-          <Comment>cutscene open</Comment>
+          <Comment>Triggers chest opening cutscene</Comment>
         </Value>
         <Value>
           <Data>7C</Data>
           <Description>Ice Trap</Description>
-          <Comment>freezes you when opened</Comment>
+          <Comment>Freezes Link when opened</Comment>
         </Value>
         <Value>
           <Data>7D</Data>
-          <Description>Pocket Egg, no model appears over Link</Description>
+          <Description>Pocket Egg (Invalid)</Description>
+          <Comment>No model appears over Link</Comment>
         </Value>
         <Value>
           <Data>7E</Data>
-          <Description>Invalid, crashes when opened</Description>
+          <Description>Invalid</Description>
+          <Comment>Game crashes when opened</Comment>
         </Value>
         <Value>
           <Data>7F</Data>
-          <Description>Invalid, crashes when opened</Description>
+          <Description>Invalid</Description>
+          <Comment>Game crashes when opened</Comment>
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="001F">
@@ -1005,16 +1017,17 @@
         <UI name="select" />
         <Value>
           <Data>0000</Data>
-          <Description>Normal</Description>
+          <Description>Graveyard Poe</Description>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Leaves a blue rupee at its spawn point</Description>
+          <Description>Graveyard Poe</Description>
+          <Comment>Leaves a Blue Rupee at its spawn point</Comment>
         </Value>
         <Value>
           <Data>0002</Data>
           <Description>Sharp (Composer Brothers)</Description>
-          <Comment>Sets Permanent Switch Flag 0B when talked to</Comment>
+          <Comment>Sets Permanent Switch Flag 0B when spoken to</Comment>
           <Meta>
             <Object>006E</Object>
             <Flag type="switch">0B</Flag>
@@ -1031,7 +1044,7 @@
         </Value>
         <Value uihide="true" repeat="+">
           <Data>0004</Data>
-          <Description>Normal</Description>
+          <Description>Graveyard Poe</Description>
         </Value>
       </Variable>
     </Variables>
@@ -1043,7 +1056,7 @@
     <Description>Octorok</Description>
     <Variables>
       <Variable mask="FF00" default="FF" nullable="true">
-        <Description>Rocks fired per volley</Description>
+        <Description>Rocks Fired per Volley</Description>
         <UI name="num">
           <Param id="display">int</Param>
         </UI>
@@ -1065,11 +1078,13 @@
     <Description>Webs</Description>
     <Variables>
       <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
-        <Description>Switch Flag set when destroyed</Description>
+        <Description>Switch Flag</Description>
+        <Comment>Set when destroyed</Comment>
         <UI name="switchflag" />
       </Variable>
       <Variable maskType="&amp;" mask="0FC0" default="3F" nullable="true">
-        <Description>Switch Flag that when set causes web to burn self</Description>
+        <Description>Switch Flag</Description>
+        <Comment>Web burns when set</Comment>
         <UI name="switchflag" />
       </Variable>
       <Variable maskType="&amp;" mask="F000">
@@ -1077,16 +1092,16 @@
         <UI name="select" />
         <Value>
           <Data>0</Data>
-          <Description>Web-covered hole</Description>
+          <Description>Web-Covered Hole</Description>
         </Value>
         <Value>
           <Data>1</Data>
-          <Description>Vertical web wall (huge)</Description>
+          <Description>Vertical Web Wall</Description>
         </Value>
         <Value repeat="+">
           <Data>2</Data>
-          <Description>Web-covered hole</Description>
-          <Comment>when burned, web becomes inverse-conical and extends up, looks kinda weird</Comment>
+          <Description>Web-Covered Hole</Description>
+          <Comment>When burned, web becomes inverse-conical and extends upwards</Comment>
         </Value>
       </Variable>
     </Variables>
@@ -1106,7 +1121,7 @@
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Round shadow</Description>
+          <Description>Bomb Shadow</Description>
         </Value>
       </Variable>
     </Variables>
@@ -1123,7 +1138,7 @@
         <Value>
           <Data>00</Data>
           <Description>?</Description>
-          <Comment>FIXME: used in Master Quest</Comment>
+          <Comment>FIXME: Used in Master Quest</Comment>
         </Value>
         <Value>
           <Data>01</Data>
@@ -1136,7 +1151,7 @@
       </Variable>
       <Variable maskType="&amp;" mask="3F00">
         <Description>Switch Flag</Description>
-        <Comment>Switch Flag to spawn on, type 02 only</Comment>
+        <Comment>Flag to spawn on. Used by type 02 only</Comment>
         <UI name="switchflag" />
       </Variable>
     </Variables>
@@ -1152,16 +1167,17 @@
         <UI name="select" />
         <Value>
           <Data>FFFF</Data>
-          <Description>Normal</Description>
+          <Description>Default</Description>
         </Value>
         <Value>
           <Data>0000</Data>
-          <Description>Two-Foot Dodongo (fire and smoke from mouth when dead)</Description>
-          <Comment>FIXME: Beta?</Comment>
+          <Description>Two-Foot Dodongo</Description>
+          <Comment>Emits fire and smoke from mouth upon death</Comment>
         </Value>
         <Value repeat="+">
           <Data>0001</Data>
-          <Description>Two-Foot Dodongo (no fire/smoke)</Description>
+          <Description>Two-Foot Dodongo</Description>
+          <Comment>Doesn't emit fire and smoke from mouth upon death</Comment>
         </Value>
       </Variable>
     </Variables>
@@ -1172,7 +1188,7 @@
     </Objects>
     <Description>Keese</Description>
     <Variables>
-      <Variable maskType="&amp;" mask="FFFF">
+      <Variable maskType="&amp;" mask="7FFF">
         <Description>Type</Description>
         <UI name="select" />
         <Value>
@@ -1198,6 +1214,18 @@
         <Value uihide="true" repeat="+">
           <Data>0005</Data>
           <Description>Aggressive Keese</Description>
+        </Value>
+      </Variable>
+      <Variable maskType="&amp;" mask="8000">
+        <Description>Invisible</Description>
+        <UI name="bitflag"/>
+        <Value>
+          <Data>0</Data>
+          <Description>Visible</Description>
+        </Value>
+        <Value>
+          <Data>1</Data>
+          <Description>Invisible</Description>
         </Value>
       </Variable>
     </Variables>
@@ -1233,15 +1261,15 @@
     <Description>Collectibles</Description>
     <Comment-Other>
       Flexible Drop rules:
-      if you have &lt;= 1 heart it becomes a fairy
-      else if 1 &lt; hearts &lt;= 3 it becomes triple hearts, or triple green rupee if at max health
-      else if 3 &lt; hearts &lt;= 5 it becomes a single heart, or green rupee if at max health
-      else if you have 0 magic it becomes a large magic jar, or nothing if you haven't unlocked magic
-      else if you are child and you have &lt;= 5 seeds it becomes deku seeds (5), or nothing without a slingshot
-      else if you are adult and you have &lt;= 5 arrows it becomes a large arrow bundle (10), or nothing without a bow
-      else if you have &lt;= 5 bombs it becomes Bombs (5), or nothing without a bomb item
-      else if you have &lt;= 10 rupees it becomes a red rupee
-      else it becomes nothing
+      If Link has ≤ 1 heart, spawn a Healing Fairy
+      else if Link has 2 to 3 hearts, spawn 3 Recovery Hearts, or 3 Green Rupees if Link is at full health
+      else if Link has 4 to 5 hearts, spawn 1 Recovery Heart, or 1 Green Rupee if Link is at full health
+      else if Link has 0 magic, spawn a large magic jar, but if magic hasn't been unlocked, spawn nothing
+      else if Link is a child and has ≤ 5 Deku Seed, spawn Deku Seeds (5), but if he doesn't have a Slingshot, spawn nothing
+      else if Link is an adult and has ≤ 5 Arrows, spawn Arrows (10), but if he doesn't have a Bow, spawn nothing
+      else if Link has ≤ 5 Bombs, spawn Bombs (5), but if he doesn't have a Bomb Bag, spawn nothing
+      else if Link has ≤ 10 Rupees, spawn a Red Rupee
+      else spawn nothing
     </Comment-Other>
     <Variables>
       <Variable maskType="&amp;" mask="3F00" default="3F" nullable="true">
@@ -1266,7 +1294,7 @@
         </Value>
         <Value>
           <Data>03</Data>
-          <Description>Heart</Description>
+          <Description>Recovery Heart</Description>
         </Value>
         <Value>
           <Data>04</Data>
@@ -1275,7 +1303,7 @@
         <Value>
           <Data>05</Data>
           <Description>Arrow (1)</Description>
-          <Comment>Likely used for collecting arrows stuck in walls</Comment>
+          <Comment>Used for collecting arrows stuck in walls [?]</Comment>
         </Value>
         <Value>
           <Data>06</Data>
@@ -1283,7 +1311,7 @@
         </Value>
         <Value>
           <Data>07</Data>
-          <Description>Heart Container (Alpha!)</Description>
+          <Description>Heart Container [Early]</Description>
         </Value>
         <Value>
           <Data>08</Data>
@@ -1299,7 +1327,7 @@
         </Value>
         <Value>
           <Data>0B</Data>
-          <Description>Bomb (5)</Description>
+          <Description>Bombs (5)</Description>
         </Value>
         <Value>
           <Data>0C</Data>
@@ -1311,11 +1339,11 @@
         </Value>
         <Value>
           <Data>0E</Data>
-          <Description>Magic jar (Large)</Description>
+          <Description>Large Magic Jar</Description>
         </Value>
         <Value>
           <Data>0F</Data>
-          <Description>Magic jar (Small)</Description>
+          <Description>Small Magic Jar</Description>
         </Value>
         <Value>
           <Data>10</Data>
@@ -1328,20 +1356,20 @@
         <Value>
           <Data>12</Data>
           <Description>Flexible Drop</Description>
-          <Comment>Used for randomized drops, see comments. Will spawn as an Invisible Heart in some situations</Comment>
+          <Comment>Used for randomized drops, see comments. Will spawn as an invisible Recovery Heart in some situations</Comment>
         </Value>
         <Value>
           <Data>13</Data>
-          <Description>Giant orange rupee</Description>
+          <Description>Giant Orange Rupee</Description>
         </Value>
         <Value>
           <Data>14</Data>
-          <Description>Large purple rupee</Description>
+          <Description>Large Purple Rupee</Description>
         </Value>
         <Value>
           <Data>15</Data>
           <Description>Deku Shield</Description>
-          <Comment>Probably requires Child Link's Object</Comment>
+          <Comment>May require Child Link's object [?]</Comment>
         </Value>
         <Value>
           <Data>16</Data>
@@ -1357,11 +1385,11 @@
         </Value>
         <Value>
           <Data>19</Data>
-          <Description>Bomb (5)</Description>
+          <Description>Bombs (5)</Description>
         </Value>
         <Value repeat="+">
           <Data>1A</Data>
-          <Description>Invisible item?</Description>
+          <Description>Invisible Item [?]</Description>
         </Value>
       </Variable>
     </Variables>
@@ -1377,11 +1405,11 @@
         <UI name="select" />
         <Value>
           <Data>0000</Data>
-          <Description>Fire arrow</Description>
+          <Description>Fire Arrow</Description>
         </Value>
         <Value repeat="+">
           <Data>0001</Data>
-          <Description>Regular arrow</Description>
+          <Description>Wooden Arrow</Description>
         </Value>
       </Variable>
     </Variables>
@@ -1413,11 +1441,11 @@
         </Value>
         <Value>
           <Data>0004</Data>
-          <Description>Group of Healing Faries</Description>
+          <Description>Group of Healing Fairies</Description>
         </Value>
         <Value>
           <Data>0005</Data>
-          <Description>Fairy Healing you</Description>
+          <Description>Fairy Healing You</Description>
         </Value>
         <Value>
           <Data>0006</Data>
@@ -1487,11 +1515,11 @@
         </Value>
         <Value uihide="true" repeat="+">
           <Data>0000</Data>
-          <Description>Normal tektite</Description>
+          <Description>Normal Tektite</Description>
         </Value>
         <Value uihide="true" repeat="+">
           <Data>0004</Data>
-          <Description>Instant death</Description>
+          <Description>Dies Instantly</Description>
         </Value>
       </Variable>
     </Variables>
@@ -1514,7 +1542,8 @@
         <UI name="select" />
         <Value>
           <Data>0000</Data>
-          <Description>Sky Peahat, spawns Larva</Description>
+          <Description>Flying Peahat</Description>
+          <Comment>Spawns Larva</Comment>
         </Value>
         <Value>
           <Data>0001</Data>
@@ -1522,11 +1551,11 @@
         </Value>
         <Value uihide="true" repeat="+">
           <Data>0002</Data>
-          <Description>Crashes</Description>
+          <Description>[Crash]</Description>
         </Value>
         <Value>
           <Data>FFFF</Data>
-          <Description>Ground Peahat</Description>
+          <Description>Burrowed Peahat</Description>
         </Value>
       </Variable>
     </Variables>
@@ -1546,23 +1575,22 @@
     <Variables>
       <Variable maskType="&amp;" mask="FFFF">
         <Description>Type</Description>
-        <Comment>FIXME: Test</Comment>
         <UI name="select" />
         <Value>
           <Data>0000</Data>
-          <Description>Large bug</Description>
+          <Description>Large Bug</Description>
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Large bug</Description>
+          <Description>Large Bug</Description>
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Three small bugs</Description>
+          <Description>Three Small Bugs</Description>
         </Value>
         <Value repeat="+">
           <Data>0003</Data>
-          <Description>Small bug</Description>
+          <Description>Small Bug</Description>
         </Value>
       </Variable>
     </Variables>
@@ -1582,16 +1610,16 @@
         </Value>
         <Value>
           <Data>0001</Data>
-          <Description>Swimming, does not flee</Description>
+          <Description>Swimming, Doesn't Flee</Description>
           <Comment>Used for very small pools of water</Comment>
         </Value>
         <Value>
           <Data>0002</Data>
-          <Description>Swimming, reacts to you</Description>
+          <Description>Swimming, Reacts to Link</Description>
         </Value>
         <Value>
           <Data>FFFF</Data>
-          <Description>Swimming, flees</Description>
+          <Description>Swimming, Flees</Description>
         </Value>
       </Variable>
     </Variables>
@@ -1607,43 +1635,45 @@
         <UI name="select"/>
         <Value>
           <Data>00</Data>
-          <Description>Vertical, two way, fades black when approached</Description>
+          <Description>Two-Way Vertical Plane</Description>
+          <Comment>Fades black upon approach</Comment>
         </Value>
         <Value>
           <Data>01</Data>
-          <Description>Up/Down, one-way, fades black when approached</Description>
-          <Comment>Front to back one way</Comment>
+          <Description>One-Way Horizontal Plane</Description>
+          <Comment>Fades black upon approach</Comment>
         </Value>
         <Value>
           <Data>02</Data>
-          <Description>Up/Down, two-way, no fade</Description>
+          <Description>Two-Way Horizontal Plane, no fade</Description>
         </Value>
         <Value>
           <Data>03</Data>
-          <Description>Vertical, enabled on switch flag, fades black when approached</Description>
+          <Description>Vertical Plane, enabled on switch flag, fades black when approached</Description>
           <Comment>Becomes a two-way transition if the bound switch flag is set</Comment>
         </Value>
         <Value>
           <Data>04</Data>
-          <Description>Vertical, two-way, no fade</Description>
+          <Description>Two-Way Vertical Plane, no fade</Description>
         </Value>
         <Value>
           <Data>05</Data>
-          <Description>Up/Down, two-way, fades black when approached</Description>
+          <Description>Two-Way Horizontal Plane, fades black when approached</Description>
         </Value>
         <Value>
           <Data>06</Data>
-          <Description>Vetical, two-way, no fade</Description>
+          <Description>Two-Way Vetical Plane, no fade</Description>
           <Comment>FIXME: Used in Water Temple, why is this different?</Comment>
         </Value>
       </Variable>
       <Variable mask="003F" default="3F" nullable="true">
         <Description>Switch Flag</Description>
-        <Comment>Type 03 only</Comment>
+        <Comment>Used by type 03 only</Comment>
         <UI name="switchflag"/>
       </Variable>
       <Variable mask="FC00" default="00">
-        <Description>Transition Actor List Identifier (Engine Reserved)</Description>
+        <Description>Transition Actor List Identifier</Description>
+        <Comment>Reserved for use by the game engine</Comment>
         <UI name="none"/>
       </Variable>
     </Variables>
@@ -1795,7 +1825,7 @@
         </Value>
         <Value>
           <Data>08FF</Data>
-          <Description>Gaonndorf Bowing to King</Description>
+          <Description>Ganondorf Bowing to King</Description>
         </Value>
         <Value>
           <Data>09FF</Data>
@@ -2070,7 +2100,7 @@
         </Value>
       </Variable>
       <Variable mask="FF00">
-        <Description>Text Id</Description>
+        <Description>Message ID</Description>
         <Comment>0x0300 + value</Comment>
         <UI name="textid">
           <Param id="base">0300</Param>
@@ -5124,11 +5154,12 @@
     <Objects>
       <Object>00AB</Object>
     </Objects>
-    <Description>Sun Block Switch</Description>
+    <Description>Reflectable Light Beam</Description>
+    <Comment>Cast to floor, used to solve light-based puzzles</Comment>
     <Variables>
       <Variable mask="FFFF">
         <Description>Type</Description>
-        <Comment>FIXME</Comment>
+        <Comment>FIXME: Understand why different variables are needed</Comment>
         <UI name="select" />
         <Value>
           <Data>00</Data>
@@ -5136,15 +5167,23 @@
         </Value>
         <Value>
           <Data>01</Data>
-          <Description>? (spot where sun block must be moved to)</Description>
+          <Description>Spirit Temple room 8</Description>
+          <Comment>Cast beam on block with sun face</Comment>
         </Value>
         <Value>
           <Data>02</Data>
-          <Description>?</Description>
+          <Description>Spirit Temple room 15</Description>
+          <Comment>Spinable Mirror with sun faces</Comment>
         </Value>
         <Value>
           <Data>03</Data>
-          <Description>?</Description>
+          <Description>Spirit Temple room 18</Description>
+          <Comment>Four Armos Room</Comment>
+        </Value>
+        <Value>
+          <Data>04</Data>
+          <Description>Spirit Temple room 26</Description>
+          <Comment>Spinnable Mirror room with light beam used to enter boss room</Comment>
         </Value>
       </Variable>
     </Variables>
@@ -6633,7 +6672,7 @@
     <Comment>
       In room 2 of Forest Temple:
       If switch flags 1C-1F are not all 1 and 1B is 0, the poe light stealing cutscene will play. The cutscene will fail if at least one of the Poes can't spawn. If the cutscene plays, 1B is set to 1.
-      If switch flags 1C-1E are 1 and a Meg Torch is attached to a flag that is 0, Meg spawns. Killing Meg sets the Meg Torch flag, and 1B is set to 0
+      If switch flags 1D-1F are 1 and a Meg Torch is attached to a flag that is 0, Meg spawns. Killing Meg sets the Meg Torch flag, and 1B is set to 0
     </Comment>
     <Variables>
       <Variable maskType="&amp;" mask="003F" default="3F" nullable="true">
@@ -7139,7 +7178,7 @@
         <UI name="switchflag" />
       </Variable>
       <Variable maskType="&amp;" mask="00FF" default="">
-        <Description>Text Id</Description>
+        <Description>Message ID</Description>
         <Comment>0x0100 + value</Comment>
         <UI name="textid">
           <Param id="base">0100</Param>
@@ -8750,7 +8789,7 @@
     <Description>Square signpost</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF">
-        <Description>Text Id</Description>
+        <Description>Message ID</Description>
         <Comment>Value + 0x0300</Comment>
         <UI name="textid">
           <Param id="base">0300</Param>
@@ -10433,7 +10472,7 @@
         </Value>
       </Variable>
       <Variable maskType="&amp;" mask="3FC0">
-        <Description>Text Id</Description>
+        <Description>Message ID</Description>
         <Comment>0x0200 + Value</Comment>
         <UI name="textid">
           <Param id="base">0200</Param>
@@ -11975,7 +12014,7 @@
     <Description>Gossip stone</Description>
     <Variables>
       <Variable maskType="&amp;" mask="FFFF">
-        <Description>Text Id</Description>
+        <Description>Message ID</Description>
         <UI name="textid">
           <Param id="base">0400</Param>
         </UI>

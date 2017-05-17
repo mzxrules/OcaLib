@@ -25,7 +25,13 @@ namespace mzxrules.XActor
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void TestForm_Load(object sender, EventArgs e)
+        {
+            Document = XActors.LoadFromFile(XmlFileLocation);
+            actorControl1.Document = Document;
+        }
+
+        private void testbutton_click(object sender, EventArgs e)
         {
             outRichTextBox.Text = Document.Serialize();
             //SCRIPT_Ui_Test();
@@ -216,12 +222,6 @@ namespace mzxrules.XActor
             {
                 actorControl1.SetActor(actor);
             }
-        }
-
-        private void TestForm_Load(object sender, EventArgs e)
-        {
-            Document = XActors.LoadFromFile(XmlFileLocation);
-            actorControl1.Document = Document;
         }
     }
 }

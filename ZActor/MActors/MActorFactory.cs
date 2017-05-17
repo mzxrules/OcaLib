@@ -14,7 +14,7 @@ namespace mzxrules.ZActor.MActors
             actor = ar.Actor;
             switch (actor)
             {
-                case 0x0000: return new LinkActor(record);
+                case 0x0000: return new MSimpleActor(record);
                 default:
                     return new MSimpleActor(record);
             }

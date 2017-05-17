@@ -9,7 +9,7 @@ namespace mzxrules.OcaLib.Cutscenes
 {
     public class ExitCommand : CutsceneCommand, IFrameData
     {
-        const int LENGTH = 8 + 8;
+        const int LENGTH = 16;
         public CutsceneCommand RootCommand { get; set; }
 
         int Unknown = 1;
@@ -41,8 +41,8 @@ namespace mzxrules.OcaLib.Cutscenes
             endFrame2 = copy.endFrame2;
         }
 
-        public ExitCommand(int command, BinaryReader br)
-            : base(command, br)
+        public ExitCommand(int command, BinaryReader br, long index)
+            : base(command, br, index)
         {
             Load(br);
         }
@@ -83,16 +83,8 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            return String.Format("{0:X4}: Exit Command, {1} entries",
-                Command,
-                Unknown)
-                + Environment.NewLine + "   " +
-
-                string.Format("asm: {0:X4}, start: {1:X4}, end: {2:X4}, {3:X4}",
-            Asm,
-            StartFrame,
-            EndFrame,
-            endFrame2);
+            return $"{Command:X4}: Exit Command, {Unknown} entries{Environment.NewLine}"
+                + $"   asm: {Asm:X4}, start: {StartFrame:X4}, end: {EndFrame:X4}, {endFrame2:X4}";
         }
 
         protected override int GetLength()
@@ -100,7 +92,7 @@ namespace mzxrules.OcaLib.Cutscenes
             return LENGTH;
         }
 
-        protected override IEnumerable<IFrameData> GetIFrameDataEnumerator()
+        public IEnumerable<IFrameData> GetIFrameDataEnumerator()
         {
             yield return this;
         }

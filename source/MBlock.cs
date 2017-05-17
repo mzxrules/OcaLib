@@ -7,12 +7,12 @@ using System.Text;
 
 namespace mzxrules.OcaLib
 {
-    public class MBlock: IEnumerable
+    public class MBlock : IEnumerable
     {
         public FileAddress Address;
         public bool IsBounded { get { return StartSet && EndSet; } }
         bool StartSet = false;
-        bool EndSet  = false;
+        bool EndSet = false;
         public object Asset;
         LinkedListNode<MBlock> Parent = null;
         LinkedListNode<MBlock> Self = null;
@@ -27,7 +27,7 @@ namespace mzxrules.OcaLib
             Self = new LinkedListNode<MBlock>(this);
         }
 
-        public MBlock(FileAddress addr, object asset):this(addr)
+        public MBlock(FileAddress addr, object asset) : this(addr)
         {
             Asset = asset;
         }
@@ -146,7 +146,7 @@ namespace mzxrules.OcaLib
             return new Enumerator(this);
         }
 
-        class Enumerator:IEnumerator
+        class Enumerator : IEnumerator
         {
             MBlock List;
             bool IsBeforeList;

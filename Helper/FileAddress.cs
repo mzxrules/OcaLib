@@ -31,9 +31,24 @@ namespace mzxrules.Helper
             End = end;
         }
 
+        public FileAddress((long start, long end) addr)
+        {
+            Start = addr.start;
+            End = addr.end;
+        }
+
+        public static implicit operator FileAddress((long start, long end) addr)
+        {
+            return new FileAddress(addr);
+        }
+        public static implicit operator FileAddress((uint start, uint end) addr)
+        {
+            return new FileAddress(addr);
+        }
+
         public static bool operator ==(FileAddress v1, FileAddress v2)
         {
-            if (Object.ReferenceEquals(v1, v2))
+            if (object.ReferenceEquals(v1, v2))
                 return true;
 
             if ((object)v1 == null || (object)v2 == null)
