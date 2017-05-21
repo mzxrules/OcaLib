@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="ActorVars.designer.cs" />
     <Compile Include="Gui\ActorControl.cs">
       <SubType>UserControl</SubType>
@@ -85,13 +86,15 @@
       <DependentUpon>SelectControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Gui\XVariableValueDisplay.cs" />
+    <Compile Include="OutputWikiNewFormat.cs" />
+    <Compile Include="ParseGBFormat.cs" />
     <Compile Include="TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OutputNewFormat.cs" />
+    <Compile Include="OutputWikiOldFormat.cs" />
     <Compile Include="ParseOldFormat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,8 +143,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MMActorVars.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Test.xslt" />
     <Content Include="UI Notes.txt" />
+    <Content Include="wiki\MM Head.txt" />
+    <Content Include="wiki\Tail MM.txt" />
+    <Content Include="wiki\Tail OoT.txt" />
+    <Content Include="wiki\OoT Head.txt" />
     <Content Include="xml-test\TestActorVariables.xml">
       <SubType>Designer</SubType>
     </Content>

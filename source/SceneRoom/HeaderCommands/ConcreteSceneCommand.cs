@@ -4,12 +4,17 @@
     {
         public override string Read()
         {
-            return string.Format("{0:X2} {1:X2} {2:X8}", ID, Command.Data1, Command.Data2);
+            return ReadRaw();
         }
 
         public override string ReadSimple()
         {
             return Read();
+        }
+
+        public string ReadRaw()
+        {
+            return $"{ID:X2} {Command.Data1:X2} {Command.Data2:X8}";
         }
 
         public override void SetCommand(SceneWord command)

@@ -23,14 +23,13 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         }
         public void Initialize(System.IO.BinaryReader br)
         {
-            byte[] objectData = new byte[sizeof(ushort)];
-            ushort o;
+            byte[] objectData = new byte[2];
 
             br.BaseStream.Position = ObjectListAddress;
             for (int i = 0; i < Objects; i++)
             {
-                br.Read(objectData, 0, sizeof(ushort));
-                Endian.Convert(out o, objectData, 0);
+                br.Read(objectData, 0, 2);
+                Endian.Convert(out ushort o, objectData, 0);
                 ObjectList.Add(o);
             }
         }
@@ -43,15 +42,13 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
             foreach (ushort a in ObjectList)
             {
-                result += a.ToString("X4") + ", ";
+                result += $"{a:X4}, ";
             }
             return result;
         }
         public override string ReadSimple()
         {
-            return String.Format("There are {0} Object(s). List starts at {1:X8}",
-                Objects,
-                ObjectListAddress);
+            return $"There are {Objects} Object(s). List starts at {ObjectListAddress:X8}";
         }
     }
 }

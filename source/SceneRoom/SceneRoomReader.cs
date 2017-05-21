@@ -420,10 +420,7 @@ namespace mzxrules.OcaLib.SceneRoom
             {
                 for (int setup = 0; setup < commandList.Count; setup++)
                 {
-                    locationStr = string.Format("{0},{1},{2},",
-                        scene,
-                        setup,
-                        room);
+                    locationStr = $"{scene},{setup},{room},";
                     setupList = commandList[setup];
                     foreach (SceneCommand cmd in setupList)
                     {

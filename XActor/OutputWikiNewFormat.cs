@@ -1,56 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace mzxrules.XActor
 {
-    static class OutputNewFormat
+    class OutputWikiNewFormat
     {
-        public static StringBuilder Output(XActors root)
+        static Game SetGame;
+        public static StringBuilder Output(XActors root, Game game)
         {
             StringBuilder sb = new StringBuilder();
+            SetGame = game;
             sb.AppendLine("== Actors ==");
-            sb.AppendLine("<pre>");
+            sb.AppendLine("<div style=\"font-family: monospace, Consolas, DejaVu Sans Mono, Droid Sans Mono, Lucida Console, Courier New;\">");
             foreach (XActor actor in root.Actor)
             {
                 PrintActor(sb, actor);
                 sb.AppendLine();
             }
-            sb.AppendLine("</pre>");
+            sb.AppendLine("</div>");
             return sb;
         }
 
         private static void PrintActor(StringBuilder sb, XActor actor)
         {
-            sb.AppendFormat("Actor: {0} {1}", actor.id, actor.Description);
-            sb.AppendLine();
-            sb.AppendFormat("Object{1}: {0}",
-                string.Join(", ", actor.Objects.Object),
-                (actor.Objects.Object.Count > 1) ? "s" : "");
+            sb.AppendLine($"==={actor.name}===");
+            sb.AppendLine($"{actor.Description}<br />");
+            sb.AppendLine($"Id: {actor.id}<br />");
+            sb.AppendFormat("Object{0}: {1}<br />",
+                (actor.Objects.Object.Count > 1) ? "s" : "",
+                string.Join(", ", actor.Objects.Object));
             sb.AppendLine();
             PrintComments(sb, actor.Comment);
             if (actor.Variables.Count > 0)
-                sb.AppendLine("Variable:");
+                sb.AppendLine("<br />");
 
             foreach (XVariable var in actor.Variables)
             {
-                if (var.altvar != AltVarTypes.Var)
-                {
-                    sb.AppendLine();
-                    if (var.altvar == AltVarTypes.XRot)
-                    {
-                        sb.AppendLine("X Rotation:");
-                    }
-                    else if (var.altvar == AltVarTypes.YRot)
-                    {
-                        sb.AppendLine("Y Rotation:");
-                    }
-                    else if (var.altvar == AltVarTypes.ZRot)
-                    {
-                        sb.AppendLine("Z Rotation:");
-                    }
-                    else
-                        sb.AppendLine("//GENERR");
-                }
                 PrintVariable(sb, var);
             }
             if (!string.IsNullOrEmpty(actor.CommentOther))
@@ -59,6 +47,8 @@ namespace mzxrules.XActor
                 PrintComments(sb, actor.CommentOther);
             }
         }
+
+
         /// <summary>
         /// Prints the stats on a packed initialization variable
         /// </summary>
@@ -66,35 +56,71 @@ namespace mzxrules.XActor
         /// <param name="var"></param>
         private static void PrintVariable(StringBuilder sb, XVariable var)
         {
-            sb.AppendFormat(" {0} {1} - {2} ",
-                (var.maskType == MaskType.And) ? "&" : "|",
-                var.mask,
-                var.Description);
+            //sb.AppendFormat(" {0} {1} - {2} ",
+            //    (var.maskType == MaskType.And) ? "&" : "|",
+            //    var.mask,
+            //    var.Description);
+            sb.Append($";{var.Capture} = {var.Description}");
+            //sb.Append($" {GetCaptureCatch(var.Capture)} - {var.Description} ");
+
             PrintComments(sb, var.Comment, true);
             sb.AppendLine();
 
+            CaptureExpression capture = new CaptureExpression(var.Capture);
             foreach (XVariableValue value in var.Value)
             {
-                PrintVariableValue(sb, value, int.Parse(var.mask, System.Globalization.NumberStyles.HexNumber));
+                PrintVariableValue(sb, value, capture);
             }
         }
 
-        private static void PrintVariableValue(StringBuilder sb, XVariableValue value, int mask)
+        class CaptureExpression
         {
+            public string Value;
+            public string VarType;
+            public int Mask;
+            public CaptureExpression(string capture)
+            {
+                Value = capture;
+                VarType = GetCaptureVarType(Value);
+                Mask = GetCaptureMask(capture);
+            }
+            private static int GetCaptureMask(string capture)
+            {
+                return Convert.ToInt32(capture.Substring(capture.IndexOf("0x")), 16);
+            }
+            private static string GetCaptureVarType(string capture)
+            {
+                return capture.Substring(0, capture.IndexOf('&')).Trim();
+            }
+        }
+
+        private static void PrintVariableValue(StringBuilder sb, XVariableValue value, CaptureExpression capture)
+        {
+            int shiftback = ShiftBack(int.Parse(value.Data, System.Globalization.NumberStyles.HexNumber), capture.Mask);
             string obj = null;
+
+            if (SetGame != Game.Oca
+                && capture.VarType != "v")
+            {
+                shiftback = ShiftBack(shiftback, 0xFF80);
+            }
+
             if (value.Meta != null)
                 obj = string.Join(", ", value.Meta.Object);
-            sb.AppendFormat("  - {0}{1} [{2:X4}]{3} = {4}",
+            obj = (!string.IsNullOrEmpty(obj)) ? string.Format(" ({0})", obj) : "";
+
+
+            sb.AppendFormat(":{0} [{2:X4}]{1} {3} {4}",
                 value.Data,
-                (!string.IsNullOrEmpty(value.repeat)) ? "+" : " ",
-                Shift(int.Parse(value.Data, System.Globalization.NumberStyles.HexNumber), mask),
-                (!string.IsNullOrEmpty(obj)) ? string.Format(" ({0})", obj) : "",
+                (!string.IsNullOrEmpty(value.repeat)) ? "+" : "",
+                shiftback,
+                obj,
                 value.Description);
             PrintComments(sb, value.Comment, true);
             sb.AppendLine();
         }
 
-        private static int Shift(int p, int mask)
+        private static int ShiftBack(int p, int mask)
         {
             return p << GetShift(mask);
         }
@@ -141,7 +167,7 @@ namespace mzxrules.XActor
                 }
                 else
                 {
-                    sb.AppendLine();
+                    sb.AppendLine("<br />");
                 }
             }
 
@@ -160,7 +186,7 @@ namespace mzxrules.XActor
                 }
                 emptyLine = false;
                 firstLine = false;
-                sb.AppendLine($"//{s}");
+                sb.AppendLine($"//{s}<br />");
             }
         }
     }

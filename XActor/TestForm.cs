@@ -16,8 +16,10 @@ namespace mzxrules.XActor
 {
     public partial class TestForm : Form
     {
-        static string XmlFileLocation = "ActorVars.xml";
+        static string OcaXmlFileLocation = "ActorVars.xml";
+        static string MaskXmlFileLoaction = "MMActorVars.xml";
         XActors Document { get; set; }
+        Game Game = Game.Oca;
 
 
         public TestForm()
@@ -27,13 +29,14 @@ namespace mzxrules.XActor
 
         private void TestForm_Load(object sender, EventArgs e)
         {
-            Document = XActors.LoadFromFile(XmlFileLocation);
-            actorControl1.Document = Document;
+            Document = null;
         }
 
-        private void testbutton_click(object sender, EventArgs e)
+        private void serializeButton_click(object sender, EventArgs e)
         {
-            outRichTextBox.Text = Document.Serialize();
+            if (Document != null)
+                outRichTextBox.Text = Document.Serialize();
+            //ParseMMGbFormat();
             //SCRIPT_Ui_Test();
             //SCRIPT_Select_Width_Test();   
         }
@@ -85,7 +88,7 @@ namespace mzxrules.XActor
         {
             XActors actors;
             Int16[] bitDictionary = new Int16[16];
-            actors = XActors.LoadFromFile(XmlFileLocation);
+            actors = XActors.LoadFromFile(OcaXmlFileLocation);
 
             for (int i = 0; i < 16; i++)
             {
@@ -95,7 +98,7 @@ namespace mzxrules.XActor
             foreach (XActor actor in actors.Actor)
             {
                 var value = from v in actor.Variables
-                            where bitDictionary.Contains(Convert.ToInt16(v.mask, 16))
+                            where bitDictionary.Contains(GetCaptureMask(v.Capture))
                             select v;
 
                 foreach (var v in value)
@@ -105,6 +108,11 @@ namespace mzxrules.XActor
                 }
             }
             outRichTextBox.Text = actors.Serialize();
+        }
+
+        private short GetCaptureMask(string capture)
+        {
+            throw new NotImplementedException();
         }
 
         private void ParseOld()
@@ -127,7 +135,32 @@ namespace mzxrules.XActor
             }
             dataInRichTextBox.Text = sb.ToString();
 
-            outRichTextBox.Text = OutputNewFormat.Output(resultXActors).ToString();
+            outRichTextBox.Text = OutputWikiOldFormat.Output(resultXActors).ToString();
+        }
+
+        private void ParseMMGbFormat()
+        {
+            string[] Lines;
+            XActors resultXActors;
+
+            Lines = dataInRichTextBox.Text.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            resultXActors = ParseGBFormat.ParseLines(Lines);
+
+            XmlSerializer serializer = new XmlSerializer(typeof(XActors));
+            XmlWriterSettings xmlOutSettings = new XmlWriterSettings()
+            {
+                Indent = true
+            };
+            StringBuilder sb = new StringBuilder();
+
+            using (XmlWriter writer = XmlWriter.Create(sb, xmlOutSettings))
+            {
+                serializer.Serialize(writer, resultXActors);
+            }
+            dataInRichTextBox.Text = sb.ToString();
+
+            outRichTextBox.Text = OutputWikiOldFormat.Output(resultXActors).ToString();
+
         }
 
         private void TestGarbage()
@@ -158,12 +191,7 @@ namespace mzxrules.XActor
 
             //firstConvertRichTextBox.Text = IdLine.IsMatch(Lines[0].Trim()).ToString();
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //ActorObjectRelationshipsFromXml();
-            PrintListFromXml();
-        }
+        
 
         private void ActorObjectRelationshipsFromXml()
         {
@@ -171,7 +199,7 @@ namespace mzxrules.XActor
             StringBuilder sb = new StringBuilder();
             List<Tuple<string, string>> ActorToObjects = new List<Tuple<string,string>>();
 
-            actorList = XActors.LoadFromFile(XmlFileLocation);
+            actorList = XActors.LoadFromFile(OcaXmlFileLocation);
 
             sb.AppendLine("{|class=\"wikitable sortable\"");
             sb.AppendLine("! data-sort-type=\"text\" | Actor");
@@ -211,7 +239,7 @@ namespace mzxrules.XActor
 
         private void PrintListFromXml()
         {
-            outRichTextBox.Text = OutputNewFormat.Output(XActors.LoadFromFile(XmlFileLocation)).ToString().TrimEnd();
+            outRichTextBox.Text += OutputWikiNewFormat.Output(Document, Game).ToString().TrimEnd();
         }
 
         private void uiTestButton_Click(object sender, EventArgs e)
@@ -220,8 +248,41 @@ namespace mzxrules.XActor
             if (Int16.TryParse(actorTextBox.Text, System.Globalization.NumberStyles.HexNumber,
                 CultureInfo.InvariantCulture, out actor))
             {
-                actorControl1.SetActor(actor);
+                actorControl.SetActor(actor);
             }
         }
+
+        private void loadOcaButton_Click(object sender, EventArgs e)
+        {
+            Document = XActors.LoadFromFile(OcaXmlFileLocation);
+            actorControl.Document = Document;
+            Game = Game.Oca;
+
+            //foreach (var item in Document.Actor)
+            //{
+            //    item.name = ActorNameConstants.OcaActorNames[Convert.ToUInt16(item.id, 16)];
+            //}
+        }
+        private void loadMMButton_Click(object sender, EventArgs e)
+        {
+            Document = XActors.LoadFromFile(MaskXmlFileLoaction);
+            actorControl.Document = Document;
+            Game = Game.Mask;
+
+            //foreach(var item in Document.Actor)
+            //{
+            //    item.name = ActorNameConstants.MaskActorNames[Convert.ToUInt16(item.id, 16)];
+            //}
+            //ParseMMGbFormat();
+        }
+
+        private void wikiButton_Click(object sender, EventArgs e)
+        {
+            //ActorObjectRelationshipsFromXml();
+            
+            if (Document != null)
+                PrintListFromXml();
+        }
+
     }
 }

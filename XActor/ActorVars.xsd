@@ -18,6 +18,7 @@
       <xs:element name="Variables" type="XVariables"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:string" use="required" />
+    <xs:attribute name="name" type="xs:string"/>
     <xs:attribute name="spawnscope" type="ActorSpawnRestrictions" default="All"/>
   </xs:complexType>
 
@@ -44,6 +45,7 @@
 
   <xs:complexType name="XVariable">
     <xs:sequence>
+      <xs:element name="Capture" type="xs:string" minOccurs="1" maxOccurs="1"/>
       <xs:element name="Description" type="xs:string" minOccurs="1" />
       <xs:element name="Comment" type="xs:string" minOccurs ="0"/>
       <xs:element name="UI" type="UI" minOccurs="1" maxOccurs="1"/>
@@ -61,9 +63,9 @@
       </xs:element>
     </xs:sequence>
     <xs:attribute name="id" default="-1"/>
-    <xs:attribute name="altvar" type="AltVarTypes" use="optional" default="Var" />
-    <xs:attribute name="maskType" type="MaskType" use="optional" default="&amp;"/>
-    <xs:attribute name="mask" type="xs:string" use="required"/>
+    <!--<xs:attribute name="altvar" type="AltVarTypes" use="optional" default="Var" /> -->
+    <!-- <xs:attribute name="maskType" type="MaskType" use="optional" default="&amp;"/> -->
+    <!-- <xs:attribute name="mask" type="xs:string" use="required"/> -->
     <xs:attribute name="default" type="xs:string" use="optional" default="0000" />
     <xs:attribute name="nullable" type="xs:boolean" default="false"/>
   </xs:complexType>

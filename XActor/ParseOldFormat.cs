@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using XActors1 = mzxrules.XActor.XActor;
 
 namespace mzxrules.XActor
 {
@@ -124,8 +123,8 @@ namespace mzxrules.XActor
             XVariable r = new XVariable();
             currentActor.Variables.Add(r);
 
-            r.maskType =  MaskType.And;
-            r.mask = "FFFF";
+            //r.maskType =  MaskType.And;
+            //r.mask = "FFFF";
             r.Description = "#N/A";
             return r;
         }

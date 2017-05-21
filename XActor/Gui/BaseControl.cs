@@ -26,10 +26,16 @@ namespace mzxrules.XActor.Gui
         public virtual void SetUi(XVariable node)
         {
             VariableDef = node;
-
-            Helper.TryParseHex(node.mask, out Mask);
-            ShiftedMask = Helper.ShiftMask(Mask);
+            GetMaskFromCapture(node.Capture, out Mask, out ShiftedMask);
+            //Helper.TryParseHex(node.mask, out Mask);
+            //ShiftedMask = Helper.ShiftMask(Mask);
             Helper.TryParseHex(node.@default, out Default);
+        }
+
+        private void GetMaskFromCapture(string capture, out ushort mask, out ushort shiftedMask)
+        {
+            mask = Convert.ToUInt16(capture.Substring(capture.IndexOf("0x")), 16);
+            shiftedMask = Helper.ShiftMask(mask);
         }
 
         protected virtual void UpdateValue(ushort value)
