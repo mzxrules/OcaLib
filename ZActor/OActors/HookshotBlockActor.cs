@@ -2,7 +2,7 @@
 {
     class HookshotBlockActor:ActorRecord_Wrapper
     {
-        public HookshotBlockActor(byte[] record, params int[] p)
+        public HookshotBlockActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

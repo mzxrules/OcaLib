@@ -2,7 +2,7 @@
 {
     class DecorativeFlameActor : ActorRecord_Wrapper
     {
-        public DecorativeFlameActor(byte[] record, params int[] p)
+        public DecorativeFlameActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

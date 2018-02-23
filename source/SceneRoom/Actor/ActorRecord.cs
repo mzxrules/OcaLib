@@ -4,27 +4,27 @@ using System.IO;
 //OCA LIB **********************************
 namespace mzxrules.OcaLib.Actor
 {
-    public class ActorRecord
+    public class ActorRecord : IActor
     {
         public static int SIZE = 0x10;
-        public ushort Actor;
-        public ushort Variable;
-        protected Vector3<short> coords = new Vector3<short>();
-        protected Vector3<ushort> rotation = new Vector3<ushort>();
-        protected int[] objectDependencies = { };
-        public ActorRecord(byte[] record, params int[] p)
+        public ushort Actor { get; set; } = 0xFFFF;
+        public ushort Variable { get; set; }
+        public Vector3<short> Coords { get; set; } = new Vector3<short>();
+        public Vector3<bool> NoRotation { get; set; } = new Vector3<bool>();
+        public Vector3<ushort> Rotation { get; set; } = new Vector3<ushort>();
+        protected int[] objectDependencies;
+        public ActorRecord(short[] record, params int[] p)
         {
-            Endian.Convert(out Actor, record, 0);
+            Actor = (ushort)record[0];
+            Coords.x = record[1];
+            Coords.y = record[2];
+            Coords.z = record[3];
 
-            Endian.Convert(out coords.x, record, 2);
-            Endian.Convert(out coords.y, record, 4);
-            Endian.Convert(out coords.z, record, 6);
+            Rotation.x = (ushort)record[4];
+            Rotation.y = (ushort)record[5];
+            Rotation.z = (ushort)record[6];
+            Variable = (ushort)record[7];
 
-            Endian.Convert(out rotation.x, record, 8);
-            Endian.Convert(out rotation.y, record, 10);
-            Endian.Convert(out rotation.z, record, 12);
-
-            Endian.Convert(out Variable, record, 14);
             objectDependencies = p;
         }
         protected ActorRecord()
@@ -33,13 +33,13 @@ namespace mzxrules.OcaLib.Actor
         public virtual void Serialize(BinaryWriter bw)
         {
             bw.WriteBig(Actor);
-            bw.WriteBig(coords);
-            bw.WriteBig(rotation);
+            bw.WriteBig(Coords);
+            bw.WriteBig(Rotation);
             bw.WriteBig(Variable);
         }
         public virtual Vector3<short> GetCoords()
         {
-            return coords;
+            return Coords;
         }
         public virtual string Print()
         {
@@ -68,8 +68,8 @@ namespace mzxrules.OcaLib.Actor
                 Variable,
                 actorName.Replace(',', ';'),
                 variables.Replace(',', ';'),
-                coords.x, coords.y, coords.z,
-                rotation.x, rotation.y, rotation.z);
+                Coords.x, Coords.y, Coords.z,
+                Rotation.x, Rotation.y, Rotation.z);
         }
         protected virtual string GetVariable()
         {
@@ -81,22 +81,15 @@ namespace mzxrules.OcaLib.Actor
         }
         protected string PrintWithoutActor()
         {
-            return string.Format("{0:X4}, {1} {2}",
-                  Variable,
-                  PrintCoord(),
-                  PrintRotation());
+            return $"{Variable:X4}, {PrintCoord()} {PrintRotation()}";
         }
         public virtual string PrintCoord()
         {
-            return string.Format("({0}, {1}, {2})",
-                coords.x, coords.y, coords.z);
+            return $"({Coords.x}, {Coords.y}, {Coords.z})";
         }
         public virtual string PrintRotation()
         {
-            return string.Format("({0:X4}, {1:X4}, {2:X4})",
-                  rotation.x,
-                  rotation.y,
-                  rotation.z);
+            return $"({Rotation.x:X4}, {Rotation.y:X4}, {Rotation.z:X4})";
         }
         public string PrintCoordAndRotation()
         {
@@ -106,7 +99,5 @@ namespace mzxrules.OcaLib.Actor
         {
             return ((float)v / ushort.MaxValue) * 360.0f;
         }
-
-
     }
 }

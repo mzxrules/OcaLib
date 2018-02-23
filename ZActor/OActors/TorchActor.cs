@@ -1,4 +1,5 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 using System;
 
 namespace mzxrules.ZActor.OActors
@@ -8,7 +9,7 @@ namespace mzxrules.ZActor.OActors
         Byte type;
         SwitchFlag flags;
         int torchCount = 0;
-        public TorchActor(byte[] record, params int[] p)
+        public TorchActor(short[] record, params int[] p)
             : base(record, p)
         {
             flags = new SwitchFlag(Variable, 0x3F);

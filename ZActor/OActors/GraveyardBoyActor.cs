@@ -3,7 +3,7 @@
     class GraveyardBoyActor:ActorRecord_Wrapper
     {
         byte path;
-        public GraveyardBoyActor(byte[] record, params int[] p)
+        public GraveyardBoyActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

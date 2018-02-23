@@ -3,7 +3,7 @@
     class KeeseActor:ActorRecord_Wrapper
     {
         byte type;
-        public KeeseActor(byte[] record, params int[] p)
+        public KeeseActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

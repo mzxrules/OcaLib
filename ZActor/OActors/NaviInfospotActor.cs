@@ -1,4 +1,5 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 using System;
 
 namespace mzxrules.ZActor.OActors
@@ -9,7 +10,7 @@ namespace mzxrules.ZActor.OActors
         bool naviIcon;
         SwitchFlag flag;
         byte dialog;
-        public NaviInfospotActor(byte[] record, params int[] p)
+        public NaviInfospotActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

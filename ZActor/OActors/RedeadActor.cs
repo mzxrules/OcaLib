@@ -4,7 +4,7 @@
     {
         bool gibdo;
         byte type;
-        public RedeadActor(byte[] record, params int[] p)
+        public RedeadActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

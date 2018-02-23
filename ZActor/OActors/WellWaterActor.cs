@@ -1,9 +1,11 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class WellWaterActor:ActorRecord_Wrapper
     {
         SwitchFlag flag;
-        public WellWaterActor(byte[] record, params int[] p)
+        public WellWaterActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

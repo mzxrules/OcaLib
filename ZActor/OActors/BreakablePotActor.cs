@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mzxrules.OcaLib.Actor;
+using System;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -6,7 +7,7 @@ namespace mzxrules.ZActor.OActors
     {
         CollectableFlag flags;
         byte drop;
-        public BreakablePotActor(byte[] record, params int[] p)
+        public BreakablePotActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

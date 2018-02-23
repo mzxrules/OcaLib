@@ -2,7 +2,7 @@
 {
     class GhomaLarvaActor:ActorRecord_Wrapper
     {
-        public GhomaLarvaActor(byte[] record, params int[] p)
+        public GhomaLarvaActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

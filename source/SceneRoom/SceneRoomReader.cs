@@ -372,10 +372,7 @@ namespace mzxrules.OcaLib.SceneRoom
             {
                 for (int setup = 0; setup < actorList.Count; setup++)
                 {
-                    locationStr = string.Format("{0},{1},{2},",
-                        scene,
-                        setup,
-                        room);
+                    locationStr = $"{scene},{setup},{room},";
                     setupList = actorList[setup];
                     foreach (ActorRecord actor in setupList)
                     {
@@ -398,10 +395,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
                     if (setupList.Count == 0)
                         continue;
-                    locationStr = string.Format("{0:D3},{1:D2},{2:D2},",
-                        scene,
-                        setup,
-                        room);
+                    locationStr = $"{scene:D3},{setup:D2},{room:D2},";
                     result.AppendLine(locationStr + string.Join(" ", list));
 
                     //foreach (ushort obj in setupList)
@@ -424,15 +418,10 @@ namespace mzxrules.OcaLib.SceneRoom
                     setupList = commandList[setup];
                     foreach (SceneCommand cmd in setupList)
                     {
-                        result.AppendLine(locationStr + cmd.ReadSimple());
+                        result.AppendLine(locationStr + cmd.ToString());
                     }
                 }
             }
         }
-
-        //public static void CommandOrderTest(BinaryReader br)
-        //{
-        //    byte[] commandArray = new byte[] { 0x18, 0x15, 0x04, 0x0E, 0x019, 0x03, 0x06, 0x07, 0x0D, 0x00, 0x01, 0x11, 0x13, 0x0F, 0x17, 0x14 };
-
     }
 }

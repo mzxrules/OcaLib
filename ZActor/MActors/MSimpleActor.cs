@@ -2,7 +2,7 @@
 {
     class MSimpleActor : MActorRecord
     {
-        public MSimpleActor(byte[] record)
+        public MSimpleActor(short[] record)
             : base(record)
         {
             //"??? (unlisted)"

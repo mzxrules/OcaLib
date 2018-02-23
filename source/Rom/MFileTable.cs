@@ -10,13 +10,14 @@ namespace mzxrules.OcaLib
     {
         public MFileTable(string romLocation, RomVersion version)
         {
+            Tables = new VFileTable_Data(version);
             using (FileStream fs = new FileStream(romLocation, FileMode.Open, FileAccess.Read))
             {
                 DmaFile = new DmaData(fs, version);
             }
             RomLocation = romLocation;
             Version = version;
-            SceneTable = new FileRefTable("SceneTable_Start", 0x10, 0);
+            //SceneTable = new FileRefTable("SceneTable_Start", 0x10, 0);
         }
 
         #region GetFile
@@ -36,14 +37,13 @@ namespace mzxrules.OcaLib
         
         public override RomFile GetSceneFile(int i)
         {
-            FileAddress sceneFile;
             byte? sceneIndex;
             sceneIndex = GetInternalSceneIndex(i);
 
             if (sceneIndex == null)
                 return null;
 
-            sceneFile = GetSceneVirtualAddress((sbyte)sceneIndex);
+            var sceneFile = GetSceneVirtualAddress((sbyte)sceneIndex);
             if (sceneFile.Start == 0)
                 return null;
             return GetFile(sceneFile);
@@ -56,43 +56,24 @@ namespace mzxrules.OcaLib
         /// <returns></returns>
         public byte? GetInternalSceneIndex(int entranceSceneIndex)
         {
-            sbyte sceneIndex;
-            int entranceTableBase;
-            int entranceTableAddr;
-            uint EntranceRecord;
-            int entranceAddr;
-
-            entranceTableBase = Addresser.GetRom(MRom.FileList.code, Version, "EntranceIndexTable_Start");
-            entranceTableAddr = entranceTableBase + (sizeof(Int32) * 3) * entranceSceneIndex + 4;
+            var entranceTableBase = Addresser.GetRom(MRom.FileList.code, Version, "EntranceIndexTable_Start");
+            var entranceTableAddr = entranceTableBase + (sizeof(Int32) * 3) * entranceSceneIndex + 4;
 
             //Capture pointer
-            if (!Addresser.TryGetRom(MRom.FileList.code, Version, (uint)ReadInt32(entranceTableAddr), out entranceAddr)
+            if (!Addresser.TryGetRom(MRom.FileList.code, Version, (uint)ReadInt32(entranceTableAddr), out int entranceAddr)
                 || !Addresser.TryGetRom(MRom.FileList.code, Version, (uint)ReadInt32(entranceAddr), out entranceAddr))
             {
                 return null;
             }
-            EntranceRecord = (uint)ReadInt32(entranceAddr);
+            uint EntranceRecord = (uint)ReadInt32(entranceAddr);
 
-            sceneIndex = (sbyte)(EntranceRecord >> 24);
+            sbyte sceneIndex = (sbyte)(EntranceRecord >> 24);
             sceneIndex = Math.Abs(sceneIndex);
 
             return (byte?)sceneIndex;
         }
 
         #endregion
-
-        #region FetchAddresses
-
-
-        //public FileAddress GetTitleCardVirtualAddress(int scene)
-        //{
-        //    return GetFileByRomTable("SceneTable_Start", scene, 5 * sizeof(Int32), 2 * sizeof(Int32));
-        //}
-
-        //public FileAddress GetHyruleFieldSkyboxFile(int id)
-        //{
-        //    return GetFileByRomTable("HyruleSkyboxTable_Start", id, 2 * sizeof(Int32));
-        //}
-        #endregion
+        
     }
 }

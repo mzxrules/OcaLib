@@ -2,7 +2,7 @@
 {
     class GraveFlowerActor: ActorRecord_Wrapper
     {
-        public GraveFlowerActor(byte[] record, params int[] p)
+        public GraveFlowerActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

@@ -16,8 +16,6 @@ namespace mzxrules.XActor
 {
     public partial class TestForm : Form
     {
-        static string OcaXmlFileLocation = "ActorVars.xml";
-        static string MaskXmlFileLoaction = "MMActorVars.xml";
         XActors Document { get; set; }
         Game Game = Game.Oca;
 
@@ -70,8 +68,8 @@ namespace mzxrules.XActor
             {
                 foreach (var variable in actor.Variables)
                 {
-                    if (variable.UI.name == UITypes.@default)
-                        Descriptions.Add(string.Format("{0}:{1}", actor.id, variable.UI.name));
+                    if (variable.UI.Item is UIDefault)
+                        Descriptions.Add($"{actor.id}:Default");
 
                 }
             }
@@ -88,7 +86,7 @@ namespace mzxrules.XActor
         {
             XActors actors;
             Int16[] bitDictionary = new Int16[16];
-            actors = XActors.LoadFromFile(OcaXmlFileLocation);
+            actors = XActors.LoadFromFile(Constants.OcaXmlFileLocation);
 
             for (int i = 0; i < 16; i++)
             {
@@ -103,8 +101,8 @@ namespace mzxrules.XActor
 
                 foreach (var v in value)
                 {
-                    if (v.UI.name == UITypes.@default)
-                        v.UI.name = UITypes.bitflag;
+                    if (v.UI.Item is UIDefault)
+                        v.UI.Item = new UIBitFlag();
                 }
             }
             outRichTextBox.Text = actors.Serialize();
@@ -125,8 +123,10 @@ namespace mzxrules.XActor
             resultXActors = oldFormat.ParseLines(Lines);
 
             XmlSerializer serializer = new XmlSerializer(typeof(XActors));
-            XmlWriterSettings xmlOutSettings = new XmlWriterSettings();
-            xmlOutSettings.Indent = true;
+            XmlWriterSettings xmlOutSettings = new XmlWriterSettings()
+            {
+                Indent = true
+            };
             StringBuilder sb = new StringBuilder();
 
             using (XmlWriter writer = XmlWriter.Create(sb, xmlOutSettings))
@@ -199,7 +199,7 @@ namespace mzxrules.XActor
             StringBuilder sb = new StringBuilder();
             List<Tuple<string, string>> ActorToObjects = new List<Tuple<string,string>>();
 
-            actorList = XActors.LoadFromFile(OcaXmlFileLocation);
+            actorList = XActors.LoadFromFile(Constants.OcaXmlFileLocation);
 
             sb.AppendLine("{|class=\"wikitable sortable\"");
             sb.AppendLine("! data-sort-type=\"text\" | Actor");
@@ -244,9 +244,8 @@ namespace mzxrules.XActor
 
         private void uiTestButton_Click(object sender, EventArgs e)
         {
-            Int16 actor;
-            if (Int16.TryParse(actorTextBox.Text, System.Globalization.NumberStyles.HexNumber,
-                CultureInfo.InvariantCulture, out actor))
+            if (short.TryParse(actorTextBox.Text, NumberStyles.HexNumber,
+                CultureInfo.InvariantCulture, out short actor))
             {
                 actorControl.SetActor(actor);
             }
@@ -254,7 +253,7 @@ namespace mzxrules.XActor
 
         private void loadOcaButton_Click(object sender, EventArgs e)
         {
-            Document = XActors.LoadFromFile(OcaXmlFileLocation);
+            Document = XActors.LoadFromFile(Constants.OcaXmlFileLocation);
             actorControl.Document = Document;
             Game = Game.Oca;
 
@@ -265,7 +264,7 @@ namespace mzxrules.XActor
         }
         private void loadMMButton_Click(object sender, EventArgs e)
         {
-            Document = XActors.LoadFromFile(MaskXmlFileLoaction);
+            Document = XActors.LoadFromFile(Constants.MaskXmlFileLoaction);
             actorControl.Document = Document;
             Game = Game.Mask;
 

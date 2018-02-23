@@ -2,7 +2,7 @@
 {
     class GreenNaviSpotActor:ActorRecord_Wrapper
     {
-        public GreenNaviSpotActor(byte[] record, params int[] p)
+        public GreenNaviSpotActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

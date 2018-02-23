@@ -4,7 +4,7 @@
     {
         private string name;
 
-        public SimpleActor(byte[] record, string p1, params int[] p2):base (record, p2)
+        public SimpleActor(short[] record, string p1, params int[] p2):base (record, p2)
         {
             this.name = p1;
         }

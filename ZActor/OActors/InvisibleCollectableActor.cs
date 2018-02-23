@@ -9,7 +9,7 @@ namespace mzxrules.ZActor.OActors
         byte t8;
         byte t0;
 
-        public InvisibleCollectableActor(byte[] b, params int[] p)
+        public InvisibleCollectableActor(short[] b, params int[] p)
             : base(b)
         {
             objectDependencies = p;

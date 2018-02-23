@@ -1,11 +1,12 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.ZActor.OActors
 {
     class WolfosActor : ActorRecord_Wrapper
     {
         SwitchFlag flag;
-        public WolfosActor(byte[] record, params int[] p)
+        public WolfosActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

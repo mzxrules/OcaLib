@@ -1,10 +1,12 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class CollectibleActor:ActorRecord_Wrapper
     {
         byte type;
         CollectableFlag flags;
-        public CollectibleActor(byte[] record, params int[] p)
+        public CollectibleActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

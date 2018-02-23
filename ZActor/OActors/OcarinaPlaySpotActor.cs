@@ -1,4 +1,5 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -8,7 +9,7 @@ namespace mzxrules.ZActor.OActors
         byte song;
         byte type;
 
-        public OcarinaPlaySpotActor(byte[] record, params int[] p)
+        public OcarinaPlaySpotActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

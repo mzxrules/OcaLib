@@ -1,5 +1,23 @@
 ﻿using mzxrules.OcaLib.SceneRoom;
+using mzxrules.OcaLib.SceneRoom.Commands;
 using System.IO;
+
+
+namespace mzxrules.OcaLib.SceneRoom
+{
+    public partial class SceneHeader
+    {
+        //HACK
+        public void SpiritHackSetAlternateHeaders(long cs0, long cs1)
+        {
+            AlternateHeadersCommand cmd = new AlternateHeadersCommand(Game.OcarinaOfTime);
+            cmd.SetCommand(new byte[] { 0x18, 0, 0, 0, /**/ 2, 0, 0, 0 });
+            cmds.Add(cmd);
+
+            Alternate.SpiritHack(cs0, cs1);
+        }
+    }
+}
 
 namespace mzxrules.OcaLib
 {

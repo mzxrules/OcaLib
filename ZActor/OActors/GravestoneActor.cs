@@ -3,7 +3,7 @@
     class GravestoneActor: ActorRecord_Wrapper
     {
         bool type;
-        public GravestoneActor(byte[] record, params int[] p)
+        public GravestoneActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

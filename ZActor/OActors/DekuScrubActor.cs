@@ -2,7 +2,7 @@
 {
     class DekuScrubActor:ActorRecord_Wrapper
     {
-        public DekuScrubActor(byte[] record, params int[] p)
+        public DekuScrubActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

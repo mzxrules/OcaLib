@@ -3,7 +3,7 @@
     class SkulltulaActor:ActorRecord_Wrapper
     {
         byte type;
-        public SkulltulaActor(byte[] record, params int[] p)
+        public SkulltulaActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

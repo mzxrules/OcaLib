@@ -1,9 +1,11 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class SpiritStoneFaceActor : ActorRecord_Wrapper
     {
         SwitchFlag flag;
-        public SpiritStoneFaceActor(byte[] record, params int[] p)
+        public SpiritStoneFaceActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

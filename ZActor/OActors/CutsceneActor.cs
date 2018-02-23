@@ -4,7 +4,7 @@ namespace mzxrules.ZActor.OActors
     class CutsceneActor : ActorRecord_Wrapper
     {
         byte type;
-        public CutsceneActor(byte[] record, params int[] p)
+        public CutsceneActor(short[] record, params int[] p)
             : base(record)
         {
             type = (byte)(Variable >> 8);

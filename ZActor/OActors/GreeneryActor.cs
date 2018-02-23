@@ -59,7 +59,7 @@ namespace mzxrules.ZActor.OActors
         };
         #endregion
 
-        public GreeneryActor(byte[] record, params int[] p)
+        public GreeneryActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

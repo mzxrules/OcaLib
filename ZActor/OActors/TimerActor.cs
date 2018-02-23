@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mzxrules.OcaLib.Actor;
+using System;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -7,7 +8,7 @@ namespace mzxrules.ZActor.OActors
         SwitchFlag flag; //write on map clear
         int timerSecs; //clock timer to clear room, in in seconds
         bool isTimer;
-        public TimerActor(byte[] record, params int[] p)
+        public TimerActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

@@ -10,7 +10,7 @@ namespace mzxrules.ZActor.OActors
         byte flag;
         ushort destination;
 
-        public GrottoActor(byte[] record, params int[] p)
+        public GrottoActor(short[] record, params int[] p)
             : base(record)
         {
             //Mask FCFF?
@@ -18,7 +18,7 @@ namespace mzxrules.ZActor.OActors
             appearOn = Shift.AsByte(Variable, 0x0300);
             contents = Shift.AsByte(Variable, 0x00E0);
             flag = Shift.AsByte(Variable, 0x001F);
-            destination = this.rotation.z;
+            destination = this.Rotation.z;
         }
         protected override string GetActorName()
         {

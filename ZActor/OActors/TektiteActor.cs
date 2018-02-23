@@ -2,7 +2,7 @@
 {
     class TektiteActor : ActorRecord_Wrapper
     {
-        public TektiteActor(byte[] record, params int[] p)
+        public TektiteActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

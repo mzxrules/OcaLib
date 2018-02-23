@@ -1,11 +1,13 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class FlameCircleActor:ActorRecord_Wrapper
     {
         byte type;
         byte camera;
         SwitchFlag flags;
-        public FlameCircleActor(byte[] record, params int[] p)
+        public FlameCircleActor(short[] record, params int[] p)
             : base(record, p)
         {
             type = (byte)(Variable >> 12);
@@ -30,7 +32,7 @@
                 case 0x6: typeStr = "Large, turns off permanently"; break;
                 default: typeStr = "Nothing"; break;
             }
-            return typeStr + ", camera " + camera.ToString("X2") + ", bound to " + flags.ToString();
+            return $"{typeStr}, camera {camera:X2}, bound to {flags.ToString()}";
         }
     }
 }

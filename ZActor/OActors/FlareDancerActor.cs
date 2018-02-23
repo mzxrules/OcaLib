@@ -2,7 +2,7 @@
 {
     class FlareDancerActor: ActorRecord_Wrapper
     {
-        public FlareDancerActor(byte[] record):base(record)
+        public FlareDancerActor(short[] record):base(record)
         {
         }
         protected override string GetActorName()

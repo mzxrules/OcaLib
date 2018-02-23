@@ -4,11 +4,12 @@ namespace mzxrules.ZActor.OActors
 {
     public static class ActorFactory
     {   
-        public static ActorRecord NewActor(byte[] record)
+        public static ActorRecord NewActor(short[] record)
         {
-            ushort actor;
+            short actor;
 
-            actor = (ushort)((record[0] << 8) + record[1]);
+            //actor = (ushort)((record[0] << 8) + record[1]);
+            actor = record[0];
             switch (actor)
             {
                 case 0x0000: return new OcaLib.Actor.LinkActor(record);

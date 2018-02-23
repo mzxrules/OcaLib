@@ -3,7 +3,7 @@
     class BeamosActor: ActorRecord_Wrapper 
     {
         //TODO: Actor variables
-        public BeamosActor(byte[] record, params int[] p)
+        public BeamosActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

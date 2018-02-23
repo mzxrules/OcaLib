@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mzxrules.OcaLib.Actor;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
@@ -167,7 +168,7 @@ namespace mzxrules.ZActor
 
         public UInt16 Mask { get; set; }
 
-        Dictionary<UInt16, ActorDefinitionItem.Option> Options = new Dictionary<UInt16, ActorDefinitionItem.Option>();
+        Dictionary<UInt16, Option> Options = new Dictionary<UInt16, Option>();
 
         public ActorDefinitionItem(XElement item)
         {
@@ -228,7 +229,6 @@ namespace mzxrules.ZActor
             UInt16 value;
             //Tuple<UInt16, string, Usage> result;// = new Tuple<ushort,string,Usage>();
             string description;
-            ActorDefinitionItem.Option option;
             //extract value
             optionValue = GetOptionValue(init);
 
@@ -236,16 +236,16 @@ namespace mzxrules.ZActor
 
             if (ItemUsage == Usage.SwitchFlag)
             {
-                mzxrules.ZActor.OActors.SwitchFlag sf = (byte)value;
+                SwitchFlag sf = (byte)value;
                 description = sf.ToString();
             }
-            else if (Options.TryGetValue(optionValue, out option))
+            else if (Options.TryGetValue(optionValue, out Option option))
             {
                 description = option.Description;
             }
             else
             {
-                description = Description;//= optionValue.ToString("X4");
+                description = Description;
             }
             return new Tuple<ushort, string, Usage>(value, description, ItemUsage);
         }

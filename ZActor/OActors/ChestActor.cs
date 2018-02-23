@@ -1,4 +1,5 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 using System;
 
 namespace mzxrules.ZActor.OActors
@@ -26,13 +27,13 @@ namespace mzxrules.ZActor.OActors
         byte rewardItem;
         ChestFlag chestFlag;
         SwitchFlag sceneFlag;
-        public ChestActor(byte[] record, params int[] p)
+        public ChestActor(short[] record, params int[] p)
             : base(record, p)
         {
             chestType = Shift.AsByte(Variable, 0xF000);
             rewardItem = Shift.AsByte(Variable, 0x0FE0); //(byte)((Variable & 0xFF0) >> 5);
             chestFlag =  Shift.AsByte(Variable, 0x001F);
-            sceneFlag = Shift.AsByte(rotation.z, 0x003F);
+            sceneFlag = Shift.AsByte(Rotation.z, 0x003F);
         }
         protected override string GetActorName()
         {

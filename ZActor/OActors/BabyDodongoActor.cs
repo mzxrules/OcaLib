@@ -2,7 +2,7 @@
 {
     class BabyDodongoActor:ActorRecord_Wrapper
     {
-        public BabyDodongoActor(byte[] record, params int[] p)
+        public BabyDodongoActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

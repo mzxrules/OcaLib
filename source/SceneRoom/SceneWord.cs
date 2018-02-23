@@ -56,5 +56,9 @@ namespace mzxrules.OcaLib.SceneRoom
         {
             return new SceneWord(arr);
         }
+        public override string ToString()
+        {
+            return $"{Code:X2} {Data1:X2} {Data2:X8}";
+        }
     }
 }

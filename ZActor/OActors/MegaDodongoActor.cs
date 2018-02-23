@@ -2,7 +2,7 @@
 {
     class MegaDodongoActor: ActorRecord_Wrapper
     {
-        public MegaDodongoActor(byte[] record, params int[] p)
+        public MegaDodongoActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

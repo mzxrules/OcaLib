@@ -8,7 +8,7 @@ using System.Text;
 
 namespace mzxrules.OcaLib.SceneRoom
 {   
-    public class SceneHeader
+    public partial class SceneHeader
     {
         public Game Game { get; private set; }
 
@@ -21,7 +21,7 @@ namespace mzxrules.OcaLib.SceneRoom
         {
             get
             {
-                return cmds.SingleOrDefault(x => x.ID == (int)c);
+                return cmds.SingleOrDefault(x => x.Code == (int)c);
             }
         }
 
@@ -83,10 +83,10 @@ namespace mzxrules.OcaLib.SceneRoom
             switch ((HeaderCommands)sceneWord.Code)
             {
                 case HeaderCommands.PositionList:       //0x00
-                    command = new PositionListCommand(Game);
+                    command = new ActorSpawnCommand(Game);
                     break;
                 case HeaderCommands.ActorList:          //0x01
-                    command = new ActorListCommand(Game);
+                    command = new ActorSpawnCommand(Game);
                     break;
                 case HeaderCommands.Collision:          //0x03
                     command = new CollisionCommand();
@@ -95,16 +95,16 @@ namespace mzxrules.OcaLib.SceneRoom
                     command = new RoomListCommand();
                     break;
                 case HeaderCommands.WindSettings:       //0x05
-                    command = new WindSettingsCommand();
+                    command = new SettingsCommand();
                     break;
                 case HeaderCommands.EntranceDefs:       //0x06
                     command = new EntranceDefinitionsCommand();
                     break;
                 case HeaderCommands.SpecialObject:      //0x07
-                    command = new SpecialObjectCommand();
+                    command = new SettingsCommand();
                     break;
                 case HeaderCommands.RoomBehavior:       //0x08
-                    command = new RoomBehaviorCommand();
+                    command = new RoomBehaviorCommand(Game);
                     break;
                 case HeaderCommands.RoomMesh:           //0x0A
                     command = new RoomMeshCommand();
@@ -122,13 +122,13 @@ namespace mzxrules.OcaLib.SceneRoom
                     command = new EnvironmentSettingsCommand();
                     break;
                 case HeaderCommands.TimeSettings:       //0x10
-                    command = new TimeSettingsCommand();
+                    command = new SettingsCommand();
                     break;
                 case HeaderCommands.SkyboxSettings:     //0x11
-                    command = new SkyboxSettingsCommand();
+                    command = new SettingsCommand();
                     break;
                 case HeaderCommands.SkyboxModifier:     //0x12
-                    command = new SkyboxModifierCommand();
+                    command = new SettingsCommand();
                     break;
                 case HeaderCommands.ExitList:           //0x13
                     command = new ExitListCommand();
@@ -137,10 +137,10 @@ namespace mzxrules.OcaLib.SceneRoom
                     command = new EndCommand();
                     break;
                 case HeaderCommands.SoundSettings:      //0x15
-                    command = new SoundSettingsCommand();
+                    command = new SettingsCommand();
                     break;
                 case HeaderCommands.SoundSettingsEcho:  //0x16
-                    command = new SoundSettingsEchoCommand();
+                    command = new SettingsCommand();
                     break;
                 case HeaderCommands.Cutscene:           //0x17
                     command = new CutsceneCommand();
@@ -149,7 +149,7 @@ namespace mzxrules.OcaLib.SceneRoom
                     command = new AlternateHeadersCommand(Game);
                     break;
                 case HeaderCommands.JpegBackground:     //0x19
-                    command = new JpegBackgroundCommand();
+                    command = new SettingsCommand();
                     break;
                 default: command = new SceneCommand(); 
                     break;
@@ -162,7 +162,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         public void InitializeAssets(BinaryReader br)
         {
-            foreach (ISegmentAddressAsset asset in cmds.Where(x => x is ISegmentAddressAsset && !(x is AlternateHeadersCommand)))
+            foreach (IDataCommand asset in cmds.Where(x => x is IDataCommand && !(x is AlternateHeadersCommand)))
             {
                 if (asset is ExitListCommand)
                 {
@@ -170,8 +170,13 @@ namespace mzxrules.OcaLib.SceneRoom
                 }
                 else if (asset is EntranceDefinitionsCommand)
                 {
-                    var v = (PositionListCommand)cmds.Single(x => x.ID == (int)HeaderCommands.PositionList);
-                    ((EntranceDefinitionsCommand)asset).Entrances = v.Positions;
+                    var v = (ActorSpawnCommand)cmds.Single(x => x.Code == (int)HeaderCommands.PositionList);
+                    ((EntranceDefinitionsCommand)asset).Entrances = v.Actors;
+                }
+                if (asset is ActorSpawnCommand)
+                {
+
+                    //ActorList list = new ActorList(Game, )
                 }
                 asset.Initialize(br);
             }
@@ -184,10 +189,10 @@ namespace mzxrules.OcaLib.SceneRoom
 
             foreach (SceneCommand command in cmds)
             {
-                cmd = (HeaderCommands)command.ID;
+                cmd = (HeaderCommands)command.Code;
                 if (cmd != HeaderCommands.End)
                 {
-                    s.Append(string.Format("{0:X2}: ",(int)cmd));
+                    s.Append($"{(int)cmd:X2}: ");
 
                     if (this[cmd] != null)
                         s.AppendLine(this[cmd].Read());
@@ -215,30 +220,21 @@ namespace mzxrules.OcaLib.SceneRoom
             sc = this[HeaderCommands.PositionList];
 
             if (sc != null)
-                return ((ISegmentAddressAsset)sc).SegmentAddress.Offset;
-            else if ((ISegmentAddressAsset)this[HeaderCommands.ObjectList] != null)
-                return ((ISegmentAddressAsset)this[HeaderCommands.ObjectList]).SegmentAddress.Offset;
+                return ((IDataCommand)sc).SegmentAddress.Offset;
+            else if ((IDataCommand)this[HeaderCommands.ObjectList] != null)
+                return ((IDataCommand)this[HeaderCommands.ObjectList]).SegmentAddress.Offset;
             else 
-                return ((ISegmentAddressAsset)this[HeaderCommands.RoomMesh]).SegmentAddress.Offset;
+                return ((IDataCommand)this[HeaderCommands.RoomMesh]).SegmentAddress.Offset;
         }
         #endregion
 
         public long ExitListEnd()
         {
             if (this[HeaderCommands.EnvironmentSettings] != null)
-                return ((ISegmentAddressAsset)this[HeaderCommands.EnvironmentSettings]).SegmentAddress.Offset;
+                return ((IDataCommand)this[HeaderCommands.EnvironmentSettings]).SegmentAddress.Offset;
             else return 0;
         }
 
-        //HACK
-        public void SpiritHackSetAlternateHeaders(long cs0, long cs1)
-        {
-            AlternateHeadersCommand cmd = new AlternateHeadersCommand(Game.OcarinaOfTime);
-            cmd.SetCommand(new byte[] { 0x18, 0, 0, 0, /**/ 2, 0, 0, 0 });
-            cmds.Add(cmd);
-
-            Alternate.SpiritHack(cs0, cs1);
-        }
 
         /// <summary>
         /// Gets all room addresses from the header and child headers
@@ -290,8 +286,10 @@ namespace mzxrules.OcaLib.SceneRoom
             AlternateHeadersCommand altCmd;
             List<List<ActorRecord>> result;
 
-            result = new List<List<ActorRecord>>();
-            result.Add(GetActorsById(id));
+            result = new List<List<ActorRecord>>
+            {
+                GetActorsById(id)
+            };
             altCmd = (AlternateHeadersCommand)this[HeaderCommands.AlternateHeaders];
             if (altCmd != null)
             {
@@ -378,7 +376,7 @@ namespace mzxrules.OcaLib.SceneRoom
             SceneCommand cmd;
             current = new List<SceneCommand>();
 
-            cmd = this.cmds.SingleOrDefault(x => x.ID == id);
+            cmd = this.cmds.SingleOrDefault(x => x.Code == id);
             if (cmd != null)
                 current.Add(cmd);
 
@@ -388,9 +386,10 @@ namespace mzxrules.OcaLib.SceneRoom
 
         internal List<List<SceneCommand>> GetAllCommandsWithId(int id)
         {
-            List<List<SceneCommand>> result = new List<List<SceneCommand>>();
-
-            result.Add(GetCommandWithId(id));
+            List<List<SceneCommand>> result = new List<List<SceneCommand>>
+            {
+                GetCommandWithId(id)
+            };
             if (HasAlternateHeaders())
             {
                 foreach (SceneHeader h in Alternate.HeaderList)

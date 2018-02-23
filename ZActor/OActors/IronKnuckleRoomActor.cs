@@ -3,7 +3,7 @@
     class IronKnuckleRoomActor : ActorRecord_Wrapper
     {
         byte type;
-        public IronKnuckleRoomActor(byte[] record, params int[] p)
+        public IronKnuckleRoomActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

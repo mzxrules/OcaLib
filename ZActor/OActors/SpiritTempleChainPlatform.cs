@@ -1,11 +1,12 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.ZActor.OActors
 {
     class SpiritTempleChainPlatformActor : ActorRecord_Wrapper
     {
         SwitchFlag flags;
-        public SpiritTempleChainPlatformActor(byte[] record, params int[] p)
+        public SpiritTempleChainPlatformActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

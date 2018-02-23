@@ -1,4 +1,5 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -6,7 +7,7 @@ namespace mzxrules.ZActor.OActors
     {
         SwitchFlag flag;
         byte type;
-        public PoeSistersPuzzle(byte[] record, params int[] p)
+        public PoeSistersPuzzle(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

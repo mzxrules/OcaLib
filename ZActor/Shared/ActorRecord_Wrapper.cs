@@ -11,7 +11,7 @@
         //protected Vector3<short> coords = new Vector3<short>();
         //protected Vector3<ushort> rotation = new Vector3<ushort>();
         //protected int[] objectDependencies = { };
-        public ActorRecord_Wrapper(byte[] record, params int[] p) : base(record, p)
+        public ActorRecord_Wrapper(short[] record, params int[] p) : base(record, p)
         {
             //Endian.Convert(out Actor, record, 0);
 

@@ -1,28 +1,31 @@
 ﻿namespace mzxrules.Helper
 {
-    public class SegmentAddress
+    public struct SegmentAddress
     {
         public byte Segment
         {
-            get { return (byte)(Address >> 24); }
-            set { Address = (value << 24) | (Address & 0xFFFFFF); }
+            get { return (byte)(value >> 24); }
         }
         public int Offset
         {
-            get { return Offset = Address & 0xFFFFFF; }
-            set { Address = (int)((uint)Address & 0xFF000000) | (value & 0xFFFFFF); }
+            get { return value & 0xFFFFFF; }
         }
 
-        private int Address;
+        private int value;
 
         public SegmentAddress(int addr)
         {
-            Address = addr;
+            value = addr;
         }
         public SegmentAddress(uint addr)
         {
-            Address = (int)addr;
+            value = (int)addr;
         }
+        public SegmentAddress(byte bank, int offset)
+        {
+            value = value = (bank << 24) | (offset & 0xFFFFFF);
+        }
+        public SegmentAddress(SegmentAddress seg, int offset) : this(seg.Segment, offset) { }
 
         public static implicit operator SegmentAddress(int ptr)
         {
@@ -36,7 +39,7 @@
 
         public override string ToString()
         {
-            return Address.ToString("X8");
+            return $"{value:X8}";
         }
     }
 }

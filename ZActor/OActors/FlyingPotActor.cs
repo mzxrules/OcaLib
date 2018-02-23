@@ -2,8 +2,8 @@
 {
     class FlyingPotActor : ActorRecord_Wrapper
     {
-        CollectableFlag flag;
-        public FlyingPotActor(byte[] record, params int[] p)
+        //CollectableFlag flag;
+        public FlyingPotActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

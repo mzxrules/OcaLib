@@ -1,11 +1,13 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class WebActor : ActorRecord_Wrapper
     {
         SwitchFlag setWhenBrokenFlag;
         SwitchFlag burnFlag;
         byte type;
-        public WebActor(byte[] record, params int[] p)
+        public WebActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

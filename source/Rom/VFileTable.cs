@@ -16,38 +16,39 @@ namespace mzxrules.OcaLib
 
         byte[] CachedFile;
         FileAddress CachedFileAddress;
+        public VFileTable_Data Tables;
 
         //"Code" file metadata for file lookups
-        protected class FileRefTable
-        {
-            public string StartKey { get; }
-            public int RecSize { get; }
-            public int FileStartOff { get; }
-            public int FileEndOff { get; }
+        //protected class FileRefTable
+        //{
+        //    public string StartKey { get; }
+        //    public int RecSize { get; }
+        //    public int FileStartOff { get; }
+        //    public int FileEndOff { get; }
 
-            public FileRefTable()
-            {
-                StartKey = null;
-            }
+        //    public FileRefTable()
+        //    {
+        //        StartKey = null;
+        //    }
 
-            public FileRefTable (string key, int size, int off)
-            {
-                StartKey = key;
-                RecSize = size;
-                FileStartOff = off;
-                FileEndOff = off + 4;
-            }
-        }
+        //    public FileRefTable (string key, int size, int off)
+        //    {
+        //        StartKey = key;
+        //        RecSize = size;
+        //        FileStartOff = off;
+        //        FileEndOff = off + 4;
+        //    }
+        //}
 
-        protected FileRefTable SceneTable = new FileRefTable();
-        protected FileRefTable TitleCardTable = new FileRefTable();
-        protected FileRefTable HyruleSkyboxTable = new FileRefTable();
+        //protected FileRefTable SceneTable = new FileRefTable();
+        //protected FileRefTable TitleCardTable = new FileRefTable();
+        //protected FileRefTable HyruleSkyboxTable = new FileRefTable();
 
-        FileRefTable ActorTable = new FileRefTable("ActorTable_Start", 0x20, 0);
-        FileRefTable ObjectTable = new FileRefTable("ObjectTable_Start", 0x08, 0);
-        FileRefTable ParticleTable = new FileRefTable("ParticleTable_Start", 0x1C, 0);
-        FileRefTable GameContextTable = new FileRefTable("GameContextTable_Start", 0x30, 4);
-        FileRefTable PlayerPauseTable = new FileRefTable("PlayerPauseOverlayTable_Start", 0x1C, 4);
+        //FileRefTable ActorTable = new FileRefTable("ActorTable_Start", 0x20, 0);
+        //FileRefTable ObjectTable = new FileRefTable("ObjectTable_Start", 0x08, 0);
+        //FileRefTable ParticleTable = new FileRefTable("ParticleTable_Start", 0x1C, 0);
+        //FileRefTable GameContextTable = new FileRefTable("GameContextTable_Start", 0x30, 4);
+        //FileRefTable PlayerPauseTable = new FileRefTable("PlayerPauseOverlayTable_Start", 0x1C, 4);
 
 
         protected VFileTable() { }
@@ -287,52 +288,52 @@ namespace mzxrules.OcaLib
 
         public FileAddress GetSceneVirtualAddress(int scene)
         {
-            return GetFileByRomTable(SceneTable, scene);
+            return GetFileByRomTable(Tables.Scenes, scene);
         }
 
 
         public FileAddress GetActorVirtualAddress(int actor)
         {
-            return GetFileByRomTable(ActorTable, actor);
+            return GetFileByRomTable(Tables.Actors, actor);
         }
 
         public FileAddress GetObjectVirtualAddress(int obj)
         {
             //oot obj 0x00E3, 0x00FB malformed references
-            return GetFileByRomTable(ObjectTable, obj);
+            return GetFileByRomTable(Tables.Objects, obj);
         }
 
         public FileAddress GetParticleEffectAddress(int index)
         {
-            return GetFileByRomTable(ParticleTable, index);
+            return GetFileByRomTable(Tables.Particles, index);
         }
 
         public FileAddress GetGameContextAddress(int i)
         {
-            return GetFileByRomTable(GameContextTable, i);
+            return GetFileByRomTable(Tables.GameOvls, i);
         }
 
         public FileAddress GetPlayPauseAddress(int i)
         {
-            return GetFileByRomTable(PlayerPauseTable , i);
+            return GetFileByRomTable(Tables.PlayerPause , i);
         }
 
-        protected FileAddress GetFileByRomTable(FileRefTable refTable, int index)
+        protected FileAddress GetFileByRomTable(VFileTable_Data.Table refTable, int index)
         {
-            string table = refTable.StartKey;
-            int size = refTable.RecSize;
-            int offset = refTable.FileStartOff;
-            int recordAddr, startAddr, endAddr;
             RomFileToken token = ORom.FileList.invalid;
             if (Version.Game == Game.OcarinaOfTime)
                 token = ORom.FileList.code;
             if (Version.Game == Game.MajorasMask)
                 token = MRom.FileList.code;
+            
+            int size = refTable.Length;
+            int offset = refTable.StartOff;
+            int recordAddr, startAddr, endAddr;
 
-            recordAddr = Addresser.GetRom(token, Version, table);
+            recordAddr = Addresser.GetRom(token, Version, refTable.Id);
             startAddr = recordAddr + (index * size) + offset;
+            endAddr = startAddr + 4;
             startAddr = ReadInt32(startAddr);
-            endAddr = recordAddr + (index * size) + refTable.FileEndOff;
             endAddr = ReadInt32(endAddr);
             FileAddress result = new FileAddress();
             try
@@ -354,7 +355,6 @@ namespace mzxrules.OcaLib
         #region GetOverlayRecord
         public ActorOverlayRecord GetActorOverlayRecord(int actor)
         {
-            int addr;
             RomFileToken token = ORom.FileList.invalid;
             if (Version.Game == Game.OcarinaOfTime)
                 token = ORom.FileList.code;
@@ -362,7 +362,7 @@ namespace mzxrules.OcaLib
                 token = MRom.FileList.code;
 
             RomFile code = GetFile(token);
-            if (!Addresser.TryGetRom(token, Version, ActorTable.StartKey, out addr))
+            if (!Addresser.TryGetRom(token, Version, Tables.Actors.Id, out int addr))
             {
                 return null;
             }
@@ -372,7 +372,6 @@ namespace mzxrules.OcaLib
 
         public GameContextRecord GetGameContextRecord(int index)
         {
-            int addr;
             RomFileToken token = ORom.FileList.invalid;
             if (Version.Game == Game.OcarinaOfTime)
                 token = ORom.FileList.code;
@@ -380,7 +379,7 @@ namespace mzxrules.OcaLib
                 token = MRom.FileList.code;
 
             RomFile code = GetFile(token);
-            if (!Addresser.TryGetRom(token, Version, GameContextTable.StartKey, out addr))
+            if (!Addresser.TryGetRom(token, Version, Tables.GameOvls.Id, out int addr))
             {
                 return null;
             }
@@ -390,7 +389,6 @@ namespace mzxrules.OcaLib
 
         public ParticleEffectOverlayRecord GetParticleEffectOverlayRecord(int index)
         {
-            int addr;
             RomFileToken token = ORom.FileList.invalid;
             if (Version.Game == Game.OcarinaOfTime)
                 token = ORom.FileList.code;
@@ -398,7 +396,7 @@ namespace mzxrules.OcaLib
                 token = MRom.FileList.code;
 
             RomFile code = GetFile(token);
-            if (!Addresser.TryGetRom(token, Version, ParticleTable.StartKey, out addr))
+            if (!Addresser.TryGetRom(token, Version, Tables.Particles.Id, out int addr))
             {
                 return null;
             }
@@ -408,7 +406,6 @@ namespace mzxrules.OcaLib
 
         public PlayPauseOverlayRecord GetPlayPauseOverlayRecord(int index)
         {
-            int addr;
             RomFileToken token = ORom.FileList.invalid;
             if (Version.Game == Game.OcarinaOfTime)
                 token = ORom.FileList.code;
@@ -416,7 +413,7 @@ namespace mzxrules.OcaLib
                 token = MRom.FileList.code;
 
             RomFile code = GetFile(token);
-            if (!Addresser.TryGetRom(token, Version, PlayerPauseTable.StartKey, out addr))
+            if (!Addresser.TryGetRom(token, Version, Tables.PlayerPause.Id, out int addr))
             {
                 return null;
             }

@@ -1,11 +1,13 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class BombableWallActor: ActorRecord_Wrapper, ISwitchFlag
     {
         bool dodongoCutscene;
         public SwitchFlag Flag { get { return flag; } set { flag = value; } }
         SwitchFlag flag;
-        public BombableWallActor(byte[] record, params int[] p)
+        public BombableWallActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

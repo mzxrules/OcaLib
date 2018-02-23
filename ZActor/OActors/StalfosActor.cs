@@ -6,7 +6,7 @@ namespace mzxrules.ZActor.OActors
     {
         byte type;
         bool minibossMusic;
-        public StalfosActor(byte[] record, params int[] p):base(record)
+        public StalfosActor(short[] record, params int[] p):base(record)
         {
             objectDependencies = p;
             type = (byte)Variable;

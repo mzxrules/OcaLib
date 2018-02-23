@@ -2,7 +2,7 @@
 {
     class DodongoActor : ActorRecord_Wrapper
     {
-        public DodongoActor(byte[] record, params int[] p)
+        public DodongoActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

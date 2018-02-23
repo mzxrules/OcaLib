@@ -55,8 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaptureExpression.cs" />
+    <Compile Include="ConditionExpression.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ActorVars.designer.cs" />
+    <Compile Include="XActorFactory.cs" />
+    <Compile Include="XActorParser.cs" />
     <Compile Include="Gui\ActorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -86,19 +90,20 @@
       <DependentUpon>SelectControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Gui\XVariableValueDisplay.cs" />
-    <Compile Include="OutputWikiNewFormat.cs" />
-    <Compile Include="ParseGBFormat.cs" />
+    <Compile Include="parser\OutputWikiNewFormat.cs" />
+    <Compile Include="parser\ParseGBFormat.cs" />
     <Compile Include="TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OutputWikiOldFormat.cs" />
-    <Compile Include="ParseOldFormat.cs" />
+    <Compile Include="parser\OutputWikiOldFormat.cs" />
+    <Compile Include="parser\ParseOldFormat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test.cs" />
+    <Compile Include="XVariableParser.cs" />
     <EmbeddedResource Include="Gui\ActorControl.resx">
       <DependentUpon>ActorControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,12 +164,16 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="xsd2code note.txt" />
+    <None Include="notes xsd2code.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Helper\Helper.csproj">
       <Project>{44a9c95f-06bc-4686-b341-150a0e2755b6}</Project>
       <Name>Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\source\OcaLib.csproj">
+      <Project>{ec69e9e2-4cfb-43f9-8e37-cb6a52935e4c}</Project>
+      <Name>OcaLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

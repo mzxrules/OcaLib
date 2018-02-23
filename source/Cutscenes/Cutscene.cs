@@ -137,6 +137,12 @@ namespace mzxrules.OcaLib.Cutscenes
             }
         }
 
+        public void TrimStart()
+        {
+            throw new NotImplementedException();
+        }
+
+
 
         /// <summary>
         /// Generates a verbose dump of a cutscene, ordering instructions by occurrence within the file
@@ -151,10 +157,10 @@ namespace mzxrules.OcaLib.Cutscenes
                 return "No Cutscene Found";
 
             if (InvalidCommandReached)
-                return String.Format("Invalid Command");
+                return "Invalid Command";
 
             if (CommandCapReached)
-                return String.Format("Exceeded {0} command limit: {1}", CommandCap, error_CommandCount);
+                return $"Exceeded {CommandCap} command limit: {error_CommandCount}";
 
             streamStart = Index;
 
@@ -196,18 +202,18 @@ namespace mzxrules.OcaLib.Cutscenes
                 if (lastRoot == null || f.RootCommand != lastRoot)
                 {
                     sb.AppendLine();
-                    sb.AppendLine(String.Format("{0:X4} {1:X6}: {2}", time, f.RootCommand.Index, f.RootCommand));
+                    sb.AppendLine($"{time:X4} {f.RootCommand.Index:X6}: {f.RootCommand}");
                     lastRoot = f.RootCommand;
                 }
                 if ((f != f.RootCommand))
-                    sb.AppendLine(String.Format("{0:X4} {1:X6}:   {2}", time, 0xFFFFFF, f));
+                    sb.AppendLine($"{time:X4} FFFFFF:   {f}");
             }
             return sb.ToString();
         }
 
         public void Save(BinaryWriter bw)
         {
-            bw.WriteBig(Commands.Count-1);
+            bw.WriteBig(Commands.Count - 1);
             bw.WriteBig(Frames);
             foreach (CutsceneCommand command in Commands)
                 command.Save(bw);

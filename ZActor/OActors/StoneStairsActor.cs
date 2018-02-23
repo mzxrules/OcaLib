@@ -1,9 +1,11 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class StoneStairsActor : ActorRecord_Wrapper
     {
         SwitchFlag flags;
-        public StoneStairsActor(byte[] record, params int[] p)
+        public StoneStairsActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

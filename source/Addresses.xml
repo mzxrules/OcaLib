@@ -428,7 +428,7 @@
         </Address>
       </Identifier>
 
-      <Identifier id="RAM_HEAP_PTR">
+      <Identifier id="RAM_ARENA_MAIN">
         <!-- Main Heap reference -->
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">12BAA0</Data>
@@ -446,7 +446,7 @@
         </Address>
       </Identifier>
 
-      <Identifier id ="RAM_INNER_HEAP_PTR">
+      <Identifier id ="RAM_ARENA_SCENES">
         <!-- "Actor" Heap reference-->
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">11BEF0</Data>
@@ -461,6 +461,14 @@
           <Data ver="MQU">11CA40</Data>
           <Data ver="MQP">11A250</Data>
           <Data ver="DBGMQ">15FF80</Data>
+        </Address>
+      </Identifier>
+
+
+      <Identifier id ="RAM_ARENA_DEBUG">
+        <!-- "Actor" Heap reference-->
+        <Address reftype="absolute" domain="RAM">
+          <Data ver="DBGMQ">16A7D0</Data>
         </Address>
       </Identifier>
 
@@ -649,14 +657,14 @@
         <Address reftype="absolute" domain="ROM">
           <!--Record Count = 110?-->
           <Data ver ="J0">C77F84</Data>
-          <Data ver="J1"></Data>
+          <Data ver="J1">C78254</Data>
           <Data ver="U0">C5BC60</Data>
-          <Data ver="P0"></Data>
-          <Data ver="P1"></Data>
-          <Data ver="GCJ"></Data>
-          <Data ver="GCU"></Data>
-          <Data ver="GCP"></Data>
-          <Data ver="DBG"></Data>
+          <Data ver="P0">DAA2E0</Data>
+          <Data ver="P1">DAA400</Data>
+          <Data ver="GCJ">C629F0</Data>
+          <Data ver="GCU">C689D0</Data>
+          <Data ver="GCP">DB7400</Data>
+          <Data ver="DBG">DECD38</Data>
         </Address>
       </Identifier>
       <Identifier id="PlayerPauseOverlayTable_Start">
@@ -670,6 +678,19 @@
           <Data ver="GCU">C749B0</Data>
           <Data ver="GCP">DBA470</Data>
           <Data ver="DBG">DF05C0</Data>
+        </Address>
+      </Identifier>
+      <Identifier id="TransitionTable_Start">
+        <Address reftype="absolute" domain="ROM">
+          <Data ver="J0">C82C90</Data>
+          <Data ver="J1"></Data>
+          <Data ver="U0"></Data>
+          <Data ver="P0"></Data>
+          <Data ver="P1"></Data>
+          <Data ver="GCJ"></Data>
+          <Data ver="GCU"></Data>
+          <Data ver="GCP"></Data>
+          <Data ver="DBG"></Data>
         </Address>
       </Identifier>
     </Block>
@@ -726,7 +747,7 @@
         </Address>
       </Identifier>
 
-      <Identifier id="RAM_HEAP_PTR">
+      <Identifier id="RAM_ARENA_MAIN">
         <!-- Main Heap reference -->
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">9E920</Data>
@@ -756,7 +777,7 @@
           <Data ver="DBG">2340D0</Data>
         </Address>
       </Identifier>
-      <Identifier id ="RAM_INNER_HEAP_PTR">
+      <Identifier id ="RAM_ARENA_SCENES">
         <!-- "Actor" Heap reference-->
         <Address reftype="absolute" domain="RAM">
           <Data ver="J0">1F5280</Data>

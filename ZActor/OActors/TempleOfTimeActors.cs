@@ -2,7 +2,7 @@
 {
     class TempleOfTimeActors : ActorRecord_Wrapper
     {
-        public TempleOfTimeActors(byte[] record, params int[] p)
+        public TempleOfTimeActors(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

@@ -40,8 +40,8 @@ namespace mzxrules.XActor.Gui
 
             this.flowLayoutPanel.Controls.Clear();
 
-            actorLabel.Text = string.Format("Actor {0}: {1}", Actor.id, Actor.Description);
-            objectsLabel.Text = string.Format("Objects: {0}", string.Join(", ", Actor.Objects.Object));
+            actorLabel.Text = $"Actor {Actor.id}: {Actor.Description}";
+            objectsLabel.Text = $"Objects: {string.Join(", ", Actor.Objects.Object)}";
 
             Control commentLabel = this.CreateCommentControl(4);
             commentLabel.Text = SetComment(Actor.Comment, Actor.CommentOther);
@@ -49,16 +49,17 @@ namespace mzxrules.XActor.Gui
             
             foreach (var item in Actor.Variables) 
             {
-                if (item.UI.name != UITypes.none)
+                //actor.Variables
+                if (! (item.UI.Item is UINone)) // UITypes.none
                 {
                     BaseControl control;
 
-                    switch (item.UI.name)
+                    switch (item.UI.Item)
                     {
-                        case UITypes.select: control = new SelectControl(); break;
-                        case UITypes.switchflag: control = new FlagsControl(); break;
-                        case UITypes.collectflag: control = new FlagsControl(); break;
-                        case UITypes.chestflag: control = new FlagsControl(); break;
+                        case UISelect c/*UITypes.select*/: control = new SelectControl(); break;
+                        case UISwitchFlag c/*UITypes.switchflag*/: control = new FlagsControl(); break;
+                        case UICollectFlag c/*UITypes.collectflag*/: control = new FlagsControl(); break;
+                        case UIChestFlag c /*UITypes.chestflag*/: control = new FlagsControl(); break;
                         default: control = new NumControl(); break;
                     }
                     control.Dock = DockStyle.Fill;

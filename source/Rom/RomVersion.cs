@@ -7,7 +7,7 @@ namespace mzxrules.OcaLib
     /// Adapter class designed to let you pass in equivalent enumerations when requested
     /// </summary>
     [DataContract]
-    public class RomVersion
+    public struct RomVersion
     {
         [DataMember]
         public Game Game { get; private set; }
@@ -32,14 +32,11 @@ namespace mzxrules.OcaLib
 
         public RomVersion(string game, string build)
         {
-
             if (game.ToLowerInvariant() == "oot"
                 || game == Game.OcarinaOfTime.ToString())
             {
-                ORom.Build oVer;
-
                 MVer = MRom.Build.UNKNOWN;
-                if (Enum.TryParse(build, true, out oVer))
+                if (Enum.TryParse(build, true, out ORom.Build oVer))
                 {
                     Game = Game.OcarinaOfTime;
                     OVer = oVer;
@@ -54,10 +51,8 @@ namespace mzxrules.OcaLib
             else if (game.ToLowerInvariant() == "mm"
                 || game == Game.MajorasMask.ToString())
             {
-                MRom.Build mVer;
-
                 OVer = ORom.Build.UNKNOWN;
-                if (Enum.TryParse(build, true, out mVer))
+                if (Enum.TryParse(build, true, out MRom.Build mVer))
                 {
                     Game = Game.MajorasMask;
                     MVer = mVer;
@@ -74,7 +69,6 @@ namespace mzxrules.OcaLib
                 OVer = ORom.Build.UNKNOWN;
                 MVer = MRom.Build.UNKNOWN;
             }
-
         }
 
         public static implicit operator RomVersion(ORom.Build v)
@@ -103,17 +97,6 @@ namespace mzxrules.OcaLib
 
         public static bool operator== (RomVersion a, RomVersion b)
         {
-            // If both are null, or both are same instance, return true.
-            if (ReferenceEquals(a, b))
-            {
-                return true;
-            }
-
-            // If one is null, but not both, return false.
-            if (((object)a == null) || ((object)b == null))
-            {
-                return false;
-            }
             return a.Game == b.Game && a.OVer == b.OVer && a.MVer == b.MVer;
         }
 
@@ -122,28 +105,14 @@ namespace mzxrules.OcaLib
             return !(a == b);
         }
 
-        //public override bool Equals(object obj)
-        //{
-        //    // If parameter is null return false.
-        //    if (obj == null)
-        //        return false;
-
-        //    // If parameter cannot be cast to Point return false.
-        //    RomVersion p = obj as RomVersion;
-        //    if ((System.Object)p == null)
-        //    {
-        //        return false;
-        //    }
-
-        //    // Return true if the fields match:
-        //    if (Game != p.Game)
-        //        return false;
-
-        //    if (Game == Game.OcarinaOfTime)
-        //        return OVer == p.OVer;
-        //    else
-        //        return MVer == p.MVer;
-        //}
+        public override bool Equals(object obj)
+        {
+            return obj is RomVersion && this == (RomVersion)obj;
+        }
+        public override int GetHashCode()
+        {
+            return ((int)OVer << 16) + (int)MVer;
+        }
 
         public bool IsCustomBuild()
         {
@@ -160,6 +129,16 @@ namespace mzxrules.OcaLib
                 || MVer == MRom.Build.J1)
                 return "J";
             return null;
+        }
+
+        public string GetGameAbbr()
+        {
+            switch (Game)
+            {
+                case Game.OcarinaOfTime: return "oot";
+                case Game.MajorasMask: return "mm" ;
+                default: return "invalid";
+            }
         }
 
         public override string ToString()
@@ -179,7 +158,6 @@ namespace mzxrules.OcaLib
             else if (Game == Game.MajorasMask)
                 return MVer.GetType();
             else return GetType();
-                
         }
     }
 }

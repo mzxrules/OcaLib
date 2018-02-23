@@ -108,7 +108,6 @@ namespace mzxrules.OcaLib.SceneRoom
 
         private void InitializeHeader(byte[] data)
         {
-            UInt32 temp;
             Endian.Convert(out MinCollision.x, data, 0);
             Endian.Convert(out MinCollision.y, data, 2);
             Endian.Convert(out MinCollision.z, data, 4);
@@ -118,7 +117,7 @@ namespace mzxrules.OcaLib.SceneRoom
             Endian.Convert(out MaxCollision.z, data, 10);
 
             Endian.Convert(out Vertices, data, 12);
-            Endian.Convert(out temp, data, 16);
+            Endian.Convert(out uint temp, data, 16);
             VerticesOffset = SceneOffset + (temp & 0xFFFFFF);
 
             Endian.Convert(out Polygons,data, 20);

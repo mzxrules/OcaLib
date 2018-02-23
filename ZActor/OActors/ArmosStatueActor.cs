@@ -3,7 +3,7 @@
     class ArmosStatueActor : ActorRecord_Wrapper
     {
         // TODO: Actor Variables
-        public ArmosStatueActor(byte[] record, params int[] p)
+        public ArmosStatueActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

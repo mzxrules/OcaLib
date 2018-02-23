@@ -1,11 +1,12 @@
-﻿using System;
+﻿using mzxrules.OcaLib.Actor;
+using System;
 
 namespace mzxrules.ZActor.OActors
 {
     class ClearBlockActor : ActorRecord_Wrapper
     {
         SwitchFlag flag;
-        public ClearBlockActor(byte[] record, params int[] p)
+        public ClearBlockActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;
@@ -17,8 +18,7 @@ namespace mzxrules.ZActor.OActors
         }
         protected override string GetVariable()
         {
-            return String.Format("{0}",
-                flag);
+            return flag.ToString(); 
         }
     }
 }

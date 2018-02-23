@@ -17,14 +17,16 @@ namespace mzxrules.OcaLib.Actor
             SwitchToBackRoom = record[2];
             SwitchToBackCamera = record[3];
 
-            Endian.Convert(out Actor, record, 4);
-            Endian.Convert(out coords.x, record, 6);
-            Endian.Convert(out coords.y, record, 8);
-            Endian.Convert(out coords.z, record, 10);
-            rotation.x = 0;
-            Endian.Convert(out rotation.y, record, 12);
-            rotation.z = 0;
-            Endian.Convert(out Variable, record, 14);
+            Endian.Convert(out ushort actor, record, 4);
+            Actor = actor;
+            Endian.Convert(out Coords.x, record, 6);
+            Endian.Convert(out Coords.y, record, 8);
+            Endian.Convert(out Coords.z, record, 10);
+            Rotation.x = 0;
+            Endian.Convert(out Rotation.y, record, 12);
+            Rotation.z = 0;
+            Endian.Convert(out ushort variable, record, 14);
+            Variable = variable;
         }
         protected TransitionActor()
         {
@@ -36,8 +38,8 @@ namespace mzxrules.OcaLib.Actor
             bw.Write(SwitchToBackRoom);
             bw.Write(SwitchToBackCamera);
             bw.WriteBig(Actor);
-            bw.WriteBig(coords);
-            bw.WriteBig(rotation.y);
+            bw.WriteBig(Coords);
+            bw.WriteBig(Rotation.y);
             bw.WriteBig(Variable);
         }
 

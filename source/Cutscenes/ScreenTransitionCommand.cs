@@ -38,15 +38,13 @@ namespace mzxrules.OcaLib.Cutscenes
         private void Load(BinaryReader br)
         {
             byte[] arr;
-            short startFrame;
-            short endFrame;
 
             arr = br.ReadBytes(12);
 
             Endian.Convert(out a, arr, 0);
             Endian.Convert(out Transition, arr, 4);
-            Endian.Convert(out startFrame, arr, 6);
-            Endian.Convert(out endFrame, arr, 8);
+            Endian.Convert(out short startFrame, arr, 6);
+            Endian.Convert(out short endFrame, arr, 8);
             Endian.Convert(out EndFrameD, arr, 10);
 
             StartFrame = startFrame;

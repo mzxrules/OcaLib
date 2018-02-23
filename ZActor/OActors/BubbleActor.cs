@@ -2,7 +2,7 @@
 {
     class BubbleActor:ActorRecord_Wrapper
     {
-        public BubbleActor(byte[] record, params int[] p)
+        public BubbleActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

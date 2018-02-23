@@ -3,7 +3,7 @@
     class GossipStoneActor:ActorRecord_Wrapper
     {
 
-        public GossipStoneActor(byte[] record, params int[] p)
+        public GossipStoneActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

@@ -1,13 +1,15 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class MegatonStatueActor:ActorRecord_Wrapper
     {
         SwitchFlag flag;
         byte type;
-        public MegatonStatueActor(byte[] record, params int[] p)
+        public MegatonStatueActor(short[] record, params int[] p)
             : base(record, p)
         {
-            flag = new SwitchFlag(Variable, 0x3F00);//(byte)((Variable & 0x3F00) >> 8);
+            flag = new SwitchFlag(Variable, 0x3F00);
             type = (byte)(Variable & 0xFF);
         }
         protected override string GetActorName()

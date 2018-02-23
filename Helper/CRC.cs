@@ -29,15 +29,18 @@ namespace mzxrules.Helper
             for (int i = 0x00001000; i < 0x00101000; i += 4)
             {
                 d = (uint)((data[i] << 24) | (data[i + 1] << 16) | (data[i + 2] << 8) | data[i + 3]);
-                if ((t6 + d) < t6) t4++;
+                if ((t6 + d) < t6)
+                    t4++;
                 t6 += d;
                 t3 ^= d;
                 r = (d << (int)(d & 0x1F)) | (d >> (32 - (int)(d & 0x1F)));
                 t5 += r;
-                if (t2 > d) t2 ^= r;
-                else t2 ^= t6 ^ d;
-                t1 += (uint)((data[0x00000750 + (i & 0xFF)] << 24) | (data[0x00000751 + (i & 0xFF)] << 16) |
-                      (data[0x00000752 + (i & 0xFF)] << 8) | data[0x00000753 + (i & 0xFF)]) ^ d;
+                if (t2 > d)
+                    t2 ^= r;
+                else
+                    t2 ^= t6 ^ d;
+                t1 += (uint)((data[0x0750 + (i & 0xFF)] << 24) | (data[0x0751 + (i & 0xFF)] << 16) |
+                      (data[0x0752 + (i & 0xFF)] << 8) | data[0x0753 + (i & 0xFF)]) ^ d;
             }
             crc[0] = t6 ^ t4 ^ t3;
             crc[1] = t5 ^ t2 ^ t1;
@@ -71,13 +74,13 @@ namespace mzxrules.Helper
                 return FileEncoding.BigEndian32;
 
             //if rom is Little Endian (32 bit)
-            if (TargetCrc == CRC.ConvertToLittleEndian32(crc_File))
+            if (TargetCrc == ConvertToLittleEndian32(crc_File))
             {
                 return FileEncoding.LittleEndian32;
             }
 
             //if rom is Little Endian 16 bit
-            else if (TargetCrc == CRC.ConvertToLittleEndian16(crc_File))
+            else if (TargetCrc == ConvertToLittleEndian16(crc_File))
             {
                 return FileEncoding.LittleEndian16;
             }

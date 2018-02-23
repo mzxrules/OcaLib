@@ -1,10 +1,12 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class WaterSpoutActor : ActorRecord_Wrapper
     {
-        ChestFlag flag;
+        //ChestFlag flag;
 
-        public WaterSpoutActor(byte[] record, params int[] p)
+        public WaterSpoutActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

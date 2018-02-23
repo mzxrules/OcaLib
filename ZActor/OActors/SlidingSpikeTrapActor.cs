@@ -2,7 +2,7 @@
 {
     class SlidingSpikeTrapActor:ActorRecord_Wrapper
     {
-        public SlidingSpikeTrapActor(byte[] record, params int[] p)
+        public SlidingSpikeTrapActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

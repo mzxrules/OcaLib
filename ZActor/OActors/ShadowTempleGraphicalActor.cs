@@ -3,7 +3,7 @@
     class ShadowTempleGraphicalActor : ActorRecord_Wrapper
     {
         byte type;
-        public ShadowTempleGraphicalActor(byte[] record, params int[] p)
+        public ShadowTempleGraphicalActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

@@ -3,7 +3,7 @@
     class AmbientFxActor : ActorRecord_Wrapper
     {
         byte type;
-        public AmbientFxActor(byte[] record, params int[] p)
+        public AmbientFxActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

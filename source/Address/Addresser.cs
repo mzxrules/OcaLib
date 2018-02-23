@@ -1,4 +1,5 @@
-﻿using mzxrules.OcaLib.Addr2;
+﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Addr2;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -80,9 +81,8 @@ namespace mzxrules.OcaLib
 
         public static bool TryGetRam(string addrVar, RomVersion version, out int v)
         {
-            Block block;
             v = 0;
-            if (!TryGetBlock(version, addrVar, out block))
+            if (!TryGetBlock(version, addrVar, out Block block))
                 return false;
 
             if (!TryMagicConverter(block, addrVar, version, Domain.RAM, out v))
@@ -96,21 +96,19 @@ namespace mzxrules.OcaLib
         #endregion
 
         #region (Try)GetRom
-        public static bool TryGetRom(RomFileToken file, RomVersion version, uint ramAddr, out int v)
+        public static bool TryGetRom(RomFileToken file, RomVersion version, N64Ptr ramAddr, out int v)
         {
-            int romStart;
-            int ramStart;
             ramAddr &= 0xFFFFFF;
             var block = GetBlock(version, file.ToString());
-            if (!TryGetStart(block, version, Domain.ROM, out romStart)
-                || !TryGetStart(block, version, Domain.RAM, out ramStart)
+            if (!TryGetStart(block, version, Domain.ROM, out int romStart)
+                || !TryGetStart(block, version, Domain.RAM, out int ramStart)
                 || ramAddr < ramStart)
             {
                 v = 0;
                 return false;
             }
 
-            v = romStart + (int)ramAddr - ramStart;
+            v = romStart + ramAddr - ramStart;
             return true;
         }
 

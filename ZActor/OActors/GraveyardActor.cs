@@ -1,10 +1,12 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class GraveyardActor:ActorRecord_Wrapper
     {
         byte type;
         SwitchFlag flags;
-        public GraveyardActor(byte[] record, params int[] p)
+        public GraveyardActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

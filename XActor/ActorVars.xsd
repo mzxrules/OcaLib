@@ -46,6 +46,7 @@
   <xs:complexType name="XVariable">
     <xs:sequence>
       <xs:element name="Capture" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Condition" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="Description" type="xs:string" minOccurs="1" />
       <xs:element name="Comment" type="xs:string" minOccurs ="0"/>
       <xs:element name="UI" type="UI" minOccurs="1" maxOccurs="1"/>
@@ -63,13 +64,9 @@
       </xs:element>
     </xs:sequence>
     <xs:attribute name="id" default="-1"/>
-    <!--<xs:attribute name="altvar" type="AltVarTypes" use="optional" default="Var" /> -->
-    <!-- <xs:attribute name="maskType" type="MaskType" use="optional" default="&amp;"/> -->
-    <!-- <xs:attribute name="mask" type="xs:string" use="required"/> -->
     <xs:attribute name="default" type="xs:string" use="optional" default="0000" />
     <xs:attribute name="nullable" type="xs:boolean" default="false"/>
   </xs:complexType>
-
 
   <xs:complexType name="XValueGlobal">
     <xs:sequence>
@@ -102,6 +99,7 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <!--
   <xs:complexType name="UI">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name ="Param">
@@ -116,7 +114,68 @@
     </xs:sequence>
     <xs:attribute name="name" type ="UITypes" default="default"/>
   </xs:complexType>
+-->
 
+  <xs:complexType name="UI">
+    <xs:sequence>
+    <xs:choice>
+      <xs:element name="BitFlag">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+      <xs:element name="ChestFlag">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+      <xs:element name="CollectFlag">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+      <xs:element name="Default">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+      <xs:element name="DropTable">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+      <xs:element name="None">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+      <xs:element name="RefLink">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+      <xs:element name="SwitchFlag">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+      <xs:element name="Select">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+      <xs:element name="Number">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Display" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="NumberUpDown">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Unit" type="xs:string"/>
+            <xs:element name="Increment" type="xs:float"/>
+            <xs:element name="Min" type="xs:float"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TextId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Base" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Path">
+        <xs:complexType></xs:complexType>
+      </xs:element>
+    </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+<!--  
   <xs:simpleType name="UITypes">
     <xs:restriction base="xs:string">
       <xs:enumeration value="bitflag" />
@@ -134,4 +193,5 @@
       <xs:enumeration value="numupdown" />
     </xs:restriction>
   </xs:simpleType>
+-->
 </xs:schema>

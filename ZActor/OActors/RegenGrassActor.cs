@@ -2,7 +2,7 @@
 {
     class RegenGrassActor : ActorRecord_Wrapper
     {
-        public RegenGrassActor(byte[] record, params int[] p)
+        public RegenGrassActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

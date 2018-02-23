@@ -10,8 +10,8 @@ namespace mzxrules.ZActor
         //public ushort Variable;
         public string Name = "";
         public string VariableStr = "";
-        protected Vector3<short> Coords = new Vector3<short>();
-        protected Vector3<ushort> Rotation = new Vector3<ushort>();
+        //protected Vector3<short> Coords = new Vector3<short>();
+        //protected Vector3<ushort> Rotation = new Vector3<ushort>();
         //protected int[] objectDependencies = { };
 
         public XmlActor(byte[] init)

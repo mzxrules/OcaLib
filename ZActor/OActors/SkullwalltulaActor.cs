@@ -7,7 +7,7 @@ namespace mzxrules.ZActor.OActors
         byte type;
         byte group;
         byte flag;
-        public SkullwalltulaActor(byte[] record, params int[] p)
+        public SkullwalltulaActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

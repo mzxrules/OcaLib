@@ -6,7 +6,7 @@ namespace mzxrules.ZActor.MActors
 {
     public class MActorFactory
     {
-        public static ActorRecord NewActor(byte[] record)
+        public static ActorRecord NewActor(short[] record)
         {
             ushort actor;
             MActorRecord ar = new MActorRecord(record);
@@ -49,17 +49,19 @@ namespace mzxrules.ZActor.MActors
             SwitchToBackRoom = record[2];
             SwitchToBackCamera = record[3];
 
-            Endian.Convert(out Actor, record, 4);
+            Endian.Convert(out ushort actor, record, 4);
+            Actor = actor;
             //ActorDataA = (byte)(Actor >> 12);
             Actor &= 0xFFF;
 
-            Endian.Convert(out coords.x, record, 6);
-            Endian.Convert(out coords.y, record, 8);
-            Endian.Convert(out coords.z, record, 10);
-            rotation.x = 0;
-            Endian.Convert(out rotation.y,record, 12);
-            rotation.z = 0;
-            Endian.Convert(out Variable, record, 14);
+            Endian.Convert(out Coords.x, record, 6);
+            Endian.Convert(out Coords.y, record, 8);
+            Endian.Convert(out Coords.z, record, 10);
+            Rotation.x = 0;
+            Endian.Convert(out Rotation.y,record, 12);
+            Rotation.z = 0;
+            Endian.Convert(out ushort variable, record, 14);
+            Variable = variable;
 
 
             //DayFlags = (ushort)(((ushort)record[9] << 7) + record[11]);

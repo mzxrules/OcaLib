@@ -2,7 +2,7 @@
 {
     class LargeCrateActor : ActorRecord_Wrapper
     {
-        public LargeCrateActor(byte[] record, params int[] p)
+        public LargeCrateActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

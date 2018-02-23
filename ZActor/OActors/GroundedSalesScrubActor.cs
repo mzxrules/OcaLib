@@ -3,7 +3,7 @@
     class GroundedSalesScrubActor:ActorRecord_Wrapper
     {
 
-        public GroundedSalesScrubActor(byte[] record, params int[] p)
+        public GroundedSalesScrubActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

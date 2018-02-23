@@ -7,7 +7,7 @@ namespace mzxrules.ZActor.OActors
         byte speed;
         byte height;
         byte size;
-        public HugeStoneElevatorActor(byte[] record, params int[] p)
+        public HugeStoneElevatorActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

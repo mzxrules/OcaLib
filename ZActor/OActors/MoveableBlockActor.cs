@@ -1,4 +1,6 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class MoveableBlockActor:ActorRecord_Wrapper
     {
@@ -6,7 +8,7 @@
         byte color;
         bool risingEdge;
         byte size;
-        public MoveableBlockActor(byte[] record, params int[] p)
+        public MoveableBlockActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

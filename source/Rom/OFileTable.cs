@@ -11,6 +11,7 @@ namespace mzxrules.OcaLib
     {
         public OFileTable(string romLoc, RomVersion version)
         {
+            Tables = new VFileTable_Data(version);
             using (FileStream fs = new FileStream(romLoc, FileMode.Open, FileAccess.Read))
             {
                 DmaFile = new DmaData(fs, version);
@@ -19,9 +20,9 @@ namespace mzxrules.OcaLib
             RomLocation = romLoc;
             Version = version;
             //table references
-            SceneTable = new FileRefTable("SceneTable_Start", 0x14, 0);
-            TitleCardTable = new FileRefTable("SceneTable_Start", 0x14, 8);
-            HyruleSkyboxTable = new FileRefTable("HyruleSkyboxTable_Start", 8, 0);
+            //SceneTable = new FileRefTable("SceneTable_Start", 0x14, 0);
+            //TitleCardTable = new FileRefTable("SceneTable_Start", 0x14, 8);
+            //HyruleSkyboxTable = new FileRefTable("HyruleSkyboxTable_Start", 8, 0);
         }
 
         #region GetFile
@@ -49,27 +50,23 @@ namespace mzxrules.OcaLib
                 || i < 101))
                 return null;
 
-            var addr = GetSceneVirtualAddress(i);
-            if (addr.Start == 0)
+            var sceneFile = GetSceneVirtualAddress(i);
+            if (sceneFile.Start == 0)
                 return null;
-            return GetFile(addr);
+            return GetFile(sceneFile);
         }
         #endregion
 
         #region FetchAddresses
-        //public FileAddress GetSceneVirtualAddress(int scene)
-        //{
-        //    return GetFileByRomTable("SceneTable_Start", scene, 5 * sizeof(int));
-        //}
 
         public FileAddress GetTitleCardVirtualAddress(int scene)
         {
-            return GetFileByRomTable(TitleCardTable, scene);
+            return GetFileByRomTable(Tables.TitleCards, scene);
         }
 
         public FileAddress GetHyruleFieldSkyboxFile(int id)
         {
-            return GetFileByRomTable(HyruleSkyboxTable, id);
+            return GetFileByRomTable(Tables.HyruleSkybox, id);
         }
         #endregion
     }

@@ -24,11 +24,11 @@ namespace mzxrules.XActor.Gui
             int flagId;
             base.UpdateValue(value);
 
-            switch (VariableDef.UI.name)
+            switch (VariableDef.UI.Item)
             {
-                case UITypes.chestflag: flagType = "Chest"; break;
-                case UITypes.switchflag: flagType = "Switch"; break;
-                case UITypes.collectflag: flagType = "Collectible"; break;
+                case UIChestFlag cf: flagType = "Chest"; break;
+                case UISwitchFlag sf: flagType = "Switch"; break;
+                case UICollectFlag cf: flagType = "Collectible"; break;
                 default: flagType = "Error"; break;
             }
 

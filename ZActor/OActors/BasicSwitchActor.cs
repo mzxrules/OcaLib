@@ -1,4 +1,5 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 using System;
 
 namespace mzxrules.ZActor.OActors
@@ -13,7 +14,7 @@ namespace mzxrules.ZActor.OActors
         public SwitchFlag Flag { get { return flag; } set { flag = value; } }
         SwitchFlag flag;
 
-        public BasicSwitchActor(byte[] record, params int[] p)
+        public BasicSwitchActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

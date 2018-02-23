@@ -1,4 +1,5 @@
 ﻿using mzxrules.Helper;
+using mzxrules.OcaLib.Actor;
 
 namespace mzxrules.ZActor.OActors
 {
@@ -7,7 +8,7 @@ namespace mzxrules.ZActor.OActors
         byte type;
         byte dialog;
         SwitchFlag flag;
-        public CheckSpotActor(byte[] record, params int[] p)
+        public CheckSpotActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;

@@ -1,10 +1,12 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+
+namespace mzxrules.ZActor.OActors
 {
     class BrownBoulderActor:ActorRecord_Wrapper
     {
         bool type;
         SwitchFlag flags;
-        public BrownBoulderActor(byte[] record, params int[] p)
+        public BrownBoulderActor(short[] record, params int[] p)
             : base(record)
         {
             objectDependencies = p;
