@@ -9,7 +9,7 @@ namespace mzxrules.OcaLib
     {
         public string FileLocation { get; set; }
         public VFileTable Files { get; set; }
-        public RomVersion Version { get { return Files.Version; } }
+        public RomVersion Version => Files.Version;
         public bool IsCompressed { get; set; }
 
 
@@ -33,6 +33,7 @@ namespace mzxrules.OcaLib
                 Files = new OFileTable(fileLocation, version);
             else
                 Files = new MFileTable(fileLocation, version);
+            
             IsCompressed = false;
             foreach (FileRecord record in Files)
             {
@@ -40,11 +41,6 @@ namespace mzxrules.OcaLib
                 if (IsCompressed)
                     break;
             }
-        }
-
-        Rom(string fileLocation)
-        {
-            FileLocation = fileLocation;
         }
 
         public static Rom New(string fileLocation, RomVersion version)

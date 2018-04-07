@@ -22,7 +22,7 @@ namespace mzxrules.OcaLib
         /// The file's location independent of compression state
         /// </summary>
         public FileAddress DataAddress { get; private set; }
-        public bool IsCompressed => PhysicalAddress.End != 0; //{ get { return PhysicalAddress.End != 0; } }
+        public bool IsCompressed => PhysicalAddress.End != 0; 
         public int Index = -1;
 
         public FileRecord(FileRecord fileRecord)
@@ -116,8 +116,7 @@ namespace mzxrules.OcaLib
                 else
                     Table.Add(fileRecord.VirtualAddress.Start, fileRecord);
             }
-            FileRecord addr;
-            Table.TryGetValue(address, out addr);
+            Table.TryGetValue(address, out FileRecord addr);
             Address = addr;
         }
 

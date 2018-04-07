@@ -143,7 +143,7 @@ namespace mzxrules.OcaLib.SceneRoom
                     command = new SettingsCommand();
                     break;
                 case HeaderCommands.Cutscene:           //0x17
-                    command = new CutsceneCommand();
+                    command = new CutsceneCommand(Game);
                     break;
                 case HeaderCommands.AlternateHeaders:   //0x18
                     command = new AlternateHeadersCommand(Game);
@@ -281,12 +281,12 @@ namespace mzxrules.OcaLib.SceneRoom
         }
 
         #region GetActors
-        public List<List<ActorRecord>> GetActorsWithId(int id)
+        public List<List<ActorSpawn>> GetActorsWithId(int id)
         {
             AlternateHeadersCommand altCmd;
-            List<List<ActorRecord>> result;
+            List<List<ActorSpawn>> result;
 
-            result = new List<List<ActorRecord>>
+            result = new List<List<ActorSpawn>>
             {
                 GetActorsById(id)
             };
@@ -298,16 +298,16 @@ namespace mzxrules.OcaLib.SceneRoom
                     if (altCmd.HeaderList[i] != null)
                         result.Add(altCmd.HeaderList[i].GetActorsById(id));
                     else
-                        result.Add(new List<ActorRecord>());
+                        result.Add(new List<ActorSpawn>());
                 }
             }
             return result;
         }
 
-        private List<ActorRecord> GetActorsById(int id)
+        private List<ActorSpawn> GetActorsById(int id)
         {
-            List<ActorRecord> result;
-            result = new List<ActorRecord>();
+            List<ActorSpawn> result;
+            result = new List<ActorSpawn>();
             IEnumerable<SceneCommand> cmdQuery;
 
             //Linq query

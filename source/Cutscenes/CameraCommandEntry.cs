@@ -25,7 +25,10 @@ namespace mzxrules.OcaLib.Cutscenes
         public short StartFrame { get; set; }
         public short EndFrame { get; set; }
 
-        public CameraCommandEntry(){}
+        public CameraCommandEntry(CutsceneCommand root)
+        {
+            RootCommand = root;
+        }
 
         public CameraCommandEntry(CutsceneCommand root, short startFrame,
             sbyte rotation, ushort frames, float angleofview, Vector3<short> coordinates)
@@ -43,10 +46,10 @@ namespace mzxrules.OcaLib.Cutscenes
             d = 0;
         }
 
-        public void Load(CutsceneCommand cmd, short startFrame, BinaryReader br)
+        public void Load(short startFrame, BinaryReader br)
         {
-            byte[] arr;
-            arr = br.ReadBytes(sizeof(uint) * 4);
+            byte[] arr = br.ReadBytes(0x10);
+
             Terminator = arr[0];
             Rotation = (sbyte)arr[1];
 
@@ -58,7 +61,6 @@ namespace mzxrules.OcaLib.Cutscenes
             //IFrameData
             StartFrame = startFrame;
             EndFrame = (short)(startFrame + Frames);
-            RootCommand = cmd;
         }
 
         public void Save(BinaryWriter bw)
@@ -89,15 +91,10 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            return String.Format("{0:X2} Frames: {1:X4} Roll: {7:F2}, View Angle: {2:F4} ({3}, {4}, {5}) {6:X4}",
-                Terminator,
-                Frames,
-                AngleOfView,
-                Coordinates.x,
-                Coordinates.y,
-                Coordinates.z,
-                d,
-                (float)Rotation * 180 / 128);
+            float roll = (float)Rotation * 180 / 128;
+            return 
+                $"{Terminator:X2} Frames: {Frames:X4} Roll: {roll:F2}, View Angle: {AngleOfView:F4} " +
+                $"({Coordinates.x}, {Coordinates.y}, {Coordinates.z}) {d:X4}";
         }
     }
 }

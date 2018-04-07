@@ -17,40 +17,7 @@ namespace mzxrules.OcaLib
         byte[] CachedFile;
         FileAddress CachedFileAddress;
         public VFileTable_Data Tables;
-
-        //"Code" file metadata for file lookups
-        //protected class FileRefTable
-        //{
-        //    public string StartKey { get; }
-        //    public int RecSize { get; }
-        //    public int FileStartOff { get; }
-        //    public int FileEndOff { get; }
-
-        //    public FileRefTable()
-        //    {
-        //        StartKey = null;
-        //    }
-
-        //    public FileRefTable (string key, int size, int off)
-        //    {
-        //        StartKey = key;
-        //        RecSize = size;
-        //        FileStartOff = off;
-        //        FileEndOff = off + 4;
-        //    }
-        //}
-
-        //protected FileRefTable SceneTable = new FileRefTable();
-        //protected FileRefTable TitleCardTable = new FileRefTable();
-        //protected FileRefTable HyruleSkyboxTable = new FileRefTable();
-
-        //FileRefTable ActorTable = new FileRefTable("ActorTable_Start", 0x20, 0);
-        //FileRefTable ObjectTable = new FileRefTable("ObjectTable_Start", 0x08, 0);
-        //FileRefTable ParticleTable = new FileRefTable("ParticleTable_Start", 0x1C, 0);
-        //FileRefTable GameContextTable = new FileRefTable("GameContextTable_Start", 0x30, 4);
-        //FileRefTable PlayerPauseTable = new FileRefTable("PlayerPauseOverlayTable_Start", 0x1C, 4);
-
-
+        
         protected VFileTable() { }
 
         public override RomFile GetSceneFile(int i)
@@ -74,22 +41,15 @@ namespace mzxrules.OcaLib
         /// <summary>
         /// Returns a stream pointed to the decompressed file at the given address
         /// </summary>
-        /// <param name="virtualAddress"></param>
+        /// <param name="vAddr"></param>
         /// <returns></returns>
-        public RomFile GetFile(FileAddress virtualAddress)
+        public RomFile GetFile(FileAddress vAddr)
         {
-            FileRecord record, temp;
-
-            temp = new FileRecord(virtualAddress, new FileAddress(virtualAddress.Start, 0), -1);
-
-            if (DmaTable.TryGetValue(virtualAddress.Start, out record))
-            {
-                if (virtualAddress.Size != record.VirtualAddress.Size)
-                    record = temp;
-            }
-            else
-                record = temp;
-            return GetFile(record);
+            if (DmaTable.TryGetValue(vAddr.Start, out FileRecord record)
+                && vAddr.Size == record.VirtualAddress.Size)
+                    return GetFile(record);
+            
+            return GetFile(new FileRecord(vAddr, new FileAddress(vAddr.Start, 0), -1));
         }
 
         /// <summary>
@@ -100,9 +60,7 @@ namespace mzxrules.OcaLib
         /// <returns></returns>
         public RomFile GetFile(long virtualAddress)
         {
-            FileRecord record; //file we're looking up
-
-            if (!DmaTable.TryGetValue(virtualAddress, out record))
+            if (!DmaTable.TryGetValue(virtualAddress, out FileRecord record))
                 throw new Exception();
 
             return GetFile(new FileRecord(record));
@@ -248,9 +206,7 @@ namespace mzxrules.OcaLib
         /// <returns>The returned FileAddress</returns>
         public FileAddress GetVRomAddress(long address)
         {
-            FileRecord record;
-
-            if (!DmaTable.TryGetValue(address, out record))
+            if (!DmaTable.TryGetValue(address, out FileRecord record))
                 throw new FileNotFoundException();
 
             return record.VirtualAddress;
@@ -258,8 +214,7 @@ namespace mzxrules.OcaLib
 
         protected int ReadInt32(int addr)
         {
-            FileRecord record;
-            record = GetFileStart(addr);
+            FileRecord record = GetFileStart(addr);
             using (BinaryReader reader = new BinaryReader(GetFile(record)))
             {
                 reader.BaseStream.Position = record.GetRelativeAddress(addr);
@@ -349,9 +304,7 @@ namespace mzxrules.OcaLib
         }
         
         #endregion
-
-
-
+        
         #region GetOverlayRecord
         public ActorOverlayRecord GetActorOverlayRecord(int actor)
         {
@@ -387,7 +340,7 @@ namespace mzxrules.OcaLib
             return new GameContextRecord(index, new BinaryReader(code));
         }
 
-        public ParticleEffectOverlayRecord GetParticleEffectOverlayRecord(int index)
+        public ParticleEffectOverlayRecord GetParticleOverlayRecord(int index)
         {
             RomFileToken token = ORom.FileList.invalid;
             if (Version.Game == Game.OcarinaOfTime)

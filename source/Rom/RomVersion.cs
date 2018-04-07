@@ -30,10 +30,9 @@ namespace mzxrules.OcaLib
             MVer = build;
         }
 
-        public RomVersion(string game, string build)
+        public RomVersion(Game game, string build)
         {
-            if (game.ToLowerInvariant() == "oot"
-                || game == Game.OcarinaOfTime.ToString())
+            if (game == Game.OcarinaOfTime)
             {
                 MVer = MRom.Build.UNKNOWN;
                 if (Enum.TryParse(build, true, out ORom.Build oVer))
@@ -48,8 +47,7 @@ namespace mzxrules.OcaLib
                 }
 
             }
-            else if (game.ToLowerInvariant() == "mm"
-                || game == Game.MajorasMask.ToString())
+            else if (game == Game.MajorasMask)
             {
                 OVer = ORom.Build.UNKNOWN;
                 if (Enum.TryParse(build, true, out MRom.Build mVer))
@@ -69,6 +67,20 @@ namespace mzxrules.OcaLib
                 OVer = ORom.Build.UNKNOWN;
                 MVer = MRom.Build.UNKNOWN;
             }
+        }
+
+        public RomVersion(string game, string build) : this(ResolveGame(game), build) { }
+
+        private static Game ResolveGame(string game)
+        {
+            if (game.ToLowerInvariant() == "oot"
+                   || game == Game.OcarinaOfTime.ToString())
+                return Game.OcarinaOfTime;
+            else if (game.ToLowerInvariant() == "mm"
+                || game == Game.MajorasMask.ToString())
+                return Game.MajorasMask;
+
+            return Game.Undefined;
         }
 
         public static implicit operator RomVersion(ORom.Build v)

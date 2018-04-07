@@ -23,7 +23,7 @@ namespace mzxrules.OcaLib.Actor
         }
         public SwitchFlag(UInt16 variable, UInt16 mask)
         {
-            value = Shift.AsByte(variable, mask); //(byte)((variable & mask) >> Shift.GetShift(mask));
+            value = Shift.AsByte(variable, mask); 
         }
 
         public static implicit operator byte(SwitchFlag s)

@@ -127,8 +127,7 @@ namespace mzxrules.OcaLib.SceneRoom
             if (scene == null)
                 return "NULL";
 
-            result.AppendFormat("Scene at {0:X8}", scene.VirtualAddress.Start);
-            result.AppendLine();
+            result.AppendLine($"Scene at {scene.VirtualAddress.Start:X8}");
             result.Append(ReadHeader(scene.Header));
 
             return result.ToString();
@@ -138,9 +137,7 @@ namespace mzxrules.OcaLib.SceneRoom
         {
             StringBuilder result = new StringBuilder();
 
-            result.AppendFormat("Room at {0:X8}",
-                room.VirtualAddress.Start);
-            result.AppendLine();
+            result.AppendLine($"Room at {room.VirtualAddress.Start:X8}");
 
             result.Append(ReadHeader(room.Header));
             return result.ToString();
@@ -161,11 +158,11 @@ namespace mzxrules.OcaLib.SceneRoom
 
                     if (i < 3)
                     {
-                        result.AppendFormat("Setup {0}: ", (i + 1));
+                        result.Append($"Setup {(i + 1)}: ");
                     }
                     else
                     {
-                        result.AppendFormat("Cutscene {0}: ", (i - 3));
+                        result.Append($"Cutscene {(i - 3)}: ");
                     }
                     result.AppendLine(Alternate.HeaderOffsetsList[i].ToString("X8"));
                     result.AppendLine(Alternate.HeaderList[i].Read());
@@ -198,27 +195,31 @@ namespace mzxrules.OcaLib.SceneRoom
             }
             foreach (byte[] item in list)
             {
-                result.AppendFormat("{0}, {1}", item[0], (item[1] + 1));
-                result.AppendLine();
+                result.AppendLine($"{item[0]}, {(item[1] + 1)}");
             }
             return result.ToString();
         }
 
         public static string GetObjectsById(Rom r, int id)
         {
-            return PrintCollectionById(r, id, ObjectListPrintout);
-
-            //var result = CreateCollectionById<ushort>(r, id, r.Scene.GetObjectsWithId);
+            string cols = "Scene,Setup,Room" + Environment.NewLine;
+            return cols + PrintCollectionById(r, id, ObjectListPrintout);
         }
 
         public static string GetActorsById(Rom r, int id)
         {
-            return PrintCollectionById(r, id, ActorListPrintout);
+            string cols = "Scene,Setup,Room";
+            if (r.Version.Game == Game.MajorasMask)
+            {
+                cols += ",Id,Variable,Type,Description,x,y,z,rx,ry,rz,vrx,vry,vrz,Day Flags,Scene_0x1B";
+            }
+            return cols + Environment.NewLine + PrintCollectionById(r, id, ActorListPrintout);
         }
 
         public static string GetCommandsById(Rom r, int id)
         {
-            return PrintCollectionById(r, id, CommandListPrintout);
+            string cols = "Scene,Setup,Room" + Environment.NewLine;
+            return cols + PrintCollectionById(r, id, CommandListPrintout);
         }
 
 
@@ -235,7 +236,6 @@ namespace mzxrules.OcaLib.SceneRoom
             int count = 0;
 
             result = new StringBuilder();
-            result.AppendLine("Scene,Setup,Room");
             for (sceneId = 0; sceneId < rom.Scenes; sceneId++)
             {
                 //set room negative to denote scene level actors
@@ -264,7 +264,7 @@ namespace mzxrules.OcaLib.SceneRoom
                     catch { }
                 }
             }
-            result.AppendLine("Total: " + count.ToString());
+            result.AppendLine($"Total: {count}");
             return result.ToString();
         }
         
@@ -342,7 +342,7 @@ namespace mzxrules.OcaLib.SceneRoom
 
         private static int ActorListPrintout(int id, SceneHeader header, int sceneId, int roomId, StringBuilder result)
         {
-            List<List<ActorRecord>> actorList = header.GetActorsWithId(id);
+            List<List<ActorSpawn>> actorList = header.GetActorsWithId(id);
             AppendActorList(actorList, sceneId, roomId, result);
             return GetSublistCount(actorList);
         }
@@ -364,9 +364,9 @@ namespace mzxrules.OcaLib.SceneRoom
             return count;
         }
 
-        private static void AppendActorList(List<List<ActorRecord>> actorList, int scene, int room, StringBuilder result)
+        private static void AppendActorList(List<List<ActorSpawn>> actorList, int scene, int room, StringBuilder result)
         {
-            List<ActorRecord> setupList;
+            List<ActorSpawn> setupList;
             string locationStr;
             if (actorList.Count > 0)
             {
@@ -374,7 +374,7 @@ namespace mzxrules.OcaLib.SceneRoom
                 {
                     locationStr = $"{scene},{setup},{room},";
                     setupList = actorList[setup];
-                    foreach (ActorRecord actor in setupList)
+                    foreach (ActorSpawn actor in setupList)
                     {
                         result.AppendLine(locationStr + actor.PrintCommaDelimited());
                     }

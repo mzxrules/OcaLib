@@ -4,7 +4,7 @@ using System.IO;
 
 namespace mzxrules.OcaLib.Actor
 {
-    public class TransitionActor : ActorRecord
+    public class TransitionActor : ActorSpawn
     {
         byte SwitchToFrontRoom;
         byte SwitchToFrontCamera;

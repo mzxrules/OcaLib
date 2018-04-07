@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Align.cs" />
     <Compile Include="BinaryReaderExtension.cs" />
     <Compile Include="BinaryWriterExtension.cs" />
     <Compile Include="FileAddress.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="SegmentAddress.cs" />
     <Compile Include="Shift.cs" />
     <Compile Include="StreamExtension.cs" />
+    <Compile Include="CStr.cs" />
     <Compile Include="Vectors.cs" />
     <Compile Include="Yaz0.cs" />
   </ItemGroup>

@@ -14,8 +14,8 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public IEnumerable<IFrameData> IFrameDataEnum => GetIFrameDataEnumerator();
 
-        public TextCommand(int command, BinaryReader br, long index)
-            : base(command, br, index)
+        public TextCommand(int command, BinaryReader br)
+            : base(command, br)
         {
             Load(br);
         }

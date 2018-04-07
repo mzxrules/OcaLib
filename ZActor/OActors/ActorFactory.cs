@@ -4,7 +4,7 @@ namespace mzxrules.ZActor.OActors
 {
     public static class ActorFactory
     {   
-        public static ActorRecord NewActor(short[] record)
+        public static ActorSpawn NewActor(short[] record)
         {
             short actor;
 

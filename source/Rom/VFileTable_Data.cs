@@ -50,9 +50,9 @@ namespace mzxrules.OcaLib
                 GameOvls = new Table    { Id = "GameContextTable_Start",        Length = 0x30, StartOff = 0, Records = 0 };
                 PlayerPause = new Table { Id = "PlayerPauseOverlayTable_Start", Length = 0x1C, StartOff = 0, Records = 2 };
                 Actors = new Table      { Id = "ActorTable_Start",              Length = 0x20, StartOff = 0, Records = 0x2B2 };
-                Particles = new Table   { Id = "ParticleTable_Start",           Length = 0x1C, StartOff = 0, Records = 0x27 };
+                Particles = new Table   { Id = "ParticleTable_Start",           Length = 0x1C, StartOff = 0, Records = 0x027 };
                 Objects = new Table     { Id = "ObjectTable_Start",             Length = 0x08, StartOff = 0, Records = 0x192 };
-                Scenes = new Table      { Id = "SceneTable_Start",              Length = 0x10, StartOff = 0, Records =  0x71 };
+                Scenes = new Table      { Id = "SceneTable_Start",              Length = 0x10, StartOff = 0, Records = 0x071 };
             }
         }
     }

@@ -6,7 +6,7 @@ namespace mzxrules.ZActor.MActors
 {
     public class MActorFactory
     {
-        public static ActorRecord NewActor(short[] record)
+        public static ActorSpawn NewActor(short[] record)
         {
             ushort actor;
             MActorRecord ar = new MActorRecord(record);

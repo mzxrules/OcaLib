@@ -30,7 +30,7 @@
                         (Command[6] > 0) ? "Yes" : "No");
 
                 case HeaderCommands.SkyboxModifier:
-                    return $"Skybox Settings: Disable Sky? { Command.Data2 >> 24 > 0}, Disable Sun/Moon? {(Command.Data2 & 0xFF0000) >> 16 > 0}";
+                    return $"Skybox Settings: Disable Sky? {Command.Data2 >> 24 > 0}, Disable Sun/Moon? {(Command.Data2 & 0xFF0000) >> 16 > 0}";
 
                 case HeaderCommands.SoundSettings:
                     return string.Format("Sound Settings: Reverb {0}, Playback option {1}, Song {2:X2}.",

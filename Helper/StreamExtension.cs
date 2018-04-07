@@ -41,12 +41,21 @@ namespace mzxrules.Helper
             offset = (int)(0x10 - (sw.Length % 0x10)) & 0x0F;
             return sw.Pad(offset);
         }
-        public static bool Pad(this Stream sw, int i)
+        /// <summary>
+        /// Zero pads the stream by n bytes
+        /// </summary>
+        /// <param name="sw"></param>
+        /// <param name="n">Number of bytes to pad the stream by</param>
+        /// <returns></returns>
+        public static bool Pad(this Stream sw, int n)
         {
             if (!sw.CanWrite)
                 return false;
-            for (; i > 0; i--)
+            while (n > 0)
+            {
                 sw.WriteByte(0);
+                n--;
+            }
             return true;
         }
         

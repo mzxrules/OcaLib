@@ -10,8 +10,8 @@ namespace mzxrules.OcaLib.Cutscenes
     {
         const int LENGTH = 8;
         public EndCommand() { }
-        public EndCommand(int command, BinaryReader br, long index)
-            : base(command, br, index)
+        public EndCommand(int command, BinaryReader br)
+            : base(command, br)
         {
             Load(br);
         }
@@ -29,7 +29,7 @@ namespace mzxrules.OcaLib.Cutscenes
         }
         public override string ToString()
         {
-            return $"{(short)Command:X4}: End Cutscene {(Index + Length):X4}";
+            return $"{(short)Command:X4}: End Cutscene";
         }
         public override string ReadCommand()
         {

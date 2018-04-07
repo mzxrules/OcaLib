@@ -33,12 +33,12 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         {
             byte[] actorArray;
 
-            actorArray = new byte[ActorRecord.SIZE];
+            actorArray = new byte[ActorSpawn.SIZE];
 
             br.BaseStream.Position = SegmentAddress.Offset;
             
             var readRemaining = br.BaseStream.Length - br.BaseStream.Position;
-            var maxLoops = readRemaining / ActorRecord.SIZE;
+            var maxLoops = readRemaining / ActorSpawn.SIZE;
 
             var loop = (maxLoops > TransitionActors) ? TransitionActors : maxLoops;
             
@@ -64,9 +64,9 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             return $"There are {TransitionActorList.Count} transition actor(s). List starts at {SegmentAddress.Offset:X8}.";
         }
 
-        public List<ActorRecord> GetActors()
+        public List<ActorSpawn> GetActors()
         {
-            return TransitionActorList.Cast<ActorRecord>().ToList();
+            return TransitionActorList.Cast<ActorSpawn>().ToList();
         }
     }
 }

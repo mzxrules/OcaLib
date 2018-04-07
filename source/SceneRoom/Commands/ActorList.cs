@@ -27,7 +27,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         private int actors;
 
 
-        private delegate ActorRecord GetActorRecord(short[] data);
+        private delegate ActorSpawn GetActorRecord(short[] data);
         GetActorRecord NewActor;
 
         public ActorList(Game game, SegmentAddress addr, int actors)
@@ -48,8 +48,8 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
             for (int i = 0; i < actors; i++)
             {
-                short[] actorArray = new short[ActorRecord.SIZE / 2];
-                for (int j = 0; j < ActorRecord.SIZE / 2; j++)
+                short[] actorArray = new short[ActorSpawn.SIZE / 2];
+                for (int j = 0; j < ActorSpawn.SIZE / 2; j++)
                 {
                     actorArray[j] = br.ReadBigInt16();
                 }
@@ -64,13 +64,13 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             br.BaseStream.Position = Address.Offset;
 
             var readRemaining = br.BaseStream.Length - br.BaseStream.Position;
-            var maxLoops = readRemaining / ActorRecord.SIZE;
+            var maxLoops = readRemaining / ActorSpawn.SIZE;
 
             var loop = (maxLoops > actors) ? actors : maxLoops;
 
             for (int i = 0; i < loop; i++)
             {
-                byte[] actorArray = new byte[ActorRecord.SIZE];
+                byte[] actorArray = new byte[ActorSpawn.SIZE];
                 br.Read(actorArray, 0, 16);
                 list.Add(ActorFactory.OcarinaTransitionActors(actorArray));
             }
@@ -87,9 +87,9 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             
         }
 
-        public List<ActorRecord> GetActors()
+        public List<ActorSpawn> GetActors()
         {
-            return Actors.Cast<ActorRecord>().ToList();
+            return Actors.Cast<ActorSpawn>().ToList();
         }
     }
 }

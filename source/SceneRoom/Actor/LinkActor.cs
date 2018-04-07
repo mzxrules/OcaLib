@@ -5,7 +5,7 @@ using System.Text;
 
 namespace mzxrules.OcaLib.Actor
 {
-    public class LinkActor : ActorRecord
+    public class LinkActor : ActorSpawn
     {
         public LinkActor(short[] data) : base(data) { }
         public LinkActor() { }

@@ -20,8 +20,8 @@ namespace mzxrules.OcaLib.Cutscenes
         }
         short EndFrameD;
 
-        public ScreenTransitionCommand(int command, BinaryReader br, long index)
-            : base(command, br, index)
+        public ScreenTransitionCommand(int command, BinaryReader br)
+            : base(command, br)
         {
             Load(br);
         }

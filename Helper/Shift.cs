@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace mzxrules.Helper
+﻿namespace mzxrules.Helper
 {
     public static class Shift
     {
@@ -17,22 +15,27 @@ namespace mzxrules.Helper
         {
             return (sbyte)((value & mask) >> GetRight(mask));
         }
-        public static UInt16 AsUInt16(ulong value, ulong mask)
+        public static ushort AsUInt16(ulong value, ulong mask)
         {
-            return (UInt16)((value & mask) >> GetRight(mask));
+            return (ushort)((value & mask) >> GetRight(mask));
         }
-        public static int GetLeft(UInt16 mask)
+        public static int GetLeft(ushort mask)
         {
             ulong v = mask;
             v <<= 48;
             return GetLeft(v);
         }
-        public static int GetLeft(UInt32 mask)
+        public static int GetLeft(uint mask)
         {
             ulong v = mask;
             v <<= 32;
             return GetLeft(v);
         }
+        /// <summary>
+        /// Gets the leftmost bit of the given mask, where the leftmost bit is index 0
+        /// </summary>
+        /// <param name="mask"></param>
+        /// <returns></returns>
         public static int GetLeft(ulong mask)
         {
             int shift;
@@ -45,6 +48,11 @@ namespace mzxrules.Helper
 
             return shift;
         }
+        /// <summary>
+        /// Gets the rightmost bit index of the given mask
+        /// </summary>
+        /// <param name="mask"></param>
+        /// <returns></returns>
         public static int GetRight(ulong mask)
         {
             int shift;

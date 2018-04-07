@@ -19,10 +19,6 @@ namespace mzxrules.OcaLib
 
             RomLocation = romLoc;
             Version = version;
-            //table references
-            //SceneTable = new FileRefTable("SceneTable_Start", 0x14, 0);
-            //TitleCardTable = new FileRefTable("SceneTable_Start", 0x14, 8);
-            //HyruleSkyboxTable = new FileRefTable("HyruleSkyboxTable_Start", 8, 0);
         }
 
         #region GetFile
@@ -64,7 +60,7 @@ namespace mzxrules.OcaLib
             return GetFileByRomTable(Tables.TitleCards, scene);
         }
 
-        public FileAddress GetHyruleFieldSkyboxFile(int id)
+        public FileAddress GetHyruleFieldSkyboxVirtualAddress(int id)
         {
             return GetFileByRomTable(Tables.HyruleSkybox, id);
         }

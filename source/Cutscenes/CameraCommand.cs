@@ -9,7 +9,7 @@ namespace mzxrules.OcaLib.Cutscenes
     public class CameraCommand : CutsceneCommand, IFrameCollection, IFrameData
     {
         public CutsceneCommand RootCommand { get { return this; } set { throw new InvalidOperationException(); } }
-        public CameraCommand.Type CommandType { get { return GetCameraCommandType(); } }
+        public Type CommandType { get { return GetCameraCommandType(); } }
 
         const int LENGTH = 12;
         public short StartFrame { get; set; }
@@ -22,8 +22,8 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public List<CameraCommandEntry> Entries = new List<CameraCommandEntry>();
 
-        public CameraCommand(int command, BinaryReader br, long index)
-            : base(command, br, index)
+        public CameraCommand(int command, BinaryReader br)
+            : base(command, br)
         {
             Load(br);
         }
@@ -72,8 +72,8 @@ namespace mzxrules.OcaLib.Cutscenes
 
             do
             {
-                entry = new CameraCommandEntry();
-                entry.Load(this, startFrame, br);
+                entry = new CameraCommandEntry(this);
+                entry.Load(startFrame, br);
                 startFrame += (short)entry.Frames;
 
                 Entries.Add(entry);
@@ -82,15 +82,15 @@ namespace mzxrules.OcaLib.Cutscenes
         }
 
 
-        private CameraCommand.Type GetCameraCommandType()
+        private Type GetCameraCommandType()
         {
             switch (Command)
             {
-                case 01: return CameraCommand.Type.Position;
-                case 05: return CameraCommand.Type.Position;
-                case 02: return CameraCommand.Type.FocusPoint;
-                case 06: return CameraCommand.Type.FocusPoint;
-                default: return CameraCommand.Type.Invalid;
+                case 01: return Type.Position;
+                case 05: return Type.Position;
+                case 02: return Type.FocusPoint;
+                case 06: return Type.FocusPoint;
+                default: return Type.Invalid;
             }
         }
 
@@ -107,17 +107,12 @@ namespace mzxrules.OcaLib.Cutscenes
                 default: commandType = "Unknown Command"; break;
             }
 
-            return String.Format("{0:X8}: {3} Camera {2}, {1}", Command, ParamsToString(),
-                commandType, relativity);
+            return $"{Command:X8}: {relativity} Camera {commandType}, {ParamsToString()}";
         }
 
         public string ParamsToString()
         {
-            return String.Format("{0:X4} Start: {1:X4} End: {2:X4} {3:X4}",
-                UnknownA,
-                StartFrame,
-                EndFrame,
-                zero);
+            return $"{UnknownA:X4} Start: {StartFrame:X4} End: {EndFrame:X4} {zero:X4}";
         }
 
         public override string ReadCommand()

@@ -29,26 +29,7 @@ namespace mzxrules.OcaLib
             Scenes = (Version == Build.DBGMQ) ? 109 : 101;
             Actors = 0x1D7;
             Objects = 0x192;
-            Particles = 0x26;
+            Particles = 0x25;
         }
-
-        public bool DetectRom(string file, out ORom rom)
-        {
-            rom = null;
-            try
-            {
-                using (System.IO.BinaryReader br = new System.IO.BinaryReader(
-                    new System.IO.FileStream(file, System.IO.FileMode.Open, System.IO.FileAccess.Read)))
-                {
-                    br.BaseStream.Position = 0x10;
-                    ulong a = (br.ReadBigUInt32() << 32) + br.ReadBigUInt32();
-                }
-            }
-            catch
-            {
-            }
-            return false;
-        }
-
     }
 }

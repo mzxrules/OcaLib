@@ -7,20 +7,20 @@ using mzxrules.Helper;
 
 namespace mzxrules.OcaLib.Cutscenes
 {
-    public class ActorCommand : CutsceneCommand, IFrameCollection
+    public class ActionCommand : CutsceneCommand, IFrameCollection
     {
         const int LENGTH = 8;
         public List<ActionEntry> Entries = new List<ActionEntry>();
 
         public IEnumerable<IFrameData> IFrameDataEnum => throw new NotImplementedException();
 
-        public ActorCommand(int command, BinaryReader br, long index)
-            : base(command, br, index)
+        public ActionCommand(int command, BinaryReader br)
+            : base(command, br)
         {
             Load(br);
         }
         
-        public ActorCommand(int command, ActionEntry entry)
+        public ActionCommand(int command, ActionEntry entry)
         {
             Command = command;
             entry.RootCommand = this;
@@ -53,11 +53,10 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            return string.Format("{0:X4}: {2}, Entries: {1:X8}",
-                Command, Entries.Count, GetActorName());
+            return $"{Command:X4}: {GetName()}, Entries: {Entries.Count:X8}";
         }
 
-        private string GetActorName()
+        private string GetName()
         {
             switch (Command)
             {

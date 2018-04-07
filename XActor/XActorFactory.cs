@@ -28,17 +28,17 @@ namespace mzxrules.XActor
             return result;
         }
 
-        public static OcaLib.Actor.ActorRecord NewOcaActor(short[] record)
+        public static OcaLib.Actor.ActorSpawn NewOcaActor(short[] record)
         {
             var actor = record[0];
             if (!OcarinaActorParsers.TryGetValue(actor, out XActorParser xactorParser))
             {
-                return new OcaLib.Actor.ActorRecord(record);
+                return new OcaLib.Actor.ActorSpawn(record);
             }
             return new XActorRecord(record, xactorParser.Description, xactorParser.GetVariables(record, CaptureExpression.GetOcaActorValue));
         }
 
-        public static OcaLib.Actor.ActorRecord NewMMActor(short[] record)
+        public static OcaLib.Actor.ActorSpawn NewMMActor(short[] record)
         {
             var actor = (short)(record[0] & 0xFFF);
             if (!MaskActorParsers.TryGetValue(actor, out XActorParser xActorParser))
@@ -48,12 +48,12 @@ namespace mzxrules.XActor
             return new XMActorRecord(record, xActorParser.Description, xActorParser.GetVariables(record, CaptureExpression.GetMMActorValue));
         }
 
-        public static OcaLib.Actor.ActorRecord NewOcaTransitionActor(byte[] record)
+        public static OcaLib.Actor.ActorSpawn NewOcaTransitionActor(byte[] record)
         {
             return new OcaLib.Actor.TransitionActor(record);
         }
 
-        public class XActorRecord : OcaLib.Actor.ActorRecord
+        public class XActorRecord : OcaLib.Actor.ActorSpawn
         {
             string name;
             string vars;

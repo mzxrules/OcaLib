@@ -14,19 +14,13 @@ namespace mzxrules.OcaLib.Cutscenes
         public ushort Option, TextIdChoiceA, TextIdChoiceB;
         internal void Load(CutsceneCommand cmd, BinaryReader br)
         {
-            byte[] arr;
-            arr = br.ReadBytes(sizeof(short) * 6);
-
-            Endian.Convert(out TextId, arr, 0);
-            Endian.Convert(out short startFrame, arr, 2);
-            Endian.Convert(out short endFrame, arr, 4);
-            Endian.Convert(out Option, arr, 6);
-            Endian.Convert(out TextIdChoiceA, arr, 8);
-            Endian.Convert(out TextIdChoiceB, arr, 10);
-
+            /* 0x00 */ TextId = br.ReadBigUInt16();
+            /* 0x02 */ StartFrame = br.ReadBigInt16();
+            /* 0x04 */ EndFrame = br.ReadBigInt16();
+            /* 0x06 */ Option = br.ReadBigUInt16();
+            /* 0x08 */ TextIdChoiceA = br.ReadBigUInt16();
+            /* 0x0A */ TextIdChoiceB = br.ReadBigUInt16();
             RootCommand = cmd;
-            StartFrame = startFrame;
-            EndFrame = endFrame;
         }
         public void Save(BinaryWriter bw)
         {

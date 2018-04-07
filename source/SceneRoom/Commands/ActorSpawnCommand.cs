@@ -14,7 +14,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public int Actors { get; set; }
         public List<IActor> ActorList = new List<IActor>();
-        private delegate ActorRecord GetActorRecord(short[] data);
+        private delegate ActorSpawn GetActorRecord(short[] data);
         GetActorRecord NewActor;
 
         public ActorSpawnCommand(Game game)
@@ -43,7 +43,7 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             string result;
 
             result = ToString();
-            foreach (ActorRecord a in ActorList)
+            foreach (ActorSpawn a in ActorList)
             {
                 result += Environment.NewLine + a.Print();
             }
@@ -62,17 +62,17 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             br.BaseStream.Position = SegmentAddress.Offset;
             for (int i = 0; i < Actors; i++)
             {
-                short[] actorArray = new short[ActorRecord.SIZE / 2];
-                for (int j = 0; j < ActorRecord.SIZE/2; j ++)
+                short[] actorArray = new short[ActorSpawn.SIZE / 2];
+                for (int j = 0; j < ActorSpawn.SIZE/2; j ++)
                 {
                     actorArray[j] = br.ReadBigInt16();
                 }
                 ActorList.Add(NewActor(actorArray));
             }
         }
-        public List<ActorRecord> GetActors()
+        public List<ActorSpawn> GetActors()
         {
-            return ActorList.Cast<ActorRecord>().ToList();
+            return ActorList.Cast<ActorSpawn>().ToList();
         }
     }
 }

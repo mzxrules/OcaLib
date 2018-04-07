@@ -53,7 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cutscenes\TimeCommand.cs" />
+    <Compile Include="Elf\Elf32_Rel.cs" />
+    <Compile Include="Elf\Elf32_Sym.cs" />
+    <Compile Include="Elf\ElfUtil.cs" />
+    <Compile Include="Elf\FileHeader.cs" />
+    <Compile Include="Elf\SectionHeader.cs" />
     <Compile Include="EntranceTableRecord.cs" />
+    <Compile Include="Overlay.cs" />
     <Compile Include="Rom\VFileTable_Data.cs" />
     <Compile Include="SceneRoom\Actor\ChestFlag.cs" />
     <Compile Include="SceneRoom\Actor\CollectibleFlags.cs" />
@@ -64,7 +71,7 @@
     <Compile Include="VirtualTable\GameContextRecord.cs" />
     <Compile Include="VirtualTable\OverlayTableRecord.cs" />
     <Compile Include="SceneRoom\Actor\ActorFactory.cs" />
-    <Compile Include="SceneRoom\Actor\ActorRecord.cs" />
+    <Compile Include="SceneRoom\Actor\ActorSpawn.cs" />
     <Compile Include="SceneRoom\Actor\LinkActor.cs" />
     <Compile Include="SceneRoom\Actor\TransitionActor.cs" />
     <Compile Include="Addresses.designer.cs" />
@@ -122,7 +129,7 @@
     <Compile Include="SceneRoom\Commands\RoomMeshCommand.cs" />
     <Compile Include="SceneRoom\Commands\ObjectListCommand.cs" />
     <Compile Include="SceneRoom\Commands\PathListCommand.cs" />
-    <Compile Include="Cutscenes\ActorCommand.cs" />
+    <Compile Include="Cutscenes\ActionCommand.cs" />
     <Compile Include="Cutscenes\CameraCommand.cs" />
     <Compile Include="Cutscenes\CutsceneCommand.cs" />
     <Compile Include="SceneRoom\SceneHeader.cs" />
@@ -171,7 +178,6 @@
       <Name>Helper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

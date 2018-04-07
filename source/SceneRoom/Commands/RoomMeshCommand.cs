@@ -160,10 +160,10 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             
             public ushort Width { get; private set; }
             public ushort Height { get; private set; }
-            public byte imageFmt { get; private set; }
-            public byte imageSize { get; private set; }
-            public ushort imagePal { get; private set; }
-            public ushort imageFlip { get; private set; }
+            public byte ImageFmt { get; private set; }
+            public byte ImageSize { get; private set; }
+            public ushort ImagePal { get; private set; }
+            public ushort ImageFlip { get; private set; }
 
             public StaticBackground (BinaryReader br, bool readIndex = false)
             { 
@@ -179,15 +179,15 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
                 Width = br.ReadBigUInt16();
                 Height = br.ReadBigUInt16();
-                imageFmt = br.ReadByte();
-                imageSize = br.ReadByte();
+                ImageFmt = br.ReadByte();
+                ImageSize = br.ReadByte();
 
-                imagePal = br.ReadUInt16();
-                imageFlip = br.ReadUInt16();
+                ImagePal = br.ReadUInt16();
+                ImageFlip = br.ReadUInt16();
             }
             public override string ToString()
             {
-                return $"JFIF {BackgroundId} {JFIF}, {Width}x{Height}, {imageFmt:X2} {imageSize:X2} {imagePal:X4} {imageFlip:X4}";
+                return $"JFIF {BackgroundId} {JFIF}, {Width}x{Height}, {ImageFmt:X2} {ImageSize:X2} {ImagePal:X4} {ImageFlip:X4}";
             }
         }
 

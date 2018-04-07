@@ -4,7 +4,7 @@ using System.IO;
 //OCA LIB **********************************
 namespace mzxrules.OcaLib.Actor
 {
-    public class ActorRecord : IActor
+    public class ActorSpawn : IActor
     {
         public static int SIZE = 0x10;
         public ushort Actor { get; set; } = 0xFFFF;
@@ -13,7 +13,7 @@ namespace mzxrules.OcaLib.Actor
         public Vector3<bool> NoRotation { get; set; } = new Vector3<bool>();
         public Vector3<ushort> Rotation { get; set; } = new Vector3<ushort>();
         protected int[] objectDependencies;
-        public ActorRecord(short[] record, params int[] p)
+        public ActorSpawn(short[] record)
         {
             Actor = (ushort)record[0];
             Coords.x = record[1];
@@ -25,9 +25,9 @@ namespace mzxrules.OcaLib.Actor
             Rotation.z = (ushort)record[6];
             Variable = (ushort)record[7];
 
-            objectDependencies = p;
+            objectDependencies = null;
         }
-        protected ActorRecord()
+        protected ActorSpawn()
         {
         }
         public virtual void Serialize(BinaryWriter bw)

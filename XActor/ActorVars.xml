@@ -4605,7 +4605,7 @@
         </UI>
       </Variable>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xFF</Capture>
+        <Capture>v &amp;&gt;&gt; 0x00FF</Capture>
         <Description>Type</Description>
         <UI>
             <Default/>
@@ -4718,7 +4718,7 @@
         </Value>
         <Value>
           <Data>0F</Data>
-          <Description>??? (actor performs beq on this value)</Description>
+          <Description>Temple of Time Master Sword Chamber Blue Aura</Description>
           <Meta>
             <Object>????</Object>
           </Meta>

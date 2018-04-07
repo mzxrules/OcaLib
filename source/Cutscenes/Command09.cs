@@ -14,8 +14,8 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public IEnumerable<IFrameData> IFrameDataEnum => GetIFrameDataEnumerator();
         
-        public Command09(int command, BinaryReader br, long index)
-            : base(command, br, index)
+        public Command09(int command, BinaryReader br)
+            : base(command, br)
         {
             Load(br);
         }
@@ -112,13 +112,8 @@ namespace mzxrules.OcaLib.Cutscenes
 
             public override string ToString()
             {
-                return string.Format("{0:X4} Frame Start: {1:X4} Frame End {2:X4} {3:X4} {4:X4} {5:X4}",
-                    int1,
-                    StartFrame,
-                    EndFrame,
-                    s4,
-                    s5,
-                    s6);
+                return
+                    $"{int1:X4} Frame Start: {StartFrame:X4} Frame End {EndFrame:X4} {s4:X4} {s5:X4} {s6:X4}";
             }
         }
     }

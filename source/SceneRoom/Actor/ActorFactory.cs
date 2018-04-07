@@ -3,9 +3,9 @@
     public static class ActorFactory
     {
         #region Delegates
-        public delegate ActorRecord OcarinaActorFactoryDelegate(short[] data);
+        public delegate ActorSpawn OcarinaActorFactoryDelegate(short[] data);
         public delegate TransitionActor OcarinaTransitionActorFactoryDelegate(byte[] data);
-        public delegate ActorRecord MaskActorFactoryDelegate(short[] data);
+        public delegate ActorSpawn MaskActorFactoryDelegate(short[] data);
         public delegate TransitionActor MaskTransitionActorFactoryDelegate(byte[] data);
 
         private static  OcarinaActorFactoryDelegate OcarinaActorFactory_In;
@@ -31,12 +31,12 @@
         }
 
 
-        internal static ActorRecord OcarinaActors(short[] data)
+        internal static ActorSpawn OcarinaActors(short[] data)
         {
             if (OcarinaActorFactory_In != null)
                 return OcarinaActorFactory_In(data);
             else
-                return new ActorRecord(data, null);
+                return new ActorSpawn(data);
         }
 
         internal static TransitionActor OcarinaTransitionActors(byte[] data)
@@ -47,12 +47,12 @@
                 return new TransitionActor(data);
         }
 
-        internal static ActorRecord MaskActors(short[] data)
+        internal static ActorSpawn MaskActors(short[] data)
         {
             if (MaskActorFactory_In != null)
                 return MaskActorFactory_In(data);
             else
-                return new ActorRecord(data, null);
+                return new ActorSpawn(data);
         }
 
         internal static TransitionActor MaskTransitionActors(byte[] data)

@@ -1,6 +1,5 @@
-﻿/* 
- * Yaz0 (de)compression algorithm was found on http://www.amnoid.de and ported to C#
- */ 
+﻿// Yaz0 (de)compression algorithm was found on http://www.amnoid.de and ported to C#
+ 
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -38,7 +37,6 @@ namespace mzxrules.Helper
         public static byte[] Decode(Stream sr, int yaz0BlockSize)
         {
             byte[] buf;
-            byte[] result;
             int[] size;
 
             buf = new byte[sizeof(int)];
@@ -53,7 +51,7 @@ namespace mzxrules.Helper
             buf = new byte[yaz0BlockSize];
             sr.Read(buf, 0, yaz0BlockSize);
 
-            Decode(buf, out result, size[0]);
+            Decode(buf, out byte[] result, size[0]);
             return result;
         }
 
@@ -141,7 +139,7 @@ namespace mzxrules.Helper
         /// <param name="pos"></param>
         /// <param name="pMatchPos"></param>
         /// <returns></returns>
-        static UInt32 simpleEnc(byte[] src, int size, int pos, ref uint /* u32* */ pMatchPos)
+        static UInt32 SimpleEnc(byte[] src, int size, int pos, ref uint /* u32* */ pMatchPos)
         //u32 simpleEnc(u8* src, int size, int pos, u32 *pMatchPos)
         {
             int startPos = pos - 0x1000;
@@ -191,7 +189,7 @@ namespace mzxrules.Helper
         /// <param name="pos"></param>
         /// <param name="pMatchPos"></param>
         /// <returns></returns>
-        static UInt32 nintendoEnc(byte[] src, int size, int pos, ref uint pMatchPos, StaticEncodeVars var)
+        static UInt32 NintendoEnc(byte[] src, int size, int pos, ref uint pMatchPos, StaticEncodeVars var)
         //u32 nintendoEnc(u8* src, int size, int pos, u32 *pMatchPos)
         {
             //int startPos = pos - 0x1000;
@@ -206,13 +204,13 @@ namespace mzxrules.Helper
                 return var.numBytes1;
             }
             var.prevFlag = 0;
-            numBytes = simpleEnc(src, size, pos, ref var.matchPos); //numBytes = simpleEnc(src, size, pos, &matchPos);
+            numBytes = SimpleEnc(src, size, pos, ref var.matchPos); //numBytes = simpleEnc(src, size, pos, &matchPos);
             pMatchPos = var.matchPos; //*pMatchPos = matchPos;
 
             // if this position is RLE encoded, then compare to copying 1 byte and next position(pos+1) encoding
             if (numBytes >= 3)
             {
-                var.numBytes1 = simpleEnc(src, size, pos + 1, ref var.matchPos); //numBytes1 = simpleEnc(src, size, pos+1, &matchPos);
+                var.numBytes1 = SimpleEnc(src, size, pos + 1, ref var.matchPos); //numBytes1 = simpleEnc(src, size, pos+1, &matchPos);
                 // if the next position encoding is +2 longer than current position, choose it.
                 // this does not guarantee the best optimization, but fairly good optimization with speed.
                 if (var.numBytes1 >= numBytes + 2)
@@ -265,7 +263,7 @@ namespace mzxrules.Helper
 
             while (r.srcPos < srcSize)
             {
-                numBytes = nintendoEnc(src, srcSize, r.srcPos, ref matchPos, var); //matchPos passed ref &matchpos
+                numBytes = NintendoEnc(src, srcSize, r.srcPos, ref matchPos, var); //matchPos passed ref &matchpos
                 
                 if (numBytes < 3)
                 {

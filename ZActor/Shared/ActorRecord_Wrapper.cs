@@ -1,9 +1,10 @@
-﻿namespace mzxrules.ZActor.OActors
+﻿using mzxrules.OcaLib.Actor;
+namespace mzxrules.ZActor.OActors
 {
     /// <summary>
     /// Wrapper class to avoid refactoring the ZActor lib
     /// </summary>
-    public class ActorRecord_Wrapper : mzxrules.OcaLib.Actor.ActorRecord
+    public class ActorRecord_Wrapper : ActorSpawn
     {
         //public static int SIZE = 0x10;
         //public ushort Actor;
@@ -11,7 +12,7 @@
         //protected Vector3<short> coords = new Vector3<short>();
         //protected Vector3<ushort> rotation = new Vector3<ushort>();
         //protected int[] objectDependencies = { };
-        public ActorRecord_Wrapper(short[] record, params int[] p) : base(record, p)
+        public ActorRecord_Wrapper(short[] record, params int[] p) : base(record)
         {
             //Endian.Convert(out Actor, record, 0);
 

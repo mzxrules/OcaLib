@@ -68,5 +68,10 @@ namespace mzxrules.Helper
         {
             return base.GetHashCode();
         }
+
+        public override string ToString()
+        {
+            return $"{Start:X8}:{End:X8}";
+        }
     }
 }

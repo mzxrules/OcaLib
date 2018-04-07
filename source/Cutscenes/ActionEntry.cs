@@ -21,32 +21,27 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public ActionEntry(CutsceneCommand cmd, BinaryReader br)
         {
-            Load(cmd, br);
+            RootCommand = cmd;
+            Load(br);
         }
 
-        private void Load(CutsceneCommand cmd, BinaryReader br)
+        private void Load(BinaryReader br)
         {
-            byte[] arr;
-            short startFrame;
-            short endFrame;
+            byte[] arr = br.ReadBytes(LENGTH);
 
-            arr = br.ReadBytes(LENGTH);
+            /* 0x00 */ Endian.Convert(out Action, arr, 0);
+            /* 0x02 */ Endian.Convert(out short startFrame, arr, 2);
+            /* 0x04 */ Endian.Convert(out short endFrame, arr, 4);
+            /* 0x06 */ Endian.Convert(out d, arr, 6);
 
-            Endian.Convert(out Action, arr, 0);
-            Endian.Convert(out startFrame, arr, 2);
-            Endian.Convert(out endFrame, arr, 4);
-            Endian.Convert(out d, arr, 6);
+            /* 0x08 */ Endian.Convert(out e, arr, 8);
+            /* 0x0A */ Endian.Convert(out f, arr, 10);
+            /* 0x0C */ Endian.Convert(StartVertex, arr, 12);
+            /* 0x18 */ Endian.Convert(EndVertex, arr, 24);
+            /* 0x24 */ Endian.Convert(VertexNormal, arr, 36);
 
-            Endian.Convert(out e, arr, 8);
-            Endian.Convert(out f, arr, 10);
-            Endian.Convert(StartVertex, arr, 12);
-            Endian.Convert(EndVertex, arr, 24);
-            Endian.Convert(VertexNormal, arr, 36);
-
-            RootCommand = cmd;
             StartFrame = startFrame;
             EndFrame = endFrame;
-
         }
 
         public void Save(BinaryWriter bw)
@@ -67,33 +62,11 @@ namespace mzxrules.OcaLib.Cutscenes
 
         public override string ToString()
         {
-            StringBuilder sb;
-            sb = new StringBuilder();
-
-            sb.Append(
-                String.Format("Action: {0:X4}, Start: {1:X4}, End: {2:X4}, {3:X4} {4:X4} {5:X4}",
-                Action,
-                StartFrame,
-                EndFrame,
-                d,
-                e, f));
-
-            sb.Append(String.Format(" Vertex Start: ({0}, {1}, {2}) ",
-                StartVertex.x,
-                StartVertex.y,
-                StartVertex.z));
-
-            sb.Append(String.Format("End: ({0}, {1}, {2}) ",
-                EndVertex.x,
-                EndVertex.y,
-                EndVertex.z));
-
-            sb.Append(String.Format("Normal: ({0:F4}, {1:F4}, {2:F4})",
-                VertexNormal.x,
-                VertexNormal.y,
-                VertexNormal.z));
-
-            return sb.ToString();
+            return 
+                $"Action: {Action:X4}, Start: {StartFrame:X4}, End: {EndFrame:X4}, {d:X4} {e:X4} {f:X4} " +
+                $"Vertex Start: ({StartVertex.x}, {StartVertex.y}, {StartVertex.z}) " +
+                $"End: ({EndVertex.x}, {EndVertex.y}, {EndVertex.z}) " +
+                $"Normal: ({VertexNormal.x:F4}, {VertexNormal.y:F4}, {VertexNormal.z:F4})";
         }
     }
 }

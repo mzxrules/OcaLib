@@ -26,7 +26,6 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         public override string Read()
         {
             return ToString();
-            //return $"Room Behavior: {Command.Data1:X2} : {Command.Data2:X8}";
         }
     }
 }

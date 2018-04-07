@@ -3,7 +3,7 @@ using System;
 
 namespace mzxrules.OcaLib.Actor
 {
-    public class MActorRecord : ActorRecord
+    public class MActorRecord : ActorSpawn
     {
         protected ushort DayFlags;
         protected byte Scene_0x1B;

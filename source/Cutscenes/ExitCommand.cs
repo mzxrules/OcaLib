@@ -41,8 +41,8 @@ namespace mzxrules.OcaLib.Cutscenes
             endFrame2 = copy.endFrame2;
         }
 
-        public ExitCommand(int command, BinaryReader br, long index)
-            : base(command, br, index)
+        public ExitCommand(int command, BinaryReader br)
+            : base(command, br)
         {
             Load(br);
         }
