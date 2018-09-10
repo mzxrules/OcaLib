@@ -5,14 +5,14 @@ namespace mzxrules.OcaLib
 {
     public class EntranceTableRecord
     {
-        public byte SceneIndex;
-        public byte SpawnIndex;
+        public byte Scene;
+        public byte Spawn;
         public short Variables;
 
         public EntranceTableRecord (BinaryReader br)
         {
-            SceneIndex = br.ReadByte();
-            SpawnIndex = br.ReadByte();
+            Scene = br.ReadByte();
+            Spawn = br.ReadByte();
             Variables = br.ReadBigInt16();
         }
     }

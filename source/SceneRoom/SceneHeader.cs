@@ -333,8 +333,10 @@ namespace mzxrules.OcaLib.SceneRoom
             AlternateHeadersCommand altCmd;
             List<List<ushort>> result;
 
-            result = new List<List<ushort>>();
-            result.Add(GetObjectsById(id));
+            result = new List<List<ushort>>
+            {
+                GetObjectsById(id)
+            };
             altCmd = (AlternateHeadersCommand)this[HeaderCommands.AlternateHeaders];
             if (altCmd != null)
             {

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.IO;
 using mzxrules.Helper;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace mzxrules.OcaLib.Elf
 {
@@ -10,7 +13,7 @@ namespace mzxrules.OcaLib.Elf
     {
         static string[] ovlSectionsStr = { ".text", ".data", ".rodata", ".bss" };
         
-        class Ovl
+        internal class Ovl
         {
             public N64Ptr start;
             public N64Ptr header;
@@ -20,17 +23,23 @@ namespace mzxrules.OcaLib.Elf
             public Dictionary<string, string> BindingSymbolName = new Dictionary<string, string>();
             public Dictionary<string, N64Ptr> BindingValue = new Dictionary<string, N64Ptr>();
 
-            public void UpdateActorOverlay(BinaryWriter rom, int actor, uint dmadata, uint vromStart)
+            public void UpdateActorOverlay(BinaryWriter rom, int actorTable, int actor, uint vromStart, uint dmadata)
             {
                 uint vromEnd = vromStart + (uint)(pEnd - start);
-                //update dmadata
-                rom.BaseStream.Position = dmadata;
-                rom.WriteBig(vromStart);
-                rom.WriteBig(vromEnd);
-                rom.WriteBig(vromStart);
-                rom.WriteBig(0);
+                string dmawriteback = (dmadata == 0) ? "No Writeback" : $"{dmadata:X8}";
+                Console.WriteLine($"{vromStart:X8}:{vromEnd:X8} - Actor {actor:X4}; dmadata - {dmawriteback}");
 
-                rom.BaseStream.Position = 0xB5E490 + (actor * 0x20);
+                if (dmadata > 0)
+                {
+                    //update dmadata
+                    rom.BaseStream.Position = dmadata;
+                    rom.WriteBig(vromStart);
+                    rom.WriteBig(vromEnd);
+                    rom.WriteBig(vromStart);
+                    rom.WriteBig(0);
+                }
+
+                rom.BaseStream.Position = actorTable + (actor * 0x20);
 
                 rom.WriteBig(vromStart);
                 rom.WriteBig(vromEnd);
@@ -41,35 +50,153 @@ namespace mzxrules.OcaLib.Elf
             }
         }
 
-        public static bool TryConvertToOverlay(BinaryReader elf, string path, N64Ptr rpoint)
+        public static void CreateDummyScript(string path)
+        {
+            Script script = new Script
+            {
+                Rom = new XRom()
+                {
+                    Path = "Rom Path",
+                    ActorTable = "Actor table location, no hex specifier.",
+                },
+                Actor = new List<XActor>()
+                {
+                     new XActor()
+                     {
+                         Path = "Path to gcc object file (*.o)",
+                         InitBinding = "Symbol name of custom actor's initialization variables within your source .o file",
+                         Id = "Actor Id, Hexadecimal",
+                         DMA = "Set dmadata table record offset. optional... either set to 0 or delete DMA element",
+                         VRam = "Virtual ram address to inject overlay",
+                         VRom = "Virtual rom address to inject overlay"
+                     },
+                     new XActor()
+                     {
+                         Path = "Example Actor:",
+                         InitBinding = "initVars",
+                         Id = "00D8",
+                         DMA = "D280",
+                         VRom = "0347E000",
+                         VRam = "80B87280"
+                     }
+                },
+            };
+            script.SaveToFile(path);
+        }
+
+        public static void ProcessInjectScript(string path)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Script));
+            Script script;
+            try
+            {
+                using (XmlReader reader = XmlReader.Create(new FileStream(path, FileMode.Open)))
+                {
+                    script = (Script)serializer.Deserialize(reader);
+                }
+                ProcessInjectScript(script);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        private static void ProcessInjectScript(Script script)
+        {
+            if (!File.Exists(script.Rom.Path))
+            {
+                Console.WriteLine($"Cannot find inject rom {script.Rom.Path}");
+                return;
+            }
+            if (!int.TryParse(script.Rom.ActorTable, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int actorTable))
+            {
+                Console.WriteLine($"Cannot parse Actor Table address {script.Rom.ActorTable}");
+                return;
+            }
+
+            Console.WriteLine($"Rom: {script.Rom.Path}");
+            Console.WriteLine($"Actor Table: {script.Rom.ActorTable:X8}");
+
+            using (FileStream rom = new FileStream(script.Rom.Path, FileMode.Open))
+            {
+                foreach (var actor in script.Actor)
+                {
+                    if (!File.Exists(actor.Path))
+                    {
+                        Console.WriteLine($"Cannot find file {actor.Path}");
+                        continue;
+                    }
+                    if (!int.TryParse(actor.Id, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int id)
+                        || !uint.TryParse(actor.VRam, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uint vram)
+                        || !uint.TryParse(actor.VRom, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uint vrom))
+                    {
+                        Console.WriteLine($"Invalid parameter for actor {actor.Path}");
+                        continue;
+                    }
+
+                    if (!uint.TryParse(actor.DMA, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out uint dma))
+                    {
+                        dma = 0;
+                    }
+
+                    if (!File.Exists(actor.Path))
+                    {
+                        Console.WriteLine($"Cannot locate {actor.Path}");
+                        continue;
+                    }
+                    Ovl odata = new Ovl
+                    {
+                        start = vram,
+                        BindingSymbolName = { { "init", actor.InitBinding } }
+                    };
+                    byte[] data = new byte[0];
+                    using (FileStream elf = new FileStream(actor.Path, FileMode.Open))
+                    {
+                        BinaryReader br = new BinaryReader(elf);
+                        if (!TryConvertToOverlay(br, odata, out data))
+                        {
+                            Console.WriteLine($"Conversion of {actor.Path} failed!");
+                            continue;
+                        }
+                    }
+
+
+                    odata.UpdateActorOverlay(new BinaryWriter(rom), actorTable, id, vrom, dma);
+                    rom.Position = vrom;
+                    rom.Write(data, 0, data.Length);
+                }
+                CRC.Write(rom);
+            }
+        }
+
+        public static bool TryConvertToOverlay(string elfpath, string ovlpath, N64Ptr rpoint)
         {
             Ovl odata = new Ovl
             {
                 start = rpoint,
                 BindingSymbolName = { {"init", "initVars" } }
             };
-            bool result = TryConvertToOverlay(elf, odata, out byte[] ovlByte);
 
-            string rompath = @"C:\Users\mzxrules\Documents\Roms\N64\Games\zcodec\ovl_test.z64";
+            bool result = false;
 
-            //custom inject
-            using (FileStream rom = new FileStream(rompath, FileMode.Open))
+            MemoryStream ms = new MemoryStream();
+
+            using (FileStream elfFile = new FileStream(elfpath, FileMode.Open))
             {
-                odata.UpdateActorOverlay(new BinaryWriter(rom), 0xD8, 0xD280, 0x347E000);
-                rom.Position = 0x347E000;
-                rom.Write(ovlByte, 0, ovlByte.Length);
-                CRC.Write(rom);
+                elfFile.CopyTo(ms);
+                ms.Position = 0;
             }
-            
-            //write the overlay for debugging purposes
-            using (FileStream fs = new FileStream(path, FileMode.Create))
+            result = TryConvertToOverlay(new BinaryReader(ms), odata, out byte[] ovlByte);
+
+            using (FileStream fs = new FileStream(ovlpath, FileMode.Create))
             {
                 fs.Write(ovlByte, 0, ovlByte.Length);
             }
 
-            
             return result;
         }
+
         private static bool TryConvertToOverlay(BinaryReader elf, Ovl odata, out byte[] ovlByte)
         {
             ovlByte = new byte[0];
@@ -152,8 +279,8 @@ namespace mzxrules.OcaLib.Elf
 
                     for (int i = 0; i < rel.Count; i++)
                     {
-                        var relcur = rel[i];
-                        var symbol = symtab[relcur.R_Sym];
+                        var relCur = rel[i];
+                        var symbol = symtab[relCur.R_Sym];
                         if (symbol.st_shndx == 0)
                         {
                             Console.WriteLine($"{symbol.Name}: Undefined Section");
@@ -161,26 +288,26 @@ namespace mzxrules.OcaLib.Elf
                         }
 
                         N64Ptr relSecAddr = sections[symbol.st_shndx].NS.Addr;
-                        switch (relcur.R_Type)
+                        switch (relCur.R_Type)
                         {
                             case Reloc.R_MIPS32:
                                 {
-                                    ovl.BaseStream.Position = fOff + relcur.r_offset;
-                                    elf.BaseStream.Position = sec.sh_offset + relcur.r_offset;
+                                    ovl.BaseStream.Position = fOff + relCur.r_offset;
+                                    elf.BaseStream.Position = sec.sh_offset + relCur.r_offset;
                                     var data = elf.ReadBigInt32() + relSecAddr + symbol.st_value;
                                     ovl.WriteBig(data);
-                                    ovlRelocations.Add(new Overlay.RelocationWord((Overlay.Section)newSecId, Reloc.R_MIPS32, sOff + relcur.r_offset));
+                                    ovlRelocations.Add(new Overlay.RelocationWord((Overlay.Section)newSecId, Reloc.R_MIPS32, sOff + relCur.r_offset));
                                     break;
                                 }
                             case Reloc.R_MIPS26:
                                 {
-                                    ovl.BaseStream.Position = fOff + relcur.r_offset;
-                                    elf.BaseStream.Position = sec.sh_offset + relcur.r_offset;
+                                    ovl.BaseStream.Position = fOff + relCur.r_offset;
+                                    elf.BaseStream.Position = sec.sh_offset + relCur.r_offset;
                                     var data = elf.ReadBigUInt32();
                                     var newAddrDat = (uint)((relSecAddr + symbol.st_value >> 2) & 0x3FFFFFF);
                                     data += newAddrDat;
                                     ovl.WriteBig(data);
-                                    ovlRelocations.Add(new Overlay.RelocationWord((Overlay.Section)newSecId, Reloc.R_MIPS26, sOff + relcur.r_offset));
+                                    ovlRelocations.Add(new Overlay.RelocationWord((Overlay.Section)newSecId, Reloc.R_MIPS26, sOff + relCur.r_offset));
                                     break;
                                 }
                             case Reloc.R_MIPS_HI16:
@@ -190,37 +317,62 @@ namespace mzxrules.OcaLib.Elf
                                         Console.WriteLine("R_MIPS_HI16 without a proper pair");
                                         return false;
                                     }
+
                                     i++;
                                     var relLo = rel[i];
-                                    elf.BaseStream.Position = sec.sh_offset + relcur.r_offset + 2;
-                                    N64Ptr addr = elf.ReadBigUInt16() << 16;
+                                    //have hi and lo relocations
+
+                                    elf.BaseStream.Position = sec.sh_offset + relCur.r_offset + 2;
+                                    var hiData = elf.ReadBigUInt16();
                                     elf.BaseStream.Position = sec.sh_offset + relLo.r_offset;
                                     var loData = elf.ReadBigUInt32();
-                                    addr += loData & 0xFFFF;
-                                    addr += relSecAddr;
+
+                                    N64Ptr hiAddr = hiData << 16;
+                                    N64Ptr addr = hiAddr + (loData & 0xFFFF) + relSecAddr + symtab[relLo.R_Sym].st_value;
 
                                     var hi16 = (ushort)((addr >> 16));
                                     var lo16 = (ushort)(addr & 0xFFFF);
-
                                     bool isOri = ((loData >> 26) & 0x3F) == 0x0D;
-                                    if ((addr & 0xFFFF) > 0x8000 && !isOri)
+
+                                    if (lo16 > 0x8000 && !isOri)
                                     {
                                         hi16++;
                                     }
 
-                                    ovl.BaseStream.Position = fOff + relcur.r_offset + 2;
+                                    ovl.BaseStream.Position = fOff + relCur.r_offset + 2;
                                     ovl.WriteBig(hi16);
 
                                     ovl.BaseStream.Position = fOff + relLo.r_offset + 2;
                                     ovl.WriteBig(lo16);
 
-                                    ovlRelocations.Add(new Overlay.RelocationWord((Overlay.Section)newSecId, Reloc.R_MIPS_HI16, sOff + relcur.r_offset));
+                                    ovlRelocations.Add(new Overlay.RelocationWord((Overlay.Section)newSecId, Reloc.R_MIPS_HI16, sOff + relCur.r_offset));
                                     ovlRelocations.Add(new Overlay.RelocationWord((Overlay.Section)newSecId, Reloc.R_MIPS_LO16, sOff + relLo.r_offset));
+                                    
+                                    //Write repeating R_MIPS_LO16s
+                                    while (i+1 < rel.Count)
+                                    {
+                                        i++;
+                                        relLo = rel[i];
+                                        if (relLo.R_Type != Reloc.R_MIPS_LO16)
+                                        {
+                                            i--;
+                                            break;
+                                        }
+
+                                        elf.BaseStream.Position = sec.sh_offset + relLo.r_offset + 2;
+                                        loData = elf.ReadBigUInt16();
+                                        addr = hiAddr + (loData & 0xFFFF) + relSecAddr + symtab[relLo.R_Sym].st_value;
+                                        lo16 = (ushort)(addr & 0xFFFF);
+                                        ovl.BaseStream.Position = fOff + relLo.r_offset + 2;
+                                        ovl.WriteBig(lo16);
+                                        ovlRelocations.Add(new Overlay.RelocationWord((Overlay.Section)newSecId, Reloc.R_MIPS_LO16, sOff + relLo.r_offset));
+                                    }
+
                                     break;
                                 }
                             case Reloc.R_MIPS_LO16:
                                 {
-                                    Console.WriteLine("R_MIPS_LO16 without a proper pair");
+                                    Console.WriteLine($"R_MIPS_LO16 {fOff + relCur.r_offset:X6} without a proper pair");
                                     return false;
                                 }
                             default:
@@ -259,19 +411,17 @@ namespace mzxrules.OcaLib.Elf
             foreach(var kv in odata.BindingSymbolName)
             {
                 var symbol = list.Where(x => x.Name == kv.Value).SingleOrDefault();
-
-
-                if (symbol.st_shndx > 0 && symbol.st_shndx < sections.Count)
+                if (symbol != null
+                    && (symbol.st_shndx > 0 && symbol.st_shndx < sections.Count) )
                 {
                     var section = sections[symbol.st_shndx];
-                    if (section.NS == null)
+                    if (section.NS != null)
                     {
-                        Console.WriteLine($"Binding {kv.Key}<-{kv.Value} failed");
+                        odata.BindingValue[kv.Key] = symbol.st_value + section.NS.Addr;
                         continue;
                     }
-
-                    odata.BindingValue[kv.Key] = symbol.st_value + section.NS.Addr;
                 }
+                Console.WriteLine($"Binding {kv.Key}<-{kv.Value} failed");
             }
         }
 

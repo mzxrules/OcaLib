@@ -3,14 +3,9 @@ using System;
 
 namespace mzxrules.OcaLib.SceneRoom.Commands
 {
-    class CollisionCommand : SceneCommand, IDataCommand
+    public class CollisionCommand : SceneCommand, IDataCommand
     {
         public SegmentAddress SegmentAddress { get; set; }
-        public int CollisionHeaderAddress
-        {
-            get { return SegmentAddress.Offset; }
-            set { SegmentAddress = new SegmentAddress(SegmentAddress, value); }
-        }
         public CollisionMesh Mesh;
 
         public override void SetCommand(SceneWord command)
@@ -23,19 +18,16 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
 
         public void Initialize(System.IO.BinaryReader br)
         {
-            Mesh = new CollisionMesh(0, CollisionHeaderAddress);
+            Mesh = new CollisionMesh(SegmentAddress);
             Mesh.Initialize(br);
         }
         public override string Read()
         {
-            string result;
-            result = ToString() + Environment.NewLine;
-            result += Mesh.Print();
-            return result;
+            return ToString() + Environment.NewLine + Mesh.Print();
         }
         public override string ToString()
         {
-            return $"Collision Header starts at {CollisionHeaderAddress:X8}";
+            return $"Collision Header starts at {SegmentAddress.Offset:X8}";
         }
     }
 }

@@ -53,13 +53,13 @@ namespace mzxrules.ZActor.MActors
             Actor = actor;
             //ActorDataA = (byte)(Actor >> 12);
             Actor &= 0xFFF;
+            
+            Endian.Convert(out Vector3<short> coords, record, 6);
+            Coords = coords;
+            
+            Endian.Convert(out ushort ry, record, 12);
+            Rotation = new Vector3<ushort>(0, ry, 0);
 
-            Endian.Convert(out Coords.x, record, 6);
-            Endian.Convert(out Coords.y, record, 8);
-            Endian.Convert(out Coords.z, record, 10);
-            Rotation.x = 0;
-            Endian.Convert(out Rotation.y,record, 12);
-            Rotation.z = 0;
             Endian.Convert(out ushort variable, record, 14);
             Variable = variable;
 

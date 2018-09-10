@@ -4,34 +4,20 @@ using System.Collections.Generic;
 
 namespace mzxrules.OcaLib
 {
-    public class OverlayTableRecord
+    public class OverlayRecord
     {
         public FileAddress VRom { get; set; }
         public FileAddress VRam { get; set; }
+        public N64Ptr RamStart { get; protected set; }
 
-
-        protected static List<uint> GetData_Rom(byte[] data, int LENGTH)
+        //Spectrum dependency, used by ActorOverlayRecord
+        public FileAddress Ram
         {
-            List<uint> d = new List<uint>();
-
-            for (int i = 0; i < LENGTH; i += 4)
+            get
             {
-                var v = BitConverter.ToUInt32(data, i);
-                d.Add(Endian.ConvertUInt32(v));
+                return (RamStart == 0) ? 
+                    new FileAddress() : new FileAddress(RamStart, RamStart + VRam.Size);
             }
-            return d;
         }
-
-        //protected static List<uint> GetData_Ram(byte[] data, int LENGTH)
-        //{
-        //    List<uint> d = new List<uint>();
-
-        //    for (int i = 0; i < LENGTH; i += 4)
-        //    {
-        //        var v = BitConverter.ToUInt32(data, i);
-        //        d.Add(v);
-        //    }
-        //    return d;
-        //}
     }
 }

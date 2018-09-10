@@ -13,7 +13,7 @@ namespace mzxrules.OcaLib
             Tables = new VFileTable_Data(version);
             using (FileStream fs = new FileStream(romLocation, FileMode.Open, FileAccess.Read))
             {
-                DmaFile = new DmaData(fs, version);
+                dmadata = new DmaData(fs, version);
             }
             RomLocation = romLocation;
             Version = version;

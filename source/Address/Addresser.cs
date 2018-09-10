@@ -32,10 +32,9 @@ namespace mzxrules.OcaLib
 
         public static bool TryGetOffset(string addrVar, RomVersion version, out int v)
         {
-            Block block;
             v = 0;
 
-            if (!TryGetBlock(version, addrVar, out block))
+            if (!TryGetBlock(version, addrVar, out Block block))
                 return false;
 
             var lookupAddr = block.Identifier.SingleOrDefault(x => x.id == addrVar);
@@ -124,10 +123,9 @@ namespace mzxrules.OcaLib
 
         public static int GetRom(RomFileToken file, RomVersion version)
         {
-            int addr;
             var block = GetBlock(version, file.ToString());
 
-            TryGetStart(block, version, Domain.ROM, out addr);
+            TryGetStart(block, version, Domain.ROM, out int addr);
             return addr;
         }
 
@@ -185,7 +183,7 @@ namespace mzxrules.OcaLib
 
         private static bool TryMagicConverter(Block block, string ident, RomVersion version, Domain domain, out int result)
         {
-            int start, lookup;
+            int lookup;
             result = 0;
             lookup = 0;
 
@@ -213,13 +211,12 @@ namespace mzxrules.OcaLib
                 //if lookup is absolute, but not in the same space, convert to offset
                 if (addr.reftype == AddressType.absolute && addr.domain != domain)
                 {
-                    int altStart;
                     Addr altStartAddr;
 
                     altStartAddr = block.Start.SingleOrDefault(x => x.domain == addr.domain);
 
                     if (altStartAddr == null
-                        || !TryGetAddrValue(altStartAddr, version, out altStart))
+                        || !TryGetAddrValue(altStartAddr, version, out int altStart))
                         return false;
 
                     lookup -= altStart;
@@ -239,7 +236,7 @@ namespace mzxrules.OcaLib
                     return false;
             }
 
-            if (!TryGetStart(block, version, domain, out start))
+            if (!TryGetStart(block, version, domain, out int start))
                 return false;
 
             result = start + lookup;

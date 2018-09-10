@@ -45,7 +45,6 @@ namespace mzxrules.OcaLib
                     Game = Game.Undefined;
                     OVer = ORom.Build.UNKNOWN;
                 }
-
             }
             else if (game == Game.MajorasMask)
             {
@@ -87,6 +86,7 @@ namespace mzxrules.OcaLib
         {
             return new RomVersion(v);
         }
+
         public static implicit operator RomVersion(MRom.Build v)
         {
             return new RomVersion(v);
@@ -121,6 +121,7 @@ namespace mzxrules.OcaLib
         {
             return obj is RomVersion && this == (RomVersion)obj;
         }
+
         public override int GetHashCode()
         {
             return ((int)OVer << 16) + (int)MVer;
@@ -170,6 +171,12 @@ namespace mzxrules.OcaLib
             else if (Game == Game.MajorasMask)
                 return MVer.GetType();
             else return GetType();
+        }
+
+        public static bool TryGet(string game, string version, out RomVersion value)
+        {
+            value = new RomVersion(game, version);
+            return value.Game != Game.Undefined;
         }
     }
 }

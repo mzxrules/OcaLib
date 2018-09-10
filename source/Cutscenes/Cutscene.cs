@@ -162,7 +162,7 @@ namespace mzxrules.OcaLib.Cutscenes
             { 0x8E, 0x31 },
             { 0x8F, 0x8F },
             { 0x90, 0x0F }
-    };
+        };
 
         /// <summary>
         /// For reporting a parse error
@@ -204,18 +204,28 @@ namespace mzxrules.OcaLib.Cutscenes
             {
                 cmd = null;
                 commandId = br.ReadBigInt32();
-                if (commandId > 0 && commandId < 0x91)
+
+                if (commandId == 0x3E8)
                 {
-                    switch ((byte)commandId)
+                    cmd = new ExitCommand(commandId, br);
+                }
+                else if (commandId == -1)
+                {
+                    cmd = new EndCommand(commandId, br);
+                }
+                else if (commandId > 0 && commandId < 0x91)
+                {
+                    int functionalId = CommandMap[commandId];
+                    switch (functionalId)
                     {
-                        case 0x01: cmd = new CameraCommand(commandId, br); break;
-                        case 0x02: goto case 1;
-                        case 0x03: goto default; //Custom Action
-                        case 0x04: goto default; //Lighting Settings
-                        case 0x05: goto case 1; //Camera Command
-                        case 0x06: goto case 1; //Camera Command
-                        case 0x07: goto default;
-                        case 0x08: goto default;
+                        case 0x01: cmd = new CameraCommand(commandId, br); break; //Camera Positions
+                        case 0x02: goto case 1; //Camera Focus Points
+                        case 0x03: goto default; //Special Execution
+                        case 0x04: cmd = new ActionCommand(commandId, br); break; //Lighting Settings
+                        case 0x05: goto case 1; //Camera Positions (Link)
+                        case 0x06: goto case 1; //Camera Focus Points (Link)
+                        case 0x07: goto default; //unknown 1
+                        case 0x08: goto default; //unknown 2
                         case 0x09: cmd = new Command09(commandId, br); break;
                         case 0x0A: goto default; //Struct + 0x24, Link
                         case 0x0B: goto default; //No Command
@@ -230,18 +240,14 @@ namespace mzxrules.OcaLib.Cutscenes
                         case 0x2D: cmd = new ScreenTransitionCommand(commandId, br); break;
                         case 0x31: goto default; //Struct + 0x44
                         case 0x3E: goto default; //Struct + 0x48
-                        case 0x56: goto default;
-                        case 0x57: goto default;
-                        case 0x7C: goto default;
+                        case 0x56: goto default; //Play Background Music
+                        case 0x57: goto default; //Stop Background Music
+                        case 0x7C: goto default; //Fade Background Music
                         case 0x8C: cmd = new TimeCommand(commandId, br); break;
                         case 0x8F: goto default; //Struct + 0x4C
                         default: cmd = new ActionCommand(commandId, br); break;
                     }
                 }
-                else if (commandId == 0x3E8)
-                    cmd = new ExitCommand(commandId, br);
-                else if (commandId == -1)
-                    cmd = new EndCommand(commandId, br);
 
                 if (cmd != null)
                     Commands.Add(cmd);

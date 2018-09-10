@@ -22,24 +22,18 @@ namespace mzxrules.OcaLib.Actor
                 );
             Actor &= 0xFFF;
 
-            //Endian.Convert(out Coords.x, record, 2);
-            //Endian.Convert(out Coords.y, record, 4);
-            //Endian.Convert(out Coords.z, record, 6);
-            Coords.x = record[1];
-            Coords.y = record[2];
-            Coords.z = record[3];
+            Coords = new Vector3<short>(record[1], record[2], record[3]);
 
 
-            DayFlags = (ushort)((record[4] & 7) << 7 + (record[6] & 0x7F)); //(ushort)((record[9] << 7) + (record[13] & 0x7F));
+            DayFlags = (ushort)((record[4] & 7) << 7 + (record[6] & 0x7F)); 
 
-            Rotation.x = Shift.AsUInt16((ushort)record[4], 0xFF80); //(ushort)(record[08] * 2 + Shift.AsByte(record[09], 0x80));
-            Rotation.y = Shift.AsUInt16((ushort)record[5], 0xFF80); //(ushort)(record[10] * 2 + Shift.AsByte(record[11], 0x80));
-            Rotation.z = Shift.AsUInt16((ushort)record[6], 0xFF80); //(ushort)(record[12] * 2 + Shift.AsByte(record[13], 0x80));
+            ushort rx = Shift.AsUInt16((ushort)record[4], 0xFF80); 
+            ushort ry = Shift.AsUInt16((ushort)record[5], 0xFF80); 
+            ushort rz = Shift.AsUInt16((ushort)record[6], 0xFF80);
+            Rotation = new Vector3<ushort>(rx, ry, rz);
 
             Scene_0x1B = Shift.AsByte((ushort)record[5], 0x7F);
             Variable = (ushort)record[7];
-            //Endian.Convert(out ushort variable, record, 14);
-            //Variable = variable;
         }
         protected MActorRecord()
         {

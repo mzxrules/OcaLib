@@ -15,8 +15,6 @@ namespace mzxrules.OcaLib
 
     public class Overlay
     {
-        public int VirtualSize { get; private set; }
-        public int PhysicalSize { get; private set; }
         public int TextSize;
         public int DataSize;
         public int RodataSize;
@@ -26,12 +24,13 @@ namespace mzxrules.OcaLib
         public List<RelocationWord> Relocations = new List<RelocationWord>();
 
         public Overlay() { }
+
         public Overlay(BinaryReader br)
         {
             //Get Header
-            PhysicalSize = (int)br.BaseStream.Length;
+            int physicalSize = (int)br.BaseStream.Length;
 
-            int size = PhysicalSize;
+            int size = physicalSize;
             br.BaseStream.Position = size - 4;
 
             int header_inset = br.ReadBigInt32();
@@ -43,11 +42,12 @@ namespace mzxrules.OcaLib
             BssSize = br.ReadBigInt32();
             RelCount = br.ReadBigInt32();
 
-            VirtualSize = PhysicalSize + BssSize;
+            int virtualSize = physicalSize + BssSize;
 
             for (int i = 0; i < RelCount; i++)
             {
-                Relocations.Add(new RelocationWord(this, br.ReadBigInt32()));
+                var rel = new RelocationWord(this, br.ReadBigInt32());
+                Relocations.Add(rel);
             }
         }
 

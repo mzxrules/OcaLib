@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using mzxrules.Helper;
@@ -18,10 +19,10 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
             if (SegmentAddress.Segment != (byte)ORom.Bank.scene)
                 throw new Exception();
         }
-        public void Initialize(System.IO.BinaryReader br)
+        public void Initialize(BinaryReader br)
         {
             int nodes;
-            int address;
+            SegmentAddress address;
             int loop = 0;
 
             br.BaseStream.Position = SegmentAddress.Offset;
@@ -31,17 +32,22 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
                 br.BaseStream.Position += 3;
                 address = br.ReadBigInt32();
 
-                if (nodes <= 0 || loop >= 50
-                    ||
-                    ((address >> 16) & 0xFFC0) //assuming an address range of 0200 0000 to 022F FFFF, quite larger than expected
-                    != (((int)ORom.Bank.scene) << 8)) //
+                if (nodes > 0
+                    && loop < 50
+                    && (address.Offset < 0x2F_FFFF) //assuming an address range of 0200 0000 to 022F FFFF, quite larger than expected
+                    && address.Segment == (int)ORom.Bank.scene)
+                {
+                    var seekback = br.BaseStream.Position;
+                    Path path = new Path(nodes, address.Offset, br);
+                    Paths.Add(path);
+                    br.BaseStream.Position = seekback;
+
+                    loop++;
+                }
+                else
+                {
                     break;
-
-                var t = br.BaseStream.Position;
-                Paths.Add(new Path(nodes, address & 0xFFFFFF, br));
-                br.BaseStream.Position = t;
-
-                loop++;
+                }
             }
             while (true);
         }
@@ -63,12 +69,13 @@ namespace mzxrules.OcaLib.SceneRoom.Commands
         {
             return $"Pathway List starts at {SegmentAddress.Offset:X8}";
         }
+
         class Path
         {
             public int Address { get; private set; }
             public List<Vector3<short>> PathPoints = new List<Vector3<short>>();
 
-            public Path(int nodes, int address, System.IO.BinaryReader br)
+            public Path(int nodes, int address, BinaryReader br)
             {
                 Address = address;
                 br.BaseStream.Position = address;

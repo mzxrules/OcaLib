@@ -16,13 +16,11 @@ namespace mzxrules.OcaLib.Actor
         public ActorSpawn(short[] record)
         {
             Actor = (ushort)record[0];
-            Coords.x = record[1];
-            Coords.y = record[2];
-            Coords.z = record[3];
-
-            Rotation.x = (ushort)record[4];
-            Rotation.y = (ushort)record[5];
-            Rotation.z = (ushort)record[6];
+            Coords = new Vector3<short>(record[1], record[2], record[3]);
+            Rotation = new Vector3<ushort>(
+                (ushort)record[4],
+                (ushort)record[5],
+                (ushort)record[6]);
             Variable = (ushort)record[7];
 
             objectDependencies = null;

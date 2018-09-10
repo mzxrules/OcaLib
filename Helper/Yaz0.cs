@@ -1,12 +1,12 @@
 ﻿// Yaz0 (de)compression algorithm was found on http://www.amnoid.de and ported to C#
- 
+
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace mzxrules.Helper
 {
-    public class Yaz0
+    public class Yaz
     {
         /// <summary>
         /// Returns the size of the yaz0 block
@@ -140,7 +140,6 @@ namespace mzxrules.Helper
         /// <param name="pMatchPos"></param>
         /// <returns></returns>
         static UInt32 SimpleEnc(byte[] src, int size, int pos, ref uint /* u32* */ pMatchPos)
-        //u32 simpleEnc(u8* src, int size, int pos, u32 *pMatchPos)
         {
             int startPos = pos - 0x1000;
             int numBytes = 1;
@@ -228,7 +227,7 @@ namespace mzxrules.Helper
             encodeTask.Start();
             return encodeTask;
         }
-        
+
         /// <summary>
         /// Writes compressed file to given stream, starting at stream's position.
         /// </summary>
@@ -251,8 +250,8 @@ namespace mzxrules.Helper
             StaticEncodeVars var = new StaticEncodeVars();
 
             //Write Header
-            byte[] srcSizeArr = BitConverter.GetBytes(srcSize); 
-            byte[] header = new byte[] {0x59, 0x61, 0x7A, 0x30}; //Yaz0
+            byte[] srcSizeArr = BitConverter.GetBytes(srcSize);
+            byte[] header = new byte[] { 0x59, 0x61, 0x7A, 0x30 }; //Yaz0
             if (BitConverter.IsLittleEndian)
                 Array.Reverse(srcSizeArr);
 
@@ -264,7 +263,7 @@ namespace mzxrules.Helper
             while (r.srcPos < srcSize)
             {
                 numBytes = NintendoEnc(src, srcSize, r.srcPos, ref matchPos, var); //matchPos passed ref &matchpos
-                
+
                 if (numBytes < 3)
                 {
                     //straight copy
@@ -306,10 +305,10 @@ namespace mzxrules.Helper
                 if (validBitCount == 8)
                 {
                     dstFile.WriteByte(currCodeByte);
-                    dstFile.Write(dst, 0, r.dstPos); 
+                    dstFile.Write(dst, 0, r.dstPos);
 
                     dstSize += r.dstPos + 1;
-                    
+
                     currCodeByte = 0;
                     validBitCount = 0;
                     r.dstPos = 0;
@@ -317,8 +316,8 @@ namespace mzxrules.Helper
             }
             if (validBitCount > 0)
             {
-                dstFile.WriteByte(currCodeByte); 
-                dstFile.Write(dst, 0, r.dstPos); 
+                dstFile.WriteByte(currCodeByte);
+                dstFile.Write(dst, 0, r.dstPos);
                 dstSize += r.dstPos + 1;
 
                 currCodeByte = 0;

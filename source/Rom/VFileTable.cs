@@ -6,10 +6,9 @@ using System.Linq;
 
 namespace mzxrules.OcaLib
 {
-    public class VFileTable : AbstractVFileTable, /*IDisposable,*/ IEnumerable<FileRecord>
+    public class VFileTable : /*IDisposable,*/ IEnumerable<FileRecord>
     {
-        protected Dictionary<long, FileRecord> DmaTable => DmaFile.Table;
-        protected DmaData DmaFile;
+        protected DmaData dmadata;
         public RomVersion Version { get; protected set; }
 
         protected string RomLocation;
@@ -20,14 +19,14 @@ namespace mzxrules.OcaLib
         
         protected VFileTable() { }
 
-        public override RomFile GetSceneFile(int i)
+        public virtual RomFile GetSceneFile(int i)
         {
             throw new InvalidOperationException();
         }
 
-        public override FileAddress GetDmaDataStart()
+        public FileAddress GetDmaDataStart()
         {
-            return DmaFile.Address.VirtualAddress;
+            return dmadata.Address.VirtualAddress;
         }
 
         private void ResetFileCache()
@@ -45,7 +44,7 @@ namespace mzxrules.OcaLib
         /// <returns></returns>
         public RomFile GetFile(FileAddress vAddr)
         {
-            if (DmaTable.TryGetValue(vAddr.Start, out FileRecord record)
+            if (dmadata.TryGetFileRecord(vAddr.Start, out FileRecord record)
                 && vAddr.Size == record.VirtualAddress.Size)
                     return GetFile(record);
             
@@ -60,7 +59,7 @@ namespace mzxrules.OcaLib
         /// <returns></returns>
         public RomFile GetFile(long virtualAddress)
         {
-            if (!DmaTable.TryGetValue(virtualAddress, out FileRecord record))
+            if (!dmadata.TryGetFileRecord(virtualAddress, out FileRecord record))
                 throw new Exception();
 
             return GetFile(new FileRecord(record));
@@ -92,7 +91,7 @@ namespace mzxrules.OcaLib
                 if (record.IsCompressed)
                 {
                     ms = new MemoryStream(data);
-                    decompressedData = Yaz0.Decode(ms, (int)(record.DataAddress.Size));
+                    decompressedData = Yaz.Decode(ms, (int)(record.DataAddress.Size));
                 }
                 else
                 {
@@ -131,9 +130,8 @@ namespace mzxrules.OcaLib
         {
             MemoryStream ms;
             byte[] data;
-            FileRecord tableRecord; //file we're looking up
-
-            if (!DmaTable.TryGetValue(virtualAddress, out tableRecord))
+            
+            if (!dmadata.TryGetFileRecord(virtualAddress, out FileRecord tableRecord))
                 throw new Exception();
 
             using (FileStream fs = new FileStream(RomLocation, FileMode.Open, FileAccess.Read))
@@ -154,8 +152,8 @@ namespace mzxrules.OcaLib
         /// <returns>The FileRecord of the containing file, or null if no file contains the given address</returns>
         public FileRecord GetFileStart(long virtualAddress)
         {
-            return DmaTable.FirstOrDefault(x => x.Value.VirtualAddress.Start <= virtualAddress
-                && virtualAddress < x.Value.VirtualAddress.End).Value;
+            return dmadata.Table.FirstOrDefault(x => x.VirtualAddress.Start <= virtualAddress
+                && virtualAddress < x.VirtualAddress.End);
         }
 
         /// <summary>
@@ -166,7 +164,7 @@ namespace mzxrules.OcaLib
         /// <returns>True if operation is successful</returns>
         public bool TryGetFileRecord(FileAddress virtualAddress, out FileRecord record)
         {
-            return DmaTable.TryGetValue(virtualAddress.Start, out record);
+            return dmadata.TryGetFileRecord(virtualAddress.Start, out record);
         }
 
         /// <summary>
@@ -177,7 +175,7 @@ namespace mzxrules.OcaLib
         /// <returns>True if operation is successful</returns>
         public bool TryGetFileRecord(long virtualAddress, out FileRecord record)
         {
-            return DmaTable.TryGetValue(virtualAddress, out record);
+            return dmadata.TryGetFileRecord(virtualAddress, out record);
         }
 
         /// <summary>
@@ -188,10 +186,9 @@ namespace mzxrules.OcaLib
         /// <returns>True if the operation is successful</returns>
         public bool TryGetVirtualAddress(long address, out FileAddress resultAddress)
         {
-            FileRecord record;
             bool getValue;
 
-            getValue = DmaTable.TryGetValue(address, out record);
+            getValue = dmadata.TryGetFileRecord(address, out FileRecord record);
             if (getValue)
                 resultAddress = record.VirtualAddress;
             else
@@ -206,7 +203,7 @@ namespace mzxrules.OcaLib
         /// <returns>The returned FileAddress</returns>
         public FileAddress GetVRomAddress(long address)
         {
-            if (!DmaTable.TryGetValue(address, out FileRecord record))
+            if (!dmadata.TryGetFileRecord(address, out FileRecord record))
                 throw new FileNotFoundException();
 
             return record.VirtualAddress;
@@ -230,12 +227,12 @@ namespace mzxrules.OcaLib
 
         public IEnumerator<FileRecord> GetEnumerator()
         {
-            return DmaTable.Values.GetEnumerator();
+            return dmadata.Table.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return DmaTable.Values.GetEnumerator();
+            return dmadata.Table.GetEnumerator();
         }
 
 
@@ -245,7 +242,6 @@ namespace mzxrules.OcaLib
         {
             return GetFileByRomTable(Tables.Scenes, scene);
         }
-
 
         public FileAddress GetActorVirtualAddress(int actor)
         {
@@ -323,7 +319,7 @@ namespace mzxrules.OcaLib
             return new ActorOverlayRecord(actor, new BinaryReader(code));
         }
 
-        public GameContextRecord GetGameContextRecord(int index)
+        public GameStateRecord GetGameContextRecord(int index)
         {
             RomFileToken token = ORom.FileList.invalid;
             if (Version.Game == Game.OcarinaOfTime)
@@ -337,10 +333,10 @@ namespace mzxrules.OcaLib
                 return null;
             }
             code.Stream.Position = code.Record.GetRelativeAddress(addr + (index * 0x30));
-            return new GameContextRecord(index, new BinaryReader(code));
+            return new GameStateRecord(index, new BinaryReader(code));
         }
 
-        public ParticleEffectOverlayRecord GetParticleOverlayRecord(int index)
+        public ParticleOverlayRecord GetParticleOverlayRecord(int index)
         {
             RomFileToken token = ORom.FileList.invalid;
             if (Version.Game == Game.OcarinaOfTime)
@@ -354,7 +350,7 @@ namespace mzxrules.OcaLib
                 return null;
             }
             code.Stream.Position = code.Record.GetRelativeAddress(addr + (index * 0x1C));
-            return new ParticleEffectOverlayRecord(index, new BinaryReader(code));
+            return new ParticleOverlayRecord(index, new BinaryReader(code));
         }
 
         public PlayPauseOverlayRecord GetPlayPauseOverlayRecord(int index)

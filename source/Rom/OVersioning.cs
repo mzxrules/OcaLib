@@ -43,6 +43,8 @@ namespace mzxrules.OcaLib
                     new BuildInformation { _CRC = 0xF034001AAE47ED06, _Version = Build.MQU, _Name = "USA Master Quest", _Localization = Localization.NTSC},
                     new BuildInformation { _CRC = 0x1D4136F3AF63EEA9, _Version = Build.MQP, _Name = "PAL Master Quest", _Localization = Localization.PAL },
                     new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.DBGMQ, _Name = "Debug Master Quest", _Localization = Localization.PAL },
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.IQUEC, _Name = "Chinese iQue", _Localization = Localization.CHI },
+                    new BuildInformation { _CRC = 0x0000000000000000, _Version = Build.IQUET, _Name = "Taiwanese iQue", _Localization = Localization.CHI }
                 };
             }
 
@@ -72,11 +74,11 @@ namespace mzxrules.OcaLib
             map = 3
         }
 
-        private static Language[] SupportedLanguages = new Language[] {
-            Language.Japanese,
-            Language.English,
-            Language.German,
-            Language.French, };
+        //private static Language[] SupportedLanguages = new Language[] {
+        //    Language.Japanese,
+        //    Language.English,
+        //    Language.German,
+        //    Language.French, };
 
         public enum Build
         {
@@ -98,6 +100,8 @@ namespace mzxrules.OcaLib
             MQP, //PAL GCN MQ
 
             DBGMQ, //PAL MQ Debug
+            IQUEC, //Chinese Ocarina of Time
+            IQUET, //Taiwanese Ocarina of Time
         }
 
         private static Build[] SupportedBuilds = new Build[] {
@@ -124,7 +128,8 @@ namespace mzxrules.OcaLib
         {
             UNKNOWN,
             NTSC,
-            PAL
+            PAL,
+            CHI
         }
 
         public static IEnumerable<RomVersion> GetSupportedBuilds()
@@ -145,6 +150,8 @@ namespace mzxrules.OcaLib
             yield return Build.MQP;
 
             yield return Build.DBGMQ;
+            yield return Build.IQUEC;
+            yield return Build.IQUET;
         }
 
         public static Localization GetLocalization(Build v)
@@ -165,6 +172,7 @@ namespace mzxrules.OcaLib
             {
                 case Localization.NTSC: return new Language[] { Language.Japanese, Language.English };
                 case Localization.PAL: return new Language[] { Language.English, Language.German, Language.French };
+                case Localization.CHI: return new Language[] { Language.Chinese };
                 default: return null;
             }
         }

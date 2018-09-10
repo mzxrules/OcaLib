@@ -16,7 +16,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -62,11 +62,13 @@
     <Compile Include="Endian.cs" />
     <Compile Include="N64Ptr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ptr.cs" />
     <Compile Include="SegmentAddress.cs" />
     <Compile Include="Shift.cs" />
     <Compile Include="StreamExtension.cs" />
     <Compile Include="CStr.cs" />
     <Compile Include="Vectors.cs" />
+    <Compile Include="Yaz.cs" />
     <Compile Include="Yaz0.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

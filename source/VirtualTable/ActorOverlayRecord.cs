@@ -4,7 +4,7 @@ using System.IO;
 
 namespace mzxrules.OcaLib
 {
-    public class ActorOverlayRecord : OverlayTableRecord
+    public class ActorOverlayRecord : OverlayRecord
     {
         #region Structure
         /* 00: [Vrom] File Start, End
@@ -18,17 +18,17 @@ namespace mzxrules.OcaLib
         //Main data structure
         //public FileAddress VRom;
         //public FileAddress VRam;
-        //uint ramFileStart;
+        //N64Ptr RamStart;
         public N64Ptr VRamActorInfo;
         public N64Ptr RamFileName;
-        public uint Unknown;
+        public ushort AllocationType;
+        public sbyte NumSpawned;
         #endregion
 
         #region Extended Fields
 
         public const int LENGTH = 0x20;
 
-        public FileAddress Ram { get; protected set; }
 
         public int Actor { get; protected set; }
 
@@ -38,14 +38,7 @@ namespace mzxrules.OcaLib
 
         public ActorOverlayRecord(int index, BinaryReader br)
         {
-            Actor = index;
-            VRom = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
-            VRam = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
-
-            /* ramFileStart = */ br.ReadBigUInt32();
-            VRamActorInfo = br.ReadBigUInt32();
-            RamFileName = br.ReadBigUInt32();
-            Unknown = br.ReadBigUInt32();
+            Initialize(index, br);
         }
 
         /// <summary>
@@ -55,22 +48,21 @@ namespace mzxrules.OcaLib
         /// <param name="data"></param>
         public ActorOverlayRecord(int index, byte[] data)
         {
-            Create(index, GetData_Rom(data, LENGTH));
+            using (BinaryReader br = new BinaryReader(new MemoryStream(data)))
+                Initialize(index, br);
         }
-        
-        private void Create(int index, List<uint> data)
+
+        private void Initialize(int index, BinaryReader br)
         {
-            N64Ptr ramFileStart;
             Actor = index;
-            VRom = new FileAddress(data[0], data[1]);
-            VRam = new FileAddress(data[2], data[3]);
+            VRom = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
+            VRam = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
 
-            ramFileStart = data[4];
-            VRamActorInfo = data[5];
-            RamFileName = data[6];
-            Unknown = data[7];
-
-            Ram = new FileAddress(ramFileStart, ramFileStart + VRam.Size);
+            RamStart = br.ReadBigUInt32();
+            VRamActorInfo = br.ReadBigUInt32();
+            RamFileName = br.ReadBigUInt32();
+            AllocationType = br.ReadBigUInt16();
+            NumSpawned = br.ReadSByte();
         }
     }
 }

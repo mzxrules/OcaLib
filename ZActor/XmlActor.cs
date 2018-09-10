@@ -33,24 +33,32 @@ namespace mzxrules.ZActor
             if (XmlActorDictionary.TryGetActorDefinition(Actor, out actorDef))
             {
                 Name = actorDef.Name;
+                short x,  y,  z;
+                x = y = z = 0;
+
+                ushort rx, ry, rz;
+                rx = ry = rz = 0;
+
                 foreach (Tuple<ushort, string, ActorDefinitionItem.Usage> value in actorDef.GetValues(init))
                 {
                     switch (value.Item3)
                     {
                         case ActorDefinitionItem.Usage.ActorNumber: break;
-                        case ActorDefinitionItem.Usage.PositionX: Coords.x = (short)value.Item1; break;
-                        case ActorDefinitionItem.Usage.PositionY: Coords.y = (short)value.Item1; break;
-                        case ActorDefinitionItem.Usage.PositionZ: Coords.z = (short)value.Item1; break;
-                        case ActorDefinitionItem.Usage.RotationX: Rotation.x = value.Item1; break;
-                        case ActorDefinitionItem.Usage.RotationY: Rotation.y = value.Item1; break;
-                        case ActorDefinitionItem.Usage.RotationZ: Rotation.z = value.Item1; break;
+                        case ActorDefinitionItem.Usage.PositionX: x = (short)value.Item1; break;
+                        case ActorDefinitionItem.Usage.PositionY: y = (short)value.Item1; break;
+                        case ActorDefinitionItem.Usage.PositionZ: z = (short)value.Item1; break;
+                        case ActorDefinitionItem.Usage.RotationX: rx = value.Item1; break;
+                        case ActorDefinitionItem.Usage.RotationY: ry = value.Item1; break;
+                        case ActorDefinitionItem.Usage.RotationZ: rz = value.Item1; break;
                         case ActorDefinitionItem.Usage.SwitchFlag: VariableStr += value.Item2 + ", "; break;
                         case ActorDefinitionItem.Usage.CollectFlag: goto case ActorDefinitionItem.Usage.SwitchFlag;
-                        case ActorDefinitionItem.Usage.ChestFlag: VariableStr += String.Format("Chest Flag: {0:X2}, ", value.Item1); break;
+                        case ActorDefinitionItem.Usage.ChestFlag: VariableStr += string.Format("Chest Flag: {0:X2}, ", value.Item1); break;
                         default:
-                            VariableStr += String.Format("{0}: {1:X}, ", value.Item2, value.Item1); break;
+                            VariableStr += string.Format("{0}: {1:X}, ", value.Item2, value.Item1); break;
                     }
                 }
+                Coords = new Vector3<short>(x, y, z);
+                Rotation = new Vector3<ushort>(rx, ry, rz);
             }
             else
             {

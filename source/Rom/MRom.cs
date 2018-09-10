@@ -13,7 +13,8 @@ namespace mzxrules.OcaLib
         public MRom(string fileLocation, Build version)
             : base(fileLocation, version)
         {
-            Scenes = 0x6E;
+            
+            //Scenes = 0x6E;
         }
     }
 }

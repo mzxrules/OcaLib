@@ -5069,15 +5069,21 @@
           <Meta />
         </Value>
       </Variable>
-    <Variable>
-      <Capture>v &amp;>> 0xFF00</Capture>
-      <Description>unknown</Description>
-      <UI>
-        <Number>
-          <Display>hex</Display>
-        </Number>
-      </UI>
+      <Variable>
+        <Capture>v &amp;>> 0x7F00</Capture>
+        <Description>Switch Flag</Description>
+        <Comment>Yes, 0x7F</Comment>
+        <UI>
+          <SwitchFlag/>
+        </UI>
       </Variable>
+    <Variable>
+      <Capture>v &amp;>> 0x8000</Capture>
+      <Description>Unknown</Description>
+      <UI>
+        <BitFlag/>
+      </UI>
+    </Variable>
     </Variables>
   </Actor>
   <Actor id="0091" name="En_Po_Sisters">
@@ -8164,7 +8170,7 @@
       </Variable>
       <Variable>
         <Capture>v &amp;&gt;&gt; 0x0004</Capture>
-        <Description>Loads block based on Switch Flag state</Description>
+        <Description>Spawn on Switch Flag state</Description>
         <UI>
             <Select/>
         </UI>
@@ -8663,7 +8669,7 @@
         </Value>
       </Variable>
       <Variable default="3F" nullable="true">
-        <Capture>v &amp;&gt;&gt; 0x3F</Capture>
+        <Capture>v &amp;&gt;&gt; 0x003F</Capture>
         <Description>Switch Flag</Description>
         <UI>
             <SwitchFlag/>
@@ -10030,7 +10036,7 @@
     <Comment>Liftable &amp; cut-able</Comment>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x3</Capture>
+        <Capture>v &amp;&gt;&gt; 0x0003</Capture>
         <Description>Type</Description>
         <UI>
             <Default/>
@@ -13892,103 +13898,26 @@
       <Object>016B</Object>
     </Objects>
     <Description>Dog</Description>
-    <Comment>It's possible to make this spawn an infinite number of dogs //FIXME: Direction</Comment>
+    <Comment>It's possible to make this spawn an infinite number of dogs</Comment>
     <Variables>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0x0FF0</Capture>
+        <Capture>v &amp;&gt;&gt; 0x0F00</Capture>
+        <Description>Unknown</Description>
+        <Comment>FIXME: Document</Comment>
+        <UI>
+          <Default/>
+        </UI>
+      </Variable>
+      <Variable>
+        <Capture>v &amp;&gt;&gt; 0x00F0</Capture>
         <Description>Direction it runs</Description>
         <Comment>Orientation relative to the object. Also, if you befriend a dog and return to the place with the dog and change this value, another dog will spawn</Comment>
         <UI>
-            <Select/>
+          <Path/>
         </UI>
-        <Value>
-          <Data>00</Data>
-          <Description>SEE</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>01</Data>
-          <Description>NNW</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>02</Data>
-          <Description>N</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>03</Data>
-          <Description>First NNW, then SE</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>04</Data>
-          <Description>First NNW, then SE</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>05</Data>
-          <Description>First NNW, then SE</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>06</Data>
-          <Description>N</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>07</Data>
-          <Description>First NNW, then S</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>08</Data>
-          <Description>First NNW, then SE</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>09</Data>
-          <Description>N</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0A</Data>
-          <Description>First NNW, then SE</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0B</Data>
-          <Description>NW</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0C</Data>
-          <Description>NW</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0D</Data>
-          <Description>NW</Description>
-          <Meta />
-        </Value>
-        <Value>
-          <Data>0E</Data>
-          <Description>NW</Description>
-          <Meta />
-        </Value>
-        <Value repeat="+">
-          <Data>0F</Data>
-          <Description>First NNW, then SEE</Description>
-          <Meta />
-        </Value>
-        <Value repeat="+">
-          <Data>F0</Data>
-          <Description>No dog</Description>
-          <Meta />
-        </Value>
       </Variable>
       <Variable>
-        <Capture>v &amp;&gt;&gt; 0xF</Capture>
+        <Capture>v &amp;&gt;&gt; 0x000F</Capture>
         <Description>Color</Description>
         <UI>
             <Default/>
@@ -15387,7 +15316,7 @@
     <Objects>
       <Object>0154</Object>
     </Objects>
-    <Description>Bonooru the Scarecrow Spawn</Description>
+    <Description>Pierre the Scarecrow Spawn</Description>
     <Comment>
       Green Navi spot
       FIXME: Switch Flag
@@ -15571,8 +15500,17 @@
     <Objects>
       <Object>0003</Object>
     </Objects>
-    <Description>Young Link Silver Block</Description>
-    <Variables />
+    <Description>Silver Block (Child Link)</Description>
+    <Comment>Only spawns as child link</Comment>
+    <Variables>
+      <Variable>
+        <Capture>v &amp;>> 0x003F</Capture>
+        <Description>Switch Flag to Spawn On</Description>
+        <UI>
+          <SwitchFlag/>
+        </UI>
+      </Variable>
+    </Variables>
   </Actor>
   <Actor id="01D6" name="Obj_Warp2block">
     <Objects>

@@ -62,16 +62,18 @@ namespace mzxrules.Helper
         {
             return ConvertShort(v);
         }
-        public static short ConvertShort(short v)
-        {
-            return (short)(((v & 0xff) << 8) | ((v >> 8) & 0xff));
-        }
 
         public static Int16 ConvertInt16(byte[] array, int offset)
         {
             return ConvertShort(array, offset);
         }
-        public static short ConvertShort(byte[] array, int offset)
+
+        public static short ConvertShort(short v)
+        {
+            return (short)(((v & 0xff) << 8) | ((v >> 8) & 0xff));
+        }
+
+        private static short ConvertShort(byte[] array, int offset)
         {
             return (short)((array[offset] << 8) | array[offset + 1]);
         }
@@ -114,9 +116,9 @@ namespace mzxrules.Helper
             result = ConvertInt32(array, offset);
         }
 
-        public static Int32 ConvertInt32(byte[] array, int offset)
+        public static int ConvertInt32(byte[] array, int offset)
         {
-            return (array[offset] << 24) | (array[offset + 1] << 16) | (array[offset + 2] << 8) | array[offset + 3];
+            return ((array[offset] << 24) | (array[offset + 1] << 16) | (array[offset + 2] << 8) | array[offset + 3]);
         }
 
         public static void Convert(ref Int32 v)
@@ -124,7 +126,7 @@ namespace mzxrules.Helper
             v = ConvertInt32(v);
         }
 
-        public static Int32 ConvertInt32(Int32 value)
+        public static int ConvertInt32(Int32 value)
         {
             return ((value & 0xFF) << 24) | ((value & 0xFF00) << 8) | ((value >> 8) & 0xFF00) | ((value >> 24) & 0xFF);
         }
@@ -171,43 +173,48 @@ namespace mzxrules.Helper
             v = BitConverter.ToSingle(temp, 0);
         }
 
-        public static void Convert(Vector3<short> v, byte[] arr, int offset)
+        public static void Convert(out Vector3<short> v, byte[] arr, int offset)
         {
-            Convert(out v.x, arr, offset + 0);
-            Convert(out v.y, arr, offset + 2);
-            Convert(out v.z, arr, offset + 4);
+            Convert(out short x, arr, offset + 0);
+            Convert(out short y, arr, offset + 2);
+            Convert(out short z, arr, offset + 4);
+            v = new Vector3<short>(x, y, z);
         }
 
-        public static void Convert(Vector3<ushort> v, byte[] arr, int offset)
+        public static void Convert(out Vector3<ushort> v, byte[] arr, int offset)
         {
-            Convert(out v.x, arr, offset + 0);
-            Convert(out v.y, arr, offset + 2);
-            Convert(out v.z, arr, offset + 4);
+            Convert(out ushort x, arr, offset + 0);
+            Convert(out ushort y, arr, offset + 2);
+            Convert(out ushort z, arr, offset + 4);
+            v = new Vector3<ushort>(x, y, z);
         }
 
-        public static void Convert(Vector3<uint> v, byte[] arr, int offset)
+        public static void Convert(out Vector3<uint> v, byte[] arr, int offset)
         {
-            Convert(out v.x, arr, offset + 0);
-            Convert(out v.y, arr, offset + 4);
-            Convert(out v.z, arr, offset + 8);
+            Convert(out uint x, arr, offset + 0);
+            Convert(out uint y, arr, offset + 4);
+            Convert(out uint z, arr, offset + 8);
+            v = new Vector3<uint>(x, y, z);
         }
-        public static void Convert(Vector3<int> v, byte[] arr, int offset)
+        public static void Convert(out Vector3<int> v, byte[] arr, int offset)
         {
-            Convert(out v.x, arr, offset + 0);
-            Convert(out v.y, arr, offset + 4);
-            Convert(out v.z, arr, offset + 8);
+            Convert(out int x, arr, offset + 0);
+            Convert(out int y, arr, offset + 4);
+            Convert(out int z, arr, offset + 8);
+            v = new Vector3<int>(x, y, z);
         }
-        public static void Convert(Vector3<float> v, byte[] arr, int offset)
+        public static void Convert(out Vector3<float> v, byte[] arr, int offset)
         {
             byte[] arr2 = new byte[0x0C];
 
             Array.Copy(arr, offset, arr2, 0, 0x0C);
             ReverseBytes(ref arr2, 0x04);
 
-            v.x = BitConverter.ToSingle(arr2, 0);
-            v.y = BitConverter.ToSingle(arr2, 4);
-            v.z = BitConverter.ToSingle(arr2, 8);
-            
+            float x = BitConverter.ToSingle(arr2, 0);
+            float y = BitConverter.ToSingle(arr2, 4);
+            float z = BitConverter.ToSingle(arr2, 8);
+
+            v = new Vector3<float>(x, y, z);
         }
     }
 }

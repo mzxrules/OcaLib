@@ -3,21 +3,23 @@ using System.IO;
 
 namespace mzxrules.OcaLib
 {
-    public class ParticleEffectOverlayRecord : OverlayTableRecord
+    public class ParticleOverlayRecord : OverlayRecord
     {
-        public int ParticleEffect { get; protected set; }
-        public FileAddress Ram { get; private set; }
+        //0x00 VROM
+        //0x08 VRAM
+        //0x10 RamStart
+        public int Id { get; protected set; }
         public N64Ptr UnknownPtr { get; private set; }
         public uint Unknown1 { get; private set; }
-        public ParticleEffectOverlayRecord()
+        public ParticleOverlayRecord()
         { }
 
-        public ParticleEffectOverlayRecord(int index, BinaryReader br)
+        public ParticleOverlayRecord(int index, BinaryReader br)
         {
             Initialize(index, br);
         }
 
-        public ParticleEffectOverlayRecord(int index, byte[] data)
+        public ParticleOverlayRecord(int index, byte[] data)
         {
             using (BinaryReader br = new BinaryReader(new MemoryStream(data)))
                 Initialize(index, br);
@@ -25,13 +27,11 @@ namespace mzxrules.OcaLib
 
         private void Initialize(int index, BinaryReader br)
         {
-            ParticleEffect = index;
-            uint ramAddress;
+            Id = index;
             VRom = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
             VRam = new FileAddress(br.ReadBigUInt32(), br.ReadBigUInt32());
 
-            ramAddress = br.ReadBigUInt32();
-            Ram = (ramAddress == 0) ? new FileAddress() : new FileAddress(ramAddress, ramAddress + VRam.Size);
+            RamStart = br.ReadBigUInt32();
             UnknownPtr = br.ReadBigUInt32();
             Unknown1 = br.ReadBigUInt32();
         }

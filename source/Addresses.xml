@@ -36,6 +36,8 @@
           <Data ver="MQU">7170</Data>
           <Data ver="MQP">7170</Data>
           <Data ver="DBGMQ">12F70</Data>
+          <Data ver="IQUEC">B7A0</Data>
+          <Data ver="IQUET">B240</Data>
         </Address>
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">B140</Data>
@@ -50,6 +52,8 @@
           <Data ver="MQU">AF90</Data>
           <Data ver="MQP">AF90</Data>
           <Data ver="DBGMQ">16DA0</Data>
+          <Data ver="IQUEC">13040</Data>
+          <Data ver="IQUET">12AF0</Data>
         </Address>
       </Start>
       <Identifier id="__End">
@@ -108,6 +112,8 @@
           <Data ver="MQU">A86000</Data>
           <Data ver="MQP">A88000</Data>
           <Data ver="DBGMQ">A94000</Data>
+          <Data ver="IQUEC">AB0000</Data>
+          <Data ver="IQUET"></Data>
         </Address>
         <Address reftype="absolute" domain="RAM">
           <Data ver="N0">110A0</Data>
@@ -122,6 +128,8 @@
           <Data ver="MQU">10EE0</Data>
           <Data ver="MQP">10F00</Data>
           <Data ver="DBGMQ">1CE60</Data>
+          <Data ver="IQUEC">18FA0</Data>
+          <Data ver="IQUET"></Data>
         </Address>
       </Start>
       <Identifier id="TextbankTable">
@@ -175,6 +183,7 @@
           <Data ver="MQU">B5CB20</Data>
           <Data ver="MQP">B5C480</Data>
           <Data ver="DBGMQ">B8D440</Data>
+          <Data ver ="IQUEC">B87180</Data>
         </Address>
       </Identifier>
       <Identifier id="GameContextTable_Start">
@@ -230,6 +239,8 @@
           <Data ver="MQU">B6D5F8</Data>
           <Data ver="MQP">B6CF58</Data>
           <Data ver="DBGMQ">B9E6C8</Data>
+          <Data ver="IQUEC">B97C38</Data>
+          <Data ver="IQUET"></Data>
         </Address>
       </Identifier>
       <Identifier id="EntranceIndexTable_Start">
@@ -265,6 +276,8 @@
           <Data ver="MQU">B6FAE0</Data>
           <Data ver="MQP">B6F440</Data>
           <Data ver="DBGMQ">BA0BB0</Data>
+          <Data ver="IQUEC">B9A120</Data>
+          <Data ver="IQUET"></Data>
         </Address>
       </Identifier>
       <Identifier id="PlayerPauseOverlayTable_Start">
@@ -401,6 +414,8 @@
           <Data ver="MQU">11B128</Data>
           <Data ver="MQP">118938</Data>
           <Data ver="DBGMQ">15E660</Data>
+          <Data ver="IQUEC">137F40</Data>
+          <Data ver="IQUET"></Data>
         </Address>
       </Identifier>
 
@@ -418,6 +433,8 @@
           <Data ver="MQU"></Data>
           <Data ver="MQP"></Data>
           <Data ver="DBGMQ">168688</Data>
+          <Data ver="IQUEC"></Data>
+          <Data ver="IQUET"></Data>
         </Address>
       </Identifier>
 
@@ -443,6 +460,8 @@
           <Data ver="MQU">12CC40</Data>
           <Data ver="MQP">12A450</Data>
           <Data ver="DBGMQ">175610</Data>
+          <Data ver="IQUEC">137E50</Data>
+          <Data ver="IQUET"></Data>
         </Address>
       </Identifier>
 
@@ -461,6 +480,8 @@
           <Data ver="MQU">11CA40</Data>
           <Data ver="MQP">11A250</Data>
           <Data ver="DBGMQ">15FF80</Data>
+          <Data ver="IQUEC">127C50</Data>
+          <Data ver="IQUET"></Data>
         </Address>
       </Identifier>
 
@@ -486,6 +507,9 @@
           <Data ver="MQU">115930</Data>
           <Data ver="MQP">113140</Data>
           <Data ver="DBGMQ">157DA0</Data>
+          <!-- These are hardcoded direct references to the global context-->
+          <Data ver="IQUEC">1D5A20</Data>
+          <Data ver="IQUET">12AF0</Data>
         </Address>
       </Identifier>
 

@@ -12,12 +12,10 @@ namespace mzxrules.OcaLib.Cutscenes
         public short EndFrame { get; set; }
         public const int LENGTH = 0x30;
         public ushort Action;
-        public short d;
-
-        UInt16 e, f;
-        public Vector3<int> StartVertex = new Vector3<int>();
-        public Vector3<int> EndVertex = new Vector3<int>();
-        public Vector3<float> VertexNormal = new Vector3<float>();
+        public Vector3<ushort> Rotation = new Vector3<ushort>();
+        public Vector3<int> StartPosition = new Vector3<int>();
+        public Vector3<int> EndPosition = new Vector3<int>();
+        public Vector3<float> Normal = new Vector3<float>();
 
         public ActionEntry(CutsceneCommand cmd, BinaryReader br)
         {
@@ -29,16 +27,13 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             byte[] arr = br.ReadBytes(LENGTH);
 
-            /* 0x00 */ Endian.Convert(out Action, arr, 0);
-            /* 0x02 */ Endian.Convert(out short startFrame, arr, 2);
-            /* 0x04 */ Endian.Convert(out short endFrame, arr, 4);
-            /* 0x06 */ Endian.Convert(out d, arr, 6);
-
-            /* 0x08 */ Endian.Convert(out e, arr, 8);
-            /* 0x0A */ Endian.Convert(out f, arr, 10);
-            /* 0x0C */ Endian.Convert(StartVertex, arr, 12);
-            /* 0x18 */ Endian.Convert(EndVertex, arr, 24);
-            /* 0x24 */ Endian.Convert(VertexNormal, arr, 36);
+            /* 0x00 */ Endian.Convert(out Action, arr, 0x00);
+            /* 0x02 */ Endian.Convert(out short startFrame, arr, 0x02);
+            /* 0x04 */ Endian.Convert(out short endFrame, arr, 0x04);
+            /* 0x06 */ Endian.Convert(out Rotation, arr, 0x06);
+            /* 0x0C */ Endian.Convert(out StartPosition, arr, 0x0C);
+            /* 0x18 */ Endian.Convert(out EndPosition, arr, 0x18);
+            /* 0x24 */ Endian.Convert(out Normal, arr, 0x24);
 
             StartFrame = startFrame;
             EndFrame = endFrame;
@@ -49,24 +44,20 @@ namespace mzxrules.OcaLib.Cutscenes
             bw.WriteBig(Action);
             bw.WriteBig(StartFrame);
             bw.WriteBig(EndFrame);
-            //0x04
-            bw.WriteBig(d);
-            //0x08
-            bw.WriteBig(e);
-            bw.WriteBig(f);
-            //0x12
-            bw.WriteBig(StartVertex);
-            bw.WriteBig(EndVertex);
-            bw.WriteBig(VertexNormal);
+            bw.WriteBig(Rotation);
+            bw.WriteBig(StartPosition);
+            bw.WriteBig(EndPosition);
+            bw.WriteBig(Normal);
         }
 
         public override string ToString()
         {
             return 
-                $"Action: {Action:X4}, Start: {StartFrame:X4}, End: {EndFrame:X4}, {d:X4} {e:X4} {f:X4} " +
-                $"Vertex Start: ({StartVertex.x}, {StartVertex.y}, {StartVertex.z}) " +
-                $"End: ({EndVertex.x}, {EndVertex.y}, {EndVertex.z}) " +
-                $"Normal: ({VertexNormal.x:F4}, {VertexNormal.y:F4}, {VertexNormal.z:F4})";
+                $"Action: {Action:X4}, Start: {StartFrame:X4}, End: {EndFrame:X4}, " +
+                $"Rotation: {Rotation.x:X4} {Rotation.y:X4} {Rotation.z:X4} " +
+                $"Start: ({StartPosition.x}, {StartPosition.y}, {StartPosition.z}) " +
+                $"End: ({EndPosition.x}, {EndPosition.y}, {EndPosition.z}) " +
+                $"Normal: ({Normal.x:F4}, {Normal.y:F4}, {Normal.z:F4})";
         }
     }
 }

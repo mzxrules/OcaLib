@@ -33,13 +33,10 @@ namespace mzxrules.OcaLib.Cutscenes
         }
         public override string ToString()
         {
-            return String.Format("{0}, Start: {1:X4}, End: {2:X4}, Option: {3:X4}  {4:X4} {5:X4}",
-                (TextId != 0xFFFF) ? $"Text {TextId:X4}" : "No Text",
-                StartFrame,
-                EndFrame,
-                Option,
-                TextIdChoiceA,
-                TextIdChoiceB);
+            string txt = (TextId != 0xFFFF) ? $"{TextId:X4}" : "None";
+            return 
+                $"Text {txt}, Start: {StartFrame:X4}, End: {EndFrame:X4}," +
+                $" Option: {Option:X4}  {TextIdChoiceA:X4} {TextIdChoiceB:X4}";
         }
     }
 }

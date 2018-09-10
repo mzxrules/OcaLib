@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
 using mzxrules.Helper;
@@ -60,19 +59,21 @@ namespace mzxrules.OcaLib.Cutscenes
         {
             switch (Command)
             {
-                case 0x03: return "Title Logo";
-                case 0x04: return "Environment Settings";
+                case 0x03: return "Special Execution";
+                case 0x04: return "Set Lighting";
                 case 0x0A: return "Link";
                 case 0x27: return "Rauru (08)";
-                case 0x29: return "Darunia (10)";
+                case 0x29: return "Darunia (Chamber of Sages)";
                 case 0x2A: return "Ruto (Adult) (11)";
                 case 0x2B: return "Saria (12)";
                 case 0x2C: return "Sage? (13)";
                 case 0x2F: return "Sheik (12)";
+                case 0x32: return "Darunia (Death Mountain Trail)";
                 case 0x3E: return "Navi";
                 case 0x55: return "Zelda (Adult)";
-                case 0x56: return "Music";
-                case 0x7C: return "Music Long Fade (Action 4)";
+                case 0x56: return "Play Background Music";
+                case 0x57: return "Stop Background Music";
+                case 0x7C: return "Fade Background Music";
                 default: return "Actor";
             }
         }

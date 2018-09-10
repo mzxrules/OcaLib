@@ -25,12 +25,19 @@
             v <<= 48;
             return GetLeft(v);
         }
+
+        /// <summary>
+        /// Gets the leftmost bit of the given mask, where the leftmost bit is index 0
+        /// </summary>
+        /// <param name="mask"></param>
+        /// <returns></returns>
         public static int GetLeft(uint mask)
         {
             ulong v = mask;
             v <<= 32;
             return GetLeft(v);
         }
+
         /// <summary>
         /// Gets the leftmost bit of the given mask, where the leftmost bit is index 0
         /// </summary>

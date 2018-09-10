@@ -1,62 +1,18 @@
 ﻿using mzxrules.Helper;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace mzxrules.OcaLib
 {
-    public class FileRecord
-    {
-        //public const int LENGTH = 0x10;
-        /// <summary>
-        /// The file's mapped location in virtual space
-        /// </summary>
-        public FileAddress VirtualAddress { get; set; } 
-        /// <summary>
-        /// The file's mapped location on file. A zeroed end address means that the file is not compressed
-        /// </summary>
-        public FileAddress PhysicalAddress { get; set; } 
-        /// <summary>
-        /// The file's location independent of compression state
-        /// </summary>
-        public FileAddress DataAddress { get; private set; }
-        public bool IsCompressed => PhysicalAddress.End != 0; 
-        public int Index = -1;
-
-        public FileRecord(FileRecord fileRecord)
-        {
-            VirtualAddress = fileRecord.VirtualAddress;
-            PhysicalAddress = fileRecord.PhysicalAddress;
-            DataAddress = fileRecord.DataAddress;
-            Index = fileRecord.Index;
-        }
-
-        public FileRecord(FileAddress virtualAddr, FileAddress physicalAddr, int index)
-        {
-            VirtualAddress = virtualAddr;
-            PhysicalAddress = physicalAddr;
-            Index = index;
-
-            if (IsCompressed)
-            {
-                DataAddress = new FileAddress(PhysicalAddress.Start, PhysicalAddress.End);
-            }
-            else
-                DataAddress = new FileAddress(PhysicalAddress.Start, PhysicalAddress.Start + VirtualAddress.Size);
-        }
-
-        public long GetRelativeAddress(long offset)
-        {
-            return offset - VirtualAddress.Start;
-        }
-    }
-
     public class DmaData
     {
-        public Dictionary<long, FileRecord> Table;
+        public List<FileRecord> Table = new List<FileRecord>();
         public FileRecord Address { get; private set; }
+
+        public DmaData (Stream s, int address)
+        {
+            InitializeTable(s, address);
+        }
 
         public DmaData (Stream s, RomVersion version)
         {
@@ -65,12 +21,12 @@ namespace mzxrules.OcaLib
                 token = ORom.FileList.dmadata;
             else if (version.Game == Game.MajorasMask)
                 token = MRom.FileList.dmadata;
-
+            
             int address = Addresser.GetRom(token, version, "__Start");
-            Initialize(s, address);
+            InitializeTable(s, address);
         }
 
-        private void Initialize(Stream fs, int address)
+        private void InitializeTable(Stream fs, int address)
         {
             FileRecord fileRecord;
             int length;         //length of file table
@@ -79,11 +35,7 @@ namespace mzxrules.OcaLib
 
             FileAddress fileVirtualAddress;
             FileAddress filePhysicalAddress;
-
-            //initialize file table
-            Table = new Dictionary<long, FileRecord>();
-
-
+            
             BinaryReader br = new BinaryReader(fs);
             //set rom type dependent values
             position = address;
@@ -104,20 +56,28 @@ namespace mzxrules.OcaLib
                     br.ReadBigInt32(),
                     br.ReadBigInt32());
 
-                if (fileVirtualAddress.Start == 0
-                    && fileVirtualAddress.End == 0)
-                    continue;
-
                 fileRecord = new FileRecord(fileVirtualAddress, filePhysicalAddress, i);
-                if (Table.ContainsKey(fileRecord.VirtualAddress.Start))
-                {
-
-                }
-                else
-                    Table.Add(fileRecord.VirtualAddress.Start, fileRecord);
+                Table.Add(fileRecord);
             }
-            Table.TryGetValue(address, out FileRecord addr);
+            TryGetFileRecord(address, out FileRecord addr);
             Address = addr;
+        }
+
+        public bool TryGetFileRecord(long virtualStart, out FileRecord fr)
+        {
+            foreach (FileRecord item in Table)
+            {
+                if (item.VirtualAddress.Start == virtualStart)
+                {
+                    fr = item;
+                    return true;
+                }
+                if (item.VirtualAddress.Start == 0
+                    && item.VirtualAddress.End == 0)
+                    break;
+            }
+            fr = new FileRecord(new FileAddress(), new FileAddress(), 0);
+            return false;
         }
 
         private int GetEndAddress(BinaryReader br)
@@ -136,14 +96,5 @@ namespace mzxrules.OcaLib
             return result;
         }
 
-        public IEnumerable<FileRecord> GetUncompressedFiles()
-        {
-            return ((IEnumerable<FileRecord>)Table).Where(x => x.IsCompressed == false);
-        }
-
-        public static object SingleOrDefault(Func<object, object> p)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

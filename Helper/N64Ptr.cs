@@ -3,11 +3,21 @@ namespace mzxrules.Helper
 {
     public struct N64Ptr : IEquatable<N64Ptr>, IComparable<N64Ptr>
     {
-        private long Pointer;
+        private long value;
+
+        public byte Segment
+        {
+            get { return (byte)(value >> 24); }
+        }
+
+        public int Offset
+        {
+            get { return (int)(value & 0xFFFFFF); }
+        }
 
         public N64Ptr(long ptr)
         {
-            Pointer = (ptr << 32) >> 32;
+            value = (ptr << 32) >> 32;
         }
         
         public static implicit operator N64Ptr(int ptr)
@@ -27,16 +37,17 @@ namespace mzxrules.Helper
 
         public static explicit operator uint(N64Ptr ptr)
         {
-            return (uint)ptr.Pointer;
+            return (uint)ptr.value;
         }
+
         public static implicit operator int(N64Ptr ptr)
         {
-            return (int)ptr.Pointer;
+            return (int)ptr.value;
         }
 
         public static bool operator ==(N64Ptr a, N64Ptr b)
         {
-            return a.Pointer == b.Pointer;
+            return a.value == b.value;
         }
 
         public static bool operator != (N64Ptr a, N64Ptr b)
@@ -71,27 +82,27 @@ namespace mzxrules.Helper
 
         public override int GetHashCode()
         {
-            return Pointer.GetHashCode();
+            return value.GetHashCode();
         }
 
         public override string ToString()
         {
-            return $"{(int)Pointer:X8}";
+            return $"{(int)value:X8}";
         }
 
         public int Base()
         {
-            return (int)Pointer & 0xFFFFFF;
+            return (int)value & 0xFFFFFF;
         }
 
         public bool Equals(N64Ptr other)
         {
-            return Pointer == other.Pointer;
+            return value == other.value;
         }
 
         public int CompareTo(N64Ptr other)
         {
-            return ((uint)Pointer).CompareTo((uint)other.Pointer);
+            return ((uint)value).CompareTo((uint)other.value);
         }
     }
 }

@@ -13,10 +13,10 @@ namespace mzxrules.OcaLib
         public bool IsCompressed { get; set; }
 
 
-        public int Scenes { get; set; }
-        public int Objects { get; set; }
-        public int Particles { get; set; }
-        public int Actors { get; set; }
+        public int Scenes { get { return Files.Tables.Scenes.Records; } }
+        public int Objects { get { return Files.Tables.Objects.Records; } }
+        public int Particles { get { return Files.Tables.Particles.Records; } }
+        public int Actors { get { return Files.Tables.Actors.Records; } }
 
         public enum Language
         {
@@ -24,7 +24,8 @@ namespace mzxrules.OcaLib
             English,
             French,
             German,
-            Spanish
+            Spanish,
+            Chinese
         }
 
         protected Rom(string fileLocation, RomVersion version)

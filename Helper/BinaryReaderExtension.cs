@@ -5,7 +5,6 @@ namespace mzxrules.Helper
 {
     public static class BinaryReaderExtension
     {
-
         public static Int16 ReadBigInt16(this BinaryReader b)
         {
             return Endian.ConvertShort(b.ReadInt16());
@@ -29,6 +28,13 @@ namespace mzxrules.Helper
             byte[] fl = b.ReadBytes(4);
             Endian.ReverseBytes(ref fl, 4);
             return BitConverter.ToSingle(fl, 0);
+        }
+
+        public static long Seek(this BinaryReader b, long address)
+        {
+            long seekback = b.BaseStream.Position;
+            b.BaseStream.Position = address;
+            return seekback;
         }
     }
 }

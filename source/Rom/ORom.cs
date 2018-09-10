@@ -26,10 +26,10 @@ namespace mzxrules.OcaLib
         public ORom(string fileLocation, Build version)
             : base(fileLocation, version)
         {
-            Scenes = (Version == Build.DBGMQ) ? 109 : 101;
-            Actors = 0x1D7;
-            Objects = 0x192;
-            Particles = 0x25;
+            //Scenes = (Version == Build.DBGMQ) ? 109 : 101;
+            //Actors = 0x1D7;
+            //Objects = 0x192;
+            //Particles = 0x25;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace mzxrules.OcaLib
 {
@@ -19,5 +20,10 @@ namespace mzxrules.OcaLib
         {
             return file.Stream;
         }
+
+        //public static explicit operator Stream(RomFile v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

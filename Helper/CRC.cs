@@ -19,7 +19,7 @@ namespace mzxrules.Helper
             uint[] crc = new uint[2];
             byte[] data = new byte[0x00101000];
 			
-            uint d, r, t1, t2, t3, t4, t5, t6 = 0xDF26F436;
+            uint t1, t2, t3, t4, t5, t6 = 0xDF26F436;
 
             t1 = t2 = t3 = t4 = t5 = t6;
 
@@ -28,12 +28,12 @@ namespace mzxrules.Helper
 
             for (int i = 0x00001000; i < 0x00101000; i += 4)
             {
-                d = (uint)((data[i] << 24) | (data[i + 1] << 16) | (data[i + 2] << 8) | data[i + 3]);
+                uint d = (uint)((data[i] << 24) | (data[i + 1] << 16) | (data[i + 2] << 8) | data[i + 3]);
                 if ((t6 + d) < t6)
                     t4++;
                 t6 += d;
                 t3 ^= d;
-                r = (d << (int)(d & 0x1F)) | (d >> (32 - (int)(d & 0x1F)));
+                uint r = (d << (int)(d & 0x1F)) | (d >> (32 - (int)(d & 0x1F)));
                 t5 += r;
                 if (t2 > d)
                     t2 ^= r;

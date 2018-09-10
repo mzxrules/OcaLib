@@ -55,7 +55,7 @@ namespace mzxrules.OcaLib.Cutscenes
 
             Endian.Convert(out Frames, arr, 2);
             Endian.Convert(out AngleOfView, arr, 4);
-            Endian.Convert(Coordinates, arr, 8);
+            Endian.Convert(out Coordinates, arr, 8);
             Endian.Convert(out d, arr, 14);
 
             //IFrameData

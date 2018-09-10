@@ -53,14 +53,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actor\ActorInit.cs" />
     <Compile Include="Cutscenes\TimeCommand.cs" />
     <Compile Include="Elf\Elf32_Rel.cs" />
     <Compile Include="Elf\Elf32_Sym.cs" />
+    <Compile Include="Elf\ElfScript.designer.cs" />
     <Compile Include="Elf\ElfUtil.cs" />
     <Compile Include="Elf\FileHeader.cs" />
     <Compile Include="Elf\SectionHeader.cs" />
     <Compile Include="EntranceTableRecord.cs" />
     <Compile Include="Overlay.cs" />
+    <Compile Include="PathUtil\RomPaths.cs" />
+    <Compile Include="PathUtil\RomPaths.designer.cs">
+      <DependentUpon>RomPaths.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rom\FileRecord.cs" />
     <Compile Include="Rom\VFileTable_Data.cs" />
     <Compile Include="SceneRoom\Actor\ChestFlag.cs" />
     <Compile Include="SceneRoom\Actor\CollectibleFlags.cs" />
@@ -85,7 +92,6 @@
     <Compile Include="Rom\RomFileToken.cs" />
     <Compile Include="Rom\MRom.cs" />
     <Compile Include="Rom\RomVersion.cs" />
-    <Compile Include="Rom\VFileTable_Abstract.cs" />
     <Compile Include="Rom\VFileTable.cs" />
     <Compile Include="Rom\FileList.cs" />
     <Compile Include="Cutscenes\Command09.cs" />
@@ -167,8 +173,16 @@
     <None Include="Addresses.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Elf\ElfScript.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PathUtil\RomPaths.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Elf\Test.xml" />
+    <Content Include="PathUtil\Test.xml" />
     <Content Include="SceneRoom\Notes.txt" />
     <Content Include="XSLTFile1.xslt" />
   </ItemGroup>

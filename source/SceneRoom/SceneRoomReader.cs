@@ -26,16 +26,21 @@ namespace mzxrules.OcaLib.SceneRoom
             }
         }
 
-        public static Scene InitializeScene(int number, RomFile file)
+        public static Scene InitializeScene(Rom rom, int id)
         {
-            BinaryReader br;
+            var file = rom.Files.GetSceneFile(id);
+            return InitializeScene(file, id);
+        }
+
+        public static Scene InitializeScene(RomFile file, int id)
+        {
             Scene scene = null;
 
             if (file == null)
                 return scene;
 
-            scene = new Scene(file.Version.Game, number, file.Record.VirtualAddress);
-            br = new BinaryReader(file);
+            scene = new Scene(file.Version.Game, id, file.Record.VirtualAddress);
+            BinaryReader br = new BinaryReader(file);
 
             //if (LocalFileTable.Version == ORom.Build.N0
             //    && number == 6)
@@ -52,10 +57,10 @@ namespace mzxrules.OcaLib.SceneRoom
             return scene;
         }
 
-        public static Scene InitializeScene(int number, BinaryReader br, Game game)
+        public static Scene InitializeScene(Game game, int id, BinaryReader br)
         {
             Scene scene;
-            scene = new Scene(game, number, new FileAddress());
+            scene = new Scene(game, id, new FileAddress());
             LoadISceneRoomHeader(br, scene);
             return scene;
         }
@@ -244,7 +249,7 @@ namespace mzxrules.OcaLib.SceneRoom
                 //load scene
                 var sceneFile = rom.Files.GetSceneFile(sceneId);
 
-                scene = InitializeScene(sceneId, sceneFile);
+                scene = InitializeScene(sceneFile, sceneId);
                 if (scene == null)
                     continue;
 
@@ -280,7 +285,7 @@ namespace mzxrules.OcaLib.SceneRoom
                 //load scene
                 var sceneFile = rom.Files.GetSceneFile(sceneId);
 
-                scene = InitializeScene(sceneId, sceneFile);
+                scene = InitializeScene(sceneFile, sceneId);
                 if (scene == null)
                     continue;
 
